@@ -1,0 +1,19 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+fos_ck_editor:
+    base_path: "build/ckeditor"
+    js_path:   "build/ckeditor/ckeditor.js"
+    default_config: main_config
+    configs:
+        main_config:
+            toolbar: "Articles"
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
+        doc_config:
+            toolbar: "Documents"
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
+    toolbars:
+        configs:
+            Documents: [['Save', 'Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', 'HorizontalRule', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source']]
+            Articles: [['Save',  'Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', 'HorizontalRule', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Table', '-', 'Styles', 'Format','Font','FontSize', '-', 'TextColor', 'BGColor', 'Source']]

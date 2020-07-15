@@ -1,0 +1,55 @@
+@media (min-width: 768px) {
+    height: 250px;
+}
+
+.bg-footer{
+    position: relative;
+    bottom: 0;
+    background-color: $light-color;
+    padding: $spacing;
+    width: 100%;
+    margin: 0;
+    box-shadow: -1px -1px 3px $secondary-color;
+}
+
+.row div.container-fluid{
+    min-height: 100vh;
+}
+
+.footer-element{
+    padding: 0;
+    margin: 0;
+}
+
+.footer-element ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.footer-element a{
+    font-family: $font-text;
+    text-decoration: none;
+    color: $primary-darker;
+    text-shadow: 1px 1px 2px $shadow-color;
+}
+
+.footer-element a:hover{
+    text-decoration: none;
+    color: $secondary-color;
+}
+
+.footer-element h2{
+    font-family: $font-title;
+    font-size: $font-size;
+    color: $secondary-color;
+    margin: $spacing 0 $spacing 0;
+}
+
+.footer-element h2 a{
+    font-family: $font-title;
+}
+
+.social-button a{
+    @include animateLines();
+}

@@ -1,0 +1,71 @@
+@import "../_vars";
+
+nav {
+    margin: 0;
+    padding: 0;
+    font-family: $font-text;
+}
+
+.dropdown-menu{
+    position: relative;
+    background-color: $primary-darker;
+    color: $secondary-color;
+    text-align: center;
+    right: 0;
+}
+
+.dropdown-item{
+    color: $light-color;
+
+    &:hover{
+        background-color: $primary-darker;
+        color: $secondary-color;
+    }
+}
+
+.navbar {
+    height: 80px;
+    padding: 0;
+    background-color: $light-color;
+    box-shadow: 1px 1px 3px #BEA058;
+}
+
+.navbar-nav{
+    background-color: $light-color;
+}
+
+.navbar-brand img {
+    width: 200px;
+    margin-left: 32px;
+}
+
+.portrait {
+    border-radius: $spacing-l;
+    width: 30px;
+}
+
+.nav-link {
+    margin-left: $spacing;
+    margin-right: $spacing;
+}
+
+.nav-item {
+    color: $primary-darker;
+    padding: $spacing-s;
+
+    & :hover{
+        color: $secondary-color;
+    }
+}
+
+.contact {
+    color: $secondary-color;
+}
+
+.fa-phone {
+    color: $secondary-color;
+}
+
+.show{
+    padding-top: 10px;
+}
