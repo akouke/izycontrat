@@ -1,0 +1,132 @@
+{% extends "_layout.html.twig" %}
+{# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
+
+{% block title %}Ceer un EURL {% endblock %}
+{% block body %}
+
+<style>
+
+    body{
+        margin: 1%;
+        text-align: center;
+    }
+    .haut{
+        margin-top: 6%;
+        text-align: center;
+    }
+    .tailInput{
+      margin-left:40%;
+      width: 22%;
+      text-align: center;
+      position: center;
+    }
+</style> 
+    {{form_start(formEurl)}}
+
+<h1 class="haut">Formulaire Creation EURL</h1>
+        <div class="breadcrumb progress">
+            <ul class="nav nav-tabs">
+                <a data-toggle="tab" class="active">1 - Détail de votre projet</a>
+                <a data-toggle="tab" > 2 - Choix de la prestation</a>
+                <a data-toggle="tab"> 3 - Paiement</a>
+                <a data-toggle="tab" >4 - Société créée !</a>
+            </ul>
+        </div>
+
+<div class="espace">
+
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active show" id="SARL">
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+      <div class="card-header">SARL STATUS</div>
+      <div class="card-body">
+<form>
+  {#<fieldset>#}
+    <fieldset class="form-group">
+      <legend>Dans quel délai souhaitez-vous créer votre SARL ?</legend>
+       {# <div class="tailInput">   {{ form_row(formSarl.timeCreate)}} </div> #}
+       <div class="tailInput">   {{ form_widget(formEurl.priority)}} </div>
+    </fieldset>
+ 
+      <a class="btn btn-danger" href="{{ path('create_entreprise')}}">Annuler</a>
+      <a class="btn btn-primary" data-toggle="tab" href="{{ '#nomEntreprise'}}">Suivant</a>
+
+  </fieldset>
+</form>
+  </div>
+</div>
+  </div>
+  <div class="tab-pane fade" id="nomEntreprise">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header">EURL STATUS</div>
+        <div class="card-body">
+            <legend>Quel nom choississez vous pour votre entreprise?</legend>
+             <div class="tailInput">   {{ form_row(formEurl.name)}} </div>
+             <a class="btn btn-danger" href="{{ path('create_eurl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#EURL">Suivant</a>
+        </div>
+      </div>
+  </div>
+  
+  <div class="tab-pane fade" id="EURL">
+  <div class="card text-white bg-secondary mb-1" style="max-width: 80rem;">
+    <div class="card-header">EURL STATUS</div>
+    <div class="card-body">
+      <legend>votre nom et prenom ?</legend>
+      <div class="tailInput">   {{ form_row(formEurl.bankName)}} </div>
+      {#<div class="tailInput">   {{ form_row(formEurl.secondName)}} </div>#}
+      
+      <a class="btn btn-danger" href="{{ path('create_eurl')}}">Retour</a>
+      <a class="btn btn-primary" data-toggle="tab" href="#MICRO-ENTREPRISE">Suivant</a>
+
+    </div>
+   </div>
+  </div>
+  <div class="tab-pane fade" id="MICRO-ENTREPRISE">
+    <div class="card text-black bg-light mb-1" style="max-width: 80rem;">
+    <div class="card-header">MICRO-ENTREPRISE</div>
+    <div class="card-body">
+      {#<h4 class="card-title">Warning card title</h4>#}
+      
+  <fieldset>
+    <fieldset class="form-group">
+      <legend>Vos coordonnees ?</legend>
+      <div class="tailInput">   {{ form_row(formEurl.address)}} </div>
+    </fieldset>
+    </fieldset>
+    <a class="btn btn-danger" href="{{ path('create_eurl')}}">Retour</a>
+    <button type="submit" class="btn btn-primary">valider</button>
+  </fieldset>
+      {#<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>#}
+    </div>
+   </div>
+  </div>
+  <div class="tab-pane fade" id="SAS">
+    <p>SAS status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  <div class="tab-pane fade" id="SCI">
+    <p>SCI status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  <div class="tab-pane fade" id="IE">
+    <p>IE status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  {#<div class="tab-pane fade" id="dropdown1">#}
+  {#  <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>#}
+  {#</div>#}
+  {#<div class="tab-pane fade" id="dropdown2">#}
+  {#  <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>#}
+  {#</div>#}
+</div>
+</div>
+    {{form_end(formEurl)}}
+
+{% endblock %}

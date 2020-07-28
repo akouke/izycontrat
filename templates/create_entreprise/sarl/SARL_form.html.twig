@@ -1,0 +1,604 @@
+{% extends '_layout.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
+
+{% block title %}Je cree mon SARL{% endblock %}
+
+{% block body %}
+<style>
+
+    body{
+        background-size: cover;
+        margin: 1%;
+        text-align: center;
+        width: 100%;
+    }
+    .haut{
+        margin-top: 6%;
+        text-align: center;
+    }
+    .tailInput{
+      margin-left:33%;
+      margin-bottom: 1%;
+      width: 34%;
+      text-align: center;
+      
+    }
+    .progress{
+      margin-top: 0.5%;
+      margin-bottom: -1%;
+      
+    }
+</style>
+
+
+{#<div class="espace">#}
+
+<div class="container-fluid">
+    <h1 class="haut">Formulaire Creation SARL</h1>
+    
+{#<form action="/create/entreprise/sarl" method="post">#}
+{#{{form_start(formSarl, {'action': path('create_sarl'), 'method': 'POST'})}}#}
+{{form_start(formSarl)}}
+    {# debut information concernant le clien#}
+    {{form_start(formPerson)}}
+  
+        {#debut information de connexion user#}
+        {{ form_start(formUser )}}
+        
+            {#debut information associe1#}
+            {{ form_start(formAssocie1 )}}
+            
+                 {#debut information associe2#}
+                 {{ form_start(formAssocie2 )}}
+                 
+                     {#debut information associe2#}
+                     {{ form_start(formAssocie3 )}}
+                 
+                         {#debut information associe2#}
+                         {{ form_start(formAssocie4 )}}
+                         
+                             {#debut information associe2#}
+                             {{ form_start(formAssocie5 )}}
+                                 
+                                 {#debut information company associer#}
+                                 {{ form_start(formAssociateCompany) }}
+                                 
+                                 {#debut information company2 associer#}
+                                 {{ form_start(formAssociateCompany2) }}
+                                 
+                                 {#debut information company3 associer#}
+                                 {{ form_start(formAssociateCompany3) }}
+              
+        <div class="breadcrumb progression">
+            <ul class="nav nav-tabs">
+                <a data-toggle="tab" class="active">1 - Détail de votre projet</a>
+                <a data-toggle="tab" > 2 - Choix de la prestation</a>
+                <a data-toggle="tab"> 3 - Paiement</a>
+                <a data-toggle="tab" >4 - Société créée !</a>
+            </ul>
+        </div>
+  
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active show" id="SARL">
+    <div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">
+      <div class="card-header">SARL STATUS
+        {#<h3 class="card-title"></h3>#}
+
+        {#    <div class="card-tools">#}
+        {#      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>#}
+        {#      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>#}
+        {#    </div>#}
+        </div>
+      <div class="card-body">
+
+    <fieldset class="form-group">
+      <legend>Dans quel délai souhaitez-vous créer votre SARL ?</legend>
+       <div class="tailInput">   
+         {{ form_widget(formSarl.priority)}}
+        <div class="d-none">
+         {{ form_widget(formSarl.companyType)}}
+         </div>
+       </div>
+          <div>
+                Exerciez-vous votre activité sous le régime de la micro-entreprise ?
+                {{ form_row(formSarl.regimeMicroEntreprise)}} 
+                {#{{ form_label(formSarl.regimeME, 'Your Name') }}#}
+          </div>
+    </fieldset>
+ 
+      <a class="btn btn-danger" href="{{ path('create_entreprise')}}">Annuler</a>
+      <a class="btn btn-primary" data-toggle="tab" href="{{ '#nomEntreprise'}}">Suivant</a>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">5%</div>
+      </div>
+  </div>
+</div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="nomEntreprise">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header">Nom Entreprise</div>
+        <div class="card-body">
+            <legend>Quel nom choississez vous pour votre entreprise?</legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.name)}} 
+              </div>
+            <div  class="alert alert-info" role="alert">
+              (Le nom servira à identifier votre société. Il devra figurer sur tous les documents commerciaux de 
+              votre société y compris les factures Vous devez renseigner ici la dénomination sociale 
+              qui est différent du nom commercial)
+            </div>
+              
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#nomCommercial">Suivant</a>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">15%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="nomCommercial">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header ">Nom Commercial
+      </div>
+        <div class="card-body">
+            <legend>Quel est le nom commercial ? (s’il y en a un)</legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.tradeName)}} 
+              </div>
+            <div class="alert alert-info" role="alert">
+              (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise 
+              est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
+            </div>
+              
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#hasProtection">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+    <div class="tab-pane fade" id="hasProtection">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Protection Marque
+      </div>
+        <div class="card-body">
+            <legend>Souhaitez-vous protéger votre com de société par un dépôt de marque ?</legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.hasProtection)}} 
+              </div>
+            <div  class="alert alert-info" role="alert">
+              (Déposer une marque ou logo permet notamment de se protéger 
+              contre un concurrent qui utiliserait votre marque de manière abusive)
+            </div>
+              
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#activitySector">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" style="width: 35%">35%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  <div class="tab-pane fade" id="activitySector">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Secteur d'Activite
+      </div>
+        <div class="card-body">
+            <legend>Quel est votre secteur d’activité ? </legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.activitySector)}} 
+              </div>
+            <p>
+              Si autre merci de le préciser :
+            </p>
+            <div class="tailInput">
+              {#<input type="text" placeholder="Autre Secteur d'active">#}
+              {#<input type="text" id="company_activitySector" name="company[activitySector]" placeholder=" Si Autre secteur d'activite" class="form-control" />#}
+              <input type="text" id="company_activitySector_autre" name="company_activitySector_autre" placeholder=" Si Autre secteur d'activite" class="form-control" />
+            </div>
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#manager">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">45%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="manager">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        {#<div class="card-header">SASU STATUS</div>#}
+        <div class="card-header "> Le Gerant
+      </div>
+        <div class="card-body">
+            <legend> Serez-vous le Gérant de la SARL ?  </legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.manager)}} 
+              </div>
+            <div  class="alert alert-info" role="alert">
+                (Le Gérant est la personne en charge de diriger la société et est le plus fréquemment 
+                un associé de la société. Cependant, il ne peut y avoir qu'un seul Gérant.)
+            </div>
+            
+            <legend>Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.hasAssociate)}} 
+              </div>
+            <div class="alert alert-info" role="alert">
+              (L'entrée d'un nouvel associé dans votre SARLU transformera celle-ci en SARL.)
+            </div>
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#address">Suivant</a>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%">55%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+    <div class="tab-pane fade" id="address">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Adresse
+      </div>
+        <div class="card-body">
+            <legend> Où sera le siège social de votre société ? </legend>
+             
+                <strong> Au domicile du Gérant (le plus fréquent) </strong> 
+             {#<div class="input-group ">#}
+                {#<div class="input-group-prepend">#}
+                {#<div class="row">#}
+                  {#<div class="input-group-text tailInput">#}
+                  <div class="tailInput">
+                    {{ form_widget(formSarl.addressManager)}} 
+                    {#<input type="radio" name="address" id="adresseManager" aria-label="Radio button for following text input">#}
+                  </div>
+                {#</div>#}
+                   {#<input type="text" class="form-control" aria-label="Text input with radio button">#}
+              {#</div>#}
+               
+                <strong> A une adresse de domiciliation </strong> 
+                  <div class="tailInput">
+                    {{ form_widget(formSarl.country)}}
+                  </div>
+              
+               <strong> Dans un bureau, local, etc… </strong> 
+                  <div class="tailInput">
+                    {{ form_widget(formSarl.address)}}
+                  </div>
+                
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#capitalSocial">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%">65%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+    <div class="tab-pane fade" id="capitalSocial">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Capital Social
+      </div>
+        <div class="card-body">
+            <strong>Quel est le montant total du capital social de votre société ? </strong>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.capitalSocial)}} 
+              </div>
+            <div  class="alert alert-info" role="alert">
+                <small>
+                     (Cet argent permettra de financer les premières dépenses et de démarrer l'activité. 
+                     Le capital social minimum est d'un euro mais 70% de nos clients choisissent un capital 
+                     entre 500€ et 2000€. Si vous souhaitez prévoir un capital variable ou faire un apport en nature, 
+                     veuillez nous contacter ou le préciser plus tard.)
+                </small>
+            </div>
+              
+            <strong>Dans quelle banque souhaitez-vous déposer le capital social ? </strong>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.bankName)}} 
+              </div>
+              <div class="alert alert-info" role="alert">
+                  <small>
+                   (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création 
+                   de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ». 
+                   Ce document est indispensable pour immatriculer votre société)
+                  </small>
+              </div>
+              
+              
+             <a class="btn btn-danger" tabindex="0" data-toggle="tooltip" title="retourner au debut" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#associes">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+    
+    <div class="tab-pane fade" id="associes">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header ">  Mes associes</div>
+      
+        <div class="card-body"> 
+            <legend>Qui sont les associés de votre société </legend>
+             {#<div class="tailInput">  #}
+             {#  {{ form_widget(formSarl.activitySector)}} #}
+             {# </div>#}
+            <details style="text-align:left; margin:1%; padding:1%; margin-left: 10%; width: 78%;"><summary class="bg-secondary form-control" ><strong><i class="fas fa-user-circle"></i> Un Particulier ?</strong></summary>
+                   {#<form action="" method="POST" name="formulaire1">#}
+                       {#<legend>Civilité</legend>#}
+                         <small  class="badge badge-warning" style="margin-top: -10px;">
+                           (Chaque apport donne droit à des actions à l'associé. 
+                           La somme des apports des associés constituent le capital social de la société)
+                         </small>
+                     <div class="row">
+                       <div class="col">  
+                         {{ form_row(formAssocie1.firstName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie1.lastName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie1.capitalAmountAdding) }} 
+                       </div>
+                     </div>
+                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <div class="row">
+                       <div class="col">  
+                         {{ form_row(formAssocie2.firstName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie2.lastName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie2.capitalAmountAdding) }} 
+                       </div>
+                     </div>
+                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <div class="row">
+                       <div class="col">  
+                         {{ form_row(formAssocie3.firstName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie3.lastName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie3.capitalAmountAdding) }} 
+                       </div>
+                     </div>
+                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <div class="row">
+                       <div class="col">  
+                         {{ form_row(formAssocie4.firstName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie4.lastName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie4.capitalAmountAdding) }} 
+                       </div>
+                     </div>
+                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <div class="row">
+                       <div class="col">  
+                         {{ form_row(formAssocie5.firstName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie5.lastName) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssocie5.capitalAmountAdding) }} 
+                       </div>
+                     </div>
+                </details>
+                </details>
+                </details>
+                </details>
+                    {#</form>#}
+                    <br>
+            </details>
+             <details style="text-align:left; margin:1%; margin-left: 11%; width: 76%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Une Societe ?</strong></summary>
+                     <div class="row">
+                       <div class="col">  
+                         {{ form_row(formAssociateCompany.name) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssociateCompany.companyType) }} 
+                       </div>
+                     </div>
+                      {#<p>#}
+                       <small> (Le nom de la société correspond généralement à la dénomination sociale.) </small>
+                      {#</p>#}
+                     <details style="text-align:left; margin:1%; margin-left: 1%; width: 99%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associe 2 ?</strong></summary>
+        
+                             <div class="row">
+                               <div class="col">  
+                                 {{ form_row(formAssociateCompany2.name) }} 
+                               </div>
+                               <div class="col">  
+                                 {{ form_row(formAssociateCompany2.companyType) }} 
+                               </div>
+                             </div>
+                             
+                             <details style="text-align:left; margin:1%; margin-left: 1%; width: 99%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associe 3 ?</strong></summary>
+        
+                                 <div class="row">
+                                   <div class="col">  
+                                     {{ form_row(formAssociateCompany3.name) }} 
+                                   </div>
+                                   <div class="col">  
+                                     {{ form_row(formAssociateCompany3.companyType) }} 
+                                   </div>
+                                 </div>
+                            </details>
+                    </details>
+            
+            </details>
+            <div  class="alert alert-info" role="alert">
+              Renseignez ici l’identité des associés de votre société, vous inclus si vous êtes associé. 
+              Vous pouvez ajouter un associé en cliquant sur le bouton "Ajouter un associé" en bas de page<br>
+                <small  class="badge badge-warning">
+                  Si vous ne possédez pas certaines informations, ne vous en faites pas, 
+                  sauvegardez votre dossier ou passez aux questions suivantes, vous pouvez les renseigner plus tard. 
+                </small>
+            </div>
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-primary" data-toggle="tab" href="#hasDirector">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">85%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  {# debut information concernant le clien#}
+  {#{{form_start(formPerson)}}#}
+  
+    <div class="tab-pane fade" id="hasDirector">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        {#<div class="card-header">SASU STATUS</div>#}
+        <div class="card-header "> DIRECTEUR GÉNÉRAL 
+      </div>
+        <div class="card-body">
+            <legend> Souhaitez-vous nommer un Directeur Général ? </legend>
+             <div class="tailInput">  
+               {{ form_widget(formSarl.hasDirector)}} 
+              </div>
+            <div class="alert alert-info" role="alert">
+                La nomination d’un Directeur Général (DG) est facultatif. Si un DG est nommé, il assiste 
+                le Gérant dans ses missions. Il représente aussi la société et a le droit de signer des documents 
+                au nom et pour le compte de la société. Le ou les DG d'une SARL sont en général également associés.
+            </div>
+
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#person">Suivant</a>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">98%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+    <div class="tab-pane fade" id="person">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Informations de Contact
+      </div>
+        <div class="card-body">
+            <legend>Vos informations de contact nous servirons à finaliser la création de votre dossier.</legend>
+             <div class="tailInput">  
+               {{ form_widget(formPerson.firstName) }} 
+             </div>
+             <div class="tailInput"> 
+               {{ form_widget(formPerson.lastName) }} 
+             </div>
+             <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
+             <div class="tailInput"> 
+               {{ form_widget(formPerson.phoneNumber) }} 
+             </div>
+              
+              {#debut information de connexion user#}
+              {#{{ form_start(formUser )}}#}
+                 <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
+                 <div class="tailInput"> 
+                    {{ form_widget(formUser.email) }} 
+                 </div>
+                {#<p>#}
+                {# <small></small>#}
+                {#</p>#}
+              <br>
+             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <button type="submit" class="btn btn-primary" >Enregistrer</button>
+              {#<button type="submit" class="btn btn-primary">Suivant</button>#}
+             
+              
+              {#{{ form_end(formUser) }}#}
+              {#fin information de connexion user#}
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">100%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+
+  
+  {#{{form_end(formPerson)}}#}
+  {#fin information concernant le client#}
+  
+  
+  {#<div class="tab-pane fade" id="EURL">#}
+  {#<div class="card text-white bg-secondary mb-1" style="max-width: 80rem;">#}
+  {#  <div class="card-header">EURL STATUS</div>#}
+  {#  <div class="card-body">#}
+  {#    <legend>votre nom et prenom ?</legend>#}
+      {#<div class="tailInput">   {{ form_row(formSarl.hasDirector)}} </div>#}
+      
+  {#    <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>#}
+  {#    <a class="btn btn-primary" data-toggle="tab" href="#MICRO-ENTREPRISE">Suivant</a>#}
+
+  {#  </div>#}
+  {# </div>#}
+  {#</div>#}
+
+</div>
+    
+                    {#{{ form_rest(formUser) }}#}
+                    {#{{ form_rest(formPerson) }}#}
+                    {#{{ form_rest(formSarl) }}#}
+                                            {#debut information company3 associer#}
+                                             {{ form_end(formAssociateCompany3) }}
+                                            {#debut information company2 associer#}
+                                             {{ form_end(formAssociateCompany2) }}
+                                            {#debut information company associer#}
+                                             {{ form_end(formAssociateCompany) }}
+                                 
+                                        {#fin information associe5#}
+                                        {{ form_end(formAssocie5 )}}
+                                        
+                                 {#fin information associe4#}
+                                 {{ form_end(formAssocie4 )}}
+                                 
+                            {#fin information associe3#}
+                            {{ form_end(formAssocie3 )}}
+                            
+                        {#fin information associe2#}
+                        {{ form_end(formAssocie2 )}}
+                        
+                    {#fin information associe1#}
+                   {{ form_end(formAssocie1 )}}
+                   
+              {{ form_end(formUser) }}
+              {#fin information de connexion user#}
+              
+         {{form_end(formPerson)}}
+         {#fin information concernant le client#}
+         
+    {{form_end(formSarl)}}
+    
+    <a class="btn btn-danger" href="{{ path('create_sarl_prestation')}}">test Prestation</a>
+    {#<button type="submit" class="btn btn-primary">Test</button>#}
+{#</form>#}
+</div>
+ 
+{% block footer %}{% endblock %}
+{% endblock %}
+    

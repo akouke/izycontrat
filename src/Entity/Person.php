@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PersonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -60,7 +62,7 @@ class Person
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string", message="Mauvais format de données")
      * @Assert\NotBlank(message="Le numéro de téléphone ne doit pas être vide")
      */
@@ -110,6 +112,42 @@ class Person
      * )
      */
     private $specialization;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Company::class, mappedBy="president", cascade={"persist", "remove"})
+     */
+    private $companies;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Person::class, inversedBy="myAssociates")
+     */
+    private $associates;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Person::class, mappedBy="associates")
+     */
+    private $myAssociates;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AssociateCompanyInfo::class, mappedBy="person")
+     */
+    private $associateCompanyInfos;
+
+    public function __construct()
+    {
+        $this->myAssociates = new ArrayCollection();
+        $this->associateCompanyInfos = new ArrayCollection();
+    }
+
+    // /**
+    //  * @ORM\ManyToMany(targetEntity=Person::class, inversedBy="associates")
+    //  */
+    // private $associates;
+
+    // public function __construct()
+    // {
+    //     $this->associates = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -252,5 +290,123 @@ class Person
     {
         //Les noms des champs à afficher dans l'éditeur de document.
         return "firstName,lastName,phoneNumber,address,country,capitalAmountAdding";
+    }
+
+    public function getCompanies(): ?Company
+    {
+        return $this->companies;
+    }
+
+    public function setCompanies(?Company $companies): self
+    {
+        $this->companies = $companies;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newPresident = null === $companies ? null : $this;
+        if ($companies->getPresident() !== $newPresident) {
+            $companies->setPresident($newPresident);
+        }
+
+        return $this;
+    }
+
+    // /**
+    //  * @return Collection|self[]
+    //  */
+    // public function getAssociates(): Collection
+    // {
+    //     return $this->associates;
+    // }
+
+    // public function addAssociate(self $associate): self
+    // {
+    //     if (!$this->associates->contains($associate)) {
+    //         $this->associates[] = $associate;
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeAssociate(self $associate): self
+    // {
+    //     if ($this->associates->contains($associate)) {
+    //         $this->associates->removeElement($associate);
+    //     }
+
+    //     return $this;
+    // }
+
+    public function getAssociates(): ?self
+    {
+        return $this->associates;
+    }
+
+    public function setAssociates(?self $associates): self
+    {
+        $this->associates = $associates;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getMyAssociates(): Collection
+    {
+        return $this->myAssociates;
+    }
+
+    public function addMyAssociate(self $myAssociate): self
+    {
+        if (!$this->myAssociates->contains($myAssociate)) {
+            $this->myAssociates[] = $myAssociate;
+            $myAssociate->setAssociates($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMyAssociate(self $myAssociate): self
+    {
+        if ($this->myAssociates->contains($myAssociate)) {
+            $this->myAssociates->removeElement($myAssociate);
+            // set the owning side to null (unless already changed)
+            if ($myAssociate->getAssociates() === $this) {
+                $myAssociate->setAssociates(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AssociateCompanyInfo[]
+     */
+    public function getAssociateCompanyInfos(): Collection
+    {
+        return $this->associateCompanyInfos;
+    }
+
+    public function addAssociateCompanyInfo(AssociateCompanyInfo $associateCompanyInfo): self
+    {
+        if (!$this->associateCompanyInfos->contains($associateCompanyInfo)) {
+            $this->associateCompanyInfos[] = $associateCompanyInfo;
+            $associateCompanyInfo->setPerson($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAssociateCompanyInfo(AssociateCompanyInfo $associateCompanyInfo): self
+    {
+        if ($this->associateCompanyInfos->contains($associateCompanyInfo)) {
+            $this->associateCompanyInfos->removeElement($associateCompanyInfo);
+            // set the owning side to null (unless already changed)
+            if ($associateCompanyInfo->getPerson() === $this) {
+                $associateCompanyInfo->setPerson(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -1,0 +1,172 @@
+{#{% extends '_layout.html.twig' %}#}
+{% extends 'base.html.twig' %}
+
+{% block title %}Je cree mon entreprise{% endblock %}
+
+{% block body %}
+<style>
+
+body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blur-ipad-background.jpg') no-repeat center center fixed;
+   background-size: cover;
+   text-align: center;
+}
+    .espace { padding-top: 5em; margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
+    /*.esp { margin-right: 1em;}*/
+    .backgroundtitre { background:  indigo; color: white}
+    .tabbed ul li.active, .tabbed ul li a.active, .tabbed ul li.active::before, .tabbed ul li.active::after {
+    
+    color: #000000;
+    background-color: whitesmoke;}
+
+</style>
+
+
+<div class="espace" >
+    {# <h1>Bonjour {{ controller_name }}! ✅</h1> #}
+   <h3 class="mb-4" style="color:white"> Créez votre entreprise en quelques clics </h3>
+    
+{#<ul class="nav nav-tabs bg-dark">#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link active btn btn-warning" data-toggle="tab" href="#SARL">SARL</a>#}
+{#  </li>#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link btn btn-warning" data-toggle="tab" href="#SASU">SASU</a>#}
+{#  </li>#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link btn btn-warning" data-toggle="tab" href="#EURL">EURL</a>#}
+{#  </li>#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link btn btn-warning" data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>#}
+{#  </li>#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link btn btn-warning" data-toggle="tab" href="#SAS">SAS</a>#}
+{#  </li>#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link btn btn-warning" data-toggle="tab" href="#SCI">SCI</a>#}
+{#  </li>#}
+{#  <li class="nav-item">#}
+{#    <a class="nav-link btn btn-warning" data-toggle="tab" href="#IE">IE</a>#}
+{#  </li>#}
+{#</ul>#}
+
+<div class='tabbed round'>
+  <ul class="nav nav-tabs">
+    <li class='nav-item active'>
+      <a data-toggle="tab" href="#SARL">SARL</a>
+    </li>
+    <li class="nav-item">
+      <a  data-toggle="tab" href="#SASU">SASU</a>
+    </li>
+    <li class="nav-item">
+      <a  data-toggle="tab" href="#EURL">EURL</a>
+    </li>
+     <li class='nav-item'>
+      <a data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
+    </li>
+    <li class="nav-item">
+      <a  data-toggle="tab" href="#SAS">SAS</a>
+    </li>
+    <li class="nav-item">
+      <a  data-toggle="tab" href="#SCI">SCI</a>
+    </li>
+     <li class="nav-item">
+      <a  data-toggle="tab" href="#IE">IE</a>
+    </li>
+  </ul>
+</div>
+
+<div id="myTabContent" class="tab-content">
+  
+  <div class="tab-pane fade active show" id="SARL">
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">SARL STATUS</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Detail Concernant SARL</legend>
+       <p>Il est formé une Société à Responsabilité Limitée régie par les lois et règlements en vigueur, ainsi que par les présents statuts. Elle fonctionne indifféremment sous la même forme avec un ou plusieurs associés. </p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_sarl')}}">Je choisi SARL</a>
+      </fieldset>
+    </div>
+   </div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="SASU">
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">SASU STATUS</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Detail Concernant SASU</legend>
+       <p>SASU status truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+          blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+          Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+          Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_sasu')}}">Je choisi SASU</a>
+      </fieldset>
+    </div>
+   </div>
+  </div>
+  
+   <div class="tab-pane fade" id="EURL">
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">EURL STATUS</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Detail Concernant EURL</legend>
+       <p>fsdfkj dsfhalk asjfhalk asfhahfa sajkfhaohf asjfhahf sfhcb safjakh sfahcqsa Zjasd uhasd </p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_eurl')}}">Je choisi EURL</a>
+      </fieldset>
+    </div>
+   </div>
+  </div>
+
+ <div class="tab-pane fade" id="MICRO-ENTREPRISE">
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">MICRO-ENTREPRISE STATUS</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Detail Concernant MICRO-ENTREPRISE</legend>
+       <p>SASU status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+          blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+          Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+          Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_m-e')}}">Je choisi MICRO-ENTREPRISE</a>
+      </fieldset>
+    </div>
+   </div>
+  </div>
+    
+  <div class="tab-pane fade" id="SAS">
+    <p>SAS status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  <div class="tab-pane fade" id="SCI">
+    <p>SCI status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  <div class="tab-pane fade" id="IE">
+    <p>IE status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
+    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
+    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
+    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  {#<div class="tab-pane fade" id="dropdown1">#}
+  {#  <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>#}
+  {#</div>#}
+  {#<div class="tab-pane fade" id="dropdown2">#}
+  {#  <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>#}
+  {#</div>#}
+</div>
+</div>
+
+{% block footer %}{% endblock %}
+{% endblock %}
+    
