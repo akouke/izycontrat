@@ -113,10 +113,10 @@ class Person
      */
     private $specialization;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Company::class, mappedBy="president", cascade={"persist", "remove"})
-     */
-    private $companies;
+    // /**
+    //  * @ORM\OneToOne(targetEntity=Company::class, mappedBy="president", cascade={"persist", "remove"})
+    //  */
+    // private $companies;
 
     /**
      * @ORM\ManyToOne(targetEntity=Person::class, inversedBy="myAssociates")
@@ -133,10 +133,22 @@ class Person
      */
     private $associateCompanyInfos;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Company::class, mappedBy="president")
+     */
+    private $companies;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Company::class, mappedBy="generalDirector")
+     */
+    private $companiesGeneralDirector;
+
     public function __construct()
     {
         $this->myAssociates = new ArrayCollection();
         $this->associateCompanyInfos = new ArrayCollection();
+        $this->companies = new ArrayCollection();
+        $this->companiesGeneralDirector = new ArrayCollection();
     }
 
     // /**
@@ -292,23 +304,23 @@ class Person
         return "firstName,lastName,phoneNumber,address,country,capitalAmountAdding";
     }
 
-    public function getCompanies(): ?Company
-    {
-        return $this->companies;
-    }
+    // public function getCompanies(): ?Company
+    // {
+    //     return $this->companies;
+    // }
 
-    public function setCompanies(?Company $companies): self
-    {
-        $this->companies = $companies;
+    // public function setCompanies(?Company $companies): self
+    // {
+    //     $this->companies = $companies;
 
-        // set (or unset) the owning side of the relation if necessary
-        $newPresident = null === $companies ? null : $this;
-        if ($companies->getPresident() !== $newPresident) {
-            $companies->setPresident($newPresident);
-        }
+    //     // set (or unset) the owning side of the relation if necessary
+    //     $newPresident = null === $companies ? null : $this;
+    //     if ($companies->getPresident() !== $newPresident) {
+    //         $companies->setPresident($newPresident);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     // /**
     //  * @return Collection|self[]
@@ -404,6 +416,68 @@ class Person
             // set the owning side to null (unless already changed)
             if ($associateCompanyInfo->getPerson() === $this) {
                 $associateCompanyInfo->setPerson(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Company[]
+     */
+    public function getCompanies(): Collection
+    {
+        return $this->companies;
+    }
+
+    public function addCompany(Company $company): self
+    {
+        if (!$this->companies->contains($company)) {
+            $this->companies[] = $company;
+            $company->setPresident($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompany(Company $company): self
+    {
+        if ($this->companies->contains($company)) {
+            $this->companies->removeElement($company);
+            // set the owning side to null (unless already changed)
+            if ($company->getPresident() === $this) {
+                $company->setPresident(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Company[]
+     */
+    public function getCompaniesGeneralDirector(): Collection
+    {
+        return $this->companiesGeneralDirector;
+    }
+
+    public function addCompaniesGeneralDirector(Company $companiesGeneralDirector): self
+    {
+        if (!$this->companiesGeneralDirector->contains($companiesGeneralDirector)) {
+            $this->companiesGeneralDirector[] = $companiesGeneralDirector;
+            $companiesGeneralDirector->setGeneralDirector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompaniesGeneralDirector(Company $companiesGeneralDirector): self
+    {
+        if ($this->companiesGeneralDirector->contains($companiesGeneralDirector)) {
+            $this->companiesGeneralDirector->removeElement($companiesGeneralDirector);
+            // set the owning side to null (unless already changed)
+            if ($companiesGeneralDirector->getGeneralDirector() === $this) {
+                $companiesGeneralDirector->setGeneralDirector(null);
             }
         }
 

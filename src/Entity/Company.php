@@ -72,15 +72,15 @@ class Company
      */
     private $country;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Person::class, inversedBy="companies", cascade={"persist", "remove"})
-     */
-    private $president;
+    // /**
+    //  * @ORM\OneToOne(targetEntity=Person::class, inversedBy="companies", cascade={"persist", "remove"})
+    //  */
+    // private $president;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Person::class, cascade={"persist", "remove"})
-     */
-    private $generalDirector;
+    // /**
+    //  * @ORM\OneToOne(targetEntity=Person::class, cascade={"persist", "remove"})
+    //  */
+    // private $generalDirector;
 
     // /**
     //  * @ORM\OneToOne(targetEntity=ActivitySector::class, cascade={"persist", "remove"})
@@ -126,6 +126,21 @@ class Company
      * @ORM\ManyToOne(targetEntity=Priority::class, inversedBy="companies")
      */
     private $priority;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Person::class, inversedBy="companies")
+     */
+    private $president;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Person::class, inversedBy="companiesGeneralDirector")
+     */
+    private $generalDirector;
+
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=Person::class)
+    //  */
+    // private $generalDirector;
 
     public function getId(): ?int
     {
@@ -276,29 +291,29 @@ class Company
         return $this;
     }
 
-    public function getPresident(): ?Person
-    {
-        return $this->president;
-    }
+    // public function getPresident(): ?Person
+    // {
+    //     return $this->president;
+    // }
 
-    public function setPresident(?Person $president): self
-    {
-        $this->president = $president;
+    // public function setPresident(?Person $president): self
+    // {
+    //     $this->president = $president;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getGeneralDirector(): ?Person
-    {
-        return $this->generalDirector;
-    }
+    // public function getGeneralDirector(): ?Person
+    // {
+    //     return $this->generalDirector;
+    // }
 
-    public function setGeneralDirector(?Person $generalDirector): self
-    {
-        $this->generalDirector = $generalDirector;
+    // public function setGeneralDirector(?Person $generalDirector): self
+    // {
+    //     $this->generalDirector = $generalDirector;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     // public function getCompanyType(): ?CompanyType
     // {
@@ -416,6 +431,42 @@ class Company
     public function setPriority(?Priority $priority): self
     {
         $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function getPresident(): ?Person
+    {
+        return $this->president;
+    }
+
+    public function setPresident(?Person $president): self
+    {
+        $this->president = $president;
+
+        return $this;
+    }
+
+    // public function getGeneralDirector(): ?Person
+    // {
+    //     return $this->generalDirector;
+    // }
+
+    // public function setGeneralDirector(?Person $generalDirector): self
+    // {
+    //     $this->generalDirector = $generalDirector;
+
+    //     return $this;
+    // }
+
+    public function getGeneralDirector(): ?Person
+    {
+        return $this->generalDirector;
+    }
+
+    public function setGeneralDirector(?Person $generalDirector): self
+    {
+        $this->generalDirector = $generalDirector;
 
         return $this;
     }

@@ -8,7 +8,9 @@
 <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto:300');
       body{
+        /*background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blur-ipad-background.jpg') no-repeat center center fixed;*/
         background-size: cover;
+        background: white;
         margin: 1%;
         text-align: center;
         width: 100%;
@@ -56,19 +58,24 @@ transition: .5s;
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
 }
-.col-sm-4:nth-child(1) .card ,
-.col-sm-4:nth-child(1) .card .title .fa{
-  background: linear-gradient(-45deg,#f403d1,#64b5f6);
+.col-sm-3:nth-child(1) .card,
+.col-sm-3:nth-child(1) .card .title .fa{
+  background: linear-gradient(-45deg,#24ff72,#9a4eff);
 
 }
-.col-sm-4:nth-child(2) .card,
-.col-sm-4:nth-child(2) .card .title .fa{
+.col-sm-3:nth-child(2) .card,
+.col-sm-3:nth-child(2) .card .title .fa{
   background: linear-gradient(-45deg,#ffec61,#f321d7);
 
 }
-.col-sm-4:nth-child(3) .card,
-.col-sm-4:nth-child(3) .card .title .fa{
+.col-sm-3:nth-child(3) .card,
+.col-sm-3:nth-child(3) .card .title .fa{
   background: linear-gradient(-45deg,#24ff72,#9a4eff);
+
+}
+.col-sm-3:nth-child(4) .card ,
+.col-sm-3:nth-child(4) .card .title .fa{
+  background: linear-gradient(-45deg,#f403d1,#64b5f6);
 
 }
 .card::before{
@@ -153,6 +160,7 @@ table {
     word-wrap: break-word;
     margin-top:auto;
     margin-bottom:auto;
+    /*border: none;*/
 }
 .text-sm {
     font-size: 12px;
@@ -160,8 +168,8 @@ table {
 
 </style> 
 
-<h1 class="haut">Choix de la Prestation</h1>
-        <div class="breadcrumb progression">
+{#<h1 class="haut">Choix de la Prestation</h1>#}
+        <div class="breadcrumb progression haut">
             <ul class="nav nav-tabs">
                 <a class="active" href="{{path('create_sarl')}}">1 - Détail de votre projet</a>
                 <a data-toggle="tab" class="active"> 2 - Choix de la prestation</a>
@@ -177,135 +185,150 @@ table {
   <div class="container-fluid">
     <div class="container">
       <div class="row">
-        {#<div class="col-sm-4">#}
-        {#  <div class="card text-center">#}
-        {#    <div class="title">#}
-              {#<i class="fa fa-paper-plane" aria-hidden="true"></i>#}
-        {#      <h2>Création SARL Service Basic</h2>#}
-        {#    </div>#}
-        {#    <div class="price">#}
-        {#      <h4>0<sup>€</sup></h4>#}
-        {#    </div>#}
-            {#<span>Dossier d'immatriculation</span>#}
-        {#    <div class="option">#}
-              {#<ul>#}
-              {#<li> <i class="fa fa-check" aria-hidden="true"></i> Statuts personnalisés </li>#}
-              {#<li> <i class="fa fa-check" aria-hidden="true"></i> Suivi facilité de vos formalités administratives </li>#}
-              {#<li> <i class="fa fa-check" aria-hidden="true"></i> Documents administratifs pour votre immatriculation </li>#}
-              {#<li> <i class="fa fa-times" aria-hidden="true"></i> Publication de l'annonce légale </li>#}
-              {#</ul>#}
-              
-        {#    </div>#}
-        {#    <a href="#">Order Now </a>#}
-        {#  </div>#}
-        {#</div>#}
-        {#<!-- END Col one -->#}
-        {#<div class="col-sm-4">#}
-        {#  <div class="card text-center">#}
-        {#    <div class="title">#}
-              {#<i class="fa fa-plane" aria-hidden="true"></i>#}
-        {#      <h2>Création SARL Service Standard</h2>#}
-        {#    </div>#}
-        {#    <div class="price">#}
-        {#      <h4>100<sup>€</sup></h4>#}
-        {#    </div>#}
-        {#    <div class="option">#}
-              {#<ul>#}
-              {#<li> <i class="fa fa-check" aria-hidden="true"></i> 50 GB Space </li>#}
-              {#<li> <i class="fa fa-check" aria-hidden="true"></i> 5 Domain Names </li>#}
-              {#<li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited Email Address </li>#}
-              {#<li> <i class="fa fa-times" aria-hidden="true"></i> Live Support </li>#}
-              {#</ul>#}
-        {#    </div>#}
-        {#    <a href="#">Order Now </a>#}
-        {#  </div>#}
-        {#</div>#}
-        {#<!-- END Col two -->#}
-        {#<div class="col-sm-4">#}
-        {#  <div class="card text-center">#}
-        {#    <div class="title">#}
-              {#<i class="fa fa-rocket" aria-hidden="true"></i>#}
-        {#      <h2>Création SARL Service Premium</h2>#}
-        {#    </div>#}
-        {#    <div class="price">#}
-        {#      <h4>200<sup>€</sup></h4>#}
-        {#    </div>#}
-        {#    <div class="option">#}
-            {#  <ul>#}
-            {#  <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited GB Space </li>#}
-            {#  <li> <i class="fa fa-check" aria-hidden="true"></i> 30 Domain Names </li>#}
-            {#  <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited Email Address </li>#}
-            {#  <li> <i class="fa fa-check" aria-hidden="true"></i> Live Support </li>#}
-            {#  </ul>#}
-        {#    </div>#}
-        {#    <a href="#">Order Now </a>#}
-        {#  </div>#}
-        {#</div>#}
-        <!-- END Col three -->
-      </div>
-      {#debut table details#}
-    <table class="table table-hover table-bordered" style="text-align:center;padding-left:200px; padding-right:200px;">
-    <thead>
-      <tr >
-          <th valign="top" style="padding-top: -50px;">
-           <h3>Creation de mon SARL</h3><p class="text-muted text-sm">Choix de prestation</p>
-          </th>
-          <th>
-             <div class="card text-center">
-                <div class="title">
-                  {#<i class="fa fa-paper-plane" aria-hidden="true"></i>#}
-                  <h2>Basic</h2>
-                </div>
-                <div class="price">
-                  <h4>0<sup>€</sup><sub>HT</sub></h4>
-                </div>
-                <div class="option">
-                      <ul>
-                      <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
-                      </ul>
-                </div>
-                <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>
-            </div>
-          </th>
-          <th>
-               <div class="card text-center">
+        <div class="col-sm-3">
+          {#<div class="card text-center">#}
+          {#  <div class="title">#}
+          {#    <i class="fa fa-rocket" aria-hidden="true"></i>#}
+          {#    <h2>Création SARL Service Premium</h2>#}
+          {#  </div>#}
+          {#  <div class="price">#}
+          {#    <h4>200<sup>€</sup></h4>#}
+          {#  </div>#}
+          {#  <div class="option">#}
+          {#    <ul>#}
+              {#<li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited GB Space </li>#}
+              {#<li> <i class="fa fa-check" aria-hidden="true"></i> 30 Domain Names </li>#}
+          {#    <li> <i class="fa fa-check" aria-hidden="true"></i> Unlimited Email Address </li>#}
+          {#    <li> <i class="fa fa-check" aria-hidden="true"></i> Live Support </li>#}
+          {#    </ul>#}
+          {#  </div>#}
+          {#  <a href="#">Order Now </a>#}
+          {#</div>#}
+        </div>
+        <!-- END Col zero -->
+        <div class="col-sm-3">
+          <div class="card text-center">
             <div class="title">
-              {#<i class="fa fa-plane" aria-hidden="true"></i>#}
-              <h2> Standard</h2>
+              {#<i class="fa fa-paper-plane" aria-hidden="true"></i>#}
+              <h2>Basic</h2>
             </div>
             <div class="price">
-              <h4>100<sup>€</sup><sub>HT</sub></h4>
+              <h4>0<sup>€</sup><sub><small>HT</small></sub></h4>
             </div>
             <div class="option">
               <ul>
-                  <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
-               </ul>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> Creation SARL </li>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
+              </ul>
+              
             </div>
-            <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>
+            <a href="{{ path('create_sarl_payement')}}"><b>Choisir ce forfait</b> </a>
           </div>
-          </th>
-          <th>
-              <div class="card text-center">
-                  {#<div class="card-header">#}
-                      {#le plus populaire#}
-                  {#</div>#}
+        </div>
+        <!-- END Col one -->
+        <div class="col-sm-3">
+          <div class="card text-center">
+            <div class="title">
+              {#<i class="fa fa-plane" aria-hidden="true"></i>#}
+              <h2>Standard</h2>
+            </div>
+            <div class="price">
+              <h4>100<sup>€</sup><sub><small>HT</small></sub></h4>
+            </div>
+            <div class="option">
+              <ul>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> Creation SARL </li>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
+              </ul>
+            </div>
+             <a href="{{ path('create_sarl_payement')}}"><b>Choisir ce forfait</b> </a>
+          </div>
+        </div>
+        <!-- END Col two -->
+        <div class="col-sm-3">
+          <div class="card text-center">
             <div class="title">
               {#<i class="fa fa-rocket" aria-hidden="true"></i>#}
               <h2> Premium</h2>
             </div>
             <div class="price">
-              <h4>200<sup>€</sup><sub>HT</sub></h4>
+              <h4>200<sup>€</sup><sub><small>HT</small></sub></h4>
             </div>
             <div class="option">
-                <ul>
-                  <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
-               </ul>
+              <ul>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> Creation SARL </li>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
+              </ul>
             </div>
-            <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>
+            <a href="{{ path('create_sarl_payement')}}"><b>Choisir ce forfait</b> </a>
           </div>
-          </th>
-      </tr>
-    </thead>
+        </div>
+        <!-- END Col three -->
+
+      </div>
+      {#debut table details#}
+    <table class="table table-hover table-bordered" style="text-align:center;padding-left:200px; padding-right:200px;">
+    {#<thead>#}
+    {#  <tr >#}
+    {#      <th valign="top" style="padding-top: -50px;">#}
+    {#       <h3>Creation de mon SARL</h3><p class="text-muted text-sm">Choix de prestation</p>#}
+    {#      </th>#}
+    {#      <th>#}
+    {#         <div class="card text-center">#}
+    {#            <div class="title">#}
+                  {#<i class="fa fa-paper-plane" aria-hidden="true"></i>#}
+    {#              <h2>Basic</h2>#}
+    {#            </div>#}
+    {#            <div class="price">#}
+    {#              <h4>0<sup>€</sup><sub>HT</sub></h4>#}
+    {#            </div>#}
+    {#            <div class="option">#}
+    {#                  <ul>#}
+    {#                  <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
+    {#                  </ul>#}
+    {#            </div>#}
+    {#            <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>#}
+    {#        </div>#}
+    {#      </th>#}
+    {#      <th>#}
+    {#           <div class="card text-center">#}
+    {#        <div class="title">#}
+              {#<i class="fa fa-plane" aria-hidden="true"></i>#}
+    {#          <h2> Standard</h2>#}
+    {#        </div>#}
+    {#        <div class="price">#}
+    {#          <h4>100<sup>€</sup><sub>HT</sub></h4>#}
+    {#        </div>#}
+    {#        <div class="option">#}
+    {#          <ul>#}
+    {#              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
+    {#           </ul>#}
+    {#        </div>#}
+    {#        <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>#}
+    {#      </div>#}
+    {#      </th>#}
+    {#      <th>#}
+    {#          <div class="card text-center">#}
+                  {#<div class="card-header">#}
+                      {#le plus populaire#}
+                  {#</div>#}
+    {#        <div class="title">#}
+              {#<i class="fa fa-rocket" aria-hidden="true"></i>#}
+    {#          <h2> Premium</h2>#}
+    {#        </div>#}
+    {#        <div class="price">#}
+    {#          <h4>200<sup>€</sup><sub>HT</sub></h4>#}
+    {#        </div>#}
+    {#        <div class="option">#}
+    {#            <ul>#}
+    {#              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
+    {#           </ul>#}
+    {#        </div>#}
+    {#        <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>#}
+    {#      </div>#}
+    {#      </th>#}
+    {#  </tr>#}
+    {#</thead>#}
     <tbody>
 
       <tr>

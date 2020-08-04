@@ -39,6 +39,14 @@ class CreateEntrepriseController extends AbstractController
         ]);
     }
     
+     /**
+     * @Route("/create/comparatif", name="comparatif_statut")
+     */
+    public function comparatifStatut()
+    {
+        return $this->render('create_entreprise/comparatif_statut.html.twig');
+    }
+    
     /**
      * @Route("/create/entreprise/sarl", name="create_sarl") 
      */
@@ -228,6 +236,18 @@ class CreateEntrepriseController extends AbstractController
      {
          
          return $this->render('create_entreprise/sarl/SARL_form_payement.html.twig', [
+            
+        ]);
+         
+     }
+     
+     /**
+     * @Route("/create/entreprise/sarl/status", name="create_sarl_status") 
+     */
+     public function createSarlStatus (Request $request, EntityManagerInterface $em)
+     {
+         
+         return $this->render('create_entreprise/sarl/SARL_status.html.twig', [
             
         ]);
          

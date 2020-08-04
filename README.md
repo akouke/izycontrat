@@ -21,11 +21,9 @@ En premier lieu, soyez bien sûrs d'avoir installé **PHP 7.2** et d'avoir param
  ##### Administrateur : janine.doe@gmail.com
 ## L'équipe
 
-# Notre groupe a gagné 56% des quiz de la promo.
 
-- [Anthony Berduck](https://www.linkedin.com/in/anthonyberduck/)
-- [Olivier Monsire](https://www.linkedin.com/in/olivier-monsire-2614311a3/)
-- [Oleg Chenesseau](https://www.linkedin.com/in/oleg-chenesseau/)
-- [Julien Moulin](https://www.linkedin.com/in/j-moulin/)
+- [Abdoulaye Seck](https://www.linkedin.com/in/abdoulaye-seck/)
+- [Cheikhou Sy]()
+
 
 

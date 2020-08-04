@@ -9,6 +9,7 @@
 body{ 
 /*background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blur-ipad-background.jpg') no-repeat center center fixed;*/
    background-size: cover;
+   background: white;
 }
 
 </style>
@@ -18,13 +19,15 @@ body{
 
    {#<h2 class="bg-light">Detail de mon SARL</h2> #}
   <div class="container">
-        <div class="breadcrumb progress">
+        <div class="breadcrumb progression">
             <a  class="active">1 - Détail de votre projet</a>
             <a>2 - Choix de la prestation</a>
             <a>3 - Paiement</a>
             <a>4 - Société créée !</a>
         </div>
     </div>
-    <h2>Dans quel délai souhaitez-vous créer votre SASU ?</h2>
+    {#<h2>Dans quel délai souhaitez-vous créer votre SASU ?</h2>#}
+    
+{% block footer %}{% endblock %}
 {% endblock %}
     
