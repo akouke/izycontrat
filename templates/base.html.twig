@@ -20,10 +20,10 @@
     <title>{% block title %}IzyContrat{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-        {{ encore_entry_link_tags('tab1') }}
+       {#{{ encore_entry_link_tags('tab1') }}#}
     {% endblock %}
-    
-    
+
+
 </head>
 <body>
     <style>
@@ -31,12 +31,12 @@
            .espace { padding-top: 6em; margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
             .esp { margin-right: 1em;}
             .backgroundtitre { background:  indigo; color: white}
-            
+
         * {
             margin: 0: padding: 0;
         }
 
-        
+
     </style>
 {% block navbar %}{% include '_navbar.html.twig' %}{% endblock %}
 
@@ -50,7 +50,7 @@
 {% block javascripts %}
     {{ encore_entry_script_tags('login') }}
     {{ encore_entry_script_tags('app') }}
-    {{ encore_entry_script_tags('tab1') }}
+    {#{{ encore_entry_link_tags('tab1') }}#}
 {% endblock %}
 
 {{ render(controller('App\\Controller\\SecurityController::login', {  } )) }}
