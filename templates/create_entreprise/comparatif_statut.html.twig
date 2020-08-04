@@ -1,45 +1,331 @@
-{% extends 'base.html.twig' %}
-{#{% block navbar %}{% endblock %}#}
-
-{% block title %}Je cree mon entreprise{% endblock %}
+{% extends '_layout.html.twig' %}
+{% block title %}Izy Contrat - Comparatif{% endblock %}
 
 {% block body %}
+  <section class="team page-content container-fluid">
+    <h2 class="text-center">Tableau comparatif</h2>
+    <p class="my-5">Vestibulum et egestas lorem, sit amet porta eros. Suspendisse et dui non magna pulvinar varius.
+      Etiam consequat eu arcu id ultricies.
+      Pellentesque sollicitudin ac risus semper malesuada. Ut lorem dui, volutpat vitae nunc quis, vestibulum
+      viverra mauris.</p>
+    <table class="border">
+      <thead class="bg-secondary">
+      <tr>
+        <th class="col-2" scope="col"></th>
+        <th scope="col">SAS</th>
+        <th scope="col">SASU</th>
+        <th scope="col">EURL</th>
+        <th scope="col">SARL</th>
+        <th scope="col">Micro-entreprise</th>
+        <th scope="col">EI</th>
+        <th scope="col">SCI</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je démarrer ma société seul ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail1">+ de
+            détails
+          </button>
+        </th>
+        <td>Non</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+      </tr>
 
-<style>
-    .haut{
-        margin-top: 75px;
-    }
-</style>
+      <tr class="collapse" id="detail1">
+        <td class="bg-secondary"></td>
+        <td>>= 2 associés (personnes physiques ou morales)</td>
+        <td>Associé unique (personne physique ou morale)</td>
+        <td>Associé unique (personne physique ou morale)</td>
+        <td>Entre 2 et 100 associés (personnes physiques ou morales)</td>
+        <td>Entreprise individuelle : une seule personne (physique)</td>
+        <td>Entreprise individuelle : une seule personne (physique)</td>
+        <td>>= 2 personnes physiques ou morales</td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je ouvrir mon capital à de futur associés ?
 
-<div class=" haut">
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail2">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Non</td>
+      </tr>
+      <tr class="collapse" id="detail2">
+        <td class="bg-secondary"></td>
+        <td>Voir Procédure d’agrément si présente dans les statuts</td>
+        <td>Voir Procédure d’agrément si présente dans les statuts Votre société deviendra une SAS</td>
+        <td>Votre société deviendra une SARL</td>
+        <td>Tous les associés doivent nécessairement donner leur accord pour l’entrée de tout autre associé
+          tiers.
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je limiter ma responsabilité ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail3">+ de
+            détails
+          </button></th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Non</td>
+        <td>Non</td>
+      </tr>
+      <tr class="collapse" id="detail3">
+        <td class="bg-secondary"></td>
+        <td>Oui, votre responsabilité est limitée à vos apports, excépté si vous êtes caution ou garant</td>
+        <td>Oui, votre responsabilité est limitée à vos apports, excépté si vous êtes caution ou garant</td>
+        <td>Oui, votre responsabilité est limitée à vos apports, excepté si vous êtes caution ou garant</td>
+        <td>Oui, votre responsabilité est limitée à vos apports, excepté si vous êtes caution ou garant</td>
+        <td>Non, vous êtes totalement responsable excepté si vous faites une déclaration d’insaisissabilité</td>
+        <td>Non, vous êtes totalement responsable excepté si vous faites une déclaration d’insaisissabilité</td>
+        <td>Non, vous êtes totalement responsable excepté si vous faites une déclaration d’insaisissabilité</td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Suis-je libre de fixer le montant de ma rémunération
+          ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail4">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Possible</td>
+        <td>Oui</td>
+        <td>Oui</td>
+      </tr>
+      <tr class="collapse" id="detail4">
+        <td class="bg-secondary"></td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>En fonction du bénéfice généré</td>
+        <td>Oui</td>
+        <td>Oui</td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je bénéficier d’une protection sociale
+          assimilé-Salarié ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail5">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Possible</td>
+        <td>Possible</td>
+        <td>Non</td>
+        <td>Non</td>
+        <td>Possible</td>
+      </tr>
+      <tr class="collapse" id="detail5">
+        <td class="bg-secondary"></td>
+        <td></td>
+        <td></td>
+        <td>Gérant Tiers : OUI
+          <br>
+          Gérant Associé Unique : Travailleur Non-Salarié (TNS)
+        </td>
+        <td>Gérant minoritaire/égalitaire : OUI
+          <br>
+          Gérant majoritaire : Travailleur Non-Salarié (TNS)
+        </td>
+        <td>Soumis à la sécurité sociale des indépendants : Travailleur Non-Salarié (TNS)</td>
+        <td>Soumis à la sécurité sociale des indépendants : Travailleur Non-Salarié (TNS)</td>
+        <td>Gérant Tiers : OUI
+          <br>
+          Gérant Associé Unique : Travailleur Non-Salarié (TNS)
+        </td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Quelle forme juridique est la plus avantageuse pour le
+          versement des dividendes ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail6">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Non</td>
+        <td>Oui</td>
+      </tr>
+      <tr class="collapse" id="detail6">
+        <td class="bg-secondary"></td>
+        <td>Associé personne physique :
 
-<table class="table table-hover table-bordered">
-  <thead>
-    <tr class="table-warning">
-      <th scope="col"></th>
-      <th scope="col">SAS</th>
-      <th scope="col">SASU</th>
-      <th scope="col">EURL</th>
-      <th scope="col">SARL</th>
-      <th scope="col">MICRO-ENTREPRISE</th>
-      <th scope="col">IE</th>
-      <th scope="col">SCI</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table-active">
-      <th>Puis-je démarrer ma société seul ?</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
+          Les dividendes sont soumis au barême progressif de l’IR –.
 
-  </tbody>
-</table>
+          Associé personne morale :
 
-</div>
+          Les dividendes sont soumis à l’IS -
+        </td>
+        <td>Associé personne physique :
+
+          Les dividendes sont soumis au barême progressif de l’IR –.
+
+          Associé personne morale :
+
+          Les dividendes sont soumis à l’IS -
+        </td>
+        <td>Associé personne physique :
+
+          Les dividendes sont soumis au barême progressif de l’IR –.
+
+          Associé personne morale :
+
+          Les dividendes sont soumis à l’IS -
+        </td>
+        <td>Associé personne physique :
+
+          Les dividendes sont soumis au barême progressif de l’IR –.
+
+          Associé personne morale :
+
+          Les dividendes sont soumis à l’IS -
+        </td>
+        <td>Pas avantageux</td>
+        <td>Pas avantageux</td>
+        <td>Possible</td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je être soumis à l’IR ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail7">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Oui</td>
+        <td>Oui</td>
+      </tr>
+      <tr class="collapse" id="detail7">
+        <td class="bg-secondary"></td>
+        <td>Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu (IR) pendant 5
+          ans max sous conditions
+        </td>
+        <td>Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu (IR)pendant 5 ans
+          max sous conditions
+        </td>
+        <td>Possible
+
+          Si associé personne physique: IR par défaut mais possibilité IS
+
+          Si associé personne morale: IS obligatoirement
+        </td>
+        <td>Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu si SARL « de
+          famille » pendant 5 ans max sous conditions
+        </td>
+        <td>Le régime classique de la micro-entreprise
+
+          Ou
+
+          Le versement libératoire
+        </td>
+        <td>Oui</td>
+        <td>Oui, mais possibilité d’être à l’IS</td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je être soumis à l’IS ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail8">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Non</td>
+        <td>Oui</td>
+      </tr>
+      <tr class="collapse" id="detail8">
+        <td class="bg-secondary"></td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Possible
+
+          Si associé personne physique: IR par défaut mais possibilité IS
+
+          Si associé personne morale: IS obligatoirement
+        </td>
+        <td>Oui</td>
+        <td>Le régime classique de la micro-entreprise
+
+          Ou
+
+          Le versement libératoire
+        </td>
+        <td>Non
+
+          Le régime classique de la micro-entreprise
+        </td>
+        <td>Oui, mais possibilité d’être à l’IR</td>
+      </tr>
+      <tr>
+        <th class="bg-secondary" scope="row">Puis-je transmettre mon entreprise simplement ?
+          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail9">+ de
+            détails
+          </button>
+        </th>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Non</td>
+        <td>Possible</td>
+      </tr>
+      <tr class="collapse" id="detail9">
+        <td class="bg-secondary"></td>
+        <td>Cession libre des actions
+
+          excepté si clause d’agrément présente dans les statuts ou dans le pacte d’actionnaire
+        </td>
+        <td>Cession libre des actions</td>
+        <td>Cession libre des parts sociales</td>
+        <td>Possible
+
+          Cession libre des parts sociales entre les conjoints / ascendants / descendants / héritiers /
+          associé
+
+          Pour les Tiers : procédure d’agrément si présente dans les statuts
+        </td>
+        <td></td>
+        <td></td>
+        <td>Possible
+
+          Cession libre des parts sociales entre les conjoints / ascendants / descendants / héritiers /
+          associé
+
+          Pour les Tiers : procédure d’agrément si présente dans les statuts
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
 {% endblock %}
