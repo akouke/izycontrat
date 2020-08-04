@@ -1,4 +1,4 @@
-{% extends '_layout.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block title %}Izy Contrat - Comparatif{% endblock %}
 
 {% block body %}
@@ -8,23 +8,23 @@
       Etiam consequat eu arcu id ultricies.
       Pellentesque sollicitudin ac risus semper malesuada. Ut lorem dui, volutpat vitae nunc quis, vestibulum
       viverra mauris.</p>
-    <table class="border">
+    <table class="text-center">
       <thead class="bg-secondary">
-      <tr>
-        <th class="col-2" scope="col"></th>
-        <th scope="col">SAS</th>
-        <th scope="col">SASU</th>
-        <th scope="col">EURL</th>
-        <th scope="col">SARL</th>
-        <th scope="col">Micro-entreprise</th>
-        <th scope="col">EI</th>
-        <th scope="col">SCI</th>
+      <tr class="sticky-thead">
+        <th class="col-1" scope="col"></th>
+        <th class="col-1" scope="col">SAS</th>
+        <th class="col-1" scope="col">SASU</th>
+        <th class="col-1" scope="col">EURL</th>
+        <th class="col-1"  scope="col">SARL</th>
+        <th class="col-1"  scope="col">Micro-entreprise</th>
+        <th class="col-1" scope="col">EI</th>
+        <th class="col-1"  scope="col">SCI</th>
       </tr>
       </thead>
       <tbody>
       <tr>
-        <th class="bg-secondary" scope="row">Puis-je démarrer ma société seul ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail1">+ de
+        <th class="bg-secondary" scope="row">Puis-je démarrer ma société seul ? <br>
+          <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse" data-target="#detail1">+ de
             détails
           </button>
         </th>
@@ -48,9 +48,9 @@
         <td>>= 2 personnes physiques ou morales</td>
       </tr>
       <tr>
-        <th class="bg-secondary" scope="row">Puis-je ouvrir mon capital à de futur associés ?
+        <th class="bg-secondary" scope="row">Puis-je ouvrir mon capital à de futur associés ? <br>
 
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail2">+ de
+          <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse" data-target="#detail2">+ de
             détails
           </button>
         </th>
@@ -75,8 +75,8 @@
         <td></td>
       </tr>
       <tr>
-        <th class="bg-secondary" scope="row">Puis-je limiter ma responsabilité ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail3">+ de
+        <th class="bg-secondary" scope="row">Puis-je limiter ma responsabilité ? <br>
+          <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse" data-target="#detail3">+ de
             détails
           </button></th>
         <td>Oui</td>
@@ -98,9 +98,9 @@
         <td>Non, vous êtes totalement responsable excepté si vous faites une déclaration d’insaisissabilité</td>
       </tr>
       <tr>
-        <th class="bg-secondary" scope="row">Suis-je libre de fixer le montant de ma rémunération
-          ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail4">+ de
+        <th class="bg-secondary p-5" scope="row">Suis-je libre de fixer le montant de ma rémunération
+          ? <br>
+          <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse" data-target="#detail4">+ de
             détails
           </button>
         </th>
@@ -124,8 +124,8 @@
       </tr>
       <tr>
         <th class="bg-secondary" scope="row">Puis-je bénéficier d’une protection sociale
-          assimilé-Salarié ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail5">+ de
+          assimilé-Salarié ? <br>
+          <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse" data-target="#detail5">+ de
             détails
           </button>
         </th>
@@ -158,8 +158,8 @@
       </tr>
       <tr>
         <th class="bg-secondary" scope="row">Quelle forme juridique est la plus avantageuse pour le
-          versement des dividendes ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail6">+ de
+          versement des dividendes ? <br>
+          <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse" data-target="#detail6">+ de
             détails
           </button>
         </th>
@@ -210,8 +210,8 @@
         <td>Possible</td>
       </tr>
       <tr>
-        <th class="bg-secondary" scope="row">Puis-je être soumis à l’IR ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail7">+ de
+        <th class="bg-secondary" scope="row">Puis-je être soumis à l’IR ? <br>
+          <button class="btn btn-outline-primary btn-mini  m-1 mb-3" data-toggle="collapse" data-target="#detail7">+ de
             détails
           </button>
         </th>
@@ -237,8 +237,8 @@
 
           Si associé personne morale: IS obligatoirement
         </td>
-        <td>Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu si SARL « de
-          famille » pendant 5 ans max sous conditions
+        <td>Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu si SARL « de
+          famille » pendant 5 ans max sous conditions
         </td>
         <td>Le régime classique de la micro-entreprise
 
@@ -250,8 +250,8 @@
         <td>Oui, mais possibilité d’être à l’IS</td>
       </tr>
       <tr>
-        <th class="bg-secondary" scope="row">Puis-je être soumis à l’IS ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail8">+ de
+        <th class="bg-secondary" scope="row">Puis-je être soumis à l’IS ? <br>
+          <button class="btn btn-outline-primary btn-mini  m-1 mb-3" data-toggle="collapse" data-target="#detail8">+ de
             détails
           </button>
         </th>
@@ -287,8 +287,8 @@
         <td>Oui, mais possibilité d’être à l’IR</td>
       </tr>
       <tr>
-        <th class="bg-secondary" scope="row">Puis-je transmettre mon entreprise simplement ?
-          <button class="btn btn-outline-primary btn-block" data-toggle="collapse" data-target="#detail9">+ de
+        <th class="bg-secondary" scope="row">Puis-je transmettre mon entreprise simplement ? <br>
+          <button class="btn btn-outline-primary btn-mini  m-1 mb-3" data-toggle="collapse" data-target="#detail9">+ de
             détails
           </button>
         </th>
@@ -328,4 +328,8 @@
       </tbody>
     </table>
   </section>
+{% endblock %}
+{% block stylesheets %}
+  {{ parent () }}
+  {{ encore_entry_link_tags('comparatif') }}
 {% endblock %}
