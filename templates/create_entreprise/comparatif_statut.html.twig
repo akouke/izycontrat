@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
 {% block title %}Izy Contrat - Comparatif{% endblock %}
 
 {% block body %}
@@ -8,7 +8,7 @@
         <table class="text-center table table-bordered table-hover">
             <thead>
             <tr class="sticky-thead">
-                <th class="col-1" scope="col"></th>
+                <th  class="col-1" scope="col"></th>
                 <th class="col-1 bg-secondary" scope="col">SAS</th>
                 <th class="col-1 bg-secondary" scope="col">SASU</th>
                 <th class="col-1 bg-secondary" scope="col">EURL</th>
@@ -50,30 +50,30 @@
                 </td>
                 <td class="text-secondary align-middle">
                     <p>
-                    <svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg>
+                        <svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg>
                     </p>
                     <p class="collapse text-primary" id="detail1">Associé unique (personne physique ou morale)</p>
                 </td>
                 <td class="text-danger align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
                         </svg></p>
                     <p class="collapse text-primary" id="detail1">Entre 2 et 100 associés (personnes physiques ou morales)</p>
                 </td>
                 <td class="text-secondary align-middle">
-                   <p> <svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                    <p> <svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail1">Entreprise individuelle : une seule personne (physique)</p>
                 </td>
                 <td class="text-secondary align-middle">
@@ -86,12 +86,12 @@
                 </td>
                 <td class="text-danger align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail1">>= 2 personnes physiques ou morales</p>
                 </td>
             </tr>
@@ -105,14 +105,14 @@
                 </th>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail2">Voir Procédure d’agrément si présente dans les statuts</p>
                 </td>
                 <td class="text-secondary align-middle">
-                    < <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
+                    <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
                               xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
@@ -295,10 +295,10 @@
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail4">Oui</p>
                 </td>
             </tr>
@@ -327,21 +327,21 @@
                 <td class="align-middle">
                     <p>Possible</p>
                     <div class="collapse text-primary" id="detail5"><p>Gérant Tiers : OUI</p>
-                    <p>Gérant Associé Unique : Travailleur Non-Salarié (TNS)</p></div>
+                        <p>Gérant Associé Unique : Travailleur Non-Salarié (TNS)</p></div>
                 </td>
                 <td class="align-middle">
                     <p>Possible</p>
                     <div class="collapse text-primary" id="detail5"><p>Gérant minoritaire/égalitaire : OUI</p>
-                    Gérant majoritaire : Travailleur Non-Salarié (TNS)</div>
+                        Gérant majoritaire : Travailleur Non-Salarié (TNS)</div>
                 </td>
                 <td class="text-danger align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail5">Soumis à la sécurité sociale des indépendants : Travailleur Non-Salarié (TNS)</p>
                 </td>
                 <td class="text-danger align-middle">
@@ -370,10 +370,10 @@
                 </th>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <div class="collapse text-primary" id="detail6"> <p>Associé personne physique :</p>
                         <p>Les dividendes sont soumis au barème progressif de l’IR –.</p>
                         <p>Associé personne morale :</p>
@@ -414,12 +414,12 @@
                 </td>
                 <td class="text-danger align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail6">Pas avantageux</p>
                 </td>
                 <td class="text-danger align-middle">
@@ -434,10 +434,10 @@
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail6">Possible</p>
                 </td>
             </tr>
@@ -450,28 +450,28 @@
                 </th>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail7">Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu (IR) pendant 5
                         ans max sous conditions</p>
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail7">Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu (IR) pendant 5
                         ans max sous conditions</p>
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <div class="collapse text-primary" id="detail7">
                         <p>Possible</p>
                         <p>Si associé personne physique: IR par défaut mais possibilité IS</p>
@@ -480,10 +480,10 @@
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail7">
                         Impôt sur les sociétés (IS) mais possibilité d’être soumis à l’Impôt sur le revenu si SARL « de
                         famille » pendant 5 ans max sous conditions
@@ -491,12 +491,12 @@
                 </td>
                 <td class="text-danger align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg></p>
                     <div class="collapse text-primary" id="detail7">
                         <p>Le régime classique de la micro-entreprise</p>
                         <p>Ou</p>
@@ -505,18 +505,18 @@
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail7">Oui</p>
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail7">Oui, mais possibilité d’être à l’IS</p>
                 </td>
             </tr>
@@ -579,22 +579,22 @@
                 </td>
                 <td class="text-danger align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                        <path fill-rule="evenodd"
-                              d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd"
+                                  d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail8">
                         Le régime classique de la micro-entreprise
                     </p>
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail8">Oui, mais possibilité d’être à l’IR</p>
                 </td>
             </tr>
@@ -607,10 +607,10 @@
                 </th>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <div class="collapse text-primary" id="detail9">
                         <p>Cession libre des actions</p>
                         <p>excepté si clause d’agrément présente dans les statuts ou dans le pacte d’actionnaire</p>
@@ -618,10 +618,10 @@
                 </td>
                 <td class="text-secondary align-middle">
                     <p><svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-check2" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg></p>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></p>
                     <p class="collapse text-primary" id="detail9">Cession libre des actions</p>
                 </td>
                 <td class="text-secondary align-middle">
