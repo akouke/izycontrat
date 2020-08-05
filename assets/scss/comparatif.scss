@@ -1,12 +1,9 @@
 @import "vars";
 
-.sticky-thead {
+.sticky-th {
   position: sticky;
   top: 80px;
-  background: $secondary-color;
-  height: 50px;
 }
-
 .btn-mini {
   font-size: small;
 }
