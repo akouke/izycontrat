@@ -14,11 +14,6 @@
     
 
 
-
-
-
-
-
     {#{% if partners is not empty %} #}
     {#<section class="partners container-fluid">#}
     {#    <h2 class="text-center">Nos partenaires</h2>#}
@@ -133,12 +128,14 @@
     {{ parent () }}
       {{ encore_entry_link_tags('home') }}
         {{ encore_entry_link_tags('howitwork') }}
+        {{ encore_entry_link_tags('about') }}
         
        
     
 {% endblock %}
 {% block javascripts %}
 {{ parent () }}
+    
     {{ encore_entry_script_tags('howitwork') }}
     
 

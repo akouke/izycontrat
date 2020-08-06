@@ -1,7 +1,7 @@
 {% extends '_layout.html.twig' %}
 {#{% extends 'base.html.twig' %}#}
 
-{% block title %}Je cree mon {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%} {% endblock %}
+{% block title %}Je cree mon {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} {% endblock %}
 
 {% block body %}
 <style>
@@ -35,7 +35,7 @@
 {#<div class="espace">#}
 
 <div class="container-fluid">
-    <h1 class="haut">Formulaire Creation {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%} </h1>
+    <h1 class="haut">Formulaire Creation {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} </h1>
     
 {% if typeStatut == 'SARL'%}
 {#<form action="/create/entreprise/sarl" method="post">#}
@@ -70,8 +70,14 @@
                                  
                                  {#debut information company3 associer#}
                                  {{ form_start(formAssociateCompany3) }}
-                                 
-    {% endif %}
+       
+      {% endif %}
+        
+        {% if typeStatut == 'EURL' %}
+        
+        {{ form_start(formEurl) }}  
+        
+        {% endif %}
               
         <div class="breadcrumb progression">
             <ul class="nav nav-tabs">
@@ -85,7 +91,7 @@
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active show" id="SARL">
     <div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">
-      <div class="card-header">STATUT {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%}
+      <div class="card-header">STATUT {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }}
         {#<h3 class="card-title"></h3>#}
 
         {#    <div class="card-tools">#}
@@ -96,20 +102,28 @@
       <div class="card-body">
 
     <fieldset class="form-group">
-      <legend>Dans quel délai souhaitez-vous créer votre {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%} ?</legend>
+      <legend>Dans quel délai souhaitez-vous créer votre {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} ?</legend>
        <div class="tailInput">  
         {% if typeStatut == 'SARL' %}
          {{ form_widget(formSarl.priority)}}
          {% else %}
            priority
           {% endif %}
-        {#<div class="d-none">#}
-        {# {{ form_widget(formSarl.companyType)}}#}
-        {# </div>#}
+        <div class="d-none">
+            {% if typeStatut == 'SARL' %}
+                 {{ form_widget(formSarl.companyType)}}
+             {% else %}
+               
+              {% endif %}
+         </div>
        </div>
           <div>
                 Exerciez-vous votre activité sous le régime de la micro-entreprise ?
+                {% if typeStatut == 'SARL' %}
                 {{ form_row(formSarl.regimeMicroEntreprise)}} 
+                {% else %}
+                   regimeMicroEntreprise
+                {% endif %}
                 {#{{ form_label(formSarl.regimeME, 'Your Name') }}#}
           </div>
     </fieldset>
@@ -130,7 +144,11 @@
         <div class="card-body">
             <legend>Quel nom choississez vous pour votre entreprise?</legend>
              <div class="tailInput">  
+             {% if typeStatut == 'SARL' %}
                {{ form_widget(formSarl.name)}} 
+             {% else %}
+               name
+              {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
               (Le nom servira à identifier votre société. Il devra figurer sur tous les documents commerciaux de 
@@ -138,7 +156,7 @@
               qui est différent du nom commercial)
             </div>
               
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#nomCommercial">Suivant</a>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%">15%</div>
@@ -155,14 +173,18 @@
         <div class="card-body">
             <legend>Quel est le nom commercial ? (s’il y en a un)</legend>
              <div class="tailInput">  
-               {{ form_widget(formSarl.tradeName)}} 
+               {% if typeStatut == 'SARL' %}
+                   {{ form_widget(formSarl.tradeName)}} 
+                {% else %}
+                   tradeName
+                {% endif %}
               </div>
             <div class="alert alert-info" role="alert">
               (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise 
               est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
             </div>
               
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#hasProtection">Suivant</a>
             
             <div class="progress">
@@ -180,14 +202,18 @@
         <div class="card-body">
             <legend>Souhaitez-vous protéger votre nom de société par un dépôt de marque ?</legend>
              <div class="tailInput">  
-               {{ form_widget(formSarl.hasProtection)}} 
+                 {% if typeStatut == 'SARL' %}
+                   {{ form_widget(formSarl.hasProtection)}} 
+                {% else %}
+                   hasProtection
+                {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
               (Déposer une marque ou logo permet notamment de se protéger 
               contre un concurrent qui utiliserait votre marque de manière abusive)
             </div>
               
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#activitySector">Suivant</a>
             
             <div class="progress">
@@ -203,8 +229,12 @@
       </div>
         <div class="card-body">
             <legend>Quel est votre secteur d’activité ? </legend>
-             <div class="tailInput">  
-               {{ form_widget(formSarl.activitySector)}} 
+             <div class="tailInput"> 
+             {% if typeStatut == 'SARL' %}
+                   {{ form_widget(formSarl.activitySector)}} 
+                {% else %}
+                   activitySector
+                {% endif %}
               </div>
             <p>
               Si autre merci de le préciser :
@@ -214,8 +244,8 @@
               {#<input type="text" id="company_activitySector" name="company[activitySector]" placeholder=" Si Autre secteur d'activite" class="form-control" />#}
               <input type="text" id="company_activitySector_autre" name="company_activitySector_autre" placeholder=" Si Autre secteur d'activite" class="form-control" />
             </div>
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
-            <a class="btn btn-primary" data-toggle="tab" href="#manager">Suivant</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="{% if typeStatut == 'SARL' %} #manager {% else %} #address {% endif %}">Suivant</a>
             
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">45%</div>
@@ -232,8 +262,12 @@
       </div>
         <div class="card-body">
             <legend> Serez-vous le Gérant de la SARL ?  </legend>
-             <div class="tailInput">  
-               {{ form_widget(formSarl.manager)}} 
+             <div class="tailInput"> 
+             {% if typeStatut == 'SARL' %}
+                   {{ form_widget(formSarl.manager)}} 
+                {% else %}
+                   manager
+                {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
                 (Le Gérant est la personne en charge de diriger la société et est le plus fréquemment 
@@ -242,12 +276,18 @@
             
             <legend>Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </legend>
              <div class="tailInput">  
+             {% if typeStatut == 'SARL' %}
                {{ form_widget(formSarl.hasAssociate)}} 
+                {% else %}
+                   hasAssociate
+                {% endif %}
               </div>
-            <div class="alert alert-info" role="alert">
-              (L'entrée d'un nouvel associé dans votre SARLU transformera celle-ci en SARL.)
-            </div>
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+                {% if typeStatut == 'SARL' %}
+                    <div class="alert alert-info" role="alert">
+                          (L'entrée d'un nouvel associé dans votre SARLU transformera celle-ci en SARL.)
+                    </div>
+                {% endif %}
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#address">Suivant</a>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%">55%</div>
@@ -264,13 +304,18 @@
         <div class="card-body">
             <legend> Où sera le siège social de votre société ? </legend>
              
+             {% if typeStatut == 'SARL' %}
                 <strong> Au domicile du Gérant (le plus fréquent) </strong> 
              {#<div class="input-group ">#}
                 {#<div class="input-group-prepend">#}
                 {#<div class="row">#}
                   {#<div class="input-group-text tailInput">#}
                   <div class="tailInput">
-                    {{ form_widget(formSarl.addressManager)}} 
+                      {#{% if typeStatut == 'SARL' %}#}
+                        {{ form_widget(formSarl.addressManager)}} 
+                        {#{% else %}#}
+                        {#   adresseManager#}
+                        {#{% endif %}#}
                     {#<input type="radio" name="address" id="adresseManager" aria-label="Radio button for following text input">#}
                   </div>
                 {#</div>#}
@@ -279,15 +324,25 @@
                
                 <strong> A une adresse de domiciliation </strong> 
                   <div class="tailInput">
-                    {{ form_widget(formSarl.country)}}
+                      {#{% if typeStatut == 'SARL' %}#}
+                            {{ form_widget(formSarl.country)}}
+                        {#{% else %}#}
+                        {#   country#}
+                        {#{% endif %}#}
                   </div>
               
                <strong> Dans un bureau, local, etc… </strong> 
                   <div class="tailInput">
-                    {{ form_widget(formSarl.address)}}
+                      {#{% if typeStatut == 'SARL' %}#}
+                        {{ form_widget(formSarl.address)}}
+                        {#{% else %}#}
+                        {#   address#}
+                        {#{% endif %}#}
                   </div>
-                
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+               {% else %} 
+                Adresse
+              {% endif %}
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#capitalSocial">Suivant</a>
             
             <div class="progress">
@@ -305,7 +360,11 @@
         <div class="card-body">
             <strong>Quel est le montant total du capital social de votre société ? </strong>
              <div class="tailInput">  
+             {% if typeStatut == 'SARL' %}
                {{ form_widget(formSarl.capitalSocial)}} 
+                {% else %}
+                   capitalSocial
+                {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
                 <small>
@@ -318,7 +377,11 @@
               
             <strong>Dans quelle banque souhaitez-vous déposer le capital social ? </strong>
              <div class="tailInput">  
-               {{ form_widget(formSarl.bankName)}} 
+             {% if typeStatut == 'SARL' %}
+                   {{ form_widget(formSarl.bankName)}} 
+                {% else %}
+                   bankName
+                {% endif %}
               </div>
               <div class="alert alert-info" role="alert">
                   <small>
@@ -329,8 +392,8 @@
               </div>
               
               
-             <a class="btn btn-danger" tabindex="0" data-toggle="tooltip" title="retourner au debut" href="{{ path('create_sarl')}}">Retour</a>
-            <a class="btn btn-primary" data-toggle="tab" href="{% if typeStatut == 'SARL' %} #associes {% else %} #hasDirector {% endif %}">Suivant</a>
+             <a class="btn btn-danger" tabindex="0" data-toggle="tooltip" title="retourner au debut" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="{% if typeStatut == 'SARL' %} #associes {% else %} #person {% endif %}">Suivant</a>
             
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
@@ -339,7 +402,8 @@
       </div>
   </div>
   
-    
+{% if typeStatut == 'SARL'%}
+
     <div class="tab-pane fade" id="associes">
       <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
         <div class="card-header ">  Mes associés</div>
@@ -516,7 +580,7 @@
                   sauvegardez votre dossier ou passez aux questions suivantes, vous pouvez les renseigner plus tard. 
                 </small>
             </div>
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
              <a class="btn btn-primary" data-toggle="tab" href="#hasDirector">Suivant</a>
             
             <div class="progress">
@@ -545,7 +609,7 @@
                 au nom et pour le compte de la société. Le ou les DG d'une SARL sont en général également associés.
             </div>
 
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#person">Suivant</a>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">98%</div>
@@ -554,6 +618,7 @@
       </div>
   </div>
   
+  {% endif %}
   
     <div class="tab-pane fade" id="person">
       <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
@@ -564,32 +629,52 @@
                
                 {#<div class="row">#}
                  <div class="tailInput">
-                     {{ form_widget(formPerson.gender) }}
+                     {% if typeStatut == 'SARL' %}
+                         {{ form_widget(formPerson.gender) }}
+                    {% else %}
+                       gender
+                    {% endif %}
                  </div>
                  <div class="tailInput">  
-                   {{ form_widget(formPerson.firstName) }} 
+                     {% if typeStatut == 'SARL' %}
+                       {{ form_widget(formPerson.firstName) }} 
+                    {% else %}
+                       firstName
+                    {% endif %}
                  </div>
                  <div class="tailInput"> 
-                   {{ form_widget(formPerson.lastName) }} 
+                     {% if typeStatut == 'SARL' %}
+                       {{ form_widget(formPerson.lastName) }} 
+                    {% else %}
+                       lastName
+                    {% endif %}
                  </div>
                  {#</div>#}
                 
              <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
              <div class="tailInput"> 
-               {{ form_widget(formPerson.phoneNumber) }} 
+                 {% if typeStatut == 'SARL' %}
+                       {{ form_widget(formPerson.phoneNumber) }} 
+                    {% else %}
+                       phoneNumber
+                    {% endif %}
              </div>
               
               {#debut information de connexion user#}
               {#{{ form_start(formUser )}}#}
                  <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
                  <div class="tailInput"> 
-                    {{ form_widget(formUser.email) }} 
+                     {% if typeStatut == 'SARL' %}
+                        {{ form_widget(formUser.email) }} 
+                    {% else %}
+                       email
+                    {% endif %}
                  </div>
                 {#<p>#}
                 {# <small></small>#}
                 {#</p>#}
               <br>
-             <a class="btn btn-danger" href="{{ path('create_sarl')}}">Retour</a>
+             <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
              <button type="submit" class="btn btn-primary" >Enregistrer</button>
               {#<button type="submit" class="btn btn-primary">Suivant</button>#}
              
@@ -625,9 +710,16 @@
 
 </div>
     
+    {% if typeStatut == 'EURL' %}
+        
+        {{ form_end(formEurl) }}
+        
+    {% endif %}
+    
                     {#{{ form_rest(formUser) }}#}
                     {#{{ form_rest(formPerson) }}#}
                     {#{{ form_rest(formSarl) }}#}
+                    {% if typeStatut == 'SARL' %}
                                             {#debut information company3 associer#}
                                              {{ form_end(formAssociateCompany3) }}
                                             {#debut information company2 associer#}
@@ -658,6 +750,7 @@
          
     {{form_end(formSarl)}}
     
+    {% endif %}
     {#<a class="btn btn-danger" href="{{ path('create_sarl_prestation')}}">test Prestation</a>#}
     {#<button type="submit" class="btn btn-primary">Test</button>#}
 {#</form>#}

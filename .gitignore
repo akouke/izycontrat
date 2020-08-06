@@ -27,7 +27,7 @@
 ###< jetbrain/phpstorm ###
 
 ###> symfony/webpack-encore-bundle ###
-/node_modules/
+/node_modules/*
 /public/build/
 npm-debug.log
 yarn-error.log
