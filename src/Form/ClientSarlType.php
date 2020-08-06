@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ClientSarlType extends AbstractType
 {
@@ -40,7 +41,16 @@ class ClientSarlType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Votre numero de telephone',
                 ),
-                'required'    => false,
+                'required'    => true,
+            ])
+             ->add('gender', ChoiceType::class, [
+                'label' => 'Civilite',
+                // 'expanded' => true,
+                'choices' => [
+                                'Monsieur' => 2,
+                                'Madame' => 1,
+                            ],
+                'mapped' => true,
             ])
             // ->add('gender')
             // ->add('address')

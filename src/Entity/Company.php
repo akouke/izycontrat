@@ -137,6 +137,11 @@ class Company
      */
     private $generalDirector;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $TotalCapital;
+
     // /**
     //  * @ORM\ManyToOne(targetEntity=Person::class)
     //  */
@@ -467,6 +472,18 @@ class Company
     public function setGeneralDirector(?Person $generalDirector): self
     {
         $this->generalDirector = $generalDirector;
+
+        return $this;
+    }
+
+    public function getTotalCapital(): ?string
+    {
+        return $this->TotalCapital;
+    }
+
+    public function setTotalCapital(?string $TotalCapital): self
+    {
+        $this->TotalCapital = $TotalCapital;
 
         return $this;
     }

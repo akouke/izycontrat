@@ -1,7 +1,7 @@
 {% extends '_layout.html.twig' %}
 {#{% extends 'base.html.twig' %}#}
 
-{% block title %}Je cree mon SARL{% endblock %}
+{% block title %}Je cree mon {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%} {% endblock %}
 
 {% block body %}
 <style>
@@ -35,8 +35,9 @@
 {#<div class="espace">#}
 
 <div class="container-fluid">
-    <h1 class="haut">Formulaire Creation SARL</h1>
+    <h1 class="haut">Formulaire Creation {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%} </h1>
     
+{% if typeStatut == 'SARL'%}
 {#<form action="/create/entreprise/sarl" method="post">#}
 {#{{form_start(formSarl, {'action': path('create_sarl'), 'method': 'POST'})}}#}
 {{form_start(formSarl)}}
@@ -69,6 +70,8 @@
                                  
                                  {#debut information company3 associer#}
                                  {{ form_start(formAssociateCompany3) }}
+                                 
+    {% endif %}
               
         <div class="breadcrumb progression">
             <ul class="nav nav-tabs">
@@ -82,7 +85,7 @@
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active show" id="SARL">
     <div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">
-      <div class="card-header">SARL STATUS
+      <div class="card-header">STATUT {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%}
         {#<h3 class="card-title"></h3>#}
 
         {#    <div class="card-tools">#}
@@ -93,12 +96,16 @@
       <div class="card-body">
 
     <fieldset class="form-group">
-      <legend>Dans quel délai souhaitez-vous créer votre SARL ?</legend>
-       <div class="tailInput">   
+      <legend>Dans quel délai souhaitez-vous créer votre {% typeStatut == 'SARL' ? 'SARL' : 'EURL'%} ?</legend>
+       <div class="tailInput">  
+        {% if typeStatut == 'SARL' %}
          {{ form_widget(formSarl.priority)}}
-        <div class="d-none">
-         {{ form_widget(formSarl.companyType)}}
-         </div>
+         {% else %}
+           priority
+          {% endif %}
+        {#<div class="d-none">#}
+        {# {{ form_widget(formSarl.companyType)}}#}
+        {# </div>#}
        </div>
           <div>
                 Exerciez-vous votre activité sous le régime de la micro-entreprise ?
@@ -171,7 +178,7 @@
         <div class="card-header "> Protection Marque
       </div>
         <div class="card-body">
-            <legend>Souhaitez-vous protéger votre com de société par un dépôt de marque ?</legend>
+            <legend>Souhaitez-vous protéger votre nom de société par un dépôt de marque ?</legend>
              <div class="tailInput">  
                {{ form_widget(formSarl.hasProtection)}} 
               </div>
@@ -323,7 +330,7 @@
               
               
              <a class="btn btn-danger" tabindex="0" data-toggle="tooltip" title="retourner au debut" href="{{ path('create_sarl')}}">Retour</a>
-            <a class="btn btn-primary" data-toggle="tab" href="#associes">Suivant</a>
+            <a class="btn btn-primary" data-toggle="tab" href="{% if typeStatut == 'SARL' %} #associes {% else %} #hasDirector {% endif %}">Suivant</a>
             
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
@@ -335,7 +342,7 @@
     
     <div class="tab-pane fade" id="associes">
       <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
-        <div class="card-header ">  Mes associes</div>
+        <div class="card-header ">  Mes associés</div>
       
         <div class="card-body"> 
             <legend>Qui sont les associés de votre société </legend>
@@ -350,6 +357,9 @@
                            La somme des apports des associés constituent le capital social de la société)
                          </small>
                      <div class="row">
+                       <div class="col-2">  
+                         {{ form_row(formAssocie1.gender) }} 
+                       </div>
                        <div class="col">  
                          {{ form_row(formAssocie1.firstName) }} 
                        </div>
@@ -360,8 +370,11 @@
                          {{ form_row(formAssocie1.capitalAmountAdding) }} 
                        </div>
                      </div>
-                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
                 <div class="row">
+                    <div class="col-2">  
+                         {{ form_row(formAssocie2.gender) }} 
+                       </div>
                        <div class="col">  
                          {{ form_row(formAssocie2.firstName) }} 
                        </div>
@@ -372,8 +385,11 @@
                          {{ form_row(formAssocie2.capitalAmountAdding) }} 
                        </div>
                      </div>
-                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
                 <div class="row">
+                    <div class="col-2">  
+                         {{ form_row(formAssocie3.gender) }} 
+                       </div>
                        <div class="col">  
                          {{ form_row(formAssocie3.firstName) }} 
                        </div>
@@ -384,8 +400,11 @@
                          {{ form_row(formAssocie3.capitalAmountAdding) }} 
                        </div>
                      </div>
-                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
+                <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
                 <div class="row">
+                    <div class="col-2">  
+                         {{ form_row(formAssocie4.gender) }} 
+                       </div>
                        <div class="col">  
                          {{ form_row(formAssocie4.firstName) }} 
                        </div>
@@ -396,8 +415,11 @@
                          {{ form_row(formAssocie4.capitalAmountAdding) }} 
                        </div>
                      </div>
-                <details style="text-align:left;  margin-left: 1%; width: 98%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associe ?</strong></summary>
-                <div class="row">
+                <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
+                 <div class="row">
+                    <div class="col-2">  
+                         {{ form_row(formAssocie5.gender) }} 
+                       </div>
                        <div class="col">  
                          {{ form_row(formAssocie5.firstName) }} 
                        </div>
@@ -407,7 +429,8 @@
                        <div class="col">  
                          {{ form_row(formAssocie5.capitalAmountAdding) }} 
                        </div>
-                     </div>
+                 </div>
+                 
                 </details>
                 </details>
                 </details>
@@ -415,7 +438,7 @@
                     {#</form>#}
                     <br>
             </details>
-             <details style="text-align:left; margin:1%; margin-left: 11%; width: 76%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Une Societe ?</strong></summary>
+             <details style="text-align:left; margin:1%; margin-left: 11%; width: 76%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Une Société ?</strong></summary>
                      <div class="row">
                        <div class="col">  
                          {{ form_row(formAssociateCompany.name) }} 
@@ -423,11 +446,22 @@
                        <div class="col">  
                          {{ form_row(formAssociateCompany.companyType) }} 
                        </div>
+                       <div class="col">  
+                         {{ form_row(formAssociateCompany.legalRepresentative) }} 
+                       </div>
+                       <div class="col">  
+                         {{ form_row(formAssociateCompany.capitalBring) }} 
+                       </div>
                      </div>
-                      {#<p>#}
+                      <p style="text-align: center">
                        <small> (Le nom de la société correspond généralement à la dénomination sociale.) </small>
-                      {#</p>#}
-                     <details style="text-align:left; margin:1%; margin-left: 1%; width: 99%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associe 2 ?</strong></summary>
+                       <small class="bg-info">
+                         <br>(Les apports en capital social sont mis à disposition de la société par les associés afin d’assurer 
+                         son fonctionnement. En contrepartie, chaque associé reçoit des actions qui lui assurent des 
+                         pouvoirs économiques et décisionnels.)
+                      </small>
+                      </p>
+                     <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associé société 2 ?</strong></summary>
         
                              <div class="row">
                                <div class="col">  
@@ -436,9 +470,20 @@
                                <div class="col">  
                                  {{ form_row(formAssociateCompany2.companyType) }} 
                                </div>
+                               <div class="col">  
+                                 {{ form_row(formAssociateCompany2.legalRepresentative) }} 
+                               </div>
+                               <div class="col">  
+                                 {{ form_row(formAssociateCompany2.capitalBring) }} 
+                                 {{ dump(formAssociateCompany2.capitalBring) }}
+                               </div>
+                             </div>
+                             <div>
+                                 {#Répartition en % <br>#}
+                                 {#100%#}
                              </div>
                              
-                             <details style="text-align:left; margin:1%; margin-left: 1%; width: 99%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associe 3 ?</strong></summary>
+                             <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associé société 3 ?</strong></summary>
         
                                  <div class="row">
                                    <div class="col">  
@@ -447,11 +492,22 @@
                                    <div class="col">  
                                      {{ form_row(formAssociateCompany3.companyType) }} 
                                    </div>
+                                   <div class="col">  
+                                     {{ form_row(formAssociateCompany3.legalRepresentative) }} 
+                                   </div>
+                                   <div class="col">  
+                                     {{ form_row(formAssociateCompany3.capitalBring) }} 
+                                   </div>
                                  </div>
                             </details>
                     </details>
             
             </details>
+            {#<div class='repeat-section-container'>#}
+            {#    <a class="btn repeat-section" data-disable-with="Ajout en cours..." data-remote="true" rel="nofollow" data-method="patch" href=""><i class="fa fa-plus-circle"></i>#}
+            {#    Ajouter un autre associé#}
+            {#    </a>#}
+            {#</div>#}
             <div  class="alert alert-info" role="alert">
               Renseignez ici l’identité des associés de votre société, vous inclus si vous êtes associé. 
               Vous pouvez ajouter un associé en cliquant sur le bouton "Ajouter un associé" en bas de page<br>
@@ -505,12 +561,19 @@
       </div>
         <div class="card-body">
             <legend>Vos informations de contact nous servirons à finaliser la création de votre dossier.</legend>
-             <div class="tailInput">  
-               {{ form_widget(formPerson.firstName) }} 
-             </div>
-             <div class="tailInput"> 
-               {{ form_widget(formPerson.lastName) }} 
-             </div>
+               
+                {#<div class="row">#}
+                 <div class="tailInput">
+                     {{ form_widget(formPerson.gender) }}
+                 </div>
+                 <div class="tailInput">  
+                   {{ form_widget(formPerson.firstName) }} 
+                 </div>
+                 <div class="tailInput"> 
+                   {{ form_widget(formPerson.lastName) }} 
+                 </div>
+                 {#</div>#}
+                
              <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
              <div class="tailInput"> 
                {{ form_widget(formPerson.phoneNumber) }} 

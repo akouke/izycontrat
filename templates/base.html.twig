@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+   
     <!--Link avec bootswatch -->
     {#debut import prestation#}
     {# <meta http-equiv="X-UA-Compatible" content="ie=edge">#}
@@ -19,6 +21,9 @@
     <meta name="theme-color" content="#ffffff">
     <title>{% block title %}IzyContrat{% endblock %}</title>
     {% block stylesheets %}
+     
+       
+      
         {{ encore_entry_link_tags('app') }}
         {{ encore_entry_link_tags('tab1') }}
     {% endblock %}
@@ -55,5 +60,6 @@
 
 {{ render(controller('App\\Controller\\SecurityController::login', {  } )) }}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 </body>
 </html>

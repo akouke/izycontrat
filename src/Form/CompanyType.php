@@ -109,7 +109,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('capitalSocial', MoneyType::class, [
                 'attr' => [
-                    'placeholder' => "2000 EURO"
+                    'placeholder' => "2000"
                     ],
                 'required' => false,
                 'mapped' => true,

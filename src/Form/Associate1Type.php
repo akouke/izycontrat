@@ -8,14 +8,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class Associate1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // $choices = [
+        //     'M' => 'M',
+        //     'Mm' => 'Mm'
+        // ];
         $builder
           ->add('capitalAmountAdding', MoneyType::class, [
-                'label' => 'Apport Associe1',
+                'label' => 'Apport Associé 1',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -24,22 +30,34 @@ class Associate1Type extends AbstractType
                 'required'    => false,
             ])
              ->add('firstName', TextType::class, [
-                'label' => 'Prénom Associe1',
+                'label' => 'Prénom Associé 1',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Abdoulaye',
+                    'placeholder' => 'Saliha',
                 ),
                 'required'    => false,
             ])
             ->add('lastName',  TextType::class, [
-                'label' => 'Nom Associe1',
+                'label' => 'Nom Associé 1',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'SECK',
+                    'placeholder' => 'AZOUGAGH',
                 ),
                 'required'    => false,
+            ])
+            ->add('gender', ChoiceType::class, [
+                'label' => 'Civilite',
+                // 'expanded' => true,
+                'choices' => [
+                                'Monsieur' => 2,
+                                'Madame' => 1,
+                            ],
+                'mapped' => true,
+                // 'empty_data'  => null,
+                // 'choice_value' => 'M'
+                // 'required'    => false,
             ])
         ;
     }
