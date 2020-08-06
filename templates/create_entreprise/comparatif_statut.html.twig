@@ -3,8 +3,11 @@
 
 {% block body %}
     <section class="team page-content container-fluid">
-        <h2 class="text-center">Tableau comparatif</h2>
-        <p class="my-5">TEXTE EN ATTENTE</p>
+        <h2 class="text-center">Tableau comparatif des status juridiques les plus communs en France.</h2>
+        <p class="my-5 text-center">Vous n’avez pas encore fait votre choix parmi les différents statuts juridiques proposés
+            car vous ne savez pas lequel correspondrait le mieux à vos besoins ?<br>
+          Voici un tableau qui pourra vous aider à faire votre choix. Il présente les différents
+            avantages et inconvénients des principaux statuts juridiques en France.</p>
         <table class="text-center table table-bordered table-hover m-auto">
             <thead class="sticky-thead">
             <tr class="sticky-thead row mx-0">
@@ -672,6 +675,16 @@
                     </div>
 
                 </td>
+            </tr>
+            <tr class="row mx-0 mb-5">
+                <th class="col " scope="col"></th>
+                <th class="col" scope="col"><a href="" class="btn btn-secondary">Commencer</a></th>
+                <th class="col" scope="col"><a href="{{ path('create_sasu') }}" class="btn btn-secondary">Commencer</a></th>
+                <th class="col" scope="col"><a href="{{ path('create_eurl') }}" class="btn btn-secondary">Commencer</a></th>
+                <th class="col" scope="col"><a href="{{ path('create_sarl') }}" class="btn btn-secondary">Commencer</a></th>
+                <th class="col" scope="col"><a href="{{ path('create_m-e') }}" class="btn btn-secondary">Commencer</a></th>
+                <th class="col" scope="col"><a href="" class="btn btn-secondary">Commencer</a></th>
+                <th class="col" scope="col"><a href="" class="btn btn-secondary">Commencer</a></th>
             </tr>
             </tbody>
         </table>
