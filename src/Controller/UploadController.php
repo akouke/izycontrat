@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Upload;
+use App\Entity\User;
 use App\Form\UploadType;
 use App\Repository\UploadRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @Route("/upload")
@@ -28,11 +30,12 @@ class UploadController extends AbstractController
     /**
      * @Route("/new", name="upload_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserInterface $user): Response
     {
         $upload = new Upload();
-        $form = $this->createForm(UploadType::class, $upload->getUser());
+        $form = $this->createForm(UploadType::class, $upload);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

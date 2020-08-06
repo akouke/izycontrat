@@ -20,7 +20,6 @@ class UploadType extends AbstractType
                 'allow_delete' => true,
                 'download_uri' => true,
             ])
-            ->remove('user')
         ;
     }
 
