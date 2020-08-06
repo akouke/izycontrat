@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @Route("/upload")
+ * @Route("/dashboard/upload")
  */
 class UploadController extends AbstractController
 {

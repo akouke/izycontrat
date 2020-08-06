@@ -1,37 +1,38 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Upload index{% endblock %}
+{% block title %}Mes status{% endblock %}
 
 {% block body %}
-<section class="team page-content container-fluid">
-    <h1>Upload index</h1>
+    <section class="page-content container-fluid col-10 col-lg-10 pb-4">
+        <h2>Mes status</h2>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
                 <th>Status</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for upload in uploads %}
-            <tr>
-                <td>{{ upload.id }}</td>
-                <td>{{ upload.user.id }}</td>
-                <td>
-                    <a href="{{ path('upload_show', {'id': upload.id}) }}">show</a>
-                    <a href="{{ path('upload_edit', {'id': upload.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for upload in uploads %}
+                <tr>
+                    <td>{{ upload.status }}</td>
+                    <td>{{ upload.user.id }}</td>
+                    <td>
+                        {{ include('upload/_delete_form.html.twig') }}
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary" href="/uploads/status/{{ upload.status }}" target="_blank">Voir</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('upload_new') }}">Create new</a>
-</section>
+        <a href="{{ path('upload_new') }}">Create new</a>
+    </section>
 {% endblock %}
