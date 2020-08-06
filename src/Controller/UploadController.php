@@ -36,7 +36,10 @@ class UploadController extends AbstractController
         $upload = new Upload();
         $form = $this->createForm(UploadType::class, $upload);
         $form->handleRequest($request);
+
+        /** @var User $user */
         $user=$this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $upload->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
