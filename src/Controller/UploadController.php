@@ -23,8 +23,13 @@ class UploadController extends AbstractController
      */
     public function index(UploadRepository $uploadRepository): Response
     {
+        /** @var User $user */
+        $user=$this->getUser();
+
+        $upload = $uploadRepository->findAllUpload($user);
+
         return $this->render('upload/index.html.twig', [
-            'uploads' => $uploadRepository->findAll(),
+            'uploads' => $upload,
         ]);
     }
 
@@ -50,36 +55,6 @@ class UploadController extends AbstractController
         }
 
         return $this->render('upload/new.html.twig', [
-            'upload' => $upload,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="upload_show", methods={"GET"})
-     */
-    public function show(Upload $upload): Response
-    {
-        return $this->render('upload/show.html.twig', [
-            'upload' => $upload,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="upload_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Upload $upload): Response
-    {
-        $form = $this->createForm(UploadType::class, $upload);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('upload_index');
-        }
-
-        return $this->render('upload/edit.html.twig', [
             'upload' => $upload,
             'form' => $form->createView(),
         ]);

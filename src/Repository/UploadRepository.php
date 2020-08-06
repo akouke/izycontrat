@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Upload;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,16 @@ class UploadRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Upload::class);
+    }
+
+    public function findAllUpload(User $user)
+    {
+        return $this
+            ->createQueryBuilder('upload')
+            ->where('upload.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
     }
 
     // /**
