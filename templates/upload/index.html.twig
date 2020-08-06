@@ -1,0 +1,37 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Upload index{% endblock %}
+
+{% block body %}
+<section class="team page-content container-fluid">
+    <h1>Upload index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for upload in uploads %}
+            <tr>
+                <td>{{ upload.id }}</td>
+                <td>{{ upload.status }}</td>
+                <td>
+                    <a href="{{ path('upload_show', {'id': upload.id}) }}">show</a>
+                    <a href="{{ path('upload_edit', {'id': upload.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('upload_new') }}">Create new</a>
+</section>
+{% endblock %}

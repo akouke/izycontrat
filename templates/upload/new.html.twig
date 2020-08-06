@@ -1,0 +1,13 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}New Upload{% endblock %}
+
+{% block body %}
+<section class="team page-content container-fluid">
+    <h1>Create new Upload</h1>
+
+    {{ include('upload/_form.html.twig') }}
+
+    <a href="{{ path('upload_index') }}">back to list</a>
+</section>
+{% endblock %}
