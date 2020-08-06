@@ -1,0 +1,168 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Fiche pratique EURL{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('technical_sheet') }}
+{% endblock %}
+
+{% block body %}
+    <section class="homeTop d-flex justify-content-center">
+        <img class="homePicture" src="/images/eurl.png" alt="image principale">
+        <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
+            <p>CRÉER UNE EURL</p>
+            <a href="{{ path('create_entreprise') }}" class="btn btn-secondary btnHome">Je crée ma EURL !</a>
+        </div>
+    </section>
+    <div class="container text-justify">
+        <div class="row justify-content-center mt-4 mb-4">
+            <h2 class="text-center">Qu’est-ce qu’une EURL ?</h2>
+        </div>
+        <div class="row mt4">
+            <p>L’entreprise unipersonnelle à responsabilité limitée (EURL) est une société à responsabilité limitée
+                (SARL)
+                constitué d’un seul associé, c’est pourquoi elle est aussi appelée SARL unipersonnelle. Elle est régie
+                par
+                les
+                mêmes règles juridiques que la SARL, sauf en ce qui concerne les dispositions relatives à l’associé
+                unique.</p>
+
+            <p>L’EURL permet à un entrepreneur de se lancer seul, et de protéger son patrimoine personnel des créanciers
+                de
+                l’entreprise en limitant sa responsabilité financière au montant de ses apports.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel est le montant du capital social d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p> Le capital social est fixé librement par l’associé unique, il n’y a pas de montant minimum ou maximum
+                exigé.
+                Il
+                peut être constitué d’apports en numéraire (somme d’argent) ou d’apports en nature (biens matériels ou
+                immatériels). Cette liberté de montant permet à l’entrepreneur de débuter son activité avec le capital
+                qui
+                correspond le mieux à ses besoins. Le montant du capital social n’est pas à prendre à la légère, il faut
+                évaluer
+                toutes les dépenses futures liées à l’activité. Une mauvaise évaluation de vos besoins est un risque
+                pour
+                votre
+                entreprise, il est plus sûr de demander conseil à un expert.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel peut être l’objet social d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p> Le choix d’un objet social pour une EURL est obligatoire, il figure dans les statuts et détermine
+                quelle(s)
+                activité(s) l’entreprise peut exercer. L’objet social peut être libre, mais il doit pouvoir être
+                réalisable
+                et licite, c’est-à-dire qu’il ne doit pas être contraire aux bonnes mœurs et à l’ordre public.
+            </p>
+            <p>L’objet social ne doit être ni trop précis, pour éviter d’avoir à réaliser des changements réguliers
+                contraignants et onéreux, ni trop vague au risque d’être considéré comme une absence d’objet. Il faut
+                penser
+                à intégrer les activités futures que l’entreprise exercera.</p>
+            <p>Certaines activités sont réglementées et ne peuvent pas être autorisées pour l’EURL, il s’agit notamment
+                du
+                courtage, de l’assurance, la prévoyance, le commerce de tabac, la collecte de droits d’auteur, ou la
+                banque
+                et l’épargne.
+            </p>
+            <p>Un objet social mal rédigé peut être considéré comme nul, et empêcher la création de votre
+                entreprise.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Comment est nommé le gérant d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Le gérant est obligatoirement une personne physique, il peut s’agir de l’associé unique ou d’un tiers. Si
+                l’associé unique exerce aussi le rôle de gérant il est alors gérant associé unique, et cumule les deux
+                fonctions. Si l’associé unique désigne un tiers pour être gérant, on parle de gérant non associé.
+            </p>
+            <p>Le gérant est nommé par l’associé unique à la création de l’EURL, soit dans les statuts, soit par acte
+                séparé. Faire un acte séparé permet de changer de gérant plus facilement, il n’y a pas besoin de
+                réaliser
+                une modification des statuts.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quels sont les pouvoirs du gérant d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Les pouvoirs du gérant sont fixés par l’associé unique dans les statuts. Ces clauses peuvent prévoir des
+                limitations ou des interdictions, si aucune clause n’est prévue alors le gérant possède les pleins
+                pouvoirs
+                concernant la gestion de l’EURL.</p>
+            <p>En cas d’abus de pouvoir de la part du gérant, celui-ci engage sa responsabilité vis-à-vis de l’associé
+                unique. L’associé unique de l’EURL peut attaquer en justice le gérant pour lui demander réparation pour
+                le
+                préjudice subi, et le révoquer sur juste motif (pour raison sérieuse).</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quelle rémunération pour le gérant d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La rémunération du gérant d’une EURL est librement choisie, il n’existe aucune rémunération
+                minimale imposée par la législation, ce qui signifie que le gérant peut ne pas être rémunéré.</p>
+            <p>La rémunération peut être fixe, elle est versée périodiquement, quels que soient les bénéfices réalisés
+                par
+                l’entreprise. La rémunération peut aussi être variable et dépendre de la performance de l’entreprise.
+                Dans
+                ce cas, elle peut être proportionnelle à la marge brute, aux bénéfices, ou encore au chiffre d’affaires.
+                Le
+                gérant peut également recevoir des avantages en nature.</p>
+            <p> Comme pour la nomination du gérant, sa rémunération peut être prévue soit les statuts, soit par acte
+                séparé.
+                L’acte séparé est la méthode la plus courante, elle permet d’éviter une modification coûteuse des
+                statuts en
+                cas de changement de rémunération.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel est le régime fiscal d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p> Si l’associé unique est une personne morale, l’EURL est soumise obligatoirement à l’impôt sur les
+                sociétés
+                (IS).
+            </p>
+            <p> Si l’associé unique est une personne physique, alors trois possibilités se présentent :</p>
+            <p>Par défaut, les bénéfices de l’EURL sont imposables sur les revenus (IR) de l’entrepreneur. Les revenus
+                issus
+                d’une activité commerciale ou artisanale sont à déclarer dans la catégorie des bénéfices industriels et
+                commerciaux (BIC). Les revenus issus d’une activité libérale quant à eux sont à déclarer dans la
+                catégorie
+                des bénéfices non commerciaux (BNC).
+            </p>
+            <p>Sur option, il est possible de choisir une imposition sur les sociétés (IS). C’est l’EURL qui est alors
+                redevable de l’impôt sur les bénéfices, et l’entrepreneur est imposable sur sa propre rémunération.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel est le régime social d’une EURL ?</h2>
+        </div>
+        <div class="row mt-4 mb-4">
+
+            <p>Si l’associé unique est également gérant alors il est considéré comme travailleur non salarié (TNS), et
+                cotise à la Sécurité sociale des indépendants.</p>
+            <p> Si l’associé n’est pas dirigeant de l’EURL, il ne peut exercer une activité salariée dans l’entreprise,
+                il
+                ne bénéficie donc pas d’une protection du fait de son absence de statut social.
+            </p>
+            <p> Si le gérant est un tiers, son régime social diffère selon s’il est rémunéré ou non. Lorsque le gérant
+                non
+                associé perçoit une rémunération, il bénéficie du régime des assimilés salariés. Dans ce cas, il est
+                soumis
+                au régime général de la Sécurité Sociale et de retraite des salariés, mais n’a pas droit à l’assurance
+                chômage. Lorsque le gérant non associé ne perçoit pas de rémunération, il ne bénéficie d’aucune
+                protection
+                sociale du fait de son statut.
+            </p>
+            <p>Vous avez trouvé une réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre projet
+                en
+                quelques clics !</p>
+            <p>Vous avez encore des questions ? L’Équipe d’<span class="text-secondary font-weight-bold">IZY</span><span
+                        class="font-weight-bold"> CONTRAT</span> est là pour vous conseiller.</p>
+        </div>
+    </div>
+{% endblock %}

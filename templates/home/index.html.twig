@@ -2,6 +2,11 @@
 
 {% block title %}Izy Contrat - Accueil{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
 {% block body %}
     <section class="homeTop d-flex justify-content-center">
         <img class="homePicture" src="images/homeImg.jpg" alt="image principale">
@@ -31,7 +36,4 @@
     {% endif %}
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent () }}
-    {{ encore_entry_link_tags('home') }}
-{% endblock %}
+
