@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+
 /**
  * @Route("/fiche/izy/pratique/", name="technical_sheet")
  */
@@ -32,5 +33,4 @@ class TechnicalSheetController extends AbstractController
     {
         return $this->render('technical_sheet/eurl.html.twig');
     }
-
 }
