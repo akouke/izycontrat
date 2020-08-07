@@ -16,4 +16,12 @@ class CguController extends AbstractController
     {
         return $this->render('conditions/index.html.twig');
     }
+
+    /**
+     * @Route("/cgu/avocats", name="cgu_lawyer")
+     */
+    public function indexCguLawyer() : Response
+    {
+        return $this->render('conditions/lawyer.html.twig');
+    }
 }
