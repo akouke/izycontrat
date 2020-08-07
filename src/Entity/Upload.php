@@ -35,8 +35,9 @@ class Upload
      * @Assert\File(maxSize = Upload::MAX_SIZE,
      *     maxSizeMessage="Le fichier est trop gros  ({{ size }} {{ suffix }}),
      * il ne doit pas dépasser {{ limit }} {{ suffix }}",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Veuillez entrer un type de fichier PDF.")
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/odt", "application/doc",
+     * "application/docx", "application/txt"},
+     *     mimeTypesMessage = "Veuillez entrer un type de fichier valide: PDF.")
      */
     private $statusFile;
 
