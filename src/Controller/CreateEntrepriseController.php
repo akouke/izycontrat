@@ -442,6 +442,10 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($user);
             $em->persist($person);
             
+            
+            return $this->redirectToRoute('create_me_ei_informations', [
+                
+                ]);
         dd($formCompany, $company, $user, $person);
             // dd($this->getUser(), $user->getEmail() );
             $em->flush();
@@ -506,9 +510,13 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($user);
             $em->persist($person);
             
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            return $this->redirectToRoute('create_me_ei_informations', [
+                
+                ]);
         dd($formCompany, $company, $user, $person);
             // dd($this->getUser(), $user->getEmail() );
-            $em->flush();
+            // $em->flush();
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
@@ -531,6 +539,8 @@ class CreateEntrepriseController extends AbstractController
      */
      public function MeEiInformations(Request $request, EntityManagerInterface $em)
      {
-        
+        return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+         
+        ]);
      }
 }

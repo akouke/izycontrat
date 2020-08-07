@@ -1,0 +1,290 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}{% endblock %}
+{% block dashboard %}{% endblock %}
+{% block title %}Vos informations {% endblock %}
+
+ {% block body %} 
+  
+  <style>
+      * {
+  margin: 0;
+  padding: 0;
+  font-family: 'AsapRegular';
+  font-size: 17px;
+}
+
+header {
+  text-align: center;
+  background-color: #244C9A;
+  border-bottom: 4px solid black;
+  \
+}
+
+body {
+  /*background: linear-gradient(#FFF, #FFC79B);*/
+  margin: auto;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  margin: 15px;
+}
+
+fieldset {
+  width: 50%;
+  background-color: #DDD;
+  margin: auto;
+  box-shadow: 2px 2px 2px black;
+  margin-bottom: 20px;
+}
+
+legend {
+  width: 400px;
+  color: #DDD;
+  font-size: 120%;
+  border-radius: 30px 10px;
+  box-shadow: 4px 2px 2px black;
+  padding: 12px;
+  background-color: #244C9A;
+  text-shadow: 1px 1px 2px black;
+  margin-bottom: 20px;
+}
+
+input {
+  display: block;
+  float: left;
+  width: 50%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+
+label {
+  display: block;
+  font-size: 0.8em;
+  float: left;
+  clear: left;
+  width: 20%;
+  background-color: #244C9A;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 20px;
+  color: #DDD;
+  margin-right: 30px;
+  text-align: center;
+}
+
+select {
+  display: block;
+  float: left;
+  width: 50%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+
+h1 {
+  text-align: center;
+  padding: 15px;
+  font-size: 170%;
+}
+
+#disclaimer {
+  font-size: 0.6em;
+}
+
+footer a {
+  font-size: 1em;
+}
+
+input:focus:invalid {
+  background-color: #F44;
+  background-image: url(stop.png);
+  background-location: right bottom;
+  background-repeat: no-repeat;
+}
+
+input:focus:valid {
+  background-color: #4F4;
+}
+
+input[type="button"] {
+  width: 150px;
+  float: none;
+  margin-bottom: 5px;
+  margin-top: 0;
+  margin-right: auto;
+  margin-left: auto
+}
+
+input[type="submit"] {
+  width: 150px;
+  float: none;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-right: auto;
+  margin-left: auto
+}
+
+input[type="reset"] {
+  width: 150px;
+  float: none;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+fieldset#dvd {
+  text-align: left;
+  border-style: none;
+  box-shadow: none;
+  width: 73%
+}
+
+fieldset#dvd label {
+  background: none;
+  color: #000;
+  float: none;
+  display: inline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 8px;
+}
+
+fieldset#dvd input {
+  background: none;
+  color: #000;
+  float: none;
+  display: inline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 0px;
+  width: 2%
+}
+
+fieldset#tuner {
+  text-align: left;
+  border-style: none;
+  box-shadow: none;
+  width: 73%
+}
+
+fieldset#tuner label {
+  background: none;
+  color: #000;
+  float: none;
+  display: inline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 8px;
+}
+
+fieldset#tuner input {
+  background: none;
+  color: #000;
+  float: none;
+  display: inline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 0px;
+  width: 2%
+}
+
+fieldset#mCard {
+  text-align: left;
+  border-style: none;
+  box-shadow: none;
+  width: 73%
+}
+
+fieldset#mCard label {
+  background: none;
+  color: #000;
+  float: none;
+  display: inline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 8px;
+}
+
+fieldset#mCard input {
+  background: none;
+  color: #000;
+  float: none;
+  display: inline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 0px;
+  width: 2%
+}
+
+input[type="checkbox"] {
+  width: 10%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+  </style>
+  
+ {#<div class="modal fade bd-example-modal-lg w-100" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">#}
+ 
+  <h1>Details de vos Informations!</h1>
+      <p>Voici la liste de toutes les informations renseignees pour la creation de votre entreprise!</p>
+
+      <form id="envoi1" name="envoi1" method="post" action="">
+        <fieldset id="customerInfo">
+          <legend>Vos Informations Personnelles</legend>
+        {#<div class=row>#}
+        {# <div class="col-8">#}
+          <label for="fName">Votre Nom</label>
+         {#</div>#}
+         {#<div class="col">#}
+          <input id="fName" name="fName" type="text" placeholder="" value="Seck" required>
+         {#</div>#}
+        </div>
+          <label for="lName">Votre Prenom</label>
+          <input id="lName" name="lName" type="text" placeholder="" value="Abdoulaye" required>
+          <label for="nationality">Votre Nationalite</label>
+          <input id="nationality" name="nationality" placeholder="" value="francaise" >
+          <label for="situation">Votre Situation</label>
+          <input id="situation" name="situation" placeholder="" value="celibataire" >
+          <label for="mail">Votre Email</label>
+          <input id="mail" name="mail" placeholder="" value="testmail@gmail.com" required>
+          {#<label for="zip">Zipcode*</label>#}
+          {#<input id="zip" name="zip" type="text" placeholder="Zipcode" required>#}
+          <label for="phone">Votre Numero</label>
+          <input id="phone" name="phone" type="tel" placeholder="" value="(33) 93 434 343" required>
+
+        </fieldset>
+        <fieldset id="specifications">
+          <legend>Informations Entreprise</legend>
+          
+         <label for="nameCompany">Nom Entreprise</label>
+          <input id="nameCompany" name="nameCompany" placeholder="nom societe" value="IzyContrat" required>
+          
+          <label for="secteurActivity">Secteur d'activite</label>
+          <input id="secteurActivity" name="secteurActivity" placeholder="secteur d'activite" value="Aide et service à la personne" required>
+
+          <label for="dc">delai de creation</label>
+          <select id="dc" name="dc">
+            <option value="vite">le plus vite possible</option>
+            <option value="1mois">Dans 1 mois </option>
+            <option value="6mois">Dans 6 mois </option>
+            <option value="NA">Je ne sais pas</option>
+          </select>
+          <label for="es">Evolution entreprise</label>
+          <select id="es" name="es">
+            <option value="oui">oui</option>
+            <option value="non">non</option>
+            <option value="NA">je ne sais pas</option>
+          </select>
+          <label for="so">objet social</label>
+          <input id="so" name="so" type="textarea">
+        </fieldset>
+        <input class="btn btn-success" id="sendOrder" type="submit" value="Valider">
+        {#<input id="sendOrder" type="reset" value="Cancel Order">#}
+        {#<input id="sendOrder" type="button" value="Contact Me">#}
+      </form>
+ {#</div>#}
+ {% endblock  %}
