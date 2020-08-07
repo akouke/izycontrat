@@ -52,6 +52,25 @@ class ClientSarlType extends AbstractType
                             ],
                 'mapped' => true,
             ])
+            ->add('married', ChoiceType::class, [
+                'label' => 'marié(e) ?',
+                // 'expanded' => true,
+                'choices' => [
+                                'Choisir...' => null,
+                                'OUI' => true,
+                                'NON' => false,
+                            ],
+                'mapped' => true,
+            ])
+            ->add('nationality', TextType::class, [
+                'label' => 'nationalité ?',
+                'mapped' => true,
+                // 'empty_data'  => null,
+                'attr' => array(
+                    'placeholder' => 'Votre nationalité',
+                ),
+                'required'    => false,
+            ])
             // ->add('gender')
             // ->add('address')
             // ->add('country')

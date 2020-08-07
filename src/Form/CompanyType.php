@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CompanyType extends AbstractType
 {
@@ -57,6 +58,7 @@ class CompanyType extends AbstractType
             // ->add('isCreated')
             ->add('manager', ChoiceType::class, [
                 'choices' => [
+                    'Choisir...' => null,
                     'OUI' => 'Oui',
                     'NON' => 'Non',
                     'JE NE SAIS PAS' => 'Je ne sais pas'
@@ -73,6 +75,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('hasProtection', ChoiceType::class, [
                 'choices' => [
+                    'Choisir...' => null,
                     'OUI' => 'Oui',
                     'NON' => 'Non',
                     'PLUS TARD' => 'Plus tard'
@@ -82,6 +85,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('hasAssociate', ChoiceType::class, [
                 'choices' => [
+                    'Choisir...' => null,
                     'OUI' => 'Oui',
                     'NON' => 'Non',
                     'PLUS TARD' => 'Plus tard'
@@ -91,6 +95,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('hasDirector', ChoiceType::class, [
                 'choices' => [
+                    'Choisir...' => null,
                     'OUI' => 'Oui',
                     'NON' => 'Non',
                     'JE NE SAIS PAS' => 'Je ne sais pas'
@@ -124,6 +129,13 @@ class CompanyType extends AbstractType
             ->add('country', TextType::class, [
                 'attr' => [
                     'placeholder' => "Dans quel département ?"
+                    ],
+                'required' => false,
+                'mapped' => true,
+                ])
+            ->add('socialObject', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => "l'objet social de votre entreprise ?"
                     ],
                 'required' => false,
                 'mapped' => true,

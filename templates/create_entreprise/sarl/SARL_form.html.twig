@@ -76,6 +76,8 @@
         {% if typeStatut == 'EURL' %}
         
         {{ form_start(formEurl) }}  
+        {{ form_start(formEurlPerson) }} 
+        {{ form_start(formEurlUser) }} 
         
         {% endif %}
               
@@ -107,22 +109,32 @@
         {% if typeStatut == 'SARL' %}
          {{ form_widget(formSarl.priority)}}
          {% else %}
-           priority
+           {{ form_widget(formEurl.priority)}}
           {% endif %}
         <div class="d-none">
             {% if typeStatut == 'SARL' %}
-                 {{ form_widget(formSarl.companyType)}}
+                 {{ form_widget(formSarl.companyType) }}
+                 {{ form_widget(formSarl.socialObject) }}
+                 {{ form_widget(formPerson.married)}}
+                 {{ form_widget(formPerson.nationality)}}
              {% else %}
-               
+               {{ form_widget(formEurl.companyType) }}
+               {{ form_widget(formEurl.addressManager) }}
+               {{ form_widget(formEurl.manager)}}
+               {{ form_widget(formEurl.hasDirector)}} 
+               {{ form_widget(formEurl.country)}} 
+               {{ form_widget(formEurl.socialObject)}} 
+               {{ form_widget(formEurlPerson.married)}} 
+               {{ form_widget(formEurlPerson.nationality)}} 
               {% endif %}
          </div>
        </div>
           <div>
                 Exerciez-vous votre activité sous le régime de la micro-entreprise ?
                 {% if typeStatut == 'SARL' %}
-                {{ form_row(formSarl.regimeMicroEntreprise)}} 
+                    {{ form_row(formSarl.regimeMicroEntreprise)}} 
                 {% else %}
-                   regimeMicroEntreprise
+                   {{ form_row(formEurl.regimeMicroEntreprise)}} 
                 {% endif %}
                 {#{{ form_label(formSarl.regimeME, 'Your Name') }}#}
           </div>
@@ -147,7 +159,7 @@
              {% if typeStatut == 'SARL' %}
                {{ form_widget(formSarl.name)}} 
              {% else %}
-               name
+               {{ form_widget(formEurl.name)}} 
               {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
@@ -176,7 +188,7 @@
                {% if typeStatut == 'SARL' %}
                    {{ form_widget(formSarl.tradeName)}} 
                 {% else %}
-                   tradeName
+                   {{ form_widget(formEurl.tradeName)}} 
                 {% endif %}
               </div>
             <div class="alert alert-info" role="alert">
@@ -205,7 +217,7 @@
                  {% if typeStatut == 'SARL' %}
                    {{ form_widget(formSarl.hasProtection)}} 
                 {% else %}
-                   hasProtection
+                   {{ form_widget(formEurl.hasProtection)}} 
                 {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
@@ -233,7 +245,7 @@
              {% if typeStatut == 'SARL' %}
                    {{ form_widget(formSarl.activitySector)}} 
                 {% else %}
-                   activitySector
+                   {{ form_widget(formEurl.activitySector)}}
                 {% endif %}
               </div>
             <p>
@@ -266,7 +278,7 @@
              {% if typeStatut == 'SARL' %}
                    {{ form_widget(formSarl.manager)}} 
                 {% else %}
-                   manager
+                   {#manager#}
                 {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
@@ -279,7 +291,7 @@
              {% if typeStatut == 'SARL' %}
                {{ form_widget(formSarl.hasAssociate)}} 
                 {% else %}
-                   hasAssociate
+                   {#{{ form_widget(formEurl.hasAssociate)}} #}
                 {% endif %}
               </div>
                 {% if typeStatut == 'SARL' %}
@@ -339,8 +351,20 @@
                         {#   address#}
                         {#{% endif %}#}
                   </div>
+                  
                {% else %} 
-                Adresse
+               
+                   <div class="tailInput">
+                     {{ form_widget(formEurl.address)}}
+                    </div>
+                      <legend>Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </legend>
+                    <div class="tailInput"> 
+                       {{ form_widget(formEurl.hasAssociate)}} 
+                    </div>
+                     <div class="alert alert-info" role="alert">
+                       (L'entrée d'un nouvel associé dans votre SARLU transformera celle-ci en SARL.)
+                     </div>
+
               {% endif %}
              <a class="btn btn-danger" href="{% if typeStatut == 'SARL' %} {{ path('create_sarl')}} {% else %} {{ path('create_eurl')}} {% endif%}">Retour</a>
             <a class="btn btn-primary" data-toggle="tab" href="#capitalSocial">Suivant</a>
@@ -363,7 +387,7 @@
              {% if typeStatut == 'SARL' %}
                {{ form_widget(formSarl.capitalSocial)}} 
                 {% else %}
-                   capitalSocial
+                   {{ form_widget(formEurl.capitalSocial)}}
                 {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
@@ -380,7 +404,7 @@
              {% if typeStatut == 'SARL' %}
                    {{ form_widget(formSarl.bankName)}} 
                 {% else %}
-                   bankName
+                   {{ form_widget(formEurl.bankName)}} 
                 {% endif %}
               </div>
               <div class="alert alert-info" role="alert">
@@ -632,21 +656,21 @@
                      {% if typeStatut == 'SARL' %}
                          {{ form_widget(formPerson.gender) }}
                     {% else %}
-                       gender
+                       {{ form_widget(formEurlPerson.gender) }}
                     {% endif %}
                  </div>
                  <div class="tailInput">  
                      {% if typeStatut == 'SARL' %}
                        {{ form_widget(formPerson.firstName) }} 
                     {% else %}
-                       firstName
+                       {{ form_widget(formEurlPerson.firstName) }} 
                     {% endif %}
                  </div>
                  <div class="tailInput"> 
                      {% if typeStatut == 'SARL' %}
                        {{ form_widget(formPerson.lastName) }} 
                     {% else %}
-                       lastName
+                       {{ form_widget(formEurlPerson.lastName) }} 
                     {% endif %}
                  </div>
                  {#</div>#}
@@ -656,7 +680,7 @@
                  {% if typeStatut == 'SARL' %}
                        {{ form_widget(formPerson.phoneNumber) }} 
                     {% else %}
-                       phoneNumber
+                       {{ form_widget(formEurlPerson.phoneNumber) }} 
                     {% endif %}
              </div>
               
@@ -667,7 +691,7 @@
                      {% if typeStatut == 'SARL' %}
                         {{ form_widget(formUser.email) }} 
                     {% else %}
-                       email
+                       {{ form_widget(formEurlUser.email) }}
                     {% endif %}
                  </div>
                 {#<p>#}
@@ -713,6 +737,8 @@
     {% if typeStatut == 'EURL' %}
         
         {{ form_end(formEurl) }}
+        {{ form_end(formEurlPerson) }}
+        {{ form_start(formEurlUser) }} 
         
     {% endif %}
     

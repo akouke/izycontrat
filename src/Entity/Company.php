@@ -142,6 +142,11 @@ class Company
      */
     private $TotalCapital;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $socialObject;
+
     // /**
     //  * @ORM\ManyToOne(targetEntity=Person::class)
     //  */
@@ -484,6 +489,18 @@ class Company
     public function setTotalCapital(?string $TotalCapital): self
     {
         $this->TotalCapital = $TotalCapital;
+
+        return $this;
+    }
+
+    public function getSocialObject(): ?string
+    {
+        return $this->socialObject;
+    }
+
+    public function setSocialObject(?string $socialObject): self
+    {
+        $this->socialObject = $socialObject;
 
         return $this;
     }
