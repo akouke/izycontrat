@@ -2,6 +2,13 @@
 
 {% block title %}Izy Contrat - Accueil{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('home') }}
+        {{ encore_entry_link_tags('howitwork') }}
+         {{ encore_entry_link_tags('about') }}
+{% endblock %}
+
 {% block body %}
     <section class="homeTop d-flex justify-content-center">
         <img class="homePicture" src="images/homeImg.jpg" alt="image principale">
@@ -219,15 +226,7 @@
 </section>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent () }}
-      {{ encore_entry_link_tags('home') }}
-        {{ encore_entry_link_tags('howitwork') }}
-         {{ encore_entry_link_tags('about') }}
-       
-       
-    
-{% endblock %}
+
 {% block javascripts %}
 {{ parent () }}
     
@@ -235,3 +234,4 @@
     
 
 {% endblock %}
+
