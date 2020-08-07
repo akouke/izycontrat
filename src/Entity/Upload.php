@@ -15,7 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Upload
 {
-    const MAX_SIZE="2000k";
+    const MAX_SIZE = "2000k";
 
     /**
      * @ORM\Id()
@@ -35,9 +35,12 @@ class Upload
      * @Assert\File(maxSize = Upload::MAX_SIZE,
      *     maxSizeMessage="Le fichier est trop gros  ({{ size }} {{ suffix }}),
      * il ne doit pas dépasser {{ limit }} {{ suffix }}",
-     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/odt", "application/doc",
-     * "application/docx", "application/txt"},
-     *     mimeTypesMessage = "Veuillez entrer un type de fichier valide: PDF.")
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/msword",
+     * "application/vnd.oasis.opendocument.text","text/plain",
+     *     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
+     *     mimeTypesMessage="Veuillez insérer un fichier au format {{ types }}"
+     * )
+     * @Assert\NotBlank(message="Veuillez joindre un fichier")
      */
     private $statusFile;
 
