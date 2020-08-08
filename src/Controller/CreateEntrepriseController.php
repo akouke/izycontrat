@@ -442,18 +442,22 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($user);
             $em->persist($person);
             
+            // dd($person, $company, $user);
             
-            return $this->redirectToRoute('create_me_ei_informations', [
-                
+            return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+                'company' => $company,
+                'person' => $person,
+                'user' => $user,
+                'typeStatut' => 'ME',
                 ]);
         dd($formCompany, $company, $user, $person);
             // dd($this->getUser(), $user->getEmail() );
             $em->flush();
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
-                ]);
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            // return $this->redirectToRoute('create_sarl_prestation', [
+            //     'user' => $user->getEmail(),
+            //     ]);
 
 
         }        
@@ -511,8 +515,11 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($person);
             
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_me_ei_informations', [
-                
+             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+                'company' => $company,
+                'person' => $person,
+                'user' => $user,
+                'typeStatut' => 'Ei',
                 ]);
         dd($formCompany, $company, $user, $person);
             // dd($this->getUser(), $user->getEmail() );
@@ -539,6 +546,7 @@ class CreateEntrepriseController extends AbstractController
      */
      public function MeEiInformations(Request $request, EntityManagerInterface $em)
      {
+        //  dd($request);
         return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
          
         ]);
