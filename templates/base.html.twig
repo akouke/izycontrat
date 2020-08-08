@@ -25,7 +25,9 @@
         
       
         {{ encore_entry_link_tags('app') }}
+
        {{ encore_entry_link_tags('tab1') }}
+
     {% endblock %}
 
 
@@ -60,6 +62,7 @@
 {#    {{ encore_entry_script_tags('tab1') }}#}
 
 {% endblock %}
+
 {{ render(controller('App\\Controller\\SecurityController::login', {  } )) }}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
 

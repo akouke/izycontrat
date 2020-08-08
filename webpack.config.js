@@ -26,6 +26,7 @@ Encore
 
     // .addEntry('tab1', './assets/js/tab1.js')
 
+
     .addStyleEntry('style_dashboard', './assets/scss/dashboard.scss')
     .addStyleEntry('article', './assets/scss/article.scss')
     .addStyleEntry('team', './assets/scss/team.scss')
