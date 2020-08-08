@@ -14,13 +14,14 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AssociatePersonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('gender')
             // ->add('firstName')
             // ->add('lastName')
             // ->add('phoneNumber')
@@ -31,6 +32,12 @@ class AssociatePersonType extends AbstractType
             // ->add('specialization')
             // ->add('user')
             // ->add('companies')
+            // ->add('gender', RadioType::class, [
+            //     'label' => 'Civilite',
+            //     'mapped' => true,
+            //     'empty_data'  => null,
+            //     'required'    => false,
+            // ])
             ->add('capitalAmountAdding', MoneyType::class, [
                 'label' => 'Apport Associe',
                 'mapped' => true,
@@ -57,6 +64,15 @@ class AssociatePersonType extends AbstractType
                     'placeholder' => 'SECK',
                 ),
                 'required'    => false,
+            ])
+             ->add('gender', ChoiceType::class, [
+                'label' => 'Civilite',
+                // 'expanded' => true,
+                'choices' => [
+                                'Monsieur' => 2,
+                                'Madame' => 1,
+                            ],
+                'mapped' => true,
             ])
             // ->add('tags', CollectionType::class, [
             //         'entry_type' => PersonType::class,

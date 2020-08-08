@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class Associate4Type extends AbstractType
 {
@@ -15,16 +16,16 @@ class Associate4Type extends AbstractType
     {
         $builder
             ->add('capitalAmountAdding', MoneyType::class, [
-                'label' => 'Apport Associe4',
+                'label' => 'Apport Associé 4',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 30000,
+                    'placeholder' => 120000,
                 ),
                 'required'    => false,
             ])
              ->add('firstName', TextType::class, [
-                'label' => 'Prénom Associe4',
+                'label' => 'Prénom Associé 4',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -33,13 +34,22 @@ class Associate4Type extends AbstractType
                 'required'    => false,
             ])
             ->add('lastName',  TextType::class, [
-                'label' => 'Nom Associe4',
+                'label' => 'Nom Associé 4',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
                     'placeholder' => 'SECK',
                 ),
                 'required'    => false,
+            ])
+             ->add('gender', ChoiceType::class, [
+                'label' => 'Civilite',
+                // 'expanded' => true,
+                'choices' => [
+                                'Monsieur' => 2,
+                                'Madame' => 1,
+                            ],
+                'mapped' => true,
             ])
         ;
     }

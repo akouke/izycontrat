@@ -70,7 +70,7 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
       <a  data-toggle="tab" href="#SCI">SCI</a>
     </li>
      <li class="nav-item">
-      <a  data-toggle="tab" href="#IE">IE</a>
+      <a  data-toggle="tab" href="#EI">EI</a>
     </li>
   </ul>
 </div>
@@ -79,13 +79,14 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
   
   <div class="tab-pane fade active show" id="SARL">
     <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
-    <div class="card-header">SARL STATUS</div>
+    <div class="card-header">STATUT SARL</div>
     <div class="card-body">
       <fieldset class="form-group">
-        <legend>Concernant SARL</legend>
-       <p>Il est formé une Société à Responsabilité Limitée régie par les lois et règlements en vigueur, ainsi que par les présents statuts. Elle fonctionne indifféremment sous la même forme avec un ou plusieurs associés. </p>
+        <legend>Création de votre SARL</legend>
+       <p>La SARL est une structure sécurisante qui vous protège et limite votre responsabilité au montant de vos apports. 
+          Créer votre SARL et recevez vos statuts en quelques minutes, c’est super IZY ! </p>
       </fieldset>
-        <a class="btn btn-primary" href="{{path('create_sarl')}}">Je choisi SARL</a>
+        <a class="btn btn-primary" href="{{path('create_sarl')}}">Je choisis SARL</a>
       </fieldset>
     </div>
    </div>
@@ -94,16 +95,14 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
   
   <div class="tab-pane fade" id="SASU">
     <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
-    <div class="card-header">SASU STATUS</div>
+    <div class="card-header">STATUT SASU</div>
     <div class="card-body">
       <fieldset class="form-group">
-        <legend>Concernant SASU</legend>
-       <p>SASU status truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
-          blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
-          Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
-          Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+        <legend>Création de votre SASU</legend>
+       <p>La SASU est une SAS avec un seul associé. Elle offre une grande liberté quant à l’organisation et le fonctionnement de votre société. 
+           Créer votre SASU et recevez vos statuts en quelques minutes, c’est super IZY ! </p>
       </fieldset>
-        <a class="btn btn-primary" href="{{path('create_sasu')}}">Je choisi SASU</a>
+        <a class="btn btn-primary" href="{{path('create_sasu')}}">Je choisis SASU</a>
       </fieldset>
     </div>
    </div>
@@ -111,13 +110,14 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
   
    <div class="tab-pane fade" id="EURL">
     <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
-    <div class="card-header">EURL STATUS</div>
+    <div class="card-header">STATUT EURL</div>
     <div class="card-body">
       <fieldset class="form-group">
-        <legend>Detail Concernant EURL</legend>
-       <p>fsdfkj dsfhalk asjfhalk asfhahfa sajkfhaohf asjfhahf sfhcb safjakh sfahcqsa Zjasd uhasd </p>
+        <legend>Création de votre EURL</legend>
+       <p>L’EURL est une SARL avec un seul associé. Comme la SARL, elle limite votre responsabilité à hauteur du montant de vos apports, ainsi votre patrimoine est protégé. 
+          Créer votre EURL et recevez vos statuts en quelques minutes, c’est super IZY ! </p>
       </fieldset>
-        <a class="btn btn-primary" href="{{path('create_eurl')}}">Je choisi EURL</a>
+        <a class="btn btn-primary" href="{{path('create_eurl')}}">Je choisis EURL</a>
       </fieldset>
     </div>
    </div>
@@ -125,38 +125,60 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
 
  <div class="tab-pane fade" id="MICRO-ENTREPRISE">
     <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
-    <div class="card-header">MICRO-ENTREPRISE STATUS</div>
+    <div class="card-header">STATUT MICRO-ENTREPRISE</div>
     <div class="card-body">
       <fieldset class="form-group">
-        <legend>Detail Concernant MICRO-ENTREPRISE</legend>
-       <p>SASU status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
-          blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
-          Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
-          Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+        <legend>Création de votre MICRO-ENTREPRISE</legend>
+       <p>Le statut d’auto-entrepreneur connait un grand succès depuis quelques années grâce à ses nombreux avantages, tant sur le plan social que sur le plan fiscal. 
+          Démarrer votre activité et bénéficier d’un accompagnement de qualité 100% en ligne.</p>
       </fieldset>
-        <a class="btn btn-primary" href="{{path('create_m-e')}}">Je choisi MICRO-ENTREPRISE</a>
+        <a class="btn btn-primary" href="{{path('create_me')}}">Je choisis MICRO-ENTREPRISE</a>
       </fieldset>
     </div>
    </div>
   </div>
     
   <div class="tab-pane fade" id="SAS">
-    <p>SAS status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
-    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
-    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
-    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">STATUT SAS</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Création de votre SAS</legend>
+       <p>La SAS est la forme juridique la plus populaire depuis quelques années grâce à sa grande flexibilité dans l’organisation de son fonctionnement tout en limitant votre responsabilité. 
+          Créer votre SAS et recevez vos statuts en quelques minutes, c’est super IZY ! </p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_sas')}}">Je choisis SAS</a>
+      </fieldset>
+    </div>
+   </div>
   </div>
   <div class="tab-pane fade" id="SCI">
-    <p>SCI status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
-    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
-    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
-    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+    <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">STATUT SCI</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Création de votre SCi</legend>
+       <p>La SCI ou Société Civile Immobilière est une structure qui vous permet de facilité la transmission d’un bien immobilier. 
+          Créer votre SCI et recevez vos statuts en quelques minutes, c’est super IZY !  </p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_sci')}}">Je choisis SCI</a>
+      </fieldset>
+    </div>
+   </div>
   </div>
-  <div class="tab-pane fade" id="IE">
-    <p>IE status Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, 
-    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. 
-    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. 
-    Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  <div class="tab-pane fade" id="EI">
+<div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+    <div class="card-header">STATUT EI</div>
+    <div class="card-body">
+      <fieldset class="form-group">
+        <legend>Création de votre Entreprise Individuelle</legend>
+       <p>L’entreprise individuelle (EI) présente plusieurs avantages. Simple à créer, 
+          elle permet de développer une activité professionnelle sans se dissocier de son exploitant. </p>
+      </fieldset>
+        <a class="btn btn-primary" href="{{path('create_ei')}}">Je choisis EI</a>
+      </fieldset>
+    </div>
+   </div>
   </div>
   {#<div class="tab-pane fade" id="dropdown1">#}
   {#  <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>#}
@@ -168,6 +190,8 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
 <a href="{{ path('comparatif_statut')}}" class="btn btn-outline-primary btn-lg btn-block">Je ne connais pas ma forme juridique</a>
 </div>
 
+
+</div>
 {% block footer %}{% endblock %}
 {% endblock %}
     

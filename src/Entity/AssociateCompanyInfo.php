@@ -42,6 +42,16 @@ class AssociateCompanyInfo
      */
     private $companyType;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $legalRepresentative;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $capitalBring;
+
 
     public function getId(): ?int
     {
@@ -105,6 +115,30 @@ class AssociateCompanyInfo
     public function setCompanyType(?CompaniesTypes $companyType): self
     {
         $this->companyType = $companyType;
+
+        return $this;
+    }
+
+    public function getLegalRepresentative(): ?string
+    {
+        return $this->legalRepresentative;
+    }
+
+    public function setLegalRepresentative(?string $legalRepresentative): self
+    {
+        $this->legalRepresentative = $legalRepresentative;
+
+        return $this;
+    }
+
+    public function getCapitalBring(): ?string
+    {
+        return $this->capitalBring;
+    }
+
+    public function setCapitalBring(?string $capitalBring): self
+    {
+        $this->capitalBring = $capitalBring;
 
         return $this;
     }

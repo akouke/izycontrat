@@ -1,12 +1,13 @@
 {% extends '_layout.html.twig' %}
 {% block title %}SARL STATUT {% endblock %}
+{% block navbar %}{% endblock %}
 {% block body %}
 <style>
      body{
         /*background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blur-ipad-background.jpg') no-repeat center center fixed;*/
         background-size: cover;
         background: white;
-        margin-top: 90px;
+        margin-top: 2px;
         text-align: center;
         width: 100%;
         font-family: 'Roboto', sans-serif !important;
@@ -26,7 +27,10 @@
     
 <h2><br>
 {% set name = 'IZY CONTRAT' %}
-{% set capital=3000 %}
+{#{% set capital=3000 %}#}
+{% set lastName = "Abdoulaye" %}
+{% set firstName = "SECK" %}
+{% set civilite = "M. " %}
 
     {% if name is defined %}
         {{ name }}
@@ -38,8 +42,8 @@
 <p>Société à responsabilité limitée<br>
 au capital de 
 <b>
-    {% if capital is defined %}
-    {{ capital }} euros 
+    {% if capitalNum is defined %}
+    {{ capitalNum }} euros 
     {% else %}
     'NOMBRE NUMERAIRE' euros
     {% endif %}
@@ -64,21 +68,23 @@ au capital de
     <hr>
     <b>LES SOUSSIGNES :</b>
 <p>
-     <br> CIVILITE <b>'Prénom NOM'</b>, <br>
-    Né le <b>'DATE à VILLE'</b> (code postal) <br>
+     <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
+        
+    Né le <b>{{ dateNaissance ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
     De nationalité Française, <br>
-    Demeurant  à <b>'VILLE (code postal) – ADRESSE'</b> <br>
-    <b>Célibataire / Marié</b> <br>
+    Demeurant  à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
 </p>
 
 <p style="text-align: center;"><br> <b>DE PREMIERE PART</b> </p>
 
 <p>
-   <br> CIVILITE <b>'Prénom NOM'</b>, <br>
-    Né le <b>'DATE à VILLE'</b> (code postal) <br>
+   <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
+        
+    Né le <b>{{ dateNaissance ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
     De nationalité Française, <br>
-    Demeurant  à <b>'VILLE (code postal) – ADRESSE'</b> <br>
-    <b>Célibataire / Marié</b> <br>
+    Demeurant  à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
 </p>
 
 <p style="text-align: center;"><br> <b>DE SECONDE PART</b> </p>
@@ -107,7 +113,7 @@ au capital de
 <p>
   <b> ARTICLE 3 -  DENOMINATION </b> <br>
 
-    La dénomination de la Société est :<b> "NOM DE LA SOCIETE" </b>. <br>
+    La dénomination de la Société est : <b> {{ company.name ?? ' NOM DE LA SOCIETE'}}  </b>. <br>
     
     Dans tous les actes et documents émanant de la Société, la dénomination sociale doit être précédée ou suivie immédiatement des mots "société à responsabilité limitée" ou des initiales "SARL" et de l'énonciation du montant du capital social.
     
@@ -119,7 +125,7 @@ au capital de
 <p>
    <b> ARTICLE 4 -  SIEGE SOCIAL </b> <br>
 
-    Le siège social est fixé : <b>VILLE (CODE POSTAL) – ADRESSE</b> <br>
+    Le siège social est fixé : <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE'}}</b> <br>
     
     Il pourra être transféré dans le même département ou dans un département limitrophe par simple décision de la gérance, sous réserve de ratification par la prochaine décision de l'associé unique ou par la prochaine décision collective extraordinaire des associés, et en tout lieu par décision de l'associé unique ou par décision collective extraordinaire des associés.
     <br>
@@ -138,17 +144,27 @@ au capital de
 
     Il est fait les apports numéraires suivants : <br>
     
-    - Par CIVILITE <b>Prénom NOM</b>, d'une somme en numéraire de <b>NOMBRE EN LETTRES €</b>, ci	<b>0.0 €</b> <br>
+    - Par <b>{{ associe1.civilite ?? ' CIVILITE' }} {{ associe1.lastName ?? ' Prénom'}} {{ associe1.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe1.apport ?? ' 0.0'}} €</b> <br>
     
-    - Par CIVILITE <b>Prénom NOM</b>, d'une somme en numéraire de <b>NOMBRE EN LETTRES €</b>, ci	<b>0.0 €</b> <br>
+    {% if associe2 is defined %}
+    - Par <b>{{ associe2.civilite ?? ' CIVILITE' }} {{ associe2.lastName ?? ' Prénom'}} {{ associe2.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe2.apport ?? ' 0.0'}} €</b> <br>
+    {% endif %}
     
-    Soit au total, la somme de <b>NOMBRE EN LETTRES €</b>, ci	<b>0.00€</b> 
+    {% if associe3 is defined %}
+    - Par <b>{{ associe3.civilite ?? ' CIVILITE' }} {{ associe3.lastName ?? ' Prénom'}} {{ associe3.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe3.apport ?? ' 0.0'}} €</b>
+    {% endif %}
+    
+    {% if associe4 is defined %}
+    - Par <b>{{ associe4.civilite ?? ' CIVILITE' }} {{ associe4.lastName ?? ' Prénom'}} {{ associe4.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe4.apport ?? ' 0.0'}} €</b>
+    {% endif %}
+    
+    Soit au total, la somme de <b>{{ total ?? ' NOMBRE EN LETTRES' }} €</b>, ci	<b> {{ totalNum ?? ' 0.00' }} €</b> 
     <p style="text-align: right">==========================</p>
     
-    La totalité de cet apport en numéraire, soit la somme de <b>NOMBRE EN LETTRE euros (nombre en numéraire €)</b>,  
+    La totalité de cet apport en numéraire, soit la somme de <b>conv(NOMBRE EN LETTRE) euros ( {{ total ?? ' nombre en numéraire' }} €)</b>,  
     a été dès avant ce jour, déposée au crédit d'un compte ouvert au nom de la Société en formation, 
-    à la banque ainsi qu'en atteste un certificat établi en date du <b>JOUR/ MOIS/ ANNEE</b> par 
-    la <b>NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE </b>, dépositaire des fonds, auquel est demeurée annexée 
+    à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par 
+    la <b>{{ bankName ?? ' NOM BANQUE' }} – {{ addressBank ?? ' ADRESSE'}} – {{ villeBank ?? '(CODE POSTAL) VILLE '}}</b>, dépositaire des fonds, auquel est demeurée annexée 
     la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
     <br>
 </p>
@@ -156,8 +172,8 @@ au capital de
 <p>
     <b>ARTICLE 7 -  CAPITAL SOCIAL</b> <br>
 
-    Le capital social est fixé à la somme de <b>NOMBRE EN LETTRES (nombre en numéraire €)</b>, divisé en 
-    <b>NOMBRE EN LETTRES (nombre en numéraire)</b> parts sociales de <b>NOMBRE EN LETTRES (nombre en numéraire )</b> chacune, 
+    Le capital social est fixé à la somme de <b>{{ capitalSocial ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? ' nombre en numéraire'}} €)</b>, divisé en 
+    <b>conv(NOMBRE EN LETTRES) ( {{ nombreAssocier ?? 'nombre en numéraire'}})</b> parts sociales de <b>conv(NOMBRE EN LETTRES) ({{ partChacune ?? 'nombre en numéraire'}} )</b> chacune, 
     et entièrement libérées et attribuées aux associés en rémunération de leur apport.
     <br>
 </p>
@@ -166,12 +182,12 @@ au capital de
     <b>ARTICLE 8 -  PARTS SOCIALES</b> <br>
 
     Les parts sociales sont attribuées et réparties comme suit : <br>
+     
+    - A <b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b>, à concurrence de <b>conv(NOMBRE EN LETTRES)</b> parts sociales, numérotées de 1 à <b> {{ nombrePartSocial ?? 'NOMBRE DE PARTS SOCIALES'}}</b>, ci	<b> {{ partTotal ?? '0'}} parts</b> <br>
     
-    - A <b>CIVILITE Prénom NOM</b>, à concurrence de <b>NOMBRE EN LETTRES</b> parts sociales, numérotées de 1 à <b>NOMBRE DE PARTS SOCIALES</b>, ci	<b>0 parts</b> <br>
+    - A <b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b>, à concurrence de <b>conv(NOMBRE EN LETTRES)</b> parts sociales, numérotées de <b>nombre après le nombre de parts précédent</b> à <b>{{ nombrePart ?? 'NOMBRE DE PARTS'}}</b>, ci <b>{{ partTotal ?? '0'}} parts</b> <br>
     
-    - A <b>CIVILITE Prénom NOM</b>, à concurrence de <b>NOMBRE EN LETTRES</b> parts sociales, numérotées de <b>nombre après le nombre de parts précédent</b> à <b>NOMBRE DE PARTS</b>, ci <b>0 parts</b> <br>
-    
-    Total égal au nombre de parts composant le capital social : <b>NOMBRE EN LETTRES</b> parts sociales, ci <b>0 parts</b>
+    Total égal au nombre de parts composant le capital social : <b>conv(NOMBRE EN LETTRES)</b> parts sociales, ci <b>{{ partTotal ?? '0' }} parts</b>
     
     <br>Les soussignés déclarent que toutes les parts sociales représentant le capital social leur appartiennent, sont réparties entre eux dans les proportions indiquées ci-dessus correspondant à leurs apports respectifs et qu'elles sont toutes souscrites et libérées comme indiqué ci-dessus.
     <br>
@@ -708,28 +724,29 @@ au capital de
 
 <p>
     
-    <b>CIVILITE PRENOM NOM</b>, soussignée de seconde part, est nommée premier gérant de la société pour une durée illimitée.
+    <b> {{ gerantCivilite ?? ' CIVILITE'}} {{ gerantLastName ?? ' Prénom'}} {{ gerantFirstName ?? ' NOM'}}</b>, soussignée de seconde part, est nommée premier gérant de la société pour une durée illimitée.
 
     <br>Il déclare, qu'aucune prescription, aucune mesure ou décision quelconque ne fait obstacle à l'exercice de ce mandat.
     <br>
 </p>
 
 <p style="text-align: right">
-    <br>Fait à <b>VILLE</b>
-    <br>Le <b>DATE</b>
+    <br>Fait à <b>{{ address ?? 'VILLE'}}</b>
+    <br>Le <b>{{ dateCreation ?? 'DATE'}}</b>
     <br>En QUATRE exemplaires originaux
     <br>
 </p>
 
 <di class="row">
-    <div class="col-5" style="margin-left: 13%"><b><u>CIVILITE PRENOM NOM</u></b></div>
-    <div class="col-4"><b><u>CIVILITE PRENOM NOM</u></b></div>
+    <div class="col-5" style="margin-left: 13%"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div>
+    <div class="col-4"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div>
 </div>
 
 
 
 </div>
-
+{#<a class="btn btn-outline-warning" href="javascript:window.print()">Imprimer votre statut</a>#}
+<a class="btn btn-outline-success" href="{{ path('save_status')}}">Sauvegarder Statut </a>
 </div>
 
 
