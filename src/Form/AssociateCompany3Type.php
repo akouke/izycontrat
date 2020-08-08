@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Entity\CompaniesTypes;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class AssociateCompany3Type extends AbstractType
 {
@@ -16,7 +17,7 @@ class AssociateCompany3Type extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom Societe Associe 3',
+                'label' => 'Nom société associée 3',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -26,9 +27,28 @@ class AssociateCompany3Type extends AbstractType
             ])
             // ->add('person')
             ->add('companyType', EntityType::class, [
+                'label' => 'forme juridique',
                 'class' => CompaniesTypes::class,
                 'choice_label' => 'name',
                 'mapped' => true,
+            ])
+            ->add('capitalBring', MoneyType::class, [
+                'label' => 'Apport Associé société 3',
+                'mapped' => true,
+                'empty_data'  => null,
+                'attr' => array(
+                    'placeholder' => 25000,
+                ),
+                'required'    => false,
+            ])
+            ->add('legalRepresentative', TextType::class, [
+                'label' => 'Nom representant legal',
+                'mapped' => true,
+                'empty_data'  => null,
+                'attr' => array(
+                    'placeholder' => 'Jone Doe',
+                ),
+                'required'    => false,
             ])
         ;
     }

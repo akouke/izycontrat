@@ -24,6 +24,7 @@ class DashboardController extends AbstractController
     public function index()
     {
         $user = $this->getUser();
+        // dd($user);
         $person = $this->getDoctrine()->getRepository(Person::class)->findOneBy(['user' => $user]);
         return $this->render(
             'dashboard/index.html.twig',
