@@ -26,6 +26,7 @@ Encore
 
     // .addEntry('tab1', './assets/js/tab1.js')
 
+
     .addStyleEntry('style_dashboard', './assets/scss/dashboard.scss')
     .addStyleEntry('article', './assets/scss/article.scss')
     .addStyleEntry('team', './assets/scss/team.scss')
@@ -35,9 +36,11 @@ Encore
     .addStyleEntry('register_user', './assets/scss/registerUser.scss')
     .addStyleEntry('editor', './assets/scss/editor.scss')
     .addStyleEntry('document', './assets/scss/document.scss')
+    .addStyleEntry('comparatif', './assets/scss/comparatif.scss')
     .addStyleEntry('technical_sheet', './assets/scss/technical_sheet.scss')
 
     // .addStyleEntry('tab1', './assets/scss/tab1.scss')
+
 
     .copyFiles([
         {

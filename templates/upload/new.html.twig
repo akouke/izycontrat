@@ -1,0 +1,14 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Téléverser des statuts{% endblock %}
+
+{% block body %}
+    <section class="page-content container-fluid col-10 col-lg-10 pb-4">
+    <h2>Téléverser ses statuts</h2>
+
+    {{ include('upload/_form.html.twig') }}
+        <div class="mt-5">
+        <a class="btn btn-secondary" href="{{ path('upload_index') }}">Retour</a>
+        </div>
+</section>
+{% endblock %}
