@@ -5,8 +5,8 @@
 {% block stylesheets %}
     {{ parent () }}
     {{ encore_entry_link_tags('home') }}
-        {{ encore_entry_link_tags('howitwork') }}
-         {{ encore_entry_link_tags('about') }}
+         {{ encore_entry_link_tags('howitwork') }} 
+          {{ encore_entry_link_tags('about') }} 
 {% endblock %}
 
 {% block body %}
@@ -203,7 +203,7 @@
 {% block javascripts %}
 {{ parent () }}
     
-    {{ encore_entry_script_tags('howitwork') }}
+  {#  {{ encore_entry_script_tags('howitwork') }} #}
     
 
 {% endblock %}

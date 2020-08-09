@@ -22,11 +22,8 @@
     <title>{% block title %}IzyContrat{% endblock %}</title>
     {% block stylesheets %}
      
-        
-      
         {{ encore_entry_link_tags('app') }}
-
-       {{ encore_entry_link_tags('tab1') }}
+       {# {{ encore_entry_link_tags('tab1') }} #}
 
     {% endblock %}
 
@@ -56,15 +53,17 @@
 {% block footer %}{% endblock %}
 
 {% block javascripts %}
-    
+     {{ encore_entry_script_tags('app') }}
     {{ encore_entry_script_tags('login') }}
-    {{ encore_entry_script_tags('app') }}
+   
 {#    {{ encore_entry_script_tags('tab1') }}#}
 
 {% endblock %}
 
 {{ render(controller('App\\Controller\\SecurityController::login', {  } )) }}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
