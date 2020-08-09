@@ -1,7 +1,7 @@
 {#{% extends '_layout.html.twig' %}#}
 {% extends 'base.html.twig' %}
 {#{% block navbar %}{% endblock %}#}
-{% block title %}Je cree mon {{ typeStatut == 'SAS' ? 'SAS' : 'SASU' }} {% endblock %}
+{% block title %}Je cree mon SCI {% endblock %}
 
 {% block stylesheets %} 
 {{ parent() }}
@@ -49,24 +49,17 @@
             <ul id="progressbar">
                 <li class="active">delai et evolution</li>
                 <li>Nom Societe</li>
-                {% if typeStatut == 'SASU'%}
-                  <li>Nom Commercial</li>
-                {% endif %}
-                <li> dépôt de marque  </li>
+                <li>Nom Commercial</li>
                 <li> Secteur d'activite</li>
-                <li>president</li>
                 <li>siege</li>
                 <li>capital social</li>
-                {% if typeStatut == 'SAS' %}
+                <li>Banque</li>
                     <li>Mes Associes</li>
-                    <li>Directeur Général</li>
-                {% endif%}
+                    {#<li>Directeur Général</li>#}
               <li>Informations de contact</li>
             </ul>
 
-{% if typeStatut == 'SAS' %}
-
-{{form_start(formSas)}}
+{{form_start(formSci)}}
     {# debut information concernant le clien#}
     {{form_start(formPerson)}}
   
@@ -96,63 +89,30 @@
                                  
                         {#debut information company3 associer#}
                         {{ form_start(formAssociateCompany3) }}
-    {% endif %}
-        
-        {% if typeStatut == 'SASU' %}
-        
-        {{ form_start(formSasu) }}  
-        {{ form_start(formSasuPerson) }} 
-        {{ form_start(formSasuUser) }} 
-        
-        {% endif %}
               
             <!-- fieldsets -->
             <fieldset>
-                {#<h2 class="fs-title">delai creation et evolution</h2>#}
-                {#<div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">#}
-                   {#<div class="card-header">STATUT {{ typeStatut == 'SAS' ? 'SAS' : 'SASU' }} </div>#}
-                      {#<div class="card-body">#}
-                
-                      <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre {{ typeStatut == 'SAS' ? 'SAS' : 'SASU' }} ?</h2>
+                      <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre SCI ?</h2>
                        <div class="tailInput">  
-                        {% if typeStatut == 'SAS' %}
-                         {{ form_widget(formSas.priority)}}
-                         {% else %}
-                           {{ form_widget(formSasu.priority)}}
-                          {% endif %}
+         
+                         {{ form_widget(formSci.priority)}}
+ 
                         <div class="d-none">
-                            {% if typeStatut == 'SAS' %}
-                                 {{ form_widget(formSas.companyType) }}
-                                 {{ form_widget(formSas.socialObject) }}
+                                 {{ form_widget(formSci.companyType) }}
+                                 {{ form_widget(formSci.socialObject) }}
                                  {{ form_widget(formPerson.married)}}
                                  {{ form_widget(formPerson.nationality)}}
-                             {% else %}
-                               {{ form_widget(formSasu.companyType) }}
-                               {{ form_widget(formSasu.addressManager) }}
-                               {#{{ form_widget(formSasu.manager)}}#}
-                               {{ form_widget(formSasu.hasDirector)}} 
-                               {{ form_widget(formSasu.country)}} 
-                               {{ form_widget(formSasu.socialObject)}} 
-                               {{ form_widget(formSasuPerson.married)}} 
-                               {{ form_widget(formSasuPerson.nationality)}} 
-                              {% endif %}
+
+                               {#{{ form_widget(formSci.addressManager) }}#}
+                               {{ form_widget(formSci.manager)}}
+                               {{ form_widget(formSci.hasAssociate)}}
+                               {{ form_widget(formSci.hasProtection)}}
+                               {{ form_widget(formSci.hasDirector)}} 
+                               {#{{ form_widget(formSci.country)}} #}
+                               {{ form_widget(formSci.socialObject)}} 
+                                {{ form_row(formSci.regimeMicroEntreprise)}} 
                          </div>
                        </div>
-                                Exerciez-vous votre activité sous le régime de la micro-entreprise ?
-                          <div class="tailInput">
-                                {% if typeStatut == 'SAS' %}
-                                    {{ form_row(formSas.regimeMicroEntreprise)}} 
-                                {% else %}
-                                   {{ form_row(formSasu.regimeMicroEntreprise)}} 
-                                {% endif %}
-
-                          </div>
-
-                      {#<div class="progress">#}
-                      {#  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">5%</div>#}
-                      {#</div>#}
-                  {#</div>#}
-                {#</div>#}
                 
             <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
@@ -162,11 +122,9 @@
                      {#<div class="card-body">#}
                         <h2 class="fs-title ">Quel nom choississez vous pour votre entreprise?</h2>
                          <div class="tailInput">  
-                         {% if typeStatut == 'SAS' %}
-                           {{ form_widget(formSas.name)}} 
-                         {% else %}
-                           {{ form_widget(formSasu.name)}} 
-                          {% endif %}
+
+                           {{ form_widget(formSci.name)}} 
+
                           </div>
                         <div  class="alert alert-info" role="alert">
                             <small>
@@ -175,30 +133,15 @@
                               qui est différent du nom commercial)
                           </small>
                         </div>
-                        
-                         {% if typeStatut == 'SAS' %}
-                           <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>
-                             <div class="tailInput">  
-                                   {{ form_widget(formSas.tradeName)}} 
-                              </div>
-                            <div class="alert alert-info" role="alert">
-                                <small>
-                                  (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise 
-                                  est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
-                                </small>
-                            </div>
-                         {% endif %}
-                    {#</div>#}
-        
+
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
-            
-            {% if typeStatut == 'SASU' %}
+
             <fieldset>
                          <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>
                              <div class="tailInput">  
-                                 {{ form_widget(formSasu.tradeName)}} 
+                                 {{ form_widget(formSci.tradeName)}} 
                               </div>
                             <div class="alert alert-info" role="alert">
                               (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise 
@@ -207,114 +150,52 @@
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
-            {% endif %}
             
-            <fieldset>
-                  {#<h2 class="fs-title ">Step #3 Select Vendors for Comparable Quotes</h2>#}
-                  {#<div class="card-body">#}
-                    <h2 class="fs-title ">Souhaitez-vous protéger votre nom de société par un dépôt de marque ?</h2>
-                     <div class="tailInput">  
-                         {% if typeStatut == 'SAS' %}
-                           {{ form_widget(formSas.hasProtection)}} 
-                        {% else %}
-                           {{ form_widget(formSasu.hasProtection)}} 
-                        {% endif %}
-                      </div>
-                    <div  class="alert alert-info" role="alert">
-                      (Déposer une marque ou logo permet notamment de se protéger 
-                      contre un concurrent qui utiliserait votre marque de manière abusive)
-                    </div>
-                    
- 
-                {#</div>#}
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
- 
              <fieldset>
                   {#<div class="card-body">#}
                     <h2 class="fs-title ">Quel est votre secteur d’activité ? </h2>
                      <div class="tailInput"> 
-                     {% if typeStatut == 'SAS' %}
-                           {{ form_widget(formSas.activitySector)}} 
-                        {% else %}
-                           {{ form_widget(formSasu.activitySector)}}
-                        {% endif %}
+
+                           {{ form_widget(formSci.activitySector)}} 
+
                       </div>
+                      <div  class="alert alert-info" role="alert">
+                           (Renseigner votre secteur d'activité et votre activité principale. Si vous avez une question, 
+                           n’hésitez pas à nous appeler au 07 67 72 73 13)
+                        </div>
                     <p>
-                      Si autre merci de le préciser :
+                      Merci de préciser votre activité  
                     </p>
                     <div class="tailInput">
                       <input type="text" id="company_activitySector_autre" name="company_activitySector_autre" placeholder=" Si Autre secteur d'activite" class="form-control" />
                     </div>
+                     <div  class="alert alert-info" role="alert">
+                           (Si vous exercez plusieurs activités, indiquez nous votre activité principale vous pourrez 
+                           la préciser au moment d'effectuer vos formalités de création.)
+                        </div>
                 {#</div>#}
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
-            
-            <fieldset>
-                     {#<div class="card-body">#}
-                                    
-                        <h2 class="fs-title "> Serez-vous le président de la {{ typeStatut == 'SAS' ? 'SAS ' : 'SASU '}} ?   </h2>
-                         <div class="tailInput"> 
-                         {% if typeStatut == 'SAS' %}
-                               {{ form_widget(formSas.manager)}} 
-                            {% else %}
-                               {{ form_widget(formSasu.manager)}}
-                            {% endif %}
-                          </div>
-                        <div  class="alert alert-info" role="alert">
-                            (Le président est la personne en charge de diriger la société et est le plus fréquemment un 
-                            associé de la société. Cependant, il ne peut y avoir qu'un seul président.)
-                        </div>
-                        
-                        <h2 class="fs-title ">Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </h2>
-                         <div class="tailInput">  
-                         {% if typeStatut == 'SAS' %}
-                           {{ form_widget(formSas.hasAssociate)}} 
-                            {% else %}
-                               {{ form_widget(formSasu.hasAssociate)}} 
-                            {% endif %}
-                          </div>
-                            {% if typeStatut == 'SASU' %}
-                                <div class="alert alert-info" role="alert">
-                                      (L'entrée d'un nouvel associé dans votre SASU transformera celle-ci en SAS.)
-                                </div>
-                            {% endif %}
 
-                    {#</div>#}
-        
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
-            
              <fieldset>
                   {#<div class="card-body">#}
                     <h2 class="fs-title ">Où sera le siège social de votre société ?</h2>
-             
-                     {% if typeStatut == 'SAS' %}
+
                         <strong> Au domicile du Président (le plus fréquent) </strong> 
                           <div class="tailInput">
-                                {{ form_widget(formSas.addressManager)}} 
+                                {{ form_widget(formSci.addressManager)}} 
                            </div>
                         <strong> A une adresse de domiciliation </strong> 
                           <div class="tailInput">
-                                    {{ form_widget(formSas.country)}}
+                                    {{ form_widget(formSci.country)}}
                           </div>
                       
                        <strong> Dans un bureau, local, etc… </strong> 
                           <div class="tailInput">
-                                {{ form_widget(formSas.address)}}
+                                {{ form_widget(formSci.address)}}
                           </div>
                           
-                       {% else %} 
-                      
-                          <strong> Dans un bureau, local, etc… </strong> 
-                          <div class="tailInput">
-                                {{ form_widget(formSasu.address)}}
-                          </div>
-        
-                      {% endif %}
                 {#</div>#}
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
@@ -323,11 +204,7 @@
             <fieldset>
                   <h2 class="fs-title ">Quel est le montant total du capital social de votre société ?</h2>
                      <div class="tailInput">  
-                     {% if typeStatut == 'SAS' %}
-                       {{ form_widget(formSas.capitalSocial)}} 
-                        {% else %}
-                           {{ form_widget(formSasu.capitalSocial)}}
-                        {% endif %}
+                       {{ form_widget(formSci.capitalSocial)}} 
                       </div>
                     <div  class="alert alert-info" role="alert">
                         <small>
@@ -337,33 +214,34 @@
                              veuillez nous contacter ou le préciser plus tard.)
                         </small>
                     </div>
-                      
+
+                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
+                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
+            </fieldset>
+            
+            <fieldset>
                     <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2>
                      <div class="tailInput">  
-                     {% if typeStatut == 'SAS' %}
-                           {{ form_widget(formSas.bankName)}} 
-                        {% else %}
-                           {{ form_widget(formSasu.bankName)}} 
-                        {% endif %}
+
+                           {{ form_widget(formSci.bankName)}} 
+
                       </div>
                       <div class="alert alert-info" role="alert">
                           <small>
                            (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création 
                            de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ». 
-                           Ce document est indispensable pour immatriculer votre société)
+                           Ce document est indispensable pour immatriculer votre société. Si vous n'avez pas encore choisi votre banque, 
+                           passez la question, vous pourrez la préciser au moment d'effectuer vos formalités de création.)
                           </small>
                       </div>
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
             
-         {% if typeStatut == 'SAS' %}   
             <fieldset>
                 <h2 class="fs-title ">Qui sont les associés de votre société </h2>
 
                     <details style="text-align:left; margin:1%; padding:1%; margin-left: 5%; width: 88%;"><summary class="bg-secondary form-control" ><strong><i class="fas fa-user-circle"></i> Un Particulier ?</strong></summary>
-                           {#<form action="" method="POST" name="formulaire1">#}
-                               {#<legend>Civilité</legend>#}
                                  <small  class="badge badge-warning" >
                                    (Chaque apport donne droit à des actions à l'associé. 
                                    La somme des apports des associés constituent le capital social de la société)
@@ -487,7 +365,7 @@
                                        </div>
                                        <div class="col">  
                                          {{ form_row(formAssociateCompany2.capitalBring) }} 
-                                         {{ dump(formAssociateCompany2.capitalBring) }}
+                                        
                                        </div>
                                      </div>
                                      <div>
@@ -530,90 +408,65 @@
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
             
-            <fieldset>
-                    <h2 class="fs-title ">Souhaitez-vous nommer un Directeur Général ? </h2>
+            {#<fieldset>#}
+            {#        <h2 class="fs-title ">Souhaitez-vous nommer un Directeur Général ? </h2>#}
                 
-                 <div class="tailInput">  
-                   {{ form_widget(formSas.hasDirector)}} 
-                  </div>
-                <div class="alert alert-info" role="alert">
-                    La nomination d’un Directeur Général (DG) est facultatif. Si un DG est nommé, il assiste 
-                    le Président dans ses missions. Il représente aussi la société et a le droit de signer des documents 
-                    au nom et pour le compte de la société. Le ou les DG d'une SAS sont en général également associés
-                </div>
+            {#     <div class="tailInput">  #}
+            {#       {{ form_widget(formSci.hasDirector)}} #}
+            {#      </div>#}
+            {#    <div class="alert alert-info" role="alert">#}
+            {#        La nomination d’un Directeur Général (DG) est facultatif. Si un DG est nommé, il assiste #}
+            {#        le Président dans ses missions. Il représente aussi la société et a le droit de signer des documents #}
+            {#        au nom et pour le compte de la société. Le ou les DG d'une SAS sont en général également associés#}
+            {#    </div>#}
            
 
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
-            
-        {% endif %}       
+            {#    <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>#}
+            {#    <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>#}
+            {#</fieldset>#}
         
             <fieldset>
                  <h2 class="fs-title ">Vos informations de contact nous servirons à finaliser la création de votre dossier. </h2>
 
                 {#<div class="row">#}
                  <div class="tailInput">
-                     {% if typeStatut == 'SAS' %}
+
                          {{ form_widget(formPerson.gender) }}
-                    {% else %}
-                       {{ form_widget(formSasuPerson.gender) }}
-                    {% endif %}
+
                  </div>
                  <div class="tailInput">  
-                     {% if typeStatut == 'SAS' %}
+ 
                        {{ form_widget(formPerson.firstName) }} 
-                    {% else %}
-                       {{ form_widget(formSasuPerson.firstName) }} 
-                    {% endif %}
+
                  </div>
                  <div class="tailInput"> 
-                     {% if typeStatut == 'SAS' %}
+
                        {{ form_widget(formPerson.lastName) }} 
-                    {% else %}
-                       {{ form_widget(formSasuPerson.lastName) }} 
-                    {% endif %}
+
                  </div>
                  {#</div>#}
                 
              <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
              <div class="tailInput"> 
-                 {% if typeStatut == 'SAS' %}
+
                        {{ form_widget(formPerson.phoneNumber) }} 
-                    {% else %}
-                       {{ form_widget(formSasuPerson.phoneNumber) }} 
-                    {% endif %}
+
              </div>
               
               {#debut information de connexion user#}
               {#{{ form_start(formUser )}}#}
                  <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
                  <div class="tailInput"> 
-                     {% if typeStatut == 'SAS' %}
+
                         {{ form_widget(formUser.email) }} 
-                    {% else %}
-                       {{ form_widget(formSasuUser.email) }}
-                    {% endif %}
+
                  </div>
            
 
                 <input type="button" name="previous" class="previous action-button-previous mid" value="Revoir"/>
                 <input type="submit" class="action-button" value="Enregistrer"/>
             </fieldset>
-   
-       {% if typeStatut == 'SASU' %}
-            
-            {{ form_end(formSasu) }}
-            {{ form_end(formSasuPerson) }}
-            {{ form_start(formSasuUser) }} 
-            
-        {% endif %}         
-            {#<fieldset>#}
-            {#        <h2 class="fs-title ">Step #5 Review and Submit </h2>#}
-            {#        <input type="button" name="previous" class="previous action-button-previous mid" value="Revoir "/>#}
-            {#        <input type="submit" name="submit" class="submit action-button" value="Enregistrer"/>#}
-            {#</fieldset>#}
-        {% if typeStatut == 'SAS' %}
+
                                         {#debut information company3 associer#}
                                              {{ form_end(formAssociateCompany3) }}
                                             {#debut information company2 associer#}
@@ -642,9 +495,8 @@
          {{form_end(formPerson)}}
          {#fin information concernant le client#}
          
-    {{form_end(formSas)}}
-    
-    {% endif %}        
+    {{form_end(formSci)}}
+       
         </div>
         <!-- link to designify.me code snippets -->
 
