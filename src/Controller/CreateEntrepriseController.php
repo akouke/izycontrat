@@ -367,37 +367,6 @@ class CreateEntrepriseController extends AbstractController
         ]);
     }
     
-    // /**
-    //  * @Route("/create/entreprise/sasu", name="create_sasu") 
-    //  */
-    //  public function createSasu()
-    //  {
-    //     return $this->render('create_entreprise/SASU_form.html.twig', [
-            
-    //     ]);
-    // }
-    
-    
-    
-    // /**
-    //  * @Route("/create/entreprise/sas", name="create_sas") 
-    //  */
-    //  public function createSAS()
-    //  {
-    //     return $this->render('create_entreprise/SASU_form.html.twig', [
-            
-    //     ]);
-    // }
-    
-    // /**
-    //  * @Route("/create/entreprise/sci", name="create_sci") 
-    //  */
-    //  public function createSCI()
-    //  {
-    //     return $this->render('create_entreprise/SASU_form.html.twig', [
-            
-    //     ]);
-    // }
     
     /**
      * @Route("/create/entreprise/micro-entreprise", name="create_me") 
@@ -442,6 +411,7 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($user);
             $em->persist($person);
             
+            $em->flush();
             // dd($person, $company, $user);
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
@@ -450,15 +420,6 @@ class CreateEntrepriseController extends AbstractController
                 'user' => $user,
                 'typeStatut' => 'ME',
                 ]);
-        dd($formCompany, $company, $user, $person);
-            // dd($this->getUser(), $user->getEmail() );
-            $em->flush();
-            
-            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            // return $this->redirectToRoute('create_sarl_prestation', [
-            //     'user' => $user->getEmail(),
-            //     ]);
-
 
         }        
         
@@ -514,6 +475,7 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($user);
             $em->persist($person);
             
+            $em->flush();
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -521,15 +483,6 @@ class CreateEntrepriseController extends AbstractController
                 'user' => $user,
                 'typeStatut' => 'Ei',
                 ]);
-        dd($formCompany, $company, $user, $person);
-            // dd($this->getUser(), $user->getEmail() );
-            // $em->flush();
-            
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
-                ]);
-
 
         }        
         
