@@ -1,9 +1,9 @@
 require('../scss/createcompany.scss');
 
-const $as = require('jquery');
-require('jquery-easing')($as);
+const $ = require('jquery');
+require('jquery.easing')($);
 
-// const $as = require("jquery");
+// const $ = require("jquery-easing");
 
 
 //jQuery time
@@ -11,15 +11,15 @@ var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
-$as(".next").click(function(){
+$(".next").click(function(){
 	if(animating) return false;
 	animating = true;
 	
-	current_fs = $as(this).parent();
-	next_fs = $as(this).parent().next();
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
 	
 	//activate next step on progressbar using the index of next_fs
-	$as("#progressbar li").eq($as("fieldset").index(next_fs)).addClass("active");
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 	
 	//show the next fieldset
 	next_fs.show(); 
@@ -49,15 +49,15 @@ $as(".next").click(function(){
 	});
 });
 
-$as(".previous").click(function(){
+$(".previous").click(function(){
 	if(animating) return false;
 	animating = true;
 	
-	current_fs = $as(this).parent();
-	previous_fs = $as(this).parent().prev();
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();
 	
 	//de-activate current step on progressbar
-	$as("#progressbar li").eq($as("fieldset").index(current_fs)).removeClass("active");
+	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 	
 	//show the previous fieldset
 	previous_fs.show(); 
@@ -84,6 +84,6 @@ $as(".previous").click(function(){
 	});
 });
 
-$as(".submit").click(function(){
-	return true;
-})
+// $(".submit").click(function(){
+// 	return true;
+// })
