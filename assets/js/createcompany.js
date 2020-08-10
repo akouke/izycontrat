@@ -1,9 +1,9 @@
 require('../scss/createcompany.scss');
 
-const $ = require('jquery');
-require('jquery.easing')($);
+// const $ = require('jquery');
+// require('jquery.easing')($);
 
-// const $ = require("jquery-easing");
+const $ = require("jquery-easing");
 
 
 //jQuery time
