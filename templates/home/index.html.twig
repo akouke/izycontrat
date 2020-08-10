@@ -5,8 +5,8 @@
 {% block stylesheets %}
     {{ parent () }}
     {{ encore_entry_link_tags('home') }}
-         {{ encore_entry_link_tags('howitwork') }} 
-          {{ encore_entry_link_tags('about') }} 
+        {#{{ encore_entry_link_tags('howitwork') }}
+          {{ encore_entry_link_tags('about') }}  #}
 
 {% endblock %}
 
@@ -18,12 +18,12 @@
             <a href="{{  path('create_entreprise') }}" class="btn btn-secondary btnHome">Je crée mon entreprise !</a>
         </div>
     </section>
-   
+
 
 <section class="about-section">
             <div class="container">
                 <div class="heading text-center">
-                    
+
 <center>
 <div class="container1">
   <div class="decorative-title">
@@ -38,14 +38,14 @@
     <div class="decorative-bar right horizontal thin"></div>
   </div>
   <span><br></span>
-  
+
   <h4>Donner vie à vos projets grâce à un accompagnement juridique sur mesure ! </h4>
 </div>
- 
+
 </center>
 <span><br></span>
                 </div>
-                
+
                  <div class="row container">
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column wow fadeInLeft">
@@ -55,20 +55,20 @@
                     <span></br></span>
                    <center><div class="btn-box">
                             <a href="#" class="theme-btn btn-style-one">Nous contacter</a>
-                        </div></center> 
+                        </div></center>
                 </div>
-                    
+
                     <div class="col-lg-6 md-4">
                        <span></br></span>
                         <h4>IZY Contrat c'est: </h4><span></br></span>
                         <div class="row">
-                           
+
                             <div class="media">
                               <img class="mr-3" src="images/stopwatch.png" alt="izy parcours">
                               <div class="media-body">
                                 <h5 class="mt-0"><strong>Un parcours IZY, rapide et 100% en ligne </strong> </h5>
                                 <p>Grâce à notre technologie, gagnez en temps et en efficacité en répondant à nos questionnaires en ligne.</p>
-                                
+
                               </div>
                             </div>
                             <div class="media">
@@ -135,7 +135,7 @@
       {#  </div>#}
     {#</section>#}
    {# {% endif %}#}
-    
+
     <section class="text-center pos-r">
   <div class="container">
     <div class="row">
@@ -193,7 +193,7 @@
       </div>
       <div class="col-sm">
         <div class="work-process">
-           
+
           <div class="step-num-box">
             <div class="step-icon"><span><i class="fa fa-check-square"></i></span>
             </div>
@@ -204,10 +204,10 @@
             <p class="mb-0">On s’occupe de toutes les formalités administratives auprès des administrations compétentes (Greffe, INPI, etc).</p>
           </div>
         </div>
-      
-      
-      
-      
+
+
+
+
   </div>
 </section>
 {% endblock %}
@@ -215,8 +215,8 @@
 
 {% block javascripts %}
 {{ parent () }}
-    
-   {{ encore_entry_script_tags('howitwork') }} 
+
+   {{ encore_entry_script_tags('howitwork') }}
 
 {% endblock %}
 
