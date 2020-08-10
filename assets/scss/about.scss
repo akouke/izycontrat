@@ -235,16 +235,17 @@
 
 .about-section .image-column .inner-column{
   position: relative;
-  padding-left: 30px;
+  padding-left: 10px;
   padding-bottom: 125px;
+  padding-bottom: 75px;
 }
 
 .about-section .image-column .inner-column:before{
   position: absolute;
-  left: -75px;
-  top: 65px;
-  height: 520px;
-  width: 520px;
+  left: -20px;
+  top: 75px;
+  height: auto;
+  width: auto;
   background-image:url(https://i.ibb.co/fxJ1jtC/about-circle-1.png);
   content: "";
 }
