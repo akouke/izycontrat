@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('style_dashboard') }}
-    
+
 {% endblock %}
 {% block dashboard %}
 {% if app.user %}
@@ -174,11 +174,9 @@
     {% endif %}
     {% endblock %}
     {% block body %}
-
     {% block footer %}
-        {% include '_footer.html.twig' %}
+        {{ render(controller('App\\Controller\\FooterInputController::input')) }}
     {% endblock %}
-</div>
 {% endblock %}
     {% block javascripts %}
         {{ parent() }}

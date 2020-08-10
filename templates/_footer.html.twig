@@ -1,4 +1,4 @@
-<footer id="sticky-footer" class="footer bg-footer text-white-50 row">
+<footer id="sticky-footer" class="footer bg-footer text-white-50 mt-5 row">
     <div class="footer-element text-center col-12 col-md-4">
         <h2>Créer son entreprise</h2>
         <ul>
@@ -19,7 +19,16 @@
             <li><a href="/">Politiques de confidentialité</a></li>
         </ul>
     </div>
-    <div class="footer-element text-center col-12 col-md-4">
+    <div class="footer-element  text-primary justify-content-center text-center col-12 col-md-4">
+        <h2>S'inscrire a la newsletter : </h2>
+        <ul>
+            <li class="mb-2">
+                Inscrivez-vous à notre newsletter pour recevoir les dernières actualités .
+            </li>
+            <li class="d-flex justify-content-center">
+                {{ include('email_newsletter/_form.html.twig') }}
+            </li>
+        </ul>
         <h2>Vous pouvez nous suivre sur</h2>
         <ul class="d-inline-flex justify-content-around">
             <li class="social-button">
@@ -54,5 +63,7 @@
         <ul>
             <li><a href="{{ path('lawyer_register') }}">Nous rejoindre</a></li>
         </ul>
-    </div>
+
+        </div>
 </footer>
+
