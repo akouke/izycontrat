@@ -1,39 +1,39 @@
-{# {% extends '_layout.html.twig' %} #}
-{% extends 'base.html.twig' %}
+ {% extends '_layout.html.twig' %}
+
 {% block title %}Je cree mon entreprise{% endblock %}
 
 {% block body %}
     <section class="page-content container-fluid col-12 col-lg-10">
 
         <h1 class="text-center"> Créez votre entreprise en quelques clics </h1>
-        <div class="espace">
-            <div class='tabbed round'>
-                <ul class="nav nav-tabs">
-                    <li class="nav-link">
-                        <a data-toggle="tab" href="#SAS">SAS</a>
+        <div class="text-center my-5 mx-auto w-75">
+            <div class="text-center">
+                <ul class="nav nav-tabs justify-content-between no-gutters">
+                    <li class="nav-link active">
+                        <a class="text-primary" data-toggle="tab" href="#SAS">SAS</a>
                     </li>
                     <li class="nav-link">
-                        <a data-toggle="tab" href="#SASU">SASU</a>
-                    </li>
-                    <li class='nav-link'>
-                        <a data-toggle="tab" href="#SARL">SARL</a>
+                        <a class="text-primary" data-toggle="tab" href="#SASU">SASU</a>
                     </li>
                     <li class="nav-link">
-                        <a data-toggle="tab" href="#EURL">EURL</a>
+                        <a class="text-primary" data-toggle="tab" href="#SARL">SARL</a>
                     </li>
                     <li class="nav-link">
-                        <a data-toggle="tab" href="#SCI">SCI</a>
-                    </li>
-                    <li class='nav-link'>
-                        <a data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
+                        <a class="text-primary" data-toggle="tab" href="#EURL">EURL</a>
                     </li>
                     <li class="nav-link">
-                        <a data-toggle="tab" href="#EI">EI</a>
+                        <a class="text-primary" data-toggle="tab" href="#SCI">SCI</a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="text-primary" data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
+                    </li>
+                    <li class="nav-link">
+                        <a class="text-primary" data-toggle="tab" href="#EI">EI</a>
                     </li>
                 </ul>
             </div>
 
-            <div id="myTabContent" class="tab-content">
+            <div id="myTabContent" class="tab-content shadow-effect">
                 <div class="tab-pane fade" id="SARL">
                     <div class="card bg-white mb-1">
                         <div class="card-header text-secondary text-center">STATUT SARL</div>
@@ -144,6 +144,8 @@
                 forme juridique</a>
         </div>
     </section>
-    {% block footer %}{% endblock %}
 {% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('create_entreprise') }}
+{% endblock %}
