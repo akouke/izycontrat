@@ -4,7 +4,7 @@
        /*     text-align: center;*/
             /*padding-top: 10px;*/
               /*background:#cdd2c5;*/
-        
+
        /* }*/
         .breadcrumb {
             display: inline-block;
@@ -14,7 +14,7 @@
             background-color: white;
         }
         .breadcrumb a {
-            font-family: 'Montserrat', sans-serif;
+            font-family: $font-text;
             text-decoration: none;
             outline: none;
             display: block;
@@ -59,12 +59,12 @@
         .breadcrumb a:last-child:after {
             content: none;
         }
-        
+
         .progression {padding-top: 2px; margin-bottom: -15px;}
-        
-        
-   
-        
+
+
+
+
 /*html, body {*/
 /*  margin: 0;*/
 /*  padding: 0;*/
@@ -73,14 +73,7 @@
 /*  width: 100%;*/
 /*  text-align: center;*/
 /*}*/
-h1{
-    font: 400 30px roboto, "Open Sans", Helvetica, sans-serif;
-  text-transform: uppercase;
-}
-h2{
-    font: 300 22px roboto, "Open Sans", Helvetica, sans-serif;
-  text-transform: uppercase;
-}
+
 .switcher-box {
   list-style: none;
   padding: 0;
@@ -95,7 +88,7 @@ h2{
   padding: 3px;
   cursor: pointer;
   background: #FFF;
-  
+
   -webkit-border-radius: 50%;
           border-radius: 50%;
 
@@ -113,7 +106,7 @@ h2{
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
       box-sizing: border-box;
-  
+
   -webkit-border-radius: 50%;
           border-radius: 50%;
 }
@@ -231,7 +224,7 @@ h2{
   color: #777;
 
   text-transform: uppercase;
-  font: 600 13px/20px roboto, "Open Sans", Helvetica, sans-serif;
+  font: 600 13px/20px $font-text, "Open Sans", Helvetica, sans-serif;
 
   transition: all 250ms ease;
 }
@@ -242,7 +235,7 @@ h2{
   position: absolute;
   top: 0;
   height: 100%;
-  width: 44px;  
+  width: 44px;
   background-color: #FFF;
   transition: all 250ms ease;
 }
@@ -745,10 +738,8 @@ h2{
 
 a.iprodev {
   line-height: normal;
-  font-family: Varela Round, sans-serif;
-  font-weight: 600;
+  font-family: $font-text;
   text-decoration: none;
-  font-size: 13px;
   color: #A7AAAE;
   position: fixed;
   left: 20px;
