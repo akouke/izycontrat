@@ -1,6 +1,11 @@
 {% extends '_layout.html.twig' %}
 {#{% extends 'base.html.twig' %}#}
 
+{% block stylesheets %} 
+{{ parent() }}
+{{ encore_entry_link_tags('tab1') }}  
+{% endblock %}
+
 {% block title %}Je cree mon {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} {% endblock %}
 
 {% block body %}
@@ -563,7 +568,7 @@
                                </div>
                                <div class="col">  
                                  {{ form_row(formAssociateCompany2.capitalBring) }} 
-                                 {{ dump(formAssociateCompany2.capitalBring) }}
+                                 
                                </div>
                              </div>
                              <div>
