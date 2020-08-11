@@ -1,6 +1,18 @@
 @import "app";
 
-.nav-link-create:active {
-  color: $secondary-color;
+.nav-link-create {
   background: $primary-color;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+  padding: 10px 24px 8px;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+  transition: all 250ms ease;
+  border-radius: 15px 15px 0 0;
+}
+
+.nav-link-create.active {
+  background: $secondary-color;
+  color: $primary-color;
 }
