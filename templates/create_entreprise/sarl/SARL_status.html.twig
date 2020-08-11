@@ -729,10 +729,17 @@ au capital de
     <br>
 </p>
 
-<di class="row">
-    <div class="col-5" style="margin-left: 13%"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div>
-    <div class="col-4"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div>
-</div>
+{#<di class="row">#}
+{#    <div class="col-5" style="margin-left: 13%"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div>#}
+{#    <div class="col-4"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div>#}
+{#</div>#}
+
+<p>
+    {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}
+</p>
+<p style="text-align: right">
+    {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}
+</p>
 
 
 

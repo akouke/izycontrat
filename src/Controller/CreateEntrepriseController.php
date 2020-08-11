@@ -299,9 +299,9 @@ class CreateEntrepriseController extends AbstractController
      */
     public function saveStatut(string $dossierClient, EntityManagerInterface $em)
     {
-        // if(!$this->getUser()){
-        //      return $this->redirectToRoute('create_entreprise' );
-        //  }
+        if(!$this->getUser()){
+             return $this->redirectToRoute('create_entreprise' );
+         }
 
          // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -328,43 +328,30 @@ class CreateEntrepriseController extends AbstractController
         // $dompdf->stream("mypdf.pdf", [
         //     "Attachment" => false
         // ]);
-        
-        // recup email user for the name pdf
-        // $email = $this->getUser()->getEmail();
 
         // Store PDF Binary Data
         $output = $dompdf->output();
         
-        // dd($output);
-        // In this case, we want to write the file in the public directory
-        $publicDirectory = $dossierClient;
-        
-        $email = "teste1.pdf";
-
-        $pdfFilepath =  $publicDirectory . '/'.$email.'.pdf';
-        $nameStatus = $email;
-        // dd($pdfFilepath);
-        // Write file to the desired path
-        // file_put_contents($pdfFilepath, $output);
-        // dd(file_put_contents($pdfFilepath, $output));
-        // $t = file_get_contents($publicDirectory . '/'.$email.'.pdf');
-        // dd($t);
-        $upload = new Upload();
-        
+   
         /** @var User $user */
         $user=$this->getUser();
+
+        $pdfFilepath =   $dossierClient.'/'.'statut_'.$user->getEmail().'.pdf';
+
+        file_put_contents($pdfFilepath, $output);
+
+        $upload = new Upload();
+       
         
         $upload->setUser($user);
-        $upload->setStatusFile($pdfFilepath);
-        
+        $upload->setStatus('statut_'.$user->getEmail().'.pdf');
+
         $em->persist($upload);
-        dd($upload);
+   
         $em->flush();
-        // Send some text response
+  
         return $this->redirectToRoute('create_entreprise');
- 
-        // return new Response("The PDF file has been succesfully generated !");
-        // end save pdf in disk
+
         
     }
     
