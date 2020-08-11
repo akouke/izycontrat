@@ -4700,7 +4700,8 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jquery-easing@0.0.1:
+
+jquery-easing@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/jquery-easing/-/jquery-easing-0.0.1.tgz#b3c37525b55734dc1ee1ad09b6c3373187687715"
   integrity sha1-s8N1JbVXNNwe4a0JtsM3MYdodxU=
