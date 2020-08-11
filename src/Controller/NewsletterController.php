@@ -6,6 +6,7 @@ use App\Entity\EmailNewsletter;
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
 use App\Repository\NewsletterRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ use \DateTime;
 
 /**
  * @Route("/newsletter")
+ * @IsGranted("ROLE_SUPER_ADMIN")
  */
 class NewsletterController extends AbstractController
 {
@@ -83,7 +85,7 @@ class NewsletterController extends AbstractController
             }
 
 
-            return $this->redirectToRoute('newsletter_index');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('newsletter/new.html.twig', [
