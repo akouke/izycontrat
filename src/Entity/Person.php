@@ -153,6 +153,16 @@ class Person
      */
     private $nationality;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $associatePart;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateBirth;
+
     public function __construct()
     {
         $this->myAssociates = new ArrayCollection();
@@ -514,6 +524,30 @@ class Person
     public function setNationality(?string $nationality): self
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    public function getAssociatePart(): ?float
+    {
+        return $this->associatePart;
+    }
+
+    public function setAssociatePart(?float $associatePart): self
+    {
+        $this->associatePart = $associatePart;
+
+        return $this;
+    }
+
+    public function getDateBirth(): ?\DateTimeInterface
+    {
+        return $this->dateBirth;
+    }
+
+    public function setDateBirth(?\DateTimeInterface $dateBirth): self
+    {
+        $this->dateBirth = $dateBirth;
 
         return $this;
     }

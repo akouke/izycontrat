@@ -25,6 +25,7 @@ Encore
     .addEntry('fields', './assets/js/fields.js')
     .addEntry('howitwork', './assets/js/howitwork.js')
     .addEntry('createcompany', './assets/js/createcompany.js')
+    .addEntry('fichesci', './assets/js/fichesci.js')
 
 
     .addStyleEntry('style_dashboard', './assets/scss/dashboard.scss')

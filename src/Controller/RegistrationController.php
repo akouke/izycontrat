@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserRegisterEvent;
 
 class RegistrationController extends AbstractController
 {
@@ -28,7 +30,8 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
-        UserAuthenticator $authenticator
+        UserAuthenticator $authenticator,
+        EventDispatcherInterface $eventDispatcher
     ): ?Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
@@ -59,6 +62,13 @@ class RegistrationController extends AbstractController
             $entityManager->persist($person);
 
             $entityManager->flush();
+            
+            $UserRegisterEvent = new UserRegisterEvent($person);
+            $eventDispatcher->dispatch(
+                UserRegisterEvent::NAME,
+                $UserRegisterEvent
+            
+            );
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

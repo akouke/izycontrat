@@ -17,6 +17,17 @@ class TechnicalSheetController extends AbstractController
     {
         return $this->render('technical_sheet/sasu.html.twig');
     }
+    
+     /**
+     * @Route("sci", name="_sci")
+     */
+    public function sci()
+    {
+        return $this->render('technical_sheet/sci.html.twig');
+    }
+    
+    
+    
 
     /**
      * @Route("sas", name="_sas")

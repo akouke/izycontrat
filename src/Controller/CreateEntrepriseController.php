@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Company;
 use App\Entity\Person;
 use App\Entity\User;
+use App\Entity\Upload;
 use App\Entity\AssociateCompanyInfo;
 use App\Entity\ActivitySector;
 use App\Form\CompanyType;
@@ -26,14 +27,13 @@ use App\Repository\CompaniesTypesRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
-
-// Include Dompdf required namespaces
+use Symfony\Component\Security\Core\User\UserInterface;
+use App\Security\UserAuthenticator;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
-//conversion numbertoletter
-// use App\Services\NumberToLetter;
 use NumberToWords\NumberToWords;
+use Symfony\Component\HttpFoundation\Response;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -42,12 +42,7 @@ class CreateEntrepriseController extends AbstractController
      */
     public function index()
     {
-        //  $user = $this->getUser();
-        // dd($user);
-        return $this->render('create_entreprise/create_entreprise.html.twig', [
-            'controller_name' => 'CreateEntrepriseController',
-            'controller_firstname' => 'M. xxxxxx',
-        ]);
+        return $this->render('create_entreprise/create_entreprise.html.twig', [ ]);
     }
     
      /**
@@ -58,44 +53,12 @@ class CreateEntrepriseController extends AbstractController
         return $this->render('create_entreprise/comparatif_statut.html.twig');
     }
     
-     /**
-     * @Route("/create/save", name="save_status")
-     */
-    public function saveStatut()
-    {
-        
-         // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-        
-        // Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
-        
-        // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('create_entreprise/sarl/SARL_status.html.twig', [
-            'title' => "Recu Creation de SARL"
-        ]);
-        
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-        
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
-        ]);
-        // return $this->render('create_entreprise/save_statut.html.twig');
-    }
-    
     /**
      * @Route("/create/entreprise/sarl", name="create_sarl") 
      */
-     public function createSarl (Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, CompaniesTypesRepository $companyTypeRecup)
+     public function createSarl (GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                                 EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                                 CompaniesTypesRepository $companyTypeRecup, Request $request)
      {
          $company = new Company();
          $person = new Person();
@@ -109,7 +72,7 @@ class CreateEntrepriseController extends AbstractController
          $associate4CompanyInfo = new AssociateCompanyInfo();
          $associate5CompanyInfo = new AssociateCompanyInfo();
          
-         $associateCompany = new AssociateCompanyInfo();
+         $associateCompany1 = new AssociateCompanyInfo();
          $associateCompany2 = new AssociateCompanyInfo();
          $associateCompany3 = new AssociateCompanyInfo();
          
@@ -130,10 +93,9 @@ class CreateEntrepriseController extends AbstractController
          $formAssocie4 = $this->createForm(Associate4Type::class, $associe4);
          $formAssocie5 = $this->createForm(Associate5Type::class, $associe5);
          
-         $formAssociateCompany = $this->createForm(AssociateCompanyType::class, $associateCompany);
+         $formAssociateCompany = $this->createForm(AssociateCompanyType::class, $associateCompany1);
          $formAssociateCompany2 = $this->createForm(AssociateCompany2Type::class, $associateCompany2);
          $formAssociateCompany3 = $this->createForm(AssociateCompany3Type::class, $associateCompany3);
-        //  $formAssocie2 = $this->createForm(AssociatePersonType::class, $associe2);
          
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
@@ -148,9 +110,6 @@ class CreateEntrepriseController extends AbstractController
          $formAssociateCompany->handleRequest($request);
          $formAssociateCompany2->handleRequest($request);
          $formAssociateCompany3->handleRequest($request);
-        //  $formAssocie2->handleRequest($request);
-            
-        // dump($company, $person, $user, $associe1, $associe2);
         
         if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
             
@@ -171,10 +130,43 @@ class CreateEntrepriseController extends AbstractController
                 ));
              $person->setUser($user);
              
+               // recup parts
+                 $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
+                 $apportAssocieCompany2 = $associateCompany2->getCapitalBring();
+                 $apportAssocieCompany3 = $associateCompany3->getCapitalBring();
+                $apportAssocie1 = $associe1->getCapitalAmountAdding();
+                $apportAssocie2 = $associe2->getCapitalAmountAdding();
+                $apportAssocie3 = $associe3->getCapitalAmountAdding();
+                $apportAssocie4 = $associe4->getCapitalAmountAdding();
+                $apportAssocie5 = $associe5->getCapitalAmountAdding();
+                
+            //parts operation : repartition and (not / by 0 or null)
+            $somTotal = $apportAssocie1 + $apportAssocie2 + $apportAssocie3 + $apportAssocie4 + $apportAssocie5 + $apportAssocieCompany1 + $apportAssocieCompany2 + $apportAssocieCompany3;
+            $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
+
+            $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
+            $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
+            $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
+            $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
+            $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
+            $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
+            $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
+            $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
+
+            $associateCompany1->setCompanyPart($partAssocieCompany1);
+            $associateCompany2->setCompanyPart($partAssocieCompany2);
+            $associateCompany3->setCompanyPart($partAssocieCompany3);
+            
+            $associe1->setAssociatePart($partAssocie1);
+            $associe2->setAssociatePart($partAssocie2);
+            $associe3->setAssociatePart($partAssocie3);
+            $associe4->setAssociatePart($partAssocie4);
+            $associe5->setAssociatePart($partAssocie5);
+            
              // pour un associer de type Societer
-             if($associateCompany->getName() !== null){
-                 $associateCompany->setPerson($person);
-                 $em->persist($associateCompany);
+             if($associateCompany1->getName() !== null){
+                 $associateCompany1->setPerson($person);
+                 $em->persist($associateCompany1);
              }
              if($associateCompany2->getName() !== null){
                  $associateCompany2->setPerson($person);
@@ -187,13 +179,8 @@ class CreateEntrepriseController extends AbstractController
             
             // persistance separer des associes
             if($associe1->getFirstName() !== null || $associe1->getLastName() !== null){
-                // $em->persist($associe1);
                 $person->addMyAssociate($associe1);
-                // $associate1CompanyInfo->setPerson($associe1);
                 $em->persist($associe1);
-                // $em->persist($associate1CompanyInfo);
-                // $em->flush();
-                // dd($associate1CompanyInfo, $associe1);
             }
             if($associe2->getFirstName() !== null || $associe2->getLastName() !== null){
                 $person->addMyAssociate($associe2);
@@ -208,27 +195,35 @@ class CreateEntrepriseController extends AbstractController
                 $em->persist($associe4);
             }
             if($associe5->getFirstName() !== null || $associe5->getLastName() !== null){
-                // $associate5CompanyInfo->setPerson($associe5);
-                // $em->persist($associate5CompanyInfo);
-                // dd($associate5CompanyInfo, $associe5);
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
-                // dd( $person, $user, $company, $request, $associateCompany, $associateCompany2);
-            //   $person->setPhoneNumber($formCompany->get('phoneNumber')->getData());
 
             $em->persist($user);
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_sarl_prestation'
-            // ,
-            // ['id' => $company->getId()]
-            );
+            $credentials = [
+                'password' => $user->getPassword(),
+                'email' => $user->getEmail(),
+                // 'csrf_token' => $request->request->get('_csrf_token'),
+                ];
+                $request->getSession()->set(
+                    Security::LAST_USERNAME,
+                    $credentials['email']
+                );
 
-            // $entityManager->flush();
+             $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main'
+            );
+            
+            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            return $this->redirectToRoute('create_sarl_prestation' );
+
         }   
 
         return $this->render('create_entreprise/sarl/SARL_form.html.twig', [
@@ -255,7 +250,7 @@ class CreateEntrepriseController extends AbstractController
      */
      public function createSarlPrestation (Request $request, EntityManagerInterface $em)
      {
-         
+        //  dd($this->getUser()->getEmail());
          return $this->render('create_entreprise/sarl/SARL_form_prestation.html.twig', [
             
         ]);
@@ -277,19 +272,19 @@ class CreateEntrepriseController extends AbstractController
      /**
      * @Route("/create/entreprise/sarl/status", name="create_sarl_status") 
      */
-     public function createSarlStatus (Request $request, EntityManagerInterface $em, Security $security)
+     public function createSarlStatus (Request $request)
      {
-        // include_once('../src/Services/testNumToLet.php');
-        // dd(NumberToLetterInFrench(3400000));
-        // dd($security);
-        $numberToWords = new NumberToWords();
-         $numberTransformer = $numberToWords->getNumberTransformer('fr');
+         if(!$this->getUser()){
+             return $this->redirectToRoute('create_entreprise' );
+         }
+         
+          $numberToWords = new NumberToWords();
+          $numberTransformer = $numberToWords->getNumberTransformer('fr');
                 //  $ex = $numberTransformer->toWords(10200400);
                  // build a new currency transformer using the RFC 3066 language identifier
                 // $currencyTransformer = $numberToWords->getCurrencyTransformer('fr');
                 // $ex = $currencyTransformer->toWords(5099.3, 'EUR');
-                // dd($ex);
-        
+
          return $this->render('create_entreprise/sarl/SARL_status.html.twig', [
             'dateCreation' => date('d/m/Y'),
             // 'capitalSocial' => NumberToLetterInFrench(3500),
@@ -298,17 +293,90 @@ class CreateEntrepriseController extends AbstractController
         ]);
          
      }
-    
+     
+     /**
+     * @Route("/create/save", name="save_status")
+     */
+    public function saveStatut(string $dossierClient, EntityManagerInterface $em)
+    {
+        // if(!$this->getUser()){
+        //      return $this->redirectToRoute('create_entreprise' );
+        //  }
+
+         // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('create_entreprise/sarl/SARL_status.html.twig', [
+            'title' => "Recu Creation de SARL"
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force/not download)
+        // $dompdf->stream("mypdf.pdf", [
+        //     "Attachment" => false
+        // ]);
+        
+        // recup email user for the name pdf
+        // $email = $this->getUser()->getEmail();
+
+        // Store PDF Binary Data
+        $output = $dompdf->output();
+        
+        // dd($output);
+        // In this case, we want to write the file in the public directory
+        $publicDirectory = $dossierClient;
+        
+        $email = "teste1.pdf";
+
+        $pdfFilepath =  $publicDirectory . '/'.$email.'.pdf';
+        $nameStatus = $email;
+        // dd($pdfFilepath);
+        // Write file to the desired path
+        // file_put_contents($pdfFilepath, $output);
+        // dd(file_put_contents($pdfFilepath, $output));
+        // $t = file_get_contents($publicDirectory . '/'.$email.'.pdf');
+        // dd($t);
+        $upload = new Upload();
+        
+        /** @var User $user */
+        $user=$this->getUser();
+        
+        $upload->setUser($user);
+        $upload->setStatusFile($pdfFilepath);
+        
+        $em->persist($upload);
+        dd($upload);
+        $em->flush();
+        // Send some text response
+        return $this->redirectToRoute('create_entreprise');
+ 
+        // return new Response("The PDF file has been succesfully generated !");
+        // end save pdf in disk
+        
+    }
     
     
     
     /**
      * @Route("/create/entreprise/eurl", name="create_eurl") 
      */
-     public function createEurl(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
+     public function createEurl(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                                CompaniesTypesRepository $companyTypeRecup, Request $request)
      {
-         
-        
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -322,8 +390,6 @@ class CreateEntrepriseController extends AbstractController
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
-            
-        // dump($company, $person, $user);
         
         if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -347,9 +413,23 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($user);
             $em->persist($person);
             
-        // dd($formCompany, $company, $user, $person);
-            // dd($this->getUser(), $user->getEmail() );
             $em->flush();
+            
+            $credentials = [
+                'password' => $user->getPassword(),
+                'email' => $user->getEmail(),
+                ];
+                $request->getSession()->set(
+                    Security::LAST_USERNAME,
+                    $credentials['email']
+                );
+
+             $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main'
+            );
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
@@ -368,10 +448,15 @@ class CreateEntrepriseController extends AbstractController
     }
     
     
+    // @param GuardAuthenticatorHandler $guardHandler
+    // @param UserAuthenticator $authenticator
+    
     /**
      * @Route("/create/entreprise/micro-entreprise", name="create_me") 
      */
-     public function createMicroEntreprise(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
+     public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                                            EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                                            CompaniesTypesRepository $companyTypeRecup, Request $request)
      {
          $company = new Company();
          $person = new Person();
@@ -386,9 +471,7 @@ class CreateEntrepriseController extends AbstractController
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
-            
-        // dump($company, $person, $user);
-        
+
         if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
             
@@ -410,9 +493,24 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->persist($user);
             $em->persist($person);
-            
             $em->flush();
-            // dd($person, $company, $user);
+
+             $credentials = [
+                'password' => $user->getPassword(),
+                'email' => $user->getEmail(),
+                // 'csrf_token' => $request->request->get('_csrf_token'),
+                ];
+                $request->getSession()->set(
+                    Security::LAST_USERNAME,
+                    $credentials['email']
+                );
+
+             $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main'
+            );
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -434,10 +532,12 @@ class CreateEntrepriseController extends AbstractController
     /**
      * @Route("/create/entreprise/ei", name="create_ei") 
      */
-     public function createEI(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
+     public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                              EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                              CompaniesTypesRepository $companyTypeRecup, Request $request)
      {
          
-                  $company = new Company();
+         $company = new Company();
          $person = new Person();
          $user = new User();
          
@@ -450,9 +550,7 @@ class CreateEntrepriseController extends AbstractController
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
-            
-        // dump($company, $person, $user);
-        
+
         if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
             
@@ -476,6 +574,23 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($person);
             
             $em->flush();
+            
+            $credentials = [
+                'password' => $user->getPassword(),
+                'email' => $user->getEmail(),
+                ];
+                $request->getSession()->set(
+                    Security::LAST_USERNAME,
+                    $credentials['email']
+                );
+
+             $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main'
+            );
+            
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -499,9 +614,6 @@ class CreateEntrepriseController extends AbstractController
      */
      public function MeEiInformations(Request $request, EntityManagerInterface $em)
      {
-        //  dd($request);
-        return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
-         
-        ]);
+        return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [ ]);
      }
 }

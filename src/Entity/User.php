@@ -77,7 +77,9 @@ class User implements UserInterface
     {
         $this->articles = new ArrayCollection();
         $this->uploads = new ArrayCollection();
+        
     }
+  
 
     public function getId(): ?int
     {

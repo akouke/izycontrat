@@ -1,10 +1,11 @@
 {% extends '_layout.html.twig' %}
 {% block title %}SARL STATUT {% endblock %}
 {% block navbar %}{% endblock %}
+{% block dashboard %}{% endblock %}
 {% block body %}
 <style>
      body{
-        /*background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blur-ipad-background.jpg') no-repeat center center fixed;*/
+
         background-size: cover;
         background: white;
         margin-top: 2px;
@@ -13,22 +14,12 @@
         font-family: 'Roboto', sans-serif !important;
     }
 </style>
-
-        {#<div class="breadcrumb progression">#}
-        {#    <ul class="nav nav-tabs">#}
-        {#        <a class="active" href="{{path('create_sarl')}}">1 - Détail de votre projet</a>#}
-        {#        <a class="active" href="{{path('create_sarl_prestation')}}"> 2 - Choix de la prestation</a>#}
-        {#        <a class="active" href="{{path('create_sarl_payement')}}"> 3 - Paiement</a>#}
-        {#        <a data-toggle="tab" class="active">4 - Société créée ! <i style="color:limegreen" class="fa fa-check fa-lg"></i></a>#}
-        {#    </ul>#}
-        {#</div>#}
         
 <div class="container-fluid">
     
     
 <h2><br>
 {% set name = 'IZY CONTRAT' %}
-{#{% set capital=3000 %}#}
 {% set lastName = "Abdoulaye" %}
 {% set firstName = "SECK" %}
 {% set civilite = "M. " %}
@@ -103,7 +94,7 @@ au capital de
   <b>  ARTICLE 2 -  OBJET </b><br>
 
     La Société a pour objet : <br>
-    <b>SECTEUR D’ACTIVITE – ACTIVITE PRECISE</b><br>
+    <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE'}}</b><br>
     
     La participation de la Société, par tous moyens, directement ou indirectement, dans toutes opérations pouvant se rattacher à son objet par voie de création de sociétés nouvelles, d'apport, de souscription ou d'achat de titres ou droits sociaux, de fusion ou autrement, de création, d'acquisition, de location, de prise en location-gérance de tous fonds de commerce ou établissements ; la prise, l'acquisition, l'exploitation ou la cession de tous procédés et brevets concernant ces activités.
     
@@ -747,7 +738,7 @@ au capital de
 
 </div>
 {#<a class="btn btn-outline-warning" href="javascript:window.print()">Imprimer votre statut</a>#}
-<a class="btn btn-outline-success" href="{{ path('save_status')}}">Sauvegarder Statut </a>
+{#<a class="btn btn-outline-success" href="{{ path('save_status')}}">Sauvegarder Statut </a>#}
 </div>
 
 
