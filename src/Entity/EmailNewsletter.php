@@ -39,7 +39,7 @@ class EmailNewsletter
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=Newsletter::class, mappedBy="email")
+     * @ORM\ManyToMany(targetEntity=Newsletter::class, mappedBy="emails")
      */
     private $newsletters;
 
@@ -89,7 +89,7 @@ class EmailNewsletter
     {
         if (!$this->newsletters->contains($newsletter)) {
             $this->newsletters[] = $newsletter;
-            $newsletter->setEmail($this);
+            $newsletter->addEmail($this);
         }
 
         return $this;
@@ -99,10 +99,7 @@ class EmailNewsletter
     {
         if ($this->newsletters->contains($newsletter)) {
             $this->newsletters->removeElement($newsletter);
-            // set the owning side to null (unless already changed)
-            if ($newsletter->getEmail() === $this) {
-                $newsletter->setEmail(null);
-            }
+            $newsletter->removeEmail($this);
         }
 
         return $this;

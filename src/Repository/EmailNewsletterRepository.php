@@ -19,6 +19,14 @@ class EmailNewsletterRepository extends ServiceEntityRepository
         parent::__construct($registry, EmailNewsletter::class);
     }
 
+    public function getEmail() {
+
+        return $this->createQueryBuilder("e")
+            ->addOrderBy("e.email")
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return EmailNewsletter[] Returns an array of EmailNewsletter objects
     //  */

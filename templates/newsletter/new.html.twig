@@ -1,0 +1,18 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}New Newsletter{% endblock %}
+
+{% block body %}
+    <section class="container page-content">
+        <div class="row mt-4 justify-content-center">
+            <h1>Nouvelle Newsletter</h1></div>
+        <div class="row mt-4 justify-content-center">
+            {{ include('newsletter/_form.html.twig') }}
+        </div>
+        <div class="row mt-4">
+           <button class="btn btn-primary"><a href="{{ path('app_home') }}"><i class="fas fa-arrow-left"></i> Revenir à l'acceuil</a></button>
+        </div>
+
+
+    </section>
+{% endblock %}

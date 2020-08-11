@@ -1,6 +1,11 @@
 {#{% extends '_layout.html.twig' %}#}
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent () }}
+    {#{{ encore_entry_link_tags('home') }}#}
+    {#     {{ encore_entry_link_tags('howitwork') }} #}
+  {{ encore_entry_link_tags('tab1') }} 
+{% endblock %}
 {% block title %}Je cree mon entreprise{% endblock %}
 
 {% block body %}
@@ -51,23 +56,23 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
 
 <div class='tabbed round'>
   <ul class="nav nav-tabs">
-    <li class='nav-item active'>
-      <a data-toggle="tab" href="#SARL">SARL</a>
-    </li>
-    <li class="nav-item">
-      <a  data-toggle="tab" href="#SASU">SASU</a>
-    </li>
-    <li class="nav-item">
-      <a  data-toggle="tab" href="#EURL">EURL</a>
-    </li>
-     <li class='nav-item'>
-      <a data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
-    </li>
     <li class="nav-item">
       <a  data-toggle="tab" href="#SAS">SAS</a>
     </li>
     <li class="nav-item">
+      <a  data-toggle="tab" href="#SASU">SASU</a>
+    </li>
+    <li class='nav-item active'>
+      <a data-toggle="tab" href="#SARL">SARL</a>
+    </li>
+    <li class="nav-item">
+      <a  data-toggle="tab" href="#EURL">EURL</a>
+    </li>
+    <li class="nav-item">
       <a  data-toggle="tab" href="#SCI">SCI</a>
+    </li>
+     <li class='nav-item'>
+      <a data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
     </li>
      <li class="nav-item">
       <a  data-toggle="tab" href="#EI">EI</a>
@@ -77,7 +82,7 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
 
 <div id="myTabContent" class="tab-content">
   
-  <div class="tab-pane fade active show" id="SARL">
+  <div class="tab-pane fade" id="SARL">
     <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
     <div class="card-header">STATUT SARL</div>
     <div class="card-body">
@@ -138,7 +143,7 @@ body{ background:url('https://westfieldcc.files.wordpress.com/2011/10/simple-blu
    </div>
   </div>
     
-  <div class="tab-pane fade" id="SAS">
+  <div class="tab-pane fade active show" id="SAS">
     <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
     <div class="card-header">STATUT SAS</div>
     <div class="card-body">

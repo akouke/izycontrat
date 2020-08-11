@@ -13,6 +13,7 @@ use \DateTime;
 
 /**
  * @Route("/email/newsletter")
+
  */
 class EmailNewsletterController extends AbstractController
 {
