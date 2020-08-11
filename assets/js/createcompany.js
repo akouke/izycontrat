@@ -14,15 +14,15 @@ var animating; //flag to prevent quick multi-click glitches
 $as(".next").click(function(){
 	if(animating) return false;
 	animating = true;
-	
+
 	current_fs = $as(this).parent();
 	next_fs = $as(this).parent().next();
-	
+
 	//activate next step on progressbar using the index of next_fs
 	$as("#progressbar li").eq($as("fieldset").index(next_fs)).addClass("active");
-	
+
 	//show the next fieldset
-	next_fs.show(); 
+	next_fs.show();
 	//hide the current fieldset with style
 	current_fs.animate({opacity: 0}, {
 		step: function(now, mx) {
@@ -38,12 +38,12 @@ $as(".next").click(function(){
         'position': 'absolute'
       });
 			next_fs.css({'left': left, 'opacity': opacity});
-		}, 
-		duration: 800, 
+		},
+		duration: 800,
 		complete: function(){
 			current_fs.hide();
 			animating = false;
-		}, 
+		},
 		//this comes from the custom easing plugin
 		easing: 'easeInOutBack'
 	});
@@ -52,15 +52,15 @@ $as(".next").click(function(){
 $as(".previous").click(function(){
 	if(animating) return false;
 	animating = true;
-	
+
 	current_fs = $as(this).parent();
 	previous_fs = $as(this).parent().prev();
-	
+
 	//de-activate current step on progressbar
 	$as("#progressbar li").eq($as("fieldset").index(current_fs)).removeClass("active");
-	
+
 	//show the previous fieldset
-	previous_fs.show(); 
+	previous_fs.show();
 	//hide the current fieldset with style
 	current_fs.animate({opacity: 0}, {
 		step: function(now, mx) {
@@ -73,12 +73,12 @@ $as(".previous").click(function(){
 			opacity = 1 - now;
 			current_fs.css({'left': left});
 			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-		}, 
-		duration: 800, 
+		},
+		duration: 800,
 		complete: function(){
 			current_fs.hide();
 			animating = false;
-		}, 
+		},
 		//this comes from the custom easing plugin
 		easing: 'easeInOutBack'
 	});
