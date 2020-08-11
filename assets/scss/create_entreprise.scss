@@ -1,5 +1,6 @@
 @import "app";
 
-.nav-link-create {
-
+.nav-link-create:active {
+  color: $secondary-color;
+  background: $primary-color;
 }

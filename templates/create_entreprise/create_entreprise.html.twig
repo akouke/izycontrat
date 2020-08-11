@@ -1,4 +1,8 @@
  {% extends '_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('create_entreprise') }}
+{% endblock %}
 
 {% block title %}Je cree mon entreprise{% endblock %}
 
@@ -8,14 +12,14 @@
         <h1 class="text-center"> Créez votre entreprise en quelques clics </h1>
         <div class="text-center my-5 mx-auto w-75">
             <div class="text-center">
-                <nav class="nav nav-pills justify-content-between no-gutters">
-                        <a class="nav-item nav-link active text-secondary font-weight-bold" data-toggle="tab" href="#SAS">SAS</a>
-                        <a class="nav-item nav-link text-secondary font-weight-bold" data-toggle="tab" href="#SASU">SASU</a>
-                        <a class="nav-item nav-link text-secondary font-weight-bold" data-toggle="tab" href="#SARL">SARL</a>
-                        <a class="nav-item nav-link text-secondary font-weight-bold" data-toggle="tab" href="#EURL">EURL</a>
-                        <a class="nav-item nav-link text-secondary font-weight-bold" data-toggle="tab" href="#SCI">SCI</a>
-                        <a class="nav-item nav-link text-secondary font-weight-bold" data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
-                        <a class="nav-item nav-link text-secondary font-weight-bold" data-toggle="tab" href="#EI">EI</a>
+                <nav class="nav nav-pills mb-2">
+                        <a class="nav-item nav-link nav-link-create active font-weight-bold text-secondary" data-toggle="tab" href="#SAS">SAS</a>
+                        <a class="nav-item nav-link font-weight-bold nav-link-create text-secondary " data-toggle="tab" href="#SASU">SASU</a>
+                        <a class="nav-item nav-link font-weight-bold nav-link-create text-secondary " data-toggle="tab" href="#SARL">SARL</a>
+                        <a class="nav-item nav-link font-weight-bold nav-link-create text-secondary " data-toggle="tab" href="#EURL">EURL</a>
+                        <a class="nav-item nav-link font-weight-bold nav-link-create text-secondary " data-toggle="tab" href="#SCI">SCI</a>
+                        <a class="nav-item nav-link font-weight-bold nav-link-create text-secondary " data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
+                        <a class="nav-item nav-link font-weight-bold nav-link-create  text-secondary" data-toggle="tab" href="#EI">EI</a>
                 </nav>
             </div>
 
@@ -126,12 +130,8 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ path('comparatif_statut') }}" class="btn btn-outline-dark btn-lg btn-block">Je ne connais pas ma
+            <a href="{{ path('comparatif_statut') }}" class="btn btn-outline-dark btn-lg btn-block my-4">Je ne connais pas ma
                 forme juridique</a>
         </div>
     </section>
-{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('create_entreprise') }}
 {% endblock %}
