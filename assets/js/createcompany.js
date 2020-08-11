@@ -1,7 +1,9 @@
 require('../scss/createcompany.scss');
 
-//const $as = require('jquery');
-//require('jquery-easing')($as);
+// const $ = require('jquery');
+// require('jquery.easing')($);
+
+const $as = require("jquery-easing");
 
 
 //jQuery time
@@ -82,6 +84,6 @@ $as(".previous").click(function(){
 	});
 });
 
-$as(".submit").click(function(){
-	return true;
-})
+// $as(".submit").click(function(){
+// 	return true;
+// })
