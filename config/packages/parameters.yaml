@@ -1,0 +1,10 @@
+parameters:
+  stripe_public_key: pk_test_51H2XzXJ1VSvMwQdgGQaYJXROFk79EphP7fsOeyIyi6nYxq4mWcDSH9C2cZueDM4Id32hjL3ooDdDbuz9dw8WTvuw003FLT7gdg
+  stripe_secret_key: sk_test_51H2XzXJ1VSvMwQdgqDSlHIbKHp3AcVgdJpWGQPbrsLLqiVUFv2nkdnGDnbuPjZRm6am5yHRu3oXNsESNVkDLDoCT00dJFRaQ7Z
+  prix_izy_basic: 49
+  prix_izy_plus: 149
+  prix_izy_premium: 289
+  payment:
+    currency: EUR
+    decimal: true
+    premium_amount: 1
