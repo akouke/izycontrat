@@ -24,6 +24,7 @@ En premier lieu, soyez bien sûrs d'avoir installé **PHP 7.2** et d'avoir param
 
 - [Abdoulaye Seck](https://www.linkedin.com/in/abdoulaye-seck/)
 - [Cheikhou Sy]()
+- [Tisserand Mathias]()
 
 
 

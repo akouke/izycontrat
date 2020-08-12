@@ -5,9 +5,11 @@
         "php": "^7.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "dompdf/dompdf": "^0.8.5",
         "friendsofsymfony/ckeditor-bundle": "^2.2",
         "fzaninotto/faker": "^1.9",
         "helios-ag/fm-elfinder-bundle": "^9.3",
+        "kwn/number-to-words": "^1.10",
         "phpmd/phpmd": "^2.6",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
@@ -32,7 +34,8 @@
         "symfony/yaml": "4.4.*",
         "symfonycasts/verify-email-bundle": "^1.0",
         "vich/uploader-bundle": "^1.14",
-        "willdurand/js-translation-bundle": "^3.0"
+        "willdurand/js-translation-bundle": "^3.0",
+      "ext-http": "*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

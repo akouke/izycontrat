@@ -1,14 +1,21 @@
 {% extends "_layout.html.twig" %}
-{#{% block stylesheets %}#}
-{#    {{ parent() }}#}
-    {#{{ encore_entry_link_tags('style_dashboard') }}#}
-{#{% endblock %}#}
 
-{% block title %}SARL Payement {% endblock %}
+{% block stylesheets %} 
+{{ parent() }}
+{{ encore_entry_link_tags('tab1') }}  
+{% endblock %}
+
+{% block title %}SARL Paiement {% endblock %}
 {% block body %}
 
 <style>
-
+  b{
+        margin: 0 0px 0 20px;
+    }
+.breadcrumb{
+        background: none;
+    }
+    
 body {
     margin: 0;
     padding: 0;
@@ -379,16 +386,16 @@ input {
 {#<h1 class="haut">Choix de Payement</h1>#}
         <div class="breadcrumb progression">
             <ul class="nav nav-tabs">
-                <a class="active" href="{{path('create_sarl')}}">1 - Détail de votre projet</a>
-                <a class="active" href="{{path('create_sarl_prestation')}}"> 2 - Choix de la prestation</a>
-                <a data-toggle="tab" class="active"> 3 - Paiement</a>
-                <a data-toggle="tab" >4 - Société créée !</a>
+                <a class="active" href="{{path('create_sarl')}}"><b>1 - Détail de votre projet</b></a>
+                <a class="active" href="{{path('create_sarl_prestation')}}"><b> 2 - Choix de la prestation</b></a>
+                <a data-toggle="tab" class="active"><b> 3 - Paiement</b></a>
+                <a data-toggle="tab" ><b>4 - Société créée !</b></a>
             </ul>
         </div>
 
 
  <div class="payment-title haut">
-        <h1>Payment Information</h1>
+        <h1>Informations de Paiement</h1>
     </div>
     <div class="container preload">
         <div class="creditcard">
@@ -510,7 +517,7 @@ input {
             <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
     </div>
-   <a class="btn btn-success" href="{{ path('create_sarl_status')}}">Valider Payement</a>  
+   <a class="btn btn-success" href="{{ path('create_sarl_status')}}">Valider Paiement</a>  
     <script type="text/javascript">
         
         window.onload = function () {

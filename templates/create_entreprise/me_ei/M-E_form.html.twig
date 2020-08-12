@@ -1,0 +1,375 @@
+{% extends '_layout.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
+{% block stylesheets %} 
+{{ parent() }}
+{{ encore_entry_link_tags('tab1') }}  
+{% endblock %}
+
+{% block title %}Je cree mon {{ typeStatut == 'ME' ? 'ME' : 'EI' }} {% endblock %}
+
+{% block body %}
+<style>
+
+    body{
+        background-size: cover;
+        background: white;
+        margin: 1%;
+        text-align: center;
+        width: 100%;
+    }
+    .haut{
+        margin-top: 6%;
+        text-align: center;
+    }
+    .tailInput{
+      margin-left:33%;
+      margin-bottom: 1%;
+      width: 34%;
+      text-align: center;
+      
+    }
+    .progress{
+      margin-top: 0.5%;
+      margin-bottom: -1%;
+      
+    }
+</style>
+
+
+{#<div class="espace">#}
+
+<div class="container-fluid">
+    <h1 class="haut">Formulaire Creation {{ typeStatut == 'ME' ? 'ME' : 'EI' }} </h1>
+    
+     {% if typeStatut == 'ME'%}
+        {{ form_start(formMe) }} 
+        {{ form_start(formMePerson) }}
+        {{ form_start(formMeUser) }}
+      {% endif %}
+        
+        {% if typeStatut == 'EI' %}
+         {{ form_start(formEi) }} 
+         {{ form_start(formEiPerson) }}
+         {{ form_start(formEiUser) }}
+        {% endif %}
+              
+        <div class="breadcrumb progression">
+            <ul class="nav nav-tabs">
+                <a data-toggle="tab" class="active">1 - Détail de votre projet</a>
+                <a data-toggle="tab" > 2 - Vos Informations</a>
+                <a data-toggle="tab"> 3 - Paiement</a>
+                <a data-toggle="tab" >4 - Société créée !</a>
+            </ul>
+        </div>
+  
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active show" id="SARL">
+    <div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">
+      <div class="card-header">STATUT {{ typeStatut == 'ME' ? 'ME' : 'EI' }}
+        </div>
+      <div class="card-body">
+
+    <fieldset class="form-group">
+      <legend>Dans quel délai souhaitez-vous créer votre {{ typeStatut == 'ME' ? 'ME' : 'EI' }} ?</legend>
+       <div class="tailInput">  
+        {% if typeStatut == 'ME' %}
+         {{ form_widget(formMe.priority)}}
+         {% else %}
+           {{ form_widget(formEi.priority)}}
+          {% endif %}
+        <div class="d-none">
+            {% if typeStatut == 'ME' %}
+               {{ form_widget(formMe.companyType) }}
+               {{ form_widget(formMe.addressManager) }}
+               {{ form_widget(formMe.manager)}}
+               {{ form_widget(formMe.hasDirector)}} 
+               {{ form_widget(formMe.country)}} 
+               {{ form_widget(formMe.tradeName)}} 
+               {{ form_widget(formMe.hasAssociate)}} 
+               {{ form_widget(formMe.hasProtection)}} 
+               {{ form_widget(formMe.bankName)}} 
+               {{ form_widget(formMe.capitalSocial)}} 
+             {% else %}
+               {{ form_widget(formEi.companyType) }}
+               {{ form_widget(formEi.addressManager) }}
+               {{ form_widget(formEi.manager)}}
+               {{ form_widget(formEi.hasDirector)}} 
+               {{ form_widget(formEi.country)}} 
+               {{ form_widget(formEi.tradeName)}} 
+               {{ form_widget(formEi.hasAssociate)}} 
+               {{ form_widget(formEi.hasProtection)}} 
+               {{ form_widget(formEi.bankName)}} 
+               {{ form_widget(formEi.capitalSocial)}}
+                {{ form_widget(formEiPerson.nationality)}}
+              {% endif %}
+         </div>
+       </div>
+          <div>
+                Exerciez-vous votre activité sous le régime de la micro-entreprise ?
+                {% if typeStatut == 'ME' %}
+                    {{ form_row(formMe.regimeMicroEntreprise)}} 
+                {% else %}
+                   {{ form_row(formEi.regimeMicroEntreprise)}} 
+                {% endif %}
+          </div>
+    </fieldset>
+ 
+      <a class="btn btn-danger" href="{{ path('create_entreprise')}}">Annuler</a>
+      <a class="btn btn-primary" data-toggle="tab" href="{{ '#nomEntreprise'}}">Suivant</a>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100" style="width: 5%">5%</div>
+      </div>
+  </div>
+</div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="nomEntreprise">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header">Nom Entreprise</div>
+        <div class="card-body">
+            <legend>Quel nom choississez vous pour votre entreprise?</legend>
+             <div class="tailInput">  
+             {% if typeStatut == 'ME' %}
+               {{ form_widget(formMe.name)}} 
+             {% else %}
+               {{ form_widget(formEi.name)}} 
+              {% endif %}
+              </div>
+            <div  class="alert alert-info" role="alert">
+              (Le nom servira à identifier votre société. Il devra figurer sur tous les documents commerciaux de 
+              votre société y compris les factures Vous devez renseigner ici la dénomination sociale 
+              qui est différent du nom commercial)
+            </div>
+              
+             <a class="btn btn-danger" href="{% if typeStatut == 'ME' %} {{ path('create_me')}} {% else %} {{ path('create_ei')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#activitySector">Suivant</a>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="activitySector">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Secteur d'Activite
+      </div>
+        <div class="card-body">
+            <legend>Quel est votre secteur d’activité ? </legend>
+             <div class="tailInput"> 
+             {% if typeStatut == 'ME' %}
+                   {{ form_widget(formMe.activitySector)}} 
+                {% else %}
+                   {{ form_widget(formEi.activitySector)}}
+                {% endif %}
+              </div>
+            <p>
+              Si autre merci de le préciser :
+            </p>
+            <div class="tailInput">
+              {#<input type="text" placeholder="Autre Secteur d'active">#}
+              {#<input type="text" id="company_activitySector" name="company[activitySector]" placeholder=" Si Autre secteur d'activite" class="form-control" />#}
+              <input type="text" id="company_activitySector_autre" name="company_activitySector_autre" placeholder=" Si Autre secteur d'activite" class="form-control" />
+            </div>
+             <a class="btn btn-danger" href="{% if typeStatut == 'ME' %} {{ path('create_me')}} {% else %} {{ path('create_ei')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#objetSocial">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">45%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  <div class="tab-pane fade" id="objetSocial">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        {#<div class="card-header">SASU STATUS</div>#}
+        <div class="card-header "> Objet Social
+      </div>
+        <div class="card-body">
+            <legend> Quel est l’objet social de votre entreprise ?  </legend>
+             <div class="tailInput"> 
+             {% if typeStatut == 'ME' %}
+                   {{ form_widget(formMe.socialObject)}} 
+                {% else %}
+                   {{ form_widget(formEi.socialObject)}} 
+                {% endif %}
+              </div>
+            <div  class="alert alert-info" role="alert">
+                (L’objet social sert à définir l’ensemble des activités exercées par une entreprise. 
+                il est important de le rédiger avec la plus grande attention. 
+                N’hésitez pas à nous contacter en cas de besoin d’aide au 07 67 72 73 13)
+            </div>
+        
+             <a class="btn btn-danger" href="{% if typeStatut == 'ME' %} {{ path('create_me')}} {% else %} {{ path('create_ei')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#siege">Suivant</a>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%">65%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  
+    <div class="tab-pane fade" id="siege">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Siege Social {% if typeStatut == 'ME' %} et nationalité {% endif %}
+      </div>
+        <div class="card-body">
+            <legend> Où souhaitez-vous exercer votre activité ?  </legend>
+             
+                  <div class="tailInput">
+                      {% if typeStatut == 'ME' %}
+                        {{ form_widget(formMe.address)}}
+                      {% else %}
+                        {{ form_widget(formEi.address)}}
+                      {% endif %}
+                  </div>
+                {% if typeStatut == 'ME' %}
+                   <legend> Quelle est votre nationalité ?  </legend>
+                   <div class="tailInput">
+                      {{ form_widget(formMePerson.nationality)}}
+                   </div>
+                  <div  class="alert alert-info" role="alert">
+                        (Si vous possédez la double nationalité (française et autre), indiquez "française" afin faciliter la procédure)
+                  </div>
+                {% endif %}
+             <a class="btn btn-danger" href="{% if typeStatut == 'ME' %} {{ path('create_me')}} {% else %} {{ path('create_ei')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#situation">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">85%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+  
+  
+    <div class="tab-pane fade" id="situation">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Votre Situation Matrimonial
+      </div>
+        <div class="card-body">
+            <strong>Etes-vous marié(e) ? </strong>
+             <div class="tailInput">  
+             {% if typeStatut == 'ME' %}
+               {{ form_widget(formMePerson.married)}}
+                {% else %}
+                   {{ form_widget(formEiPerson.married)}}
+                {% endif %}
+              </div>
+            <div  class="alert alert-info" role="alert">
+                <small>
+                     Votre réponse nous permettra de savoir si nous devons vous fournir l'attestation de d'information au 
+                     conjoint concernant les conséquences des dettes engagées dans le cadre de votre activité. 
+                     Cette attestation est obligatoire.
+                </small>
+            </div>
+              
+             <a class="btn btn-danger" tabindex="0" data-toggle="tooltip" title="retourner au debut" href="{% if typeStatut == 'ME' %} {{ path('create_me')}} {% else %} {{ path('create_ei')}} {% endif%}">Retour</a>
+            <a class="btn btn-primary" data-toggle="tab" href="#person">Suivant</a>
+            
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">95%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+    <div class="tab-pane fade" id="person">
+      <div class="card text-white bg-primary mb-1" style="max-width: 80rem;">
+        <div class="card-header "> Informations de Contact
+      </div>
+        <div class="card-body">
+            <legend>Vos informations de contact nous servirons à finaliser la création de votre dossier.</legend>
+               
+                {#<div class="row">#}
+                 <div class="tailInput">
+                     {% if typeStatut == 'ME' %}
+                         {{ form_widget(formMePerson.gender) }}
+                    {% else %}
+                       {{ form_widget(formEiPerson.gender) }}
+                    {% endif %}
+                 </div>
+                 <div class="tailInput">  
+                     {% if typeStatut == 'ME' %}
+                       {{ form_widget(formMePerson.firstName) }} 
+                    {% else %}
+                       {{ form_widget(formEiPerson.firstName) }} 
+                    {% endif %}
+                 </div>
+                 <div class="tailInput"> 
+                     {% if typeStatut == 'ME' %}
+                       {{ form_widget(formMePerson.lastName) }} 
+                    {% else %}
+                       {{ form_widget(formEiPerson.lastName) }} 
+                    {% endif %}
+                 </div>
+                 {#</div>#}
+                
+             <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
+             <div class="tailInput"> 
+                 {% if typeStatut == 'ME' %}
+                       {{ form_widget(formMePerson.phoneNumber) }} 
+                    {% else %}
+                       {{ form_widget(formEiPerson.phoneNumber) }} 
+                    {% endif %}
+             </div>
+              
+              {#debut information de connexion user#}
+              {#{{ form_start(formUser )}}#}
+                 <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
+                 <div class="tailInput"> 
+                     {% if typeStatut == 'ME' %}
+                        {{ form_widget(formMeUser.email) }} 
+                    {% else %}
+                       {{ form_widget(formEiUser.email) }}
+                    {% endif %}
+                 </div>
+                {#<p>#}
+                {# <small></small>#}
+                {#</p>#}
+              <br>
+             <a class="btn btn-danger" href="{% if typeStatut == 'ME' %} {{ path('create_me')}} {% else %} {{ path('create_ei')}} {% endif%}">Retour</a>
+             <button type="submit" class="btn btn-primary" >Enregistrer</button>
+              {#<button type="submit" class="btn btn-primary">Suivant</button>#}
+             
+              
+              {#{{ form_end(formUser) }}#}
+              {#fin information de connexion user#}
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">100%</div>
+            </div>
+        </div>
+      </div>
+  </div>
+  
+
+</div>
+    
+    {% if typeStatut == 'ME' %}
+        
+        {{ form_end(formMe) }}
+        {{ form_end(formMePerson) }}
+        {{ form_end(formMeUser) }}
+        
+    {% endif %}
+    
+    {% if typeStatut == 'EI' %}
+         
+     {{ form_end(formEi) }}
+     {{ form_end(formEiPerson) }}
+     {{ form_end(formEiUser) }}
+    
+    {% endif %}
+
+</div>
+ 
+{% block footer %}{% endblock %}
+{% endblock %}
+    

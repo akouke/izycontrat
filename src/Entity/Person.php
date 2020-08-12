@@ -143,6 +143,16 @@ class Person
      */
     private $companiesGeneralDirector;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $married;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nationality;
+
     public function __construct()
     {
         $this->myAssociates = new ArrayCollection();
@@ -480,6 +490,30 @@ class Person
                 $companiesGeneralDirector->setGeneralDirector(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMarried(): ?bool
+    {
+        return $this->married;
+    }
+
+    public function setMarried(?bool $married): self
+    {
+        $this->married = $married;
+
+        return $this;
+    }
+
+    public function getNationality(): ?string
+    {
+        return $this->nationality;
+    }
+
+    public function setNationality(?string $nationality): self
+    {
+        $this->nationality = $nationality;
 
         return $this;
     }

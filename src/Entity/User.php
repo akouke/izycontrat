@@ -68,9 +68,15 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Upload::class, mappedBy="user")
+     */
+    private $uploads;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->uploads = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,5 +216,36 @@ class User implements UserInterface
     {
         //Les noms des champs à afficher dans l'éditeur de document.
         return "email";
+    }
+
+    /**
+     * @return Collection|Upload[]
+     */
+    public function getUploads(): Collection
+    {
+        return $this->uploads;
+    }
+
+    public function addUpload(Upload $upload): self
+    {
+        if (!$this->uploads->contains($upload)) {
+            $this->uploads[] = $upload;
+            $upload->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUpload(Upload $upload): self
+    {
+        if ($this->uploads->contains($upload)) {
+            $this->uploads->removeElement($upload);
+            // set the owning side to null (unless already changed)
+            if ($upload->getUser() === $this) {
+                $upload->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

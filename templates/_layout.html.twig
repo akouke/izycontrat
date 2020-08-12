@@ -5,6 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('style_dashboard') }}
+
 {% endblock %}
 {% block dashboard %}
 {% if app.user %}
@@ -120,7 +121,7 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="">Document 1</a>
+                                            <a href="{{ path('upload_index') }}">Mes documents</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -151,14 +152,14 @@
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <li>
+                                <a href="{{ path('newsletter_new') }}">
+                                    <i class="far fa-paper-plane"></i>
+                                    <span>Envoyer une Newsletter</span>
+                                </a>
+                            </li>
                             <li class="header-menu">
                                 <span>Gestion des Champs</span>
-                            </li>
-                            <li>
-                                <a href="{{ path('field') }}">
-                                    <i class="far fa-plus-square"> </i>
-                                    <span>Ajouter un champ</span>
-                                </a>
                             </li>
                         {% endif %}
                     </ul>
@@ -173,11 +174,9 @@
     {% endif %}
     {% endblock %}
     {% block body %}
-
     {% block footer %}
-        {% include '_footer.html.twig' %}
+        {{ render(controller('App\\Controller\\FooterInputController::input')) }}
     {% endblock %}
-</div>
 {% endblock %}
     {% block javascripts %}
         {{ parent() }}

@@ -1,0 +1,305 @@
+{% extends '_layout.html.twig' %}
+
+
+{% block title %}Fiche pratique SAS{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('technical_sheet') }}
+{% endblock %}
+
+{% block body %}
+    <section class="homeTop d-flex justify-content-center">
+        <img class="homePicture img-fiche" src="/images/sas.png" alt="image principale">
+        <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
+            <p>CRÉER UNE SAS</p>
+            <a href="{{ path('create_entreprise') }}" class="btn btn-secondary btnHome">Je crée ma SAS !</a>
+        </div>
+    </section>
+    <div class="container text-justify p-4">
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Qu’est-ce qu’une SAS ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La société par actions simplifiée est une société commerciale comportant au
+                minimum deux associés. La SAS est une personne morale dont les associés peuvent être
+                des personnes physiques ou des personnes morales. Si la SAS ne comporte qu’un seul
+                associé, alors il s’agit d’une SASU (Société par Actions Simplifiée Unipersonnelle). Il n’y a
+                pas de nombre maximum d’associés prévu par la loi pour les SAS.</p>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="text-center"> Comment devenir associé d’une SAS ?</h2>
+        </div>
+        <div>
+            <p>Pour être associé d’une SAS il faut réaliser un apport au capital social, cet apport peut être en
+                numéraire (de l’argent), en nature (un bien matériel ou un bien immatériel comme un brevet) ou en
+                industrie (une compétence professionnelle par exemple). En contrepartie de cet apport, l’associé reçoit
+                des actions.
+            </p>
+            <p>Il n’y a pas de montant minimum imposé pour le capital social, ce sont les associés qui fixent librement
+                le montant.</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quels sont les droits des associés d’une SAS ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>En premier lieu, les associés d’une SAS possèdent des droits politiques, ils ont le droit de prendre part
+                aux assemblées générales et à la prise de décision collective. Ce droit ne peut être retiré par les
+                statuts, les associés doivent être informés de la tenue d’une assemblée. Les associés ont également un
+                droit de vote, celui-ci peut être aménagé par les statuts pour accorder des droits de vote double ou
+                restreindre le vote de certains associés.
+            </p>
+            <p>Les associés d’une SAS possèdent un droit à l’information, ce sont les statuts qui définissent l’étendu
+                de celui-ci.</p>
+            <p>Il existe aussi un droit financier pour les associés de SAS, ce droit découle des actions qu’ils ont
+                fournies. Ce droit permet aux associés de percevoir un dividende, ou un boni en cas de liquidation de la
+                société. Le droit financier peut faire l’objet d’aménagement dans les statuts, mais il ne peut mener à
+                une clause léonine, c’est-à-dire une clause attribuant la quasi-totalité des profits ou des pertes à
+                certains associés.</p>
+            <p>Enfin, les associés bénéficient d’un droit patrimonial sur les actions dont ils sont propriétaires. Cela
+                signifie qu’ils ont le droit de céder leurs actions. Il peut néanmoins figurer dans les statuts une
+                clause d’inaliénabilité interdisant la cession des actions pendant une certaine durée (ne pouvant
+                excéder 10 ans), une clause d’agrément obligeant les actions à être soumises à l’approbation des
+                associés ou une clause de préemption accordant un droit de priorité su la cession d’actions.</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quelles sont les obligations des associés d’une SAS ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Les obligations sont fixées par les associés eux-mêmes dans les statuts, à la création de la SAS. Les
+                associés ne doivent pas porter atteinte aux intérêts de la société. La responsabilité des associés est
+                limitée à leurs apports envers la société, cela signifie que leurs patrimoines personnels est protégé
+                des créanciers professionnels. En cas d’infraction causée par la société, les associés ne peuvent être
+                tenus responsable pénalement.</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quelles sont les obligations des associés d’une SAS ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une SAS, comme pour toute société, commence par la rédaction des statuts. Il s’agit d’une
+                étape primordiale et obligatoire, IZY CONTRAT est là pour vous accompagner tout au long du processus et
+                vous proposer des conseils personnalisés</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quelles sont les obligations des associés d’une SAS ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Bien que la SAS soit un statut juridique assez souple, il est nécessaire de respecter et d’intégrer
+                certaines mentions obligatoires lors de la création des statuts :</p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">Forme de la société : SAS</li>
+                <li class="mt-2">Dénomination sociale</li>
+                <li class="mt-2">Siège social</li>
+                <li class="mt-2">Objet social</li>
+                <li class="mt-2">Durée de la société</li>
+                <li class="mt-2">Montant du capital</li>
+                <li class="mt-2">Nombre d’actions émises et leur forme</li>
+                <li class="mt-2">Apports en nature et avantages particuliers</li>
+                <li class="mt-2">Date de clôture de l’exercice social</li>
+                <li class="mt-2">Règles de répartition du résultat et de constitution des réserves
+                </li>
+                <li class="mt-2">Conditions relatives à la direction de la société et à la désignation du président de
+                    la SAS
+                </li>
+                <li class="mt-2">Décisions devant être prises en assemblée générale
+                </li>
+                <li class="mt-2">Conditions de fonctionnement des assemblées générales
+                </li>
+                <li class="mt-2">Conditions rattachées aux modifications de la composition du capital
+                </li>
+                <li class="mt-2">Identité des fondateurs
+                </li>
+                <li class="mt-2">Identité du ou des premiers commissaires aux comptes</li>
+            </ul>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Comment choisir la dénomination sociale de votre SAS ? </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Une SAS doit posséder obligatoirement une dénomination sociale, c’est ce qui permet de l’identifier en
+                tant que personne morale. Choisir le bon nom est crucial, c’est lui qui différencie votre société des
+                concurrents et qui apparaît sur tous vos documents officiels tels que le Kbis.</p>
+            <p>C’est aux associés que revient le droit de nommer la société. La dénomination sociale doit toujours être
+                accompagnée de la mention SAS, celle-ci peut la précéder ou la suivre.
+            </p>
+            <p>Ils existent des règles à respecter pour établir un nom légal. Le nom doit avant tout être licite,
+                c’est-à-dire qu’il ne doit ne pas comporter de mentions contraires à l’ordre public et aux bonnes mœurs.
+                Il ne peut comprendre des termes associés à une activité réglementée que la SAS n’exerce pas
+                officiellement par exemple banque, établissement de crédit ou avocat. Il existe d’autres termes
+                interdits par loi comme soldes, fondation, consulat et chambre de commerce.</p>
+            <p>Le nom peut comporter des caractères alphanumériques, et certains caractères spéciaux tels que l’arobase
+                (@), le slash (/), l’astérisque (*) et l’esperluette (&). En revanche, il ne peut pas comporter des
+                symboles monétaires (€, $, £, …).</p>
+            <p>Malgré ces quelques restrictions, il vous reste de multiples possibilités pour nommer votre société. Pour
+                faciliter votre visibilité et vous démarquer il est important de choisir un nom explicite et n’induisant
+                pas en erreur le public sur la nature de votre activité. La dénomination sociale peut comporter le nom
+                d’un ou de plusieurs associés, faire référence à votre clientèle cible ou à votre secteur d’activité, ou
+                encore faire référence au lieu d’implantation de votre société. Vous pouvez choisir un nom français ou
+                étranger, ou encore proposer un nom fantaisiste, l’important est que la dénomination sociale choisie
+                reflète votre société de la manière que vous souhaitez.</p>
+            <p>N'oubliez pas de vérifier sur le site de l’Infogreffe et de l’INPI que le nom que vous avez choisi est
+                disponible, il ne doit pas faire l’objet d’une protection sur la propriété intellectuelle.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Qu’est-ce que l’objet social d’une SAS ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>L’objet social est obligatoire pour toute société, quelle que soit sa forme juridique, et doit être
+                déterminé lors de la constitution de la société. Comme pour la dénomination sociale, l’objet social doit
+                être licite, il doit exprimer une activité autorisée par loi.</p>
+            <p> Le contenu de l’objet social conditionne l’étendu de l’activité de la société. Pour que la société
+                puisse exercée sereinement, l’objet social doit décrire précisément l’activité qu’elle va exercer, que
+                ce soit dans l’immédiat ou dans un futur proche, de manière à éviter des modifications coûteuses à
+                répétition. Cependant, l’objet social ne doit pas non plus être trop large ou ambigu au risque d’être
+                considéré comme une absence d’objet.
+            </p>
+            <div class="row justify-content-center mt-4">
+                <h2 class="text-center">Comment est constitué le capital social d’une SAS ?
+                </h2>
+            </div>
+            <div class="row mt-4"><p>Il est important de déterminer rigoureusement le montant du capital social afin que
+                    la société puisse assurer correctement le démarrage de son activité. Il n’existe pas de montant
+                    minimum ou maximum imposé, il revient aux associés de réaliser les apports nécessaires au bon
+                    fonctionnement de la société au regard de sa taille et de son secteur d’activité.
+                </p>
+                <p>Le capital social est constitué des différents apports réalisés par les associés au moment de la
+                    création
+                    de la société. Il existe trois types d’apports : en numéraire, en nature et en industrie. Les
+                    apports en
+                    numéraire sont une contribution monétaire des associés. Les apports en nature sont des biens
+                    corporels
+                    (matériel informatique, bâtiment) ou incorporels (brevet, marque). Les apports en industrie
+                    représentent
+                    la mise à disposition du savoir-faire et des compétences d’un associé au service de la société.
+                    Seuls
+                    les apports en numéraire et les apports en nature peuvent entrer dans la composition du capital
+                    social,
+                    les apports en industrie quant à eux n’entrent pas dans sa composition, mais ouvre tout de même
+                    droit à
+                    l’attribution d’actions.
+                </p>
+                <p>En plus de convenir du montant du capital, les associés doivent décider si celui-ci est fixe ou
+                    variable. S’il est fait le choix d’un capital fixe, alors le montant de celui-ci doit figurer dans
+                    une clause spécifique des statuts, et toute modification du montant capital doit être décidée par
+                    les associés. Le capital variable, quant à lui, permet l’augmentation ou la diminution du capital
+                    sans avoir besoin de modifier les statuts.</p>
+                <p>La détermination du capital social dépend donc de nombreux facteurs. Il doit être suffisant pour
+                    assurer les premières dépenses de la société telles que l’achat de matériels, le paiement des
+                    charges fixes, les salaires, et les investissements. Il convient, pour ne pas commettre une erreur
+                    dommageable à votre société, de faire appel à un professionnel qui déterminera <span
+                            class="text-secondary">IZY</span>ment votre besoin.
+                </p>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <h2 class="text-center">Quel dirigeant pour la SAS ?</h2>
+            </div>
+            <div class="row mt-4">
+                <p> Même si la SAS est une forme juridique plutôt libre comparée à d’autres sociétés, elle doit
+                    respecter l’obligation de nommer un président pour la représenter légalement et assurer sa gestion
+                    quotidienne.
+                </p>
+                <p>En plus du président, il existe d’autres organes de direction facultatif pour assister le président
+                    dans ses tâches. Il est possible de nommer un directeur général et des directeurs généraux délégués,
+                    ou mettre en place un comité de direction ou un conseil d’administration.</p>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <h2 class="text-center">Qui est le président d’une SAS ?</h2>
+            </div>
+            <div class="row mt-4">
+                <p>Le président d’une SAS est un mandataire social qui agit et prend des décisions au nom de la société
+                    qu’il représente. Il peut d’agir d’une personne physique ou d’une personne morale, associé ou non de
+                    la SAS. Il ne peut y avoir qu’un seul président, le premier est nommé dans les statuts ainsi que la
+                    durée de son mandat, à défaut de précision il est nommé pour une durée illimitée. Les modalités
+                    d’élection des présidents suivants doivent également figurer dans les statuts.
+                </p>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <h2 class="text-center">Quels pouvoirs possèdent le président d’une SAS ?
+                </h2>
+            </div>
+            <div class="row mt-4">
+                <p>Sauf clause contraire dans les statuts, le président possède les pleins pouvoirs pour gérer la
+                    société et agir en son nom à l’égard des tiers. Néanmoins, les pouvoirs du président sont limités
+                    par l’objet social de la SAS. Il peut signer des contrats au nom de la société, embaucher et
+                    licencier du personnel, ou encore vendre des biens de la société.
+                </p>
+                <p>Cependant, le président d’une SAS a aussi certaines interdictions, il ne peut contracter des emprunts
+                    et de se faire accorder un découvert par la société.</p>
+                <p>De plus, certaines décisions requièrent le consentement des associés et doivent donc être prises
+                    collectivement. La loi exige que les décisions concernant un changement du montant du capital, qu’il
+                    s’agisse d’une augmentation, d’une réduction ou d’un amortissement, nécessitent l’approbation des
+                    associés. De même, les décisions relatives à une fusion, une scission, une dissolution ou une
+                    transformation quelconque de la société, aux comptes annuels, aux bénéfices et à la nomination d’un
+                    commissaire aux comptes doivent être approuvées par les associés. Il est possible de planifier dans
+                    les statuts d’autres décisions nécessitant un accord collectif.
+                </p>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <h2 class="text-center">De quelle manière la responsabilité du dirigeant d’une SAS peut-elle être engagée ?</h2>
+            </div>
+            <div class="row mt-4">
+                <p> Du fait de leur fonction, le président, ou les autres organes de direction, que ce soit le directeur
+                    général ou les directeurs généraux délégués, engagent leur responsabilité de trois manières.
+                </p>
+                <p>Premièrement, la responsabilité civile peut être engagée pour un préjudice causé à la société, à un
+                    associé à titre individuel ou vis-à-vis d’un tiers. La faute peut être un manquement aux
+                    dispositions légales et réglementaires des SAS, une violation des statuts de la société ou une faute
+                    de gestion.
+                </p>
+                <p> Deuxièmement, le dirigeant engage sa responsabilité pénale. Il peut être condamné pour une faute
+                    ayant causé préjudice à la société ou à un tiers, si celle-ci a été commise lors de l’exercice de
+                    ses fonctions.
+                </p>
+                <p> Troisièmement, le dirigeant a une responsabilité fiscale à l’égard de la SAS. Il peut être déclaré
+                    solidairement responsable du paiement des dettes en cas de manœuvre frauduleuse de sa part, ou
+                    d’inobservation grave et répétée des obligations fiscales ayant eu des conséquences négatives pour
+                    la société.</p>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <h2 class="text-center">Quel est le régime fiscal d’une SAS ?</h2>
+            </div>
+            <div class="row mt-4 mb-4">
+                <p> Le régime fiscal normal d’une SAS est l’impôt sur les sociétés (IS) pour les bénéfices qu’elle
+                    réalise. C’est la société qui est redevable de l’impôt et non les associés. En fonction des
+                    bénéfices réalisés le taux d’imposition diffère, il est de :
+                </p>
+                <div class="row justify-content-center mt-4 mb-4">
+                    <ul class="col-9">
+                        <li class="mt-2">15 % pour les bénéfices compris entre 0 et 38 120 €</li>
+                        <li class="mt-2">28 % pour les bénéfices supérieurs à 38 120 €</li>
+                    </ul>
+                </div>
+                    <p>Il est possible pour une SAS de choisir l’impôt sur le revenu (IR) pour 5 exercices, sans
+                        renouvellement possible, sous certaines conditions :</p>
+
+                    <div class="row justify-content-center mt-4 mb-4">
+                        <ul class="col-9">
+                            <li class="mt-4">La SAS exerce à titre principal une activité industrielle, commerciale, artisanale,
+                                agricole ou libérale (excepté la gestion de son propre patrimoine mobilier ou immobilier) ;
+                            </li>
+                            <li class="mt-2">Elle n’est pas cotée en bourse ;</li>
+                            <li class="mt-2">À moins de 5 d’existence à la date du choix de l’option ;</li>
+                            <li class="mt-2">À un effectif inférieur à 50 salariés ;</li>
+                            <li class="mt-2">Réalise un chiffre d’affaires annuel ou un total de bilan inférieur à 10 millions
+                                d’euros ;</li>
+                            <li class="mt-2">Et les droits de vote sont détenus, à hauteur de 50 % au moins par une ou des
+                                personnes physiques, et à hauteur de 34 % au moins par une ou plusieurs personnes ayant la
+                                qualité de dirigeants.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <p>Vous avez trouvé une réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre
+                    projet en quelques clics !
+                </p>
+                <p>Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span
+                                class="text-secondary">IZY </span>CONTRAT </span> est là pour vous conseiller.
+                </p>
+            </div>
+        </div>
+{% endblock %}
+

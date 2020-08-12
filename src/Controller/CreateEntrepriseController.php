@@ -25,6 +25,15 @@ use App\Form\AssociateCompany3Type;
 use App\Repository\CompaniesTypesRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Security;
+
+// Include Dompdf required namespaces
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+//conversion numbertoletter
+// use App\Services\NumberToLetter;
+use NumberToWords\NumberToWords;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -33,6 +42,8 @@ class CreateEntrepriseController extends AbstractController
      */
     public function index()
     {
+        //  $user = $this->getUser();
+        // dd($user);
         return $this->render('create_entreprise/create_entreprise.html.twig', [
             'controller_name' => 'CreateEntrepriseController',
             'controller_firstname' => 'M. xxxxxx',
@@ -45,6 +56,40 @@ class CreateEntrepriseController extends AbstractController
     public function comparatifStatut()
     {
         return $this->render('create_entreprise/comparatif_statut.html.twig');
+    }
+    
+     /**
+     * @Route("/create/save", name="save_status")
+     */
+    public function saveStatut()
+    {
+        
+         // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('create_entreprise/sarl/SARL_status.html.twig', [
+            'title' => "Recu Creation de SARL"
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+        // return $this->render('create_entreprise/save_statut.html.twig');
     }
     
     /**
@@ -130,19 +175,15 @@ class CreateEntrepriseController extends AbstractController
              if($associateCompany->getName() !== null){
                  $associateCompany->setPerson($person);
                  $em->persist($associateCompany);
-                //  dd($associateCompany);
              }
              if($associateCompany2->getName() !== null){
                  $associateCompany2->setPerson($person);
                  $em->persist($associateCompany2);
-                //  dd($associateCompany);
              }
              if($associateCompany3->getName() !== null){
                  $associateCompany3->setPerson($person);
                  $em->persist($associateCompany3);
-                //  dd($associateCompany);
              }
-            //  dd($associateCompany, $associateCompany2, $associateCompany3, $request);
             
             // persistance separer des associes
             if($associe1->getFirstName() !== null || $associe1->getLastName() !== null){
@@ -155,23 +196,14 @@ class CreateEntrepriseController extends AbstractController
                 // dd($associate1CompanyInfo, $associe1);
             }
             if($associe2->getFirstName() !== null || $associe2->getLastName() !== null){
-                // $associate2CompanyInfo->setPerson($associe2);
-                // $em->persist($associate2CompanyInfo);
-                // dd($associate2CompanyInfo, $associe2);
                 $person->addMyAssociate($associe2);
                 $em->persist($associe2);
             }
             if($associe3->getFirstName() !== null || $associe3->getLastName() !== null){
-                // $associate3CompanyInfo->setPerson($associe3);
-                // $em->persist($associate3CompanyInfo);
-                // dd($associate3CompanyInfo, $associe3);
                 $person->addMyAssociate($associe3);
                 $em->persist($associe3);
             }
             if($associe4->getFirstName() !== null || $associe4->getLastName() !== null){
-                // $associate4CompanyInfo->setPerson($associe4);
-                // $em->persist($associate4CompanyInfo);
-                // dd($associate4CompanyInfo, $associe4);
                 $person->addMyAssociate($associe4);
                 $em->persist($associe4);
             }
@@ -182,7 +214,7 @@ class CreateEntrepriseController extends AbstractController
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
-                // dd( $person, $user, $company, $request, $associateCompany);
+                // dd( $person, $user, $company, $request, $associateCompany, $associateCompany2);
             //   $person->setPhoneNumber($formCompany->get('phoneNumber')->getData());
 
             $em->persist($user);
@@ -211,7 +243,8 @@ class CreateEntrepriseController extends AbstractController
             'formAssociateCompany' => $formAssociateCompany->createView(),
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
-            'SARL' => "SARL",
+            
+            'typeStatut' => "SARL",
             // 'EURL' => "EURL"
             
         ]);
@@ -244,26 +277,43 @@ class CreateEntrepriseController extends AbstractController
      /**
      * @Route("/create/entreprise/sarl/status", name="create_sarl_status") 
      */
-     public function createSarlStatus (Request $request, EntityManagerInterface $em)
+     public function createSarlStatus (Request $request, EntityManagerInterface $em, Security $security)
      {
-         
+        // include_once('../src/Services/testNumToLet.php');
+        // dd(NumberToLetterInFrench(3400000));
+        // dd($security);
+        $numberToWords = new NumberToWords();
+         $numberTransformer = $numberToWords->getNumberTransformer('fr');
+                //  $ex = $numberTransformer->toWords(10200400);
+                 // build a new currency transformer using the RFC 3066 language identifier
+                // $currencyTransformer = $numberToWords->getCurrencyTransformer('fr');
+                // $ex = $currencyTransformer->toWords(5099.3, 'EUR');
+                // dd($ex);
+        
          return $this->render('create_entreprise/sarl/SARL_status.html.twig', [
-            
+            'dateCreation' => date('d/m/Y'),
+            // 'capitalSocial' => NumberToLetterInFrench(3500),
+            'capitalSocial' => $numberTransformer->toWords(3500),
+            'capitalNum' => 3500,
         ]);
          
      }
     
     
+    
+    
     /**
      * @Route("/create/entreprise/eurl", name="create_eurl") 
      */
-     public function createEurl(Request $request)
+     public function createEurl(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
      {
          
         
          $company = new Company();
          $person = new Person();
          $user = new User();
+         
+         $activitySector = new ActivitySector();
     
          $formCompany = $this->createForm(CompanyType::class, $company);
          $formPerson = $this->createForm(ClientSarlType::class, $person);
@@ -273,55 +323,185 @@ class CreateEntrepriseController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
             
-        dump($company, $person, $user);
-        if ($formCompany->isSubmitted() ) {
-        dd($formCompany);
-            // $person->setAddress($formCompany->get('address')->getData());
-            // $person->setCountry($formCompany->get('country')->getData());
-            // $person->setFirstName($formCompany->get('firstName')->getData());
-            // $person->setLastName($formCompany->get('lastName')->getData());
-            // $person->setPhoneNumber($formCompany->get('phoneNumber')->getData());
-            // $person->setSpecialization($formCompany->get('specialization')->getData());
-            // $user->setEmail($request->request->get('registration_user')['user']['email']);
-            // $user->setPassword(
-            //     $passwordEncoder->encodePassword(
-            //         $user,
-            //         $request->request->all()['registration_user']['user']['password']
-            //     )
-            // );
-            $user->setIsVerified(false);
-            $user->setRoles(['ROLE_CLIENT']);
-            // $entityManager = $this->getDoctrine()->getManager();
+        // dump($company, $person, $user);
+        
+        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+            
+           if ($request->request->all()['company']['activitySector'] === "14")
+            {
+                $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
+                
+                $em->persist($activitySector);
+            }
+             $company->setIsCreated(false);
+             $company->setCompanyType($companyTypeRecup->findOneByName("EURL"));
+             
+             $user->setIsVerified(false);
+             $user->setRoles(['ROLE_CLIENT']);
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+              
+             $person->setUser($user);
+            
+            $em->persist($company);
+            $em->persist($user);
+            $em->persist($person);
+            
+        // dd($formCompany, $company, $user, $person);
+            // dd($this->getUser(), $user->getEmail() );
+            $em->flush();
+            
+            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            return $this->redirectToRoute('create_sarl_prestation', [
+                'user' => $user->getEmail(),
+                ]);
 
-            // $entityManager->persist($user);
-            // $entityManager->persist($person);
 
-            // $entityManager->flush();
         }        
     
-        return $this->render('create_entreprise/EURL_form.html.twig', [
+        return $this->render('create_entreprise/sarl/SARL_form.html.twig', [
              'formEurl' => $formCompany->createView(),
-        ]);
-    }
-    
-    /**
-     * @Route("/create/entreprise/sasu", name="create_sasu") 
-     */
-     public function createSasu()
-     {
-        return $this->render('create_entreprise/SASU_form.html.twig', [
-            
+             'formEurlPerson' => $formPerson->createView(),
+             'formEurlUser' => $formUser->createView(),
+             'typeStatut' => "EURL",
         ]);
     }
     
     
     /**
-     * @Route("/create/entreprise/micro-entreprise", name="create_m-e") 
+     * @Route("/create/entreprise/micro-entreprise", name="create_me") 
      */
-     public function createMicroEntreprise()
+     public function createMicroEntreprise(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
      {
-        return $this->render('create_entreprise/M-E_form.html.twig', [
+         $company = new Company();
+         $person = new Person();
+         $user = new User();
+         
+         $activitySector = new ActivitySector();
+    
+         $formCompany = $this->createForm(CompanyType::class, $company);
+         $formPerson = $this->createForm(ClientSarlType::class, $person);
+         $formUser = $this->createForm(UserSarlType::class, $user);
+         
+         $formCompany->handleRequest($request);
+         $formPerson->handleRequest($request);
+         $formUser->handleRequest($request);
             
+        // dump($company, $person, $user);
+        
+        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+            
+           if ($request->request->all()['company']['activitySector'] === "14")
+            {
+                $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
+                
+                $em->persist($activitySector);
+            }
+             $company->setIsCreated(false);
+             $company->setCompanyType($companyTypeRecup->findOneByName("MICRO-ENTREPRISE"));
+             
+             $user->setIsVerified(false);
+             $user->setRoles(['ROLE_CLIENT']);
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+              
+             $person->setUser($user);
+            
+            $em->persist($company);
+            $em->persist($user);
+            $em->persist($person);
+            
+            $em->flush();
+            // dd($person, $company, $user);
+            
+            return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+                'company' => $company,
+                'person' => $person,
+                'user' => $user,
+                'typeStatut' => 'ME',
+                ]);
+
+        }        
+        
+        return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
+            'formMe' => $formCompany->createView(),
+             'formMePerson' => $formPerson->createView(),
+             'formMeUser' => $formUser->createView(),
+           'typeStatut' => 'ME' 
         ]);
     }
+    
+    /**
+     * @Route("/create/entreprise/ei", name="create_ei") 
+     */
+     public function createEI(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
+     {
+         
+                  $company = new Company();
+         $person = new Person();
+         $user = new User();
+         
+         $activitySector = new ActivitySector();
+    
+         $formCompany = $this->createForm(CompanyType::class, $company);
+         $formPerson = $this->createForm(ClientSarlType::class, $person);
+         $formUser = $this->createForm(UserSarlType::class, $user);
+         
+         $formCompany->handleRequest($request);
+         $formPerson->handleRequest($request);
+         $formUser->handleRequest($request);
+            
+        // dump($company, $person, $user);
+        
+        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+            
+           if ($request->request->all()['company']['activitySector'] === "14")
+            {
+                $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
+                
+                $em->persist($activitySector);
+            }
+             $company->setIsCreated(false);
+             $company->setCompanyType($companyTypeRecup->findOneByName("IE"));
+             
+             $user->setIsVerified(false);
+             $user->setRoles(['ROLE_CLIENT']);
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+              
+             $person->setUser($user);
+            
+            $em->persist($company);
+            $em->persist($user);
+            $em->persist($person);
+            
+            $em->flush();
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+                'company' => $company,
+                'person' => $person,
+                'user' => $user,
+                'typeStatut' => 'Ei',
+                ]);
+
+        }        
+        
+        return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
+            'formEi' => $formCompany->createView(),
+             'formEiPerson' => $formPerson->createView(),
+             'formEiUser' => $formUser->createView(),
+         'typeStatut' => 'EI',
+        ]);
+    }
+    
+    /**
+     * @Route("/create/entreprise/informations", name="create_me_ei_informations") 
+     */
+     public function MeEiInformations(Request $request, EntityManagerInterface $em)
+     {
+        //  dd($request);
+        return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+         
+        ]);
+     }
 }

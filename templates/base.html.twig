@@ -21,37 +21,30 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
-
 </head>
 <body>
-    <style>
+<style>
     /*@import url('https://fonts.googleapis.com/css?family=Roboto:300');*/
-           .espace { padding-top: 6em; margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
-            .esp { margin-right: 1em;}
-            .backgroundtitre { background:  indigo; color: white}
-
-        * {
-            margin: 0: padding: 0;
-        }
-
-
-    </style>
+    .espace { padding-top: 6em; margin: 1em auto; max-width: 1000px; width: 95%; font: 18px/1.5 sans-serif; }
+    .esp { margin-right: 1em;}
+    .backgroundtitre { background:  indigo; color: white}
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
 {% block navbar %}{% include '_navbar.html.twig' %}{% endblock %}
-
-
 {% block dashboard %}{% endblock %}
-
 {% block body %}{% endblock %}
-
 {% block footer %}{% endblock %}
-
 {% block javascripts %}
-    {{ encore_entry_script_tags('login') }}
     {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('login') }}
 {% endblock %}
-
 {{ render(controller('App\\Controller\\SecurityController::login', {  } )) }}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js"></script>
+{#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>#}
+{#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>#}
+{#<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
 </body>
 </html>

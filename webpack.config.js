@@ -23,6 +23,8 @@ Encore
     .addEntry('home', './assets/js/home.js')
     .addEntry('login', './assets/js/login.js')
     .addEntry('fields', './assets/js/fields.js')
+    .addEntry('howitwork', './assets/js/howitwork.js')
+    .addEntry('createcompany', './assets/js/createcompany.js')
 
 
     .addStyleEntry('style_dashboard', './assets/scss/dashboard.scss')
@@ -34,6 +36,13 @@ Encore
     .addStyleEntry('register_user', './assets/scss/registerUser.scss')
     .addStyleEntry('editor', './assets/scss/editor.scss')
     .addStyleEntry('document', './assets/scss/document.scss')
+    .addStyleEntry('comparatif', './assets/scss/comparatif.scss')
+    .addStyleEntry('technical_sheet', './assets/scss/technical_sheet.scss')
+    .addStyleEntry('about', './assets/scss/about.scss')
+    .addStyleEntry('tab1', './assets/scss/tab1.scss')
+
+
+
 
 
     .copyFiles([
