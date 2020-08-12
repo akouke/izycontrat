@@ -1,4 +1,10 @@
 {% extends '_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('comparatif') }}
+{% endblock %}
+
+
 {% block title %}Izy Contrat - Comparatif{% endblock %}
 
 {% block body %}
@@ -9,22 +15,23 @@
             car vous ne savez pas lequel correspondrait le mieux à vos besoins ?<br>
             Voici un tableau qui pourra vous aider à faire votre choix. Il présente les différents
             avantages et inconvénients des principaux statuts juridiques en France.</p>
-        <table class="table table-responsive table-hover mt-5 text-center">
-            <thead>
+        <div class="table-responsive">
+        <table class="table table-hover mt-5 text-center table-fixed">
+            <thead class="top-sticky">
             <tr>
-                <th>
-                    <button class="btn btn-outline-primary btn-mini m-1 mb-3" data-toggle="collapse"
+                <th class="align-middle">
+                    <button class="btn btn-outline-primary" data-toggle="collapse"
                             data-target=".multi-collapse" aria-expanded="false">+ de
                         détails
                     </button>
                 </th>
-                <th class=" bg-secondary">SAS</th>
-                <th class=" bg-secondary">SASU</th>
-                <th class=" bg-secondary">EURL</th>
-                <th class=" bg-secondary">SARL</th>
-                <th class=" bg-secondary">Micro-entreprise</th>
-                <th class=" bg-secondary">EI</th>
-                <th class=" bg-secondary">SCI</th>
+                <th class="align-middle bg-secondary">SAS</th>
+                <th class="align-middle bg-secondary">SASU</th>
+                <th class="align-middle bg-secondary">EURL</th>
+                <th class="align-middle bg-secondary">SARL</th>
+                <th class="align-middle bg-secondary">Micro-entreprise</th>
+                <th class="align-middle bg-secondary">EI</th>
+                <th class="align-middle bg-secondary">SCI</th>
             </tr>
             </thead>
             <tbody>
@@ -762,9 +769,6 @@
             </tr>
             </tbody>
         </table>
+        </div>
     </section>
-{% endblock %}
-{% block stylesheets %}
-    {{ parent () }}
-    {# {{ encore_entry_link_tags('comparatif') }} #}
 {% endblock %}
