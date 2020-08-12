@@ -6,6 +6,8 @@
 parameters:
     document_directory: '%kernel.project_dir%/public/uploads/documents'
     locale: 'fr'
+    email_from: '%env(MAILER_FROM)%'
+    
 
 services:
     # default configuration for services in *this* file
@@ -32,3 +34,6 @@ services:
     
     'App\Event\UserRegisterEvent': ~
     
+    App\Mailer\Mailer:
+       arguments:
+           $emailFrom: '%email_from%'

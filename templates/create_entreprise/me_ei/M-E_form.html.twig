@@ -61,7 +61,12 @@
                 <a data-toggle="tab" >4 - Société créée !</a>
             </ul>
         </div>
-  
+    {% if emailUsed == true %}
+      <div class="alert alert-danger">
+          Cet adresse Email: <b>{{ user.email }}</b> existe déja!
+      </div>
+    {% endif%}
+    
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active show" id="SARL">
     <div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">
@@ -330,6 +335,11 @@
                     {% else %}
                        {{ form_widget(formEiUser.email) }}
                     {% endif %}
+                    {% if emailUsed == true %}
+                      <div class="badge badge-danger">
+                         Erreur: Cet adresse Email: {{ user.email }} existe déja!
+                      </div>
+                    {% endif%}
                  </div>
                 {#<p>#}
                 {# <small></small>#}
