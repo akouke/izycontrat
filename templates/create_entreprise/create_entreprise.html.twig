@@ -1,7 +1,7 @@
- {% extends '_layout.html.twig' %}
+{% extends '_layout.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('tab1') }}
+    {{ encore_entry_link_tags('create_entreprise') }}
 {% endblock %}
 
 {% block title %}Je cree mon entreprise{% endblock %}
@@ -10,33 +10,20 @@
     <section class="page-content container-fluid col-12 col-lg-10">
 
         <h1 class="text-center"> Créez votre entreprise en quelques clics </h1>
-        <div class="text-center my-5 mx-auto w-75">
-            <div class='tabbed round text-center'>
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a  data-toggle="tab" href="#SAS">SAS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  data-toggle="tab" href="#SASU">SASU</a>
-                    </li>
-                    <li class="nav-item">
-                        <a data-toggle="tab" href="#SARL">SARL</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  data-toggle="tab" href="#EURL">EURL</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  data-toggle="tab" href="#SCI">SCI</a>
-                    </li>
-                    <li class="nav-item">
-                        <a data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  data-toggle="tab" href="#EI">EI</a>
-                    </li>
-                </ul>
+        <div class="text-center my-5 mx-auto">
+            <div class="text-center">
+                <nav class="nav nav-pills tabbed round">
+                    <a class="nav-link-create active font-weight-bold" data-toggle="tab" href="#SAS">SAS</a>
+                    <a class="font-weight-bold nav-link-create" data-toggle="tab" href="#SASU">SASU</a>
+                    <a class="font-weight-bold nav-link-create" data-toggle="tab" href="#SARL">SARL</a>
+                    <a class="font-weight-bold nav-link-create" data-toggle="tab" href="#EURL">EURL</a>
+                    <a class="font-weight-bold nav-link-create" data-toggle="tab" href="#SCI">SCI</a>
+                    <a class="font-weight-bold nav-link-create" data-toggle="tab" href="#MICRO-ENTREPRISE">MICRO-ENTREPRISE</a>
+                    <a class="font-weight-bold nav-link-create" data-toggle="tab" href="#EI">EI</a>
+                </nav>
             </div>
-            <div id="myTabContent" class="tab-content shadow-effect px-2 pt-2">
+
+            <div id="myTabContent" class="tab-content shadow-effect">
                 <div class="tab-pane fade pt-0" id="SARL">
                     <div class="card bg-white mb-1">
                         <div class="card-header text-secondary text-center">STATUT SARL</div>
