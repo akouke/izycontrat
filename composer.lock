@@ -4507,8 +4507,6 @@
             ],
             "description": "Symfony Mailer Component",
             "homepage": "https://symfony.com",
-<<<<<<< HEAD
-=======
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4523,7 +4521,6 @@
                     "type": "tidelift"
                 }
             ],
->>>>>>> bf8f32f3480ec8231a872b0e07487f3a3872f337
             "time": "2020-07-15T06:28:59+00:00"
         },
         {
