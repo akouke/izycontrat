@@ -38,9 +38,9 @@ Encore
     .addStyleEntry('document', './assets/scss/document.scss')
     .addStyleEntry('comparatif', './assets/scss/comparatif.scss')
     .addStyleEntry('technical_sheet', './assets/scss/technical_sheet.scss')
-
     .addStyleEntry('about', './assets/scss/about.scss')
     .addStyleEntry('tab1', './assets/scss/tab1.scss')
+
 
 
 

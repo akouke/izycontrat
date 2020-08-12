@@ -81,4 +81,25 @@ class DashboardController extends AbstractController
     {
         return $this->render('dashboard/Admin/show.html.twig', ['client' => $client]);
     }
+
+    /**
+     * @Route("/admin/avocats", name="admin_lawyers")
+     */
+    public function adminLawyerList()
+    {
+        $lawyers = $this->getDoctrine()
+            ->getRepository(Person::class)
+            ->findBy(['hasCompany' => true]);
+        return $this->render('dashboard/Admin/lawyer.html.twig', ['lawyers' => $lawyers]);
+    }
+
+    /**
+     * @Route("/admin/avocats/{id}", name="admin_lawyers_show")
+     * @param Person $lawyer
+     * @return Response
+     */
+    public function adminLawyerShow(Person $lawyer)
+    {
+        return $this->render('dashboard/Admin/show.html.twig', ['lawyer' => $lawyer]);
+    }
 }
