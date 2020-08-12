@@ -496,28 +496,18 @@ input {
         </div>
     </div>
     <div class="form-container">
-        <div class="field-container">
-            <label for="name">Nom Complet</label>
-            <input id="name" maxlength="20" type="text">
-        </div>
-        <div class="field-container">
-            <label for="cardnumber">Numero Carte</label><span id="generatecard">Generer un Exemple</span>
-            <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
-            <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
-
-            </svg>
-        </div>
-        <div class="field-container">
-            <label for="expirationdate">Expiration (mm/yy)</label>
-            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
-        </div>
-        <div class="field-container">
-            <label for="securitycode">Security Code</label>
-            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
-        </div>
+        <form action="check" method="post" id="payment-form">
+            <div class="field-container">
+                <label for="card-element">
+                    Credit or debit card
+                </label>
+                <div style="width: 30em" id="card-element">
+                </div>
+                <div id="card-errors" role="alert"></div>
+            </div>
+            <button class="btn btn-success">Submit Payment</button>
+        </form>
     </div>
-   <a class="btn btn-success" href="{{ path('create_sarl_status')}}">Valider Paiement</a>  
     <script type="text/javascript">
         
         window.onload = function () {
@@ -803,4 +793,59 @@ securitycode.addEventListener('focus', function () {
     </script>
 
 {% block footer %}{% endblock %}
+    {% block javascripts %}
+        <script>
+            var stripe = Stripe('{{ stripe_public_key }}');
+            var elements = stripe.elements();
+            // Custom styling can be passed to options when creating an Element.
+            var style = {
+                base: {
+                    // Add your base input styles here. For example:
+                    fontSize: '16px',
+                    color: '#32325d',
+                },
+            };
+
+            // Create an instance of the card Element.
+            var card = elements.create('card', {style: style});
+
+            // Add an instance of the card Element into the `card-element` <div>.
+            card.mount('#card-element');
+
+            // Create a token or display an error when the form is submitted.
+            var form = document.getElementById('payment-form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                stripe.createToken(card).then(function (result) {
+                    if (result.error) {
+                        // Inform the customer that there was an error.
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                    } else {
+                        // Send the token to your server.
+                        stripeTokenHandler(result.token);
+                    }
+                });
+            });
+
+            function stripeTokenHandler(token) {
+                // Insert the token ID into the form so it gets submitted to the server
+                var form = document.getElementById('payment-form');
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', token.id);
+                form.appendChild(hiddenInput);
+                var amount = document.createElement('input');
+                amount.setAttribute('type', 'hidden');
+                amount.setAttribute('name', 'amount');
+                amount.setAttribute('value', {{ amount }});
+                form.appendChild(amount);
+
+                // Submit the form
+                form.submit();
+            }
+        </script>
+    {% endblock %}
 {% endblock %}
