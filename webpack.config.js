@@ -41,6 +41,7 @@ Encore
     .addStyleEntry('technical_sheet', './assets/scss/technical_sheet.scss')
     .addStyleEntry('about', './assets/scss/about.scss')
     .addStyleEntry('tab1', './assets/scss/tab1.scss')
+    .addStyleEntry('create_entreprise', './assets/scss/create_entreprise.scss')
 
 
 

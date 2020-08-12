@@ -6,7 +6,8 @@
 {% block stylesheets %}
     {{ parent () }}
     {{ encore_entry_link_tags('home') }}
-    {{ encore_entry_link_tags('fichesci') }}
+    {#{{ encore_entry_link_tags('fichesci') }}#}
+    {{ encore_entry_link_tags('technical_sheet') }}
 {% endblock %}
 
 {% block body %}
@@ -15,7 +16,7 @@
         
         <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
             <p>CRÉER UNE SCI</p>
-            <a href="{{ path('create_entreprise') }}" class="btn btn-secondary btnHome">Je crée ma SAS !</a>
+            <a href="{{ path('create_sci') }}" class="btn btn-secondary btnHome">Je crée ma SCI !</a>
         </div>
     </section>
     <div class="container text-justify p-4">
