@@ -592,7 +592,7 @@ class CreateEntrepriseController extends AbstractController
             }
             
              $company->setIsCreated(false);
-             $company->setCompanyType($companyTypeRecup->findOneByName("IE"));
+             $company->setCompanyType($companyTypeRecup->findOneByName("EI"));
              
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);

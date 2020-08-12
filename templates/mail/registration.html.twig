@@ -1,1 +1,9 @@
 <h3>Hi {{ user.getFirstName() }}</h3>
+
+Merci confirmer en cliquant sur ce  
+        <a href="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}"> lien</a>
+        
+        Pour vous connecter cliquer 
+        
+            <a href="{{ url('app_login') }}"> ICI</a>
+        </p>
