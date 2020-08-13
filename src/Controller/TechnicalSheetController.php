@@ -58,4 +58,11 @@ class TechnicalSheetController extends AbstractController
         return $this->render('technical_sheet/individual_company.html.twig');
     }
 
+    /**
+     * @Route("sarl", name="_sarl")
+     */
+    public function sarl()
+    {
+        return $this->render('technical_sheet/sarl.html.twig');
+    }
 }
