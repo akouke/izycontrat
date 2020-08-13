@@ -265,8 +265,8 @@ class CreateEntrepriseController extends AbstractController
      {
         //  dd($this->getUser()->getEmail());
          return $this->render('create_entreprise/sarl/SARL_form_prestation.html.twig', [
-            
-        ]);
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+         ]);
          
      }
 
