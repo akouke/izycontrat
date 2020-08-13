@@ -75,7 +75,6 @@ class SaveStatusController extends AbstractController
             $country = $recupPerson->getCountry();
             $capital = $recupPerson->getCapitalAmountAdding();
             $married = $recupPerson->getMarried();
-            // dd($recupPerson->getMarried());
             if($married === true){
                 $married = 'Marié(e)';
             }
@@ -179,7 +178,7 @@ class SaveStatusController extends AbstractController
             $socialObject = $recupCompany->getSocialObject();
             
             $recupeCompanyAssocie = $detailCompanyAssociate->findByPerson($recupPerson->getId());
-            // dd($recupeCompanyAssocie);
+
             $iCompany = 0;
             if($recupeCompanyAssocie)
             {
