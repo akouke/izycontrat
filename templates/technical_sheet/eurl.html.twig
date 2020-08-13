@@ -1,9 +1,10 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Fiche pratique EURL{% endblock %}
+{% block title %}Izy pratique EURL{% endblock %}
 
 {% block stylesheets %}
     {{ parent () }}
+    {{ encore_entry_link_tags('home') }}
     {{ encore_entry_link_tags('technical_sheet') }}
 {% endblock %}
 

@@ -1,0 +1,276 @@
+{% extends '_layout.html.twig' %}
+
+
+{% block title %}Izy pratique MICRO ENTREPRISE{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('home') }}
+    {# {{ encore_entry_link_tags('fichesci') }} #}
+    {{ encore_entry_link_tags('technical_sheet') }}
+{% endblock %}
+
+{% block body %}
+    <section class="homeTop d-flex justify-content-center">
+        <img class="homePicture" src="/images/micro_entreprise.png" alt="image principale">
+
+        <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
+            <p>CRÉER UNE MICRO ENTREPRISE</p>
+            <a href="{{ path('create_sci') }}" class="btn btn-secondary btnHome w-50">Je crée ma MICRO ENTREPRISE !</a>
+        </div>
+    </section>
+    <div class="container text-justify p-4">
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Qu’est-ce qu’une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Une micro-entreprise est un régime ultra-simplifié, accessible seulement aux entrepreneurs individuels
+                (elle a remplacé l’appellation du statut d’auto-entrepreneur). La création d’une micro-entreprise est
+                soumise au respect de certains seuils de chiffre d’affaires. En 2020, celui-ci est de :
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2"> 176 200 € pour les micro-entreprises ayant une activité de vente de biens, hôtels,
+                    etc.
+                </li>
+                <li class="mt-2">70 000 € pour les micro-entreprises exerçant une profession libérale (relevant des
+                    Bénéfices Non Commerciaux) et fournissant des prestations de service (relevant des Bénéfices
+                    Industriels et Commerciaux).
+                </li>
+            </ul>
+        </div>
+        <div class="row mt-4"><p>La SCI a une personnalité morale et bénéficie d’un patrimoine distinct de celui de ses
+                créateurs (ou
+                associés).
+            </p>
+            <p>Au-delà de ces seuils, on bascule vers l’entreprise individuelle.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <h2 class="text-center">Qui peut créer une micro-entreprise ?</h2>
+        </div>
+        <div>
+            <p>La micro-entreprise est accessible exclusivement aux personnes physiques, exerçant une activité
+                d’entrepreneur individuel. La micro-entreprise n’est pas ouverte aux personnes morales.
+            </p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quels sont les pouvoirs du micro-entrepreneur ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Le micro-entrepreneur est autonome et dispose de tous les pouvoirs pour gérer son entreprise. Il peut par
+                exemple fixer sa rémunération en fonction des bénéfices réalisés.
+            </p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Comment devenir micro-entrepreneur ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une micro-entreprise nécessite la déclaration de son activité et le choix d’un Centre de
+                Formalités des Entreprises (CFE), celui-ci diffère en fonction de l’activité exercée et de la
+                domiciliation de l’entreprise. Il est également nécessaire de s’immatriculer au Registre du commerce et
+                des sociétés (RCS) si vous êtes commerçant, ou au Répertoire des métiers (RM) si vous êtes artisans.
+            </p>
+            <p>Il faut également choisir un régime social, en tant que travailleur non-salarié il vous faut choisir
+                entre le régime des indépendants de la Sécurité sociale ou la CIPAV (Caisse interprofessionnelle de
+                prévoyance et d’assurance vieillesse), ce choix dépend de la nature de votre activité.
+            </p>
+            <p>L’équipe <span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> est là
+                pour vous conseiller et vous aider dans vos démarches.
+            </p>
+
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">La rédaction des statuts est-elle indispensable à la création d’une micro-entreprise
+                ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une micro-entreprise n’exige pas la rédaction de statuts.
+            </p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quel est le capital social d’une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une micro-entreprise n’exige pas non plus l’existence d’un capital social.</p>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quelles activités une micro-entreprise IZY CONTRATpeut-elle exercer ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>CIl peut s’agir de toutes activités artisanales, d’activités commerciales portant sur l’achat et la
+                revente de biens et marchandises, ou de certains services rattachés au domaine commercial, et des
+                activités libérales relevant de la CIPAV ou de la Sécurité sociale des indépendants. Il est possible
+                d’exercer plusieurs activités au sein d’une micro-entreprise, celles-ci doivent bien entendu être
+                licites.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel siège social pour une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La domiciliation commerciale est importante car c’est elle qui permet de déterminer la nationalité de
+                l’entreprise, son pays d’imposition, le tribunal géographiquement compétent en cas de contentieux, ainsi
+                que le lieu d’immatriculation.
+            </p>
+
+            <p>Une micro-entreprise peut être domiciliée au lieu d’habitation du micro-entrepreneur, sans conditions
+                (loi Dutreil), ou être située dans un local professionnel.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quelle dénomination pour une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4"><p>La dénomination doit être licite, elle ne doit pas être contraire à l’ordre public ou
+                aux bonnes mœurs. Elle peut comporter certains caractères spéciaux (/, &, *) et/ou des chiffres.
+            </p>
+            <p>Une micro-entreprise doit comporter le nom du micro-entrepreneur. Il est également possible de faire
+                référence, en guise de nom commercial, au secteur d’activité et/ou de prévoir un nom d’enseigne.
+            </p>
+            <p>Ensuite, il convient de vérifier sur le site de l’Infogreffe et de l’INPI la disponibilité du nom,
+                celui-ci ne doit pas faire l’objet d’une protection sur la propriété intellectuelle.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Doit-on immatriculer la micro-entreprise au Registre de Commerce et des Sociétés
+                (RCS) ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p> Il y a obligation d’immatriculer la micro-entreprise au répertoire des métiers (RM), dans le cas d’une
+                activité artisanale par exemple, ou au registre de commerce et des sociétés, sous peine de sanction, car
+                toute personne physique (ou morale) qui exerce une activité commerciale doit obligatoirement s’inscrire
+                au RCS. Cette démarche s’effectue en ligne ou par courrier auprès du Centre de Formalités des
+                Entreprises (CFE) dans un délai maximum de 15 jours suivant l’exercice de l’activité.
+            </p>
+            <p><span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> est là pour
+                réaliser cette démarche à votre place, vous n’avez plus qu’à vous concentrer sur votre activité.</p>
+
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quelle responsabilité pour le micro-entrepreneur face aux créanciers ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>En cas de dettes, les créanciers peuvent exiger d’être payés en considération du patrimoine du
+                micro-entrepreneur. Il y a donc une confusion entre le patrimoine personnel et le patrimoine
+                professionnel : c’est le principe d’unicité du patrimoine.
+            </p>
+            <p>Pour protéger ses biens fonciers, le micro-entrepreneur peut limiter sa responsabilité à son patrimoine
+                professionnel en établissant une déclaration d’insaisissabilité de son patrimoine personnel auprès d’un
+                notaire. De plus, la résidence principale ne peut être saisie, et ce même sans déclaration
+                d’insaisissabilité.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Peut-on cumuler l’activité de micro-entrepreneur avec une autre ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Il est impossible de créer deux micro-entreprises, ou de cumuler le statut de micro-entrepreneur avec le
+                statut de gérant de SARL ou avec le statut de gérant associé unique d’EURL.
+            </p>
+            <p>En revanche, il est possible de cumuler deux activités au sein d’une même micro-entreprise, de cumuler la
+                profession de micro-entrepreneur avec le statut de salarié (des clauses de contrat peuvent prohiber ce
+                cumul), le statut d’étudiant, ou de fonctionnaire (sous réserve d’accord de l’administration).
+            </p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quel est le régime fiscal d’une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>L’imposition classique de la micro-entreprise est effectuée sur le pourcentage du chiffre d’affaires via
+                un barème progressif après abattement.</p>
+            <p>L’imposition d’une micro-entreprise relève à la fois du régime micro-social et du régime
+                micro-fiscal.</p>
+            <p>Il est possible, sous condition de ne pas dépasser un certain seuil, de verser l’impôt de façon
+                libératoire par déclaration complémentaire du revenu, cela consiste à s’acquitter à la fois de l’impôt
+                sur le revenu (IR) et des cotisations sociales obligatoires, au fur et à mesure des encaissements.
+            </p>
+            <p>En principe, un micro-entrepreneur n’est pas redevable de la TVA, il bénéficie de la franchise en base de
+                TVA. Cela signifie que l’entrepreneur n’est pas tenu de déclarer sa TVA et de la facturer, mais il ne
+                peut donc pas non plus la déduire ou la récupérer pour ses achats et services professionnels.
+            </p>
+
+            <p>Cependant, il est possible de renoncer à cette franchise de la TVA, pour cela son chiffre d’affaires hors
+                taxe au cours de l’année civile précédente ne doit pas dépasser un certain seuil :
+
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">85 800 € pour les activités de commerce ou les prestations d’hébergement ;</li>
+                <li class="mt-2">34 400 € pour les activités de services et les professions libérales relevant des BNC
+                    et des BIC.
+                </li>
+            </ul>
+        </div>
+        <div class="row mt-4">
+            <p>Sur sa déclaration, le micro-entrepreneur doit préciser la nature de ses revenus, son régime d’imposition
+                et fournir son numéro SIRET.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quels sont les avantages d’une micro-entreprise ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>La micro-entreprise trois principaux avantages :</p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2"><span
+                            class="font-weight-bold">Un avantage administratif, comptable et financier :</span> Comme
+                    pour l’entreprise
+                    individuelle, sa création ne nécessite pas la rédaction de statuts, et présente un faible coût de
+                    fonctionnement, car seul l’entrepreneur est en charge. Il n’est également pas obligatoire de
+                    constituer un capital social. Concernant la comptabilité, le micro-entrepreneur n’est tenu de tenir
+                    un livre des recettes et un registre des achats.
+
+                </li>
+                <li class="mt-2"><span class="font-weight-bold">Un avantage fiscal :</span> Vous pouvez bénéficier, sous certaines conditions,
+                    d’une aide consistant en l’exonération temporaire de l’impôt sur les bénéfices ou sur la cotisation
+                    foncière, si vous êtes une nouvelle entreprise dans une zone prioritaire. De plus, le paiement de
+                    l’impôt ou des cotisations sociales n’est exigé qu’en cas de réalisation du chiffre d’affaires.
+                </li>
+                <li class="mt-2"><span class="font-weight-bold">Un avantage social :</span> Vous pouvez bénéficier d’une aide, l’ACRE (Aide aux
+                    Créateurs et Repreneurs d’Entreprise), consistant en l’exonération, sous certaines conditions, des
+                    charges sociales. Le micro-entrepreneur est travailleur non salarié (TNS), et donc affilié à la
+                    Sécurité sociale des indépendants et au régime micro-social. Les cotisations sont calculées en
+                    proportion du chiffre d’affaires réalisés chaque mois, ou chaque trimestre. Si le chiffre d’affaires
+                    est nul, vous ne payez aucune cotisation. Les cotisations sociales de l’URSSAF concernent les
+                    allocations familiales, les décès et invalidités, les maladies et la maternité, les formations
+                    professionnelles et la retraite.
+                </li>
+            </ul>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2>Quels sont les inconvénients d’une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une micro-entreprise est soumise à des conditions de seuil du chiffre
+                d’affaires à ne pas dépasser.</p>
+        </div>
+        <div class="row justify-content-center">
+            <h2>Quels sont les inconvénients d’une micro-entreprise ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une micro-entreprise est soumise à des conditions de seuil du chiffre
+                d’affaires à ne pas dépasser.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2>Peut-on transformer une micro-entreprise en EURL (société) ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>votre entreprise évolue, ou pour des questions de préférence de régime fiscal ou social, vous pouvez être amené à changer de statut juridique. La procédure est assez complexe, elle consiste à créer une société dans le but de poursuivre la même activité, à réaliser un transfert de fonds de la micro-entreprise vers cette société, puis à radier la micro-entreprise auprès du CFE.
+                 Si vous souhaitez effectuer une démarche pour changer de statut, nous sommes là pour vous aider à réaliser les formalités.
+            </p>
+            <p>Vous avez trouvé une réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre projet en quelques clics !</p>
+            <p>Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> est là pour vous conseiller.
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+

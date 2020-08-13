@@ -1,9 +1,10 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Fiche technique SASU{% endblock %}
+{% block title %}Izy technique SASU{% endblock %}
 
 {% block stylesheets %}
     {{ parent () }}
+    {{ encore_entry_link_tags('home') }}
     {{ encore_entry_link_tags('technical_sheet') }}
 {% endblock %}
 
@@ -15,7 +16,7 @@
             <a href="{{ path('create_sasu') }}" class="btn btn-secondary btnHome">Je crée ma SASU !</a>
         </div>
     </section>
-    <div class="container mt-4 text-justify">
+    <div class="container text-justify p-4">
         <div class="row justify-content-center mt-4 ">
             <h2 class="text-center">Qu’est-ce qu’une SASU ?</h2>
         </div>
@@ -28,7 +29,6 @@
                         Cette forme juridique est très populaire et est utilisée de plus en plus fréquemment par les
                         entrepreneurs</p>
         </div>
-
 
         <div class="row justify-content-center mt-4">
             <h2 class="text-center">Comment rédiger les statuts d’une SASU ?</h2>
@@ -318,9 +318,6 @@
                     Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span class="text-secondary">IZY</span>  CONTRAT</span> est là pour vous conseiller.</p>
             </div>
         </div>
-
-
     </div>
-
 
 {% endblock %}
