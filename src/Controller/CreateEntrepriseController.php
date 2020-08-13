@@ -28,6 +28,8 @@ use App\Form\AssociateCompany3Type;
 use App\Repository\CompaniesTypesRepository;
 use App\Repository\ActivitySectorRepository;
 use App\Repository\UserRepository;
+use App\Repository\PersonRepository;
+use App\Repository\CompanyRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -122,7 +124,8 @@ class CreateEntrepriseController extends AbstractController
                 $emailUsed = true;
             }
             
-        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted())
+        {
            $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
             $nameActivitySector = $recupNameActivitySector->getName();
             
@@ -142,6 +145,7 @@ class CreateEntrepriseController extends AbstractController
                     // $request->request->all()['user_sarl']['password']
                 ));
              $person->setUser($user);
+             $company->setClient($user);
              
                // recup parts
                  $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
@@ -156,6 +160,7 @@ class CreateEntrepriseController extends AbstractController
             //parts operation : repartition and (not / by 0 or null)
             $somTotal = $apportAssocie1 + $apportAssocie2 + $apportAssocie3 + $apportAssocie4 + $apportAssocie5 + $apportAssocieCompany1 + $apportAssocieCompany2 + $apportAssocieCompany3;
             $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
+            $company->setTotalCapital($somTotal);
 
             $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
             $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
@@ -323,97 +328,12 @@ class CreateEntrepriseController extends AbstractController
             'description' => 'Charge for Izy Contrat',
             'source' => $token,
         ]);
-        return $this->render('create_entreprise/enterprise_created.html.twig', [
-            'amount' => $request->request->get('amount'),
-        ]);
-    }
-
-    /**
-     * @Route("/create/entreprise/sarl/status", name="create_sarl_status") 
-     */
-     public function createSarlStatus (Request $request)
-     {
-         if(!$this->getUser()){
-             return $this->redirectToRoute('create_entreprise' );
-         }
-         
-          $numberToWords = new NumberToWords();
-          $numberTransformer = $numberToWords->getNumberTransformer('fr');
-                //  $ex = $numberTransformer->toWords(10200400);
-                 // build a new currency transformer using the RFC 3066 language identifier
-                // $currencyTransformer = $numberToWords->getCurrencyTransformer('fr');
-                // $ex = $currencyTransformer->toWords(5099.3, 'EUR');
-
-         return $this->render('create_entreprise/sarl/SARL_status.html.twig', [
-            'dateCreation' => date('d/m/Y'),
-            // 'capitalSocial' => NumberToLetterInFrench(3500),
-            'capitalSocial' => $numberTransformer->toWords(3500),
-            'capitalNum' => 3500,
-        ]);
-         
-     }
-     
-     /**
-     * @Route("/create/save", name="save_status")
-     */
-    public function saveStatut(string $dossierClient, EntityManagerInterface $em)
-    {
-        if(!$this->getUser()){
-             return $this->redirectToRoute('create_entreprise' );
-         }
-
-         // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-        
-        // Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
-        
-        // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('create_entreprise/sarl/SARL_status.html.twig', [
-            'title' => "Recu Creation de SARL"
-        ]);
-        
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-        
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser (force/not download)
-        // $dompdf->stream("mypdf.pdf", [
-        //     "Attachment" => false
+        $this->addFlash('success', 'Votre paiement a ete effectue avec succes!');
+        return $this->redirectToRoute('save_status');
+        // return $this->render('create_entreprise/enterprise_created.html.twig', [
+        //     'amount' => $request->request->get('amount'),
         // ]);
-
-        // Store PDF Binary Data
-        $output = $dompdf->output();
-        
-   
-        /** @var User $user */
-        $user=$this->getUser();
-
-        $pdfFilepath =   $dossierClient.'/'.'statut_'.$user->getEmail().'.pdf';
-
-        file_put_contents($pdfFilepath, $output);
-
-        $upload = new Upload();
-       
-        
-        $upload->setUser($user);
-        $upload->setStatus('statut_'.$user->getEmail().'.pdf');
-
-        $em->persist($upload);
-   
-        $em->flush();
-  
-        return $this->redirectToRoute('create_entreprise');
-
-        
     }
-    
     
     
     /**
@@ -464,6 +384,7 @@ class CreateEntrepriseController extends AbstractController
              $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
               
              $person->setUser($user);
+             $company->setClient($user);
             
             $em->persist($company);
             $em->persist($user);
@@ -489,7 +410,6 @@ class CreateEntrepriseController extends AbstractController
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
                 ]);
 
 
@@ -504,11 +424,7 @@ class CreateEntrepriseController extends AbstractController
              'typeStatut' => "EURL",
         ]);
     }
-    
-    
-    // @param GuardAuthenticatorHandler $guardHandler
-    // @param UserAuthenticator $authenticator
-    
+
     /**
      * @Route("/create/entreprise/micro-entreprise", name="create_me") 
      */
@@ -556,6 +472,7 @@ class CreateEntrepriseController extends AbstractController
              $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
               
              $person->setUser($user);
+             $company->setClient($user);
             
             $em->persist($company);
             $em->persist($user);
@@ -587,8 +504,7 @@ class CreateEntrepriseController extends AbstractController
                 ]);
 
         }        
-        
-    // dd($person);
+
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formMe' => $formCompany->createView(),
              'formMePerson' => $formPerson->createView(),
@@ -647,6 +563,7 @@ class CreateEntrepriseController extends AbstractController
              $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
               
              $person->setUser($user);
+             $company->setClient($user);
             
             $em->persist($company);
             $em->persist($user);
@@ -669,8 +586,7 @@ class CreateEntrepriseController extends AbstractController
                 $authenticator,
                 'main'
             );
-            
-            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
                 'person' => $person,

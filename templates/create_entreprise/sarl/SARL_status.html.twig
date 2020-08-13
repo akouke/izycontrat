@@ -19,13 +19,9 @@
     
     
 <h2><br>
-{% set name = 'IZY CONTRAT' %}
-{% set lastName = "Abdoulaye" %}
-{% set firstName = "SECK" %}
-{% set civilite = "M. " %}
 
-    {% if name is defined %}
-        {{ name }}
+    {% if company.name is defined %}
+        {{ company.name }}
     {% else %}
         'NOM DE LA SOCIETE'
     {% endif %}
@@ -44,8 +40,8 @@ au capital de
 
 <p><u>Siège social</u> : 
     <b>
-        {% if address is defined %}
-        {{ adress }}
+        {% if company is defined %}
+        {{ company.address }} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}
         {% else %}
         'ADRESSE'
         {% endif %}
@@ -94,7 +90,7 @@ au capital de
   <b>  ARTICLE 2 -  OBJET </b><br>
 
     La Société a pour objet : <br>
-    <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE'}}</b><br>
+    <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE'}} {{company.activitySector.nameOther ?? ''}}</b><br>
     
     La participation de la Société, par tous moyens, directement ou indirectement, dans toutes opérations pouvant se rattacher à son objet par voie de création de sociétés nouvelles, d'apport, de souscription ou d'achat de titres ou droits sociaux, de fusion ou autrement, de création, d'acquisition, de location, de prise en location-gérance de tous fonds de commerce ou établissements ; la prise, l'acquisition, l'exploitation ou la cession de tous procédés et brevets concernant ces activités.
     
@@ -117,7 +113,7 @@ au capital de
 <p>
    <b> ARTICLE 4 -  SIEGE SOCIAL </b> <br>
 
-    Le siège social est fixé : <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE'}}</b> <br>
+    Le siège social est fixé : <b> {{ company.address ?? ' VILLE (CODE POSTAL) – ADRESSE'}} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}</b> <br>
     
     Il pourra être transféré dans le même département ou dans un département limitrophe par simple décision de la gérance, sous réserve de ratification par la prochaine décision de l'associé unique ou par la prochaine décision collective extraordinaire des associés, et en tout lieu par décision de l'associé unique ou par décision collective extraordinaire des associés.
     <br>
@@ -135,28 +131,45 @@ au capital de
    <b> ARTICLE 6 -  APPORTS </b> <br>
 
     Il est fait les apports numéraires suivants : <br>
-    
-    - Par <b>{{ associe1.civilite ?? ' CIVILITE' }} {{ associe1.lastName ?? ' Prénom'}} {{ associe1.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe1.apport ?? ' 0.0'}} €</b> <br>
-    
-    {% if associe2 is defined %}
-    - Par <b>{{ associe2.civilite ?? ' CIVILITE' }} {{ associe2.lastName ?? ' Prénom'}} {{ associe2.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe2.apport ?? ' 0.0'}} €</b> <br>
+    {#Associes Persons#}
+     {% if associe1.firstName is defined or associe1.lastName is defined or associe1.capitalAmountAdding is defined %}
+    - Par <b> {{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe1.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
     {% endif %}
     
-    {% if associe3 is defined %}
-    - Par <b>{{ associe3.civilite ?? ' CIVILITE' }} {{ associe3.lastName ?? ' Prénom'}} {{ associe3.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe3.apport ?? ' 0.0'}} €</b>
+    {% if associe2.firstName is defined or associe2.lastName is defined or associe2.capitalAmountAdding is defined %}
+    - Par <b> {{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe2.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
     {% endif %}
     
-    {% if associe4 is defined %}
-    - Par <b>{{ associe4.civilite ?? ' CIVILITE' }} {{ associe4.lastName ?? ' Prénom'}} {{ associe4.firstName ?? ' NOM'}} </b>, d'une somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci	<b>{{ associe4.apport ?? ' 0.0'}} €</b>
+    {% if associe3.firstName is defined or associe3.lastName is defined or associe3.capitalAmountAdding is defined %}
+    - Par <b> {{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe3.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
     {% endif %}
     
-    Soit au total, la somme de <b>{{ total ?? ' NOMBRE EN LETTRES' }} €</b>, ci	<b> {{ totalNum ?? ' 0.00' }} €</b> 
+    {% if associe4.firstName is defined or associe4.lastName is defined or associe4.capitalAmountAdding is defined %}
+    - Par <b> {{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie4 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe4.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+    {% endif %}
+    
+    {% if associe5.firstName is defined or associe5.lastName is defined or associe5.capitalAmountAdding is defined %}
+    - Par <b> {{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie5 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe5.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+    {% endif %}
+    
+    {#Associes Companies#}
+     {% if associeCompany1.id is defined %}
+    - Par la société <b> {{ associeCompany1.name ?? '' }} representer par {{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany1.capitalBring ?? ' 0.0'}} €</b> <br>
+    {% endif %}
+    {% if associeCompany2.id is defined %}
+    - Par la société <b> {{ associeCompany2.name ?? '' }} representer par {{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany2.capitalBring ?? ' 0.0'}} €</b> <br>
+    {% endif %}
+    {% if associeCompany3.id is defined %}
+    - Par la société <b> {{ associeCompany3.name ?? '' }} representer par {{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+    {% endif %}
+    
+    Soit au total, la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} €</b>, ci	<b> {{ totalToNum ?? ' 0.00' }} €</b> 
     <p style="text-align: right">==========================</p>
     
-    La totalité de cet apport en numéraire, soit la somme de <b>conv(NOMBRE EN LETTRE) euros ( {{ total ?? ' nombre en numéraire' }} €)</b>,  
+    La totalité de cet apport en numéraire, soit la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} euros ( {{ totalToNum ?? ' 0.00' }} €)</b>,  
     a été dès avant ce jour, déposée au crédit d'un compte ouvert au nom de la Société en formation, 
     à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par 
-    la <b>{{ bankName ?? ' NOM BANQUE' }} – {{ addressBank ?? ' ADRESSE'}} – {{ villeBank ?? '(CODE POSTAL) VILLE '}}</b>, dépositaire des fonds, auquel est demeurée annexée 
+    la <b>{{ company.bankName ?? ' NOM BANQUE' }} – {{ addressBank ?? ' ADRESSE'}} – {{ villeBank ?? '(CODE POSTAL) VILLE '}}</b>, dépositaire des fonds, auquel est demeurée annexée 
     la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
     <br>
 </p>
@@ -164,8 +177,8 @@ au capital de
 <p>
     <b>ARTICLE 7 -  CAPITAL SOCIAL</b> <br>
 
-    Le capital social est fixé à la somme de <b>{{ capitalSocial ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? ' nombre en numéraire'}} €)</b>, divisé en 
-    <b>conv(NOMBRE EN LETTRES) ( {{ nombreAssocier ?? 'nombre en numéraire'}})</b> parts sociales de <b>conv(NOMBRE EN LETTRES) ({{ partChacune ?? 'nombre en numéraire'}} )</b> chacune, 
+    Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? ' nombre en numéraire'}} €)</b>, divisé en 
+    <b>{{ totalPartWord ?? 'NOMBRE EN LETTRES'}} ( {{ totalPartNum ?? 'nombre en numéraire'}})</b> parts sociales de <b>{{ partChacuneWord ?? 'NOMBRE EN LETTRES'}} ({{ partChacuneNum ?? 'nombre en numéraire'}} )</b> chacune, 
     et entièrement libérées et attribuées aux associés en rémunération de leur apport.
     <br>
 </p>
@@ -715,9 +728,12 @@ au capital de
 </p>
 
 <p>
+    {% if isManager == true %}
+      <b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b>, soussignée de seconde part, est nommée premier gérant de la société pour une durée illimitée.
+    {% else %}
+    <b> civilite ' Prénom' ' NOM' </b>, soussignée de seconde part, est nommée premier gérant de la société pour une durée illimitée.
+   {% endif %}
     
-    <b> {{ gerantCivilite ?? ' CIVILITE'}} {{ gerantLastName ?? ' Prénom'}} {{ gerantFirstName ?? ' NOM'}}</b>, soussignée de seconde part, est nommée premier gérant de la société pour une durée illimitée.
-
     <br>Il déclare, qu'aucune prescription, aucune mesure ou décision quelconque ne fait obstacle à l'exercice de ce mandat.
     <br>
 </p>
@@ -737,7 +753,7 @@ au capital de
 <p>
     {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}
 </p>
-<p style="text-align: right">
+<p style="text-align: right; margin-top: -40px">
     {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}
 </p>
 

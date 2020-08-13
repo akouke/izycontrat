@@ -123,6 +123,7 @@ class CreateSasSasuController extends AbstractController
                     // $request->request->all()['user_sarl']['password']
                 ));
              $person->setUser($user);
+             $company->setClient($user);
              
                 // recup parts
                  $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
@@ -296,6 +297,7 @@ class CreateSasSasuController extends AbstractController
              $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
               
              $person->setUser($user);
+             $company->setClient($user);
             
             $em->persist($company);
             $em->persist($user);
@@ -421,6 +423,7 @@ class CreateSasSasuController extends AbstractController
                     "izycontratpassword" ));
                
              $person->setUser($user);
+             $company->setClient($user);
                // recup parts
                  $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
                  $apportAssocieCompany2 = $associateCompany2->getCapitalBring();

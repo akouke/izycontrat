@@ -41,9 +41,11 @@ class Mailer
             
             ]);
         $message = (new \Swift_Message())
+        ->setSubject('IZYcontrat Confirmation Email ')
         ->setFrom($this->emailFrom)
         ->setTo($person->getUser()->getEmail())
         ->setBody($body, 'text/html');
+        //->attach(Swift_Attachment::fromPath('my-document.pdf'))
         
         $this->mailer->send($message);
     }
