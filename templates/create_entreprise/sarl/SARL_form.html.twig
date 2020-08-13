@@ -94,17 +94,16 @@
                 <a data-toggle="tab" >4 - Société créée !</a>
             </ul>
         </div>
-  
+  {% if emailUsed == true %}
+      <div class="alert alert-danger">
+         Erreur: Cet adresse Email: <b>{{ user.email }}</b> existe déja!
+      </div>
+    {% endif%}
+    
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade active show" id="SARL">
     <div class="card text-white bg-primary mb-1" style="max-width: 95%; margin-left: 1%;">
       <div class="card-header">STATUT {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }}
-        {#<h3 class="card-title"></h3>#}
-
-        {#    <div class="card-tools">#}
-        {#      <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>#}
-        {#      <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>#}
-        {#    </div>#}
         </div>
       <div class="card-body">
 
@@ -698,6 +697,12 @@
                     {% else %}
                        {{ form_widget(formEurlUser.email) }}
                     {% endif %}
+                    
+                    {% if emailUsed == true %}
+                      <div class="badge badge-danger">
+                        Erreur: Cet adresse Email: <b>{{ user.email }}</b> existe déja!
+                      </div>
+                    {% endif%}
                  </div>
                 {#<p>#}
                 {# <small></small>#}

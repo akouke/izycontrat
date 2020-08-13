@@ -90,6 +90,11 @@
                         {#debut information company3 associer#}
                         {{ form_start(formAssociateCompany3) }}
               
+              {% if emailUsed == true %}
+                      <div class="alert alert-danger">
+                         Erreur: Cet adresse Email: <strong>{{ user.email }}</strong> existe déja!
+                      </div>
+                    {% endif%}
             <!-- fieldsets -->
             <fieldset>
                       <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre SCI ?</h2>
@@ -459,7 +464,12 @@
                  <div class="tailInput"> 
 
                         {{ form_widget(formUser.email) }} 
-
+                        
+                        {% if emailUsed == true %}
+                      <div class="badge badge-danger">
+                         Erreur: Cet adresse Email: {{ user.email }} existe déja!
+                      </div>
+                    {% endif%}
                  </div>
            
 

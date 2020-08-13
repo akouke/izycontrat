@@ -23,6 +23,8 @@ use App\Form\AssociateCompanyType;
 use App\Form\AssociateCompany2Type;
 use App\Form\AssociateCompany3Type;
 use App\Repository\CompaniesTypesRepository;
+use App\Repository\ActivitySectorRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -41,7 +43,8 @@ class CreateSasSasuController extends AbstractController
      */
     public function createSas(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                              CompaniesTypesRepository $companyTypeRecup, Request $request)
+                              CompaniesTypesRepository $companyTypeRecup, Request $request,
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
     {
          $company = new Company();
          $person = new Person();
@@ -94,14 +97,22 @@ class CreateSasSasuController extends AbstractController
          $formAssociateCompany2->handleRequest($request);
          $formAssociateCompany3->handleRequest($request);
             
-         if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+            $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
             
-            if ($request->request->all()['company']['activitySector'] === "14")
+         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+            $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SAS"));
              $user->setIsVerified(false);
@@ -231,6 +242,8 @@ class CreateSasSasuController extends AbstractController
             'formAssociateCompany' => $formAssociateCompany->createView(),
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
+            'emailUsed' => $emailUsed,
+            'user' => $user,
         ]);
 
     }
@@ -240,9 +253,9 @@ class CreateSasSasuController extends AbstractController
      */
     public function createSasu(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                               CompaniesTypesRepository $companyTypeRecup, Request $request)
+                               CompaniesTypesRepository $companyTypeRecup, Request $request, 
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
     {
-        
                
          $company = new Company();
          $person = new Person();
@@ -258,15 +271,23 @@ class CreateSasSasuController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
 
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
-        {
+        $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SASU"));
              
@@ -309,6 +330,8 @@ class CreateSasSasuController extends AbstractController
             'formSasu' => $formCompany->createView(),
             'formSasuPerson' => $formPerson->createView(),
             'formSasuUser' => $formUser->createView(),
+            'emailUsed' => $emailUsed,
+            'user' => $user,
         ]);
 
     }
@@ -318,7 +341,8 @@ class CreateSasSasuController extends AbstractController
      */
      public function createSCI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                               CompaniesTypesRepository $companyTypeRecup, Request $request)
+                               CompaniesTypesRepository $companyTypeRecup, Request $request,
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
          $company = new Company();
          $person = new Person();
@@ -370,15 +394,24 @@ class CreateSasSasuController extends AbstractController
          $formAssociateCompany->handleRequest($request);
          $formAssociateCompany2->handleRequest($request);
          $formAssociateCompany3->handleRequest($request);
+          
+          $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
             
-         if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
             
-            if ($request->request->all()['company']['activitySector'] === "14")
+            $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SCI"));
              $user->setIsVerified(false);
@@ -482,7 +515,6 @@ class CreateSasSasuController extends AbstractController
         }   
         
         return $this->render('create_entreprise/sci/SCI_form.html.twig', [
-         'formSci' => $formCompany->createView(),
             'formPerson' => $formPerson->createView(),
             'formUser' => $formUser->createView(),
             'formAssocie1' => $formAssocie1->createView(),
@@ -492,7 +524,10 @@ class CreateSasSasuController extends AbstractController
             'formAssocie5' => $formAssocie5->createView(),
             'formAssociateCompany' => $formAssociateCompany->createView(),
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
-            'formAssociateCompany3' => $formAssociateCompany3->createView(),   
+            'formAssociateCompany3' => $formAssociateCompany3->createView(), 
+            'formSci' => $formCompany->createView(),
+            'emailUsed' => $emailUsed,
+            'user' => $user,
         ]);
     }
     

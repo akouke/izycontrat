@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/fiche/izy/pratique/", name="technical_sheet")
+ * @Route("/fiche-izy-pratique/", name="technical_sheet")
  */
 class TechnicalSheetController extends AbstractController
 {
@@ -17,7 +17,7 @@ class TechnicalSheetController extends AbstractController
     {
         return $this->render('technical_sheet/sasu.html.twig');
     }
-    
+
      /**
      * @Route("sci", name="_sci")
      */
@@ -25,9 +25,6 @@ class TechnicalSheetController extends AbstractController
     {
         return $this->render('technical_sheet/sci.html.twig');
     }
-    
-    
-    
 
     /**
      * @Route("sas", name="_sas")
@@ -44,4 +41,21 @@ class TechnicalSheetController extends AbstractController
     {
         return $this->render('technical_sheet/eurl.html.twig');
     }
+
+    /**
+     * @Route("micro-entreprise", name="_microBusiness")
+     */
+    public function microBusiness()
+    {
+        return $this->render('technical_sheet/micro_buisness.html.twig');
+    }
+
+    /**
+     * @Route("entreprise-individuelle", name="_individualCompany")
+     */
+    public function individualCompany()
+    {
+        return $this->render('technical_sheet/individual_company.html.twig');
+    }
+
 }

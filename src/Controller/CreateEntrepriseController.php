@@ -24,6 +24,8 @@ use App\Form\AssociateCompanyType;
 use App\Form\AssociateCompany2Type;
 use App\Form\AssociateCompany3Type;
 use App\Repository\CompaniesTypesRepository;
+use App\Repository\ActivitySectorRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -58,7 +60,8 @@ class CreateEntrepriseController extends AbstractController
      */
      public function createSarl (GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                  EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                                 CompaniesTypesRepository $companyTypeRecup, Request $request)
+                                 CompaniesTypesRepository $companyTypeRecup, Request $request,
+                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
          $company = new Company();
          $person = new Person();
@@ -111,14 +114,22 @@ class CreateEntrepriseController extends AbstractController
          $formAssociateCompany2->handleRequest($request);
          $formAssociateCompany3->handleRequest($request);
         
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+        $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
             
-            if ($request->request->all()['company']['activitySector'] === "14")
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SARL"));
              $user->setIsVerified(false);
@@ -238,9 +249,9 @@ class CreateEntrepriseController extends AbstractController
             'formAssociateCompany' => $formAssociateCompany->createView(),
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
-            
+            'emailUsed' => $emailUsed,
+            'user' => $user,
             'typeStatut' => "SARL",
-            // 'EURL' => "EURL"
             
         ]);
     }
@@ -362,7 +373,8 @@ class CreateEntrepriseController extends AbstractController
      */
      public function createEurl(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                 EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                                CompaniesTypesRepository $companyTypeRecup, Request $request)
+                                CompaniesTypesRepository $companyTypeRecup, Request $request,
+                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
          $company = new Company();
          $person = new Person();
@@ -378,15 +390,24 @@ class CreateEntrepriseController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
         
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
+            
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("EURL"));
              
@@ -430,6 +451,8 @@ class CreateEntrepriseController extends AbstractController
              'formEurl' => $formCompany->createView(),
              'formEurlPerson' => $formPerson->createView(),
              'formEurlUser' => $formUser->createView(),
+             'emailUsed' => $emailUsed,
+             'user' => $user,
              'typeStatut' => "EURL",
         ]);
     }
@@ -443,7 +466,8 @@ class CreateEntrepriseController extends AbstractController
      */
      public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                             EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                                            CompaniesTypesRepository $companyTypeRecup, Request $request)
+                                            CompaniesTypesRepository $companyTypeRecup, Request $request,
+                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
          $company = new Company();
          $person = new Person();
@@ -458,16 +482,24 @@ class CreateEntrepriseController extends AbstractController
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
-
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
-        {
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+            $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
+            
+        if ($emailUsed == false && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+            $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("MICRO-ENTREPRISE"));
              
@@ -508,10 +540,13 @@ class CreateEntrepriseController extends AbstractController
 
         }        
         
+    // dd($person);
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formMe' => $formCompany->createView(),
              'formMePerson' => $formPerson->createView(),
              'formMeUser' => $formUser->createView(),
+             'emailUsed' => $emailUsed,
+             'user' => $user,
            'typeStatut' => 'ME' 
         ]);
     }
@@ -521,7 +556,8 @@ class CreateEntrepriseController extends AbstractController
      */
      public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
-                              CompaniesTypesRepository $companyTypeRecup, Request $request)
+                              CompaniesTypesRepository $companyTypeRecup, Request $request,
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
          
          $company = new Company();
@@ -538,15 +574,23 @@ class CreateEntrepriseController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
 
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
-        {
+        $emailUsed = false;
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("IE"));
              
@@ -592,6 +636,8 @@ class CreateEntrepriseController extends AbstractController
             'formEi' => $formCompany->createView(),
              'formEiPerson' => $formPerson->createView(),
              'formEiUser' => $formUser->createView(),
+             'emailUsed' => $emailUsed,
+             'user' => $user,
          'typeStatut' => 'EI',
         ]);
     }
