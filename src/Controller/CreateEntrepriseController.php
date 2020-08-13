@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -267,20 +269,66 @@ class CreateEntrepriseController extends AbstractController
         ]);
          
      }
-     
-     /**
-     * @Route("/create/entreprise/sarl/payment", name="create_sarl_payement") 
+
+    /**
+     * @Route("/create/entreprise/sarl/paymentBasic", name="create_sarl_payement_basic")
      */
-     public function createSarlPayment (Request $request, EntityManagerInterface $em)
-     {
-         
-         return $this->render('create_entreprise/sarl/SARL_form_payement.html.twig', [
-            
+    public function createSarlPaymentBasic (Request $request, EntityManagerInterface $em)
+    {
+
+        return $this->render('create_entreprise/sarl/SARL_form_payement.html.twig', [
+            'stripe_public_key' => $this->getParameter('stripe_public_key'),
+            'amount' => $this->getParameter('prix_izy_basic'),
+            'nomOffre' => 'Izy Basic'
         ]);
-         
-     }
-     
-     /**
+
+    }
+
+    /**
+     * @Route("/create/entreprise/sarl/paymentPlus", name="create_sarl_payement_plus")
+     */
+    public function createSarlPaymentPlus (Request $request, EntityManagerInterface $em)
+    {
+        return $this->render('create_entreprise/sarl/SARL_form_payement.html.twig', [
+            'stripe_public_key' => $this->getParameter('stripe_public_key'),
+            'amount' => $this->getParameter('prix_izy_plus'),
+            'nomOffre' => 'Izy Plus'
+        ]);
+
+    }
+
+    /**
+     * @Route("/create/entreprise/sarl/paymentPremium", name="create_sarl_payement_premium")
+     */
+    public function createSarlPaymentPremium (Request $request, EntityManagerInterface $em)
+    {
+        return $this->render('create_entreprise/sarl/SARL_form_payement.html.twig', [
+            'stripe_public_key' => $this->getParameter('stripe_public_key'),
+            'amount' => $this->getParameter('prix_izy_premium'),
+            'nomOffre' => "Izy Premium"
+        ]);
+
+    }
+
+    /**
+     * @Route("/create/entreprise/sarl/check", name="create_sarl_check")
+     */
+    public function checkBasic (Request $request, EntityManagerInterface $em)
+    {
+        Stripe::setApiKey($this->getParameter('stripe_secret_key'));
+        $token = $_POST['stripeToken'];
+        $charge = Charge::create([
+            'amount' => $request->request->get('amount')*100,
+            'currency' => 'eur',
+            'description' => 'Charge for Izy Contrat',
+            'source' => $token,
+        ]);
+        return $this->render('create_entreprise/enterprise_created.html.twig', [
+            'amount' => $request->request->get('amount'),
+        ]);
+    }
+
+    /**
      * @Route("/create/entreprise/sarl/status", name="create_sarl_status") 
      */
      public function createSarlStatus (Request $request)
@@ -592,7 +640,7 @@ class CreateEntrepriseController extends AbstractController
             }
             
              $company->setIsCreated(false);
-             $company->setCompanyType($companyTypeRecup->findOneByName("IE"));
+             $company->setCompanyType($companyTypeRecup->findOneByName("EI"));
              
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);

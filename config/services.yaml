@@ -8,7 +8,6 @@ parameters:
     locale: 'fr'
     email_from: '%env(MAILER_FROM)%'
 
-
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -37,3 +36,4 @@ services:
     App\Mailer\Mailer:
        arguments:
            $emailFrom: '%email_from%'
+

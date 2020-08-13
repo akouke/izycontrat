@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use phpDocumentor\Reflection\Types\Array_;
 use phpDocumentor\Reflection\Types\Boolean;
 use phpDocumentor\Reflection\Types\String_;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\Collection;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User implements UserInterface
+class User implements AdvancedUserInterface
 {
     /**
      * @ORM\Id()
@@ -72,15 +72,25 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Upload::class, mappedBy="user")
      */
     private $uploads;
+    
+     /**
+     * @ORM\Column(type="string", nullable= true, length=30)
+     */
+    private $confirmationToken;
+    
+     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $enabled;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->uploads = new ArrayCollection();
+        $this->enabled = false;
         
     }
-  
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -249,5 +259,58 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+    
+    
+    /**
+     * @return mixed
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+    /**
+     * @return mixed $confirmationToken
+     */
+    public function setConfirmationToken($confirmationToken): void
+    {
+        $this->confirmationToken = $confirmationToken;
+
+    }
+    /**
+     * @return mixed
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+    /**
+     * @return mixed $enabled
+     */
+    public function setEnabled($enabled): void
+    {
+        $this->enabled = $enabled;
+
+    }
+    
+    
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->enabled;
     }
 }
