@@ -4,6 +4,11 @@ parameters:
   prix_izy_basic: 49
   prix_izy_plus: 149
   prix_izy_premium: 289
+  url_stripe_success: https://localhost:8000/success
+  url_stripe_canceled: https://localhost:8000/canceled
+  offre_izy_basic: price_1HEEcvJ1VSvMwQdgRZ0w066w
+  offre_izy_plus: price_1HFlZmJ1VSvMwQdgPkEdRWYI
+  offre_izy_premium: price_1HFlbNJ1VSvMwQdg41XXkcxC
   payment:
     currency: EUR
     decimal: true
