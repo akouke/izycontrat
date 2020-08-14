@@ -209,7 +209,7 @@
             <p>2.Les actions sont attribuées et réparties comme suit :<br>
 
                 - A <b> {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}</b>, à
-                concurrence de <b>conv(NOMBRE EN LETTRES)</b> actions, numérotées de 1 à NOMBRE D’ACTIONS, ci</p>
+                concurrence de <b>conv(NOMBRE EN LETTRES)</b> actions, numérotées de 1 à <b>( {{ nombreAction ?? 'nombre en numéraire' }}) actions</b> , ci</p>
             <p>0 parts</p>
 
             <p>- A <b> {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}</b>, à
