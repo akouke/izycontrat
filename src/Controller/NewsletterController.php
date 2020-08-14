@@ -18,7 +18,6 @@ use \DateTime;
 
 /**
  * @Route("/newsletter")
- * @IsGranted("ROLE_SUPER_ADMIN")
  */
 class NewsletterController extends AbstractController
 {
