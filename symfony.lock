@@ -224,7 +224,7 @@
         "version": "v0.3.3"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -441,6 +441,15 @@
     },
     "symfony/intl": {
         "version": "v4.4.10"
+    },
+    "symfony/mailchimp-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "1be490e068472fc87e226cf54bc95fb6f2e49117"
+        }
     },
     "symfony/mailer": {
         "version": "4.3",
