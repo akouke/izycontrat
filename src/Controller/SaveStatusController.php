@@ -105,47 +105,58 @@ class SaveStatusController extends AbstractController
             if($iPerson == 1)
             {
                 $associe1 = $recupePersonAssocie[$iPerson-1];
-                $toWordApportAssocie1 = $associe1->getCapitalAmountAdding();
+                $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
             }
             elseif($iPerson == 2)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
-                $associe2 = $recupePersonAssocie[$iPerson-2];
-                $toWordApportAssocie1 = $associe1->getCapitalAmountAdding();
-                $toWordApportAssocie2 = $associe2->getCapitalAmountAdding();
+                $associe1 = $recupePersonAssocie[$iPerson-2];
+                $associe2 = $recupePersonAssocie[$iPerson-1];
+                $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
+                $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding();
             }
             elseif($iPerson == 3)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
+                $associe1 = $recupePersonAssocie[$iPerson-3];
                 $associe2 = $recupePersonAssocie[$iPerson-2];
-                $associe3 = $recupePersonAssocie[$iPerson-3];
+                $associe3 = $recupePersonAssocie[$iPerson-1];
                 $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
                 $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
                 $toWordApportAssocie3 = $numberTransformer->toWords($associe3->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding();
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding();
             }
             elseif($iPerson == 4)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
-                $associe2 = $recupePersonAssocie[$iPerson-2];
-                $associe3 = $recupePersonAssocie[$iPerson-3];
-                $associe4 = $recupePersonAssocie[$iPerson-4];
+                $associe1 = $recupePersonAssocie[$iPerson-4];
+                $associe2 = $recupePersonAssocie[$iPerson-3];
+                $associe3 = $recupePersonAssocie[$iPerson-2];
+                $associe4 = $recupePersonAssocie[$iPerson-1];
                 $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
                 $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
                 $toWordApportAssocie3 = $numberTransformer->toWords($associe3->getCapitalAmountAdding());
                 $toWordApportAssocie4 = $numberTransformer->toWords($associe4->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding();
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding();
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + $associe4->getCapitalAmountAdding();
             }
             elseif($iPerson == 5)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
-                $associe2 = $recupePersonAssocie[$iPerson-2];
+                $associe1 = $recupePersonAssocie[$iPerson-5];
+                $associe2 = $recupePersonAssocie[$iPerson-4];
                 $associe3 = $recupePersonAssocie[$iPerson-3];
-                $associe4 = $recupePersonAssocie[$iPerson-4];
-                $associe5 = $recupePersonAssocie[$iPerson-5];
+                $associe4 = $recupePersonAssocie[$iPerson-2];
+                $associe5 = $recupePersonAssocie[$iPerson-1];
                 $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
                 $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
                 $toWordApportAssocie3 = $numberTransformer->toWords($associe3->getCapitalAmountAdding());
                 $toWordApportAssocie4 = $numberTransformer->toWords($associe4->getCapitalAmountAdding());
                 $toWordApportAssocie5 = $numberTransformer->toWords($associe5->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding();
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding();
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + $associe4->getCapitalAmountAdding();
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + $associe4->getCapitalAmountAdding() + $associe5->getCapitalAmountAdding();
+                
             }
 
         }
@@ -196,26 +207,26 @@ class SaveStatusController extends AbstractController
             }
             elseif($iCompany == 2)
             {
-                $associeCompany1 = $recupeCompanyAssocie[$iCompany-1];
-                $associeCompany2 = $recupeCompanyAssocie[$iCompany-2];
+                $associeCompany1 = $recupeCompanyAssocie[$iCompany-2];
+                $associeCompany2 = $recupeCompanyAssocie[$iCompany-1];
                 $toWordApportAssocieCompany1 = $numberTransformer->toWords($associeCompany1->getCapitalBring());
                 $toWordApportAssocieCompany2 = $numberTransformer->toWords($associeCompany2->getCapitalBring());
             }
             elseif($iCompany == 3)
             {
-                $associeCompany1 = $recupeCompanyAssocie[$iCompany-1];
+                $associeCompany1 = $recupeCompanyAssocie[$iCompany-3];
                 $associeCompany2 = $recupeCompanyAssocie[$iCompany-2];
-                $associeCompany3 = $recupeCompanyAssocie[$iCompany-3];
+                $associeCompany3 = $recupeCompanyAssocie[$iCompany-1];
                 $toWordApportAssocieCompany1 = $numberTransformer->toWords($associeCompany1->getCapitalBring());
                 $toWordApportAssocieCompany2 = $numberTransformer->toWords($associeCompany2->getCapitalBring());
                 $toWordApportAssocieCompany3 = $numberTransformer->toWords($associeCompany3->getCapitalBring());
             }
             elseif($iCompany == 4)
             {
-                $associeCompany1 = $recupeCompanyAssocie[$iCompany-1];
-                $associeCompany2 = $recupeCompanyAssocie[$iCompany-2];
-                $associeCompany3 = $recupeCompanyAssocie[$iCompany-3];
-                $associeCompany4 = $recupeCompanyAssocie[$iCompany-4];
+                $associeCompany1 = $recupeCompanyAssocie[$iCompany-4];
+                $associeCompany2 = $recupeCompanyAssocie[$iCompany-3];
+                $associeCompany3 = $recupeCompanyAssocie[$iCompany-2];
+                $associeCompany4 = $recupeCompanyAssocie[$iCompany-1];
                 $toWordApportAssocieCompany1 = $numberTransformer->toWords($associeCompany1->getCapitalBring());
                 $toWordApportAssocieCompany2 = $numberTransformer->toWords($associeCompany2->getCapitalBring());
                 $toWordApportAssocieCompany3 = $numberTransformer->toWords($associeCompany3->getCapitalBring());
@@ -313,6 +324,12 @@ class SaveStatusController extends AbstractController
             'partChacuneNum' => ($companyCapitalSocial / $partTotal),
             'partChacuneWord' => $numberTransformer->toWords($companyCapitalSocial / $partTotal),
             'isManager' => $manager,
+            'maxIntervalleAssocie2' => $maxIntervalleAssocie2,
+            'maxIntervalleAssocie3' => $maxIntervalleAssocie3,
+            'maxIntervalleAssocie4' => $maxIntervalleAssocie4,
+            'maxIntervalleAssocie5' => $maxIntervalleAssocie5,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
+            
         ]);
       }
 
@@ -384,6 +401,7 @@ class SaveStatusController extends AbstractController
             'president' => $president,
             'generalDirector' => $generalDirector,
             'companyTotalCapital' => $companyTotalCapital,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
             'socialObject' => $socialObject,
             
             'associeCompany1' => $associeCompany1,

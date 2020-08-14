@@ -68,11 +68,11 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             
             //$UserRegisterEvent = new UserRegisterEvent($person);
+            //EMail de validation EMail déclenché lors de l'inscription d'un internaute sur le site.
             $UserPaymentEvent = new UserPaymentEvent($person);
             $eventDispatcher->dispatch(
                 UserPaymentEvent::NAME,
                 $UserPaymentEvent
-            
             );
             
             return $this->redirectToRoute('app_home');

@@ -40,6 +40,9 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use NumberToWords\NumberToWords;
 use Symfony\Component\HttpFoundation\Response;
+use App\Event\UserRegisterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserPaymentEvent;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -65,7 +68,9 @@ class CreateEntrepriseController extends AbstractController
      public function createSarl (GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                  EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                  CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                 EventDispatcherInterface $eventDispatcher)
+                                 
      {
          $company = new Company();
          $person = new Person();
@@ -162,24 +167,25 @@ class CreateEntrepriseController extends AbstractController
             $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
             $company->setTotalCapital($somTotal);
 
-            $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
-            $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
-            $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
-            $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
-            $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
-            $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
-            $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
-            $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
+            // Part en pourcentage
+            // $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
+            // $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
+            // $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
+            // $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
+            // $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
+            // $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
+            // $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
+            // $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
 
-            $associateCompany1->setCompanyPart($partAssocieCompany1);
-            $associateCompany2->setCompanyPart($partAssocieCompany2);
-            $associateCompany3->setCompanyPart($partAssocieCompany3);
+            $associateCompany1->setCompanyPart($apportAssocieCompany1);
+            $associateCompany2->setCompanyPart($apportAssocieCompany2);
+            $associateCompany3->setCompanyPart($apportAssocieCompany3);
             
-            $associe1->setAssociatePart($partAssocie1);
-            $associe2->setAssociatePart($partAssocie2);
-            $associe3->setAssociatePart($partAssocie3);
-            $associe4->setAssociatePart($partAssocie4);
-            $associe5->setAssociatePart($partAssocie5);
+            $associe1->setAssociatePart($apportAssocie1);
+            $associe2->setAssociatePart($apportAssocie2);
+            $associe3->setAssociatePart($apportAssocie3);
+            $associe4->setAssociatePart($apportAssocie4);
+            $associe5->setAssociatePart($apportAssocie5);
             
              // pour un associer de type Societer
              if($associateCompany1->getName() !== null){
@@ -216,7 +222,9 @@ class CreateEntrepriseController extends AbstractController
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
-
+            
+           
+            
             $em->persist($user);
             $em->persist($person);
             $em->persist($company);
@@ -237,6 +245,11 @@ class CreateEntrepriseController extends AbstractController
                 $request,
                 $authenticator,
                 'main'
+            );
+             $UserPaymentEvent = new UserPaymentEvent($person);
+            $eventDispatcher->dispatch(
+                UserPaymentEvent::NAME,
+                $UserPaymentEvent
             );
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
@@ -342,7 +355,8 @@ class CreateEntrepriseController extends AbstractController
      public function createEurl(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                 EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                 CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                EventDispatcherInterface $eventDispatcher)
      {
          $company = new Company();
          $person = new Person();
@@ -381,16 +395,23 @@ class CreateEntrepriseController extends AbstractController
              
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             //$randompass = random_bytes(10);
+             $user->setPassword ( $passwordEncoder->encodePassword( $user, "izycontratpassword" ));
+             
               
              $person->setUser($user);
              $company->setClient($user);
-            
+             
+           
             $em->persist($company);
+             
             $em->persist($user);
             $em->persist($person);
             
+           
             $em->flush();
+            
+            
             
             $credentials = [
                 'password' => $user->getPassword(),
@@ -408,10 +429,12 @@ class CreateEntrepriseController extends AbstractController
                 'main'
             );
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            
+            
+            $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
             return $this->redirectToRoute('create_sarl_prestation', [
                 ]);
-
+            
 
         }        
     

@@ -1,18 +1,43 @@
-<h3>Paiement accepté</h3>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Confirmation de paiement</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<img src="https://www.izy-contrat.fr/images/Logo_Izy_Contrat_H.png" alt="logo Izy Contrat">
+<h1>Bonjour,{{ user.getFirstName() }}</h1>
 
-<p>Bonjour,<br><br>
+<p>mot de passe : {{user.getUser().getPassword()}}</p>
 
-Vous venez d’effectué un achat sur notre Site.
+<p>Vous venez d’effectuer un achat sur notre Site.</p>
 
-Nous avons le plaisir de vous confirmer votre souscription à l'offre .........
+<p>Nous avons le plaisir de vous confirmer votre souscription à l'offre
+    (Mettre l’offre à laquelle il a souscrit à savoir IZY BASIC, IZY PLUS, IZY PREMIUM)</p>
 
-Vous pouvez à tout moment suivre l'avancement de votre commande en vous connectant  à votre  Espace  personnel accessible à l'adresse  suivante : http://izy-contrat.fr  à l'aide  de  votre  identifiant et  de votre mot  de passe  qui vous ont  été communiqués  précédemment par email.
+<p>Vous pouvez à tout moment suivre l'avancement de votre commande en vous connectant à
+    votre Espace personnel accessible à l'adresse suivante : <a href="https://www.izy-contrat.fr/" target="_blank">www.izy-contrat.fr</a> à l'aide de
+    votre identifiant et de votre mot de passe qui vous ont été communiqués précédemment
+    par email.</p>
 
-Nous prendrons bientôt contact avec vous afin de finaliser votre commande. 
-Afin de comprendre quelles données à caractère personnel nous collectons et ce que nous
-en faisons, ainsi que les droits dont vous disposez et la manière dont vous pouvez les exercer, vous pouvez également consulter notre Politique de confidentialité des données sur note Site à la rubrique « Politique de confidentialité ».
+<p>Nous prendrons bientôt contact avec vous afin de finaliser votre commande.
+    Afin de comprendre quelles données à caractère personnel nous collectons et ce que nous
+    en faisons, ainsi que les droits dont vous disposez et la manière dont vous pouvez les
+    exercer, vous pouvez également consulter notre Politique de confidentialité des données sur
+    note Site à la rubrique « Politique de confidentialité ».</p>
+<p>Nous vous remercions de la confiance que vous nous témoignez en ayant
+    choisi notre offre (Mettre l’offre à laquelle il a souscrit à savoir IZY BASIC, IZY PLUS, IZY
+    PREMIUM)</p>
 
-Nous vous  remercions de la confiance  que vous nous témoignez  en ayant
-choisi notre offre (Mettre l’offre à laquelle il a souscrit à savoir IZY BASIC, IZY PLUS, IZY PREMIUM)
+<p>L'équipe d'Izy Contrat</p>
 
-L'équipe Izy Contrat.</p>
+
+</body>
+</html>
+

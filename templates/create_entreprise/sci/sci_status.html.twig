@@ -1,0 +1,954 @@
+{% extends '_layout.html.twig' %}
+{% block title %}SAS STATUT {% endblock %}
+{% block navbar %}{% endblock %}
+{% block dashboard %}{% endblock %}
+{% block body %}
+    <style>
+        body {
+
+            background-size: cover;
+            background: white;
+            margin-top: 2px;
+            text-align: center;
+            width: 100%;
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
+
+    <p class="container-fluid">
+
+
+    <h2><br>
+        {% set name = 'IZY CONTRAT' %}
+        {% set lastName = "Abdoulaye" %}
+        {% set firstName = "SECK" %}
+        {% set civilite = "M. " %}
+
+        {% if name is defined %}
+            {{ name }}
+        {% else %}
+            'NOM DE LA SOCIETE'
+        {% endif %}
+
+    </h2>
+    <p>Société Par actions simplifiée<br>
+        au capital de
+        <b>
+            {% if capitalNum is defined %}
+                {{ capitalNum }} euros
+            {% else %}
+                'NOMBRE NUMERAIRE' euros
+            {% endif %}
+        </b>
+    </p>
+
+    <p><u>Siège social</u> :
+        <b>
+            {% if address is defined %}
+                {{ adress }}
+            {% else %}
+                'ADRESSE'
+            {% endif %}
+        </b>
+    </p>
+
+    <br>
+
+    < class="col-11" style="margin-left: 4%; text-align: left">
+    <hr>
+    <h2 style="color: black; text-align: center;">STATUTS</h2>
+    <hr>
+    <b>LES SOUSSIGNES :</b>
+    <p>
+        <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
+
+        Né le <b>{{ dateNaissance ?? 'DATE' }} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+        De nationalité Française, <br>
+        Demeurant à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+        <b>{{ situation ?? 'Célibataire / Marié' }}</b> <br>
+    </p>
+
+    <p style="text-align: center;"><br> <b>DE PREMIERE PART</b></p>
+
+    <p>
+        <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
+
+        Né le <b>{{ dateNaissance ?? 'DATE' }} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+        De nationalité Française, <br>
+        Demeurant à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+        <b>{{ situation ?? 'Célibataire / Marié' }}</b> <br>
+    </p>
+
+    <p style="text-align: center;"><b>Ont établi, ainsi qu'il suit, les statuts de la société par actions
+            simplifiée
+            qu'ils ont décidé de constituer.</b></p>
+
+    <p style="text-align: center;"><br> <b>TITRE PREMIER. - FORME, OBJET, DENOMINATION, SIEGE, DUREE</b></p>
+    <p><b>ARTICLE 1 - FORME</b><br>
+    <p>Il est formé par les présentes entre les propriétaires de parts sociales ci-après créées et celles qui
+        pourront l'être ultérieurement, une société civile régie par les dispositions du Titre IX du Livre III du
+        Code civil, du décret n° 78-704 du 3 juillet 1978 et par toutes les dispositions légales ou réglementaires
+        applicables en pareille matière ainsi que par les présents statuts.</p>
+
+    <b>ARTICLE 2 - OBJET</b>
+
+    <p>La Société a pour objet :</p>
+
+    <p>-l'acquisition, la transformation, l’aménagement, l'administration et l'exploitation par bail, location ou
+        autrement de tous immeubles bâtis ou non, et de tous droits mobiliers ou immobiliers dont elle pourrait
+        devenir propriétaire, par voie d'acquisition, échange, apport ou autrement,
+        éventuellement et exceptionnellement l'aliénation du ou des immeubles et droits, devenus inutiles à la
+        Société, au moyen de vente, échange ou apport en société,
+        et généralement toutes opérations quelconques pouvant se rattacher directement ou indirectement à l'objet
+        ci-dessus défini susceptibles d’en favoriser la réalisation, pourvu que ces opérations ne modifient pas le
+        caractère civil de la Société.</p>
+
+
+    <b>ARTICLE 3 - DENOMINATION</b>
+
+    <p>La dénomination de la Société est : {{ company.name ?? ' NOM DE LA SOCIETE' }}</p>
+
+    <p>Cette dénomination qui doit figurer sur tous les actes et documents émanant de la Société et destinés aux
+        tiers doit être précédée ou suivie des mots « Société civile immobilière» et de l'indication du capital
+        social.</p>
+
+    <b> ARTICLE 4 - SIEGE SOCIAL</b>
+
+    <p></p>Le siège social est fixé : {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE' }}
+
+    <p>Il peut être transféré en tout autre endroit de la même ville ou du même département par simple décision de
+        la gérance, et partout ailleurs par décision collective extraordinaire.</p>
+
+
+    <p><b>ARTICLE 5 - DUREE</b></p>
+
+    <p>La durée de la Société est fixée à quatre-vingt-dix-neuf (99) années à compter de la date de son
+        immatriculation au Registre du commerce et des sociétés, sauf dissolution anticipée ou prorogation.
+        Un an au moins avant la date d’expiration de la société, les associés doivent être consultés par la gérance
+        à l’effet de décider, à la majorité prévue pour la modification des statuts, si la société doit être
+        prorogée. A défaut tout associé peut demander au Président du Tribunal de Grande Instance statuant sur
+        requête, la désignation d’un mandataire de justice chargé de provoquer la décision ci-dessus prévue.
+    </p>
+
+    <p><b>TITRE II. - APPORTS, CAPITAL SOCIAL, MODIFICATIONS DU CAPITAL</b></p>
+
+
+    <p><b>ARTICLE 6 - APPORTS</b><br>
+
+        Il est fait les apports numéraires suivants :</p>
+
+    <p>- Par
+        <b>{{ associe1.civilite ?? ' CIVILITE' }} {{ associe1.lastName ?? ' Prénom' }} {{ associe1.firstName ?? ' NOM' }} </b>,d'une
+        somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci <b>{{ associe1.apport ?? ' 0.0' }} €</b></p>
+    <p> - Par
+        <b>{{ associe1.civilite ?? ' CIVILITE' }} {{ associe1.lastName ?? ' Prénom' }} {{ associe1.firstName ?? ' NOM' }} </b>,d'une
+        somme en numéraire de <b> conv(NOMBRE EN LETTRES) €</b>, ci <b>{{ associe1.apport ?? ' 0.0' }} €</b></p>
+
+    Soit au total, la somme de <b>{{ total ?? ' NOMBRE EN LETTRES' }} €</b>, ci <b> {{ totalNum ?? ' 0.00' }}
+    €</b>
+    <p style="text-align: right">==========================</p>
+
+
+    <p>La totalité de cet apport en numéraire, soit la somme de <b>conv(NOMBRE EN LETTRE) euros
+            ( {{ total ?? ' nombre en numéraire' }} €)</b> , a été dès avant ce jour, déposée au crédit d'un
+        compte
+        ouvert au nom de la Société en formation, à la banque ainsi qu'en atteste un certificat établi en date
+        du
+        <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par la <b>{{ bankName ?? ' NOM BANQUE' }}
+            – {{ addressBank ?? ' ADRESSE' }} – {{ villeBank ?? '(CODE POSTAL) VILLE ' }}</b> , dépositaire des
+        fonds, auquel est demeurée annexée la liste des associés ayant souscrit avec l'indication, pour chacun
+        d'eux, des sommes versées.</p>
+
+    <p>Les soussignés déclarent expressément, chacun pour ce qui le concerne, que leurs apports respectifs
+        constituent des biens personnels. En conséquence les parts sociales reçues seront la propriété exclusive de
+        chacun d’eux.</p>
+
+
+    <p><b>ARTICLE 7 - CAPITAL SOCIAL</b><br>
+
+    <p> 1.Le capital social est fixé à la somme de <b>{{ capitalSocial ?? ' NOMBRE EN LETTRES' }}
+            ({{ capitalNum ?? ' nombre en numéraire' }} €)</b>, divisé en <b>conv(NOMBRE EN LETTRES)
+            ( {{ nombreAction ?? 'nombre en numéraire' }})</b> actions de NOMBRE en lettres (nombre en numéraire
+        )
+        chacune, et entièrement
+        libérées et attribuées aux associés en rémunération de leur apport.</p>
+
+    <p> Les parts sociales sont attribuées et réparties comme suit :
+    </p>
+    <p><b> A {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}</b>, à concurrence
+        de <b> conv(NOMBRE EN LETTRES)</b> parts sociales, numérotées de 1 à {{ partTotal ?? '0' }},
+        ci 0 parts</p>
+
+    <p>-<b> A {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}</b>, à concurrence
+        de <b> conv(NOMBRE EN LETTRES)</b> parts sociales, numérotées de nombre après le
+        nombre de parts précédent à NOMBRE DE PARTS, ci 0 parts<br>
+
+        Total égal au nombre de parts composant le capital social : conv(NOMBRE EN LETTRES) parts sociales,
+        ci 0 parts</p>
+
+
+    <p><b>ARTICLE 8 - MODIFICATIONS DU CAPITAL SOCIAL</b></p>
+
+    <p>1Le capital social peut, sur décision de l'Assemblée Générale Extraordinaire, être augmenté par la création
+        de parts nouvelles ou par l'élévation du montant nominal des parts existantes, soit au moyen d'apports en
+        numéraire ou en nature, soit par compensation avec des créances liquides et exigibles sur la Société, soit
+        par incorporation de bénéfices ou réserves.</p>
+
+    <p>2. Il peut également être réduit, sur décision de l'Assemblée Générale Extraordinaire, au moyen de
+        l'annulation, du remboursement ou du rachat des parts existantes ou de leur échange contre de nouvelles
+        parts d'un montant identique ou inférieur, ayant ou non la même valeur nominale.</p>
+
+
+    <p><b>TITRE III. - PARTS SOCIALES, DROITS ET OBLIGATIONS GENERAUX DES ASSOCIES</b></p>
+
+
+    <p><b>ARTICLE 9 - REPRESENTATION DES PARTS SOCIALES</b></p>
+
+    <p>Les parts sociales ne peuvent être représentées par des titres négociables. Le droit de chaque associé
+        résulte seulement des présents statuts et des actes ultérieurs modifiant le capital social ou constatant des
+        cessions régulièrement consenties.</p>
+
+    <p> Une copie, certifiée conforme par le gérant, de ces documents sera délivrée à tout associé qui en fera la
+        demande.</p>
+
+
+    <p><b>ARTICLE 10 - DROITS ET OBLIGATIONS ATTACHES AUX PARTS SOCIALES</b></p>
+
+    <p><u>1- Droits aux bénéfices, obligations aux pertes</u></p>
+
+    <p>Chaque part sociale donne à son propriétaire un droit égal dans les bénéfices de la Société et dans tout
+        l'actif social.</p>
+
+    <p>En cas de démembrement grevant les parts sociales, l’usufruitier jouira de toutes les prérogatives et
+        assumera toutes les obligations attachées à la qualité d’associé, conformément à la loi et aux statuts de la
+        Société.</p>
+
+    <p> En conséquence, il sera fiscalement seul imposable au titre des résultats de la Société aussi bien courants
+        qu'exceptionnels. </p>
+
+    <p> Les droits sur les bénéfices distribués, qu’il s’agisse du bénéfice d’un exercice ou de prélèvements sur les
+        réserves, primes ou boni de liquidation reviendront de plein droit à l’usufruitier. Il en sera de même
+        s’agissant de tout profit exceptionnel comme les plus-values de cession des éléments de l’actif immobilisé.
+        De même, l’usufruitier pourra déduire les déficits éventuellement dégagés par la Société. <p>
+
+    <p> Dans ses rapports avec ses coassociés, chacun des associés n'est tenu des dettes et engagements sociaux que
+        dans la proportion du nombre de parts qu'il possède, à l’exception des associés mineurs pour lesquels la
+        contribution aux pertes sera limitée à la somme maximale de 100 euros, le reste étant réparti entre les
+        associés majeurs proportionnellement aux nombres de parts détenues par eux. <p>
+
+    <p>A l'égard des tiers, les associés répondent indéfiniment des dettes sociales à proportion de leur part dans
+        le capital social à la date de l'exigibilité ou au jour de la cessation des paiements. </p>
+
+    <p> Les créanciers ne peuvent poursuivre le paiement des dettes sociales contre un associé qu'après avoir
+        préalablement et vainement poursuivi la Société</p>.
+
+    <p><u>2 - Droit de communication et d'intervention dans la vie sociale.
+        </u></p>
+    <p> Outre le droit d'information annuel à l'occasion de l'approbation des comptes visé ci-après, les associés
+        ont le droit d'obtenir, au moins une fois par an, communication des livres et documents sociaux. </p>>
+
+    <p>L'associé pourra prendre lui-même, au siège social, communication de tous les livres et documents sociaux,
+        des contrats, factures, correspondances, procès-verbaux et plus généralement de tout document établi par la
+        Société ou reçu par elle, conformément aux dispositions de l'article 48 du décret du 3 juillet 1978 précité.
+    </p>>
+
+    <p>Chaque associé peut poser toutes questions écrites concernant la gestion de la Société, au gérant de
+        celle-ci qui devra répondre dans le délai d'un mois, conformément aux dispositions de l'article 1855 du Code
+        civil. </p>>
+
+    <p> Tout associé peut participer aux décisions collectives et y voter, dans les conditions relatées ci-après.
+        Chaque part sociale donne droit à une voix. </p>>
+
+    <p><u>3 - Transmission des droits et obligations des associés. </u></p>
+
+    <p>Les droits et obligations attachés à chaque part la suivent dans quelque main qu'elle passe. La propriété
+        d'une part emporte, de plein droit, adhésion aux statuts et aux décisions de l'assemblée générale.</p>
+
+
+    <p><b>ARTICLE 11 - INDIVISIBILITE DES PARTS SOCIALES</b></p>
+
+    <p>Les parts sociales sont indivisibles à l'égard de la Société qui ne reconnaît qu'un seul propriétaire pour
+        chaque part. </p>
+
+    <p>Les copropriétaires indivis sont tenus de désigner l'un d'entre eux pour les représenter auprès de la
+        Société ; à défaut d'entente, il appartient à l'indivisaire le plus diligent de faire désigner par voie de
+        justice un mandataire chargé de les représenter, conformément aux dispositions de l'article 1844 du Code
+        civil.</p>
+
+    <p>Si une ou plusieurs parts sont grevées d'usufruit, le droit de vote appartient à l’usufruitier sauf pour les
+        décisions relatives à la prorogation, la dissolution de la société ou à la transformation de la société en
+        société en nom collectif où il est réservé au nu-propriétaire. Sauf convention contraire signifiée à la
+        Société, l'usufruitier représente valablement le nu-propriétaire pour ces décisions. </p>>
+
+    <p>Toutefois, dans tous les cas, le nu-propriétaire a le droit de participer aux assemblées générales et pourra
+        à l’occasion de celles-ci poser des questions écrites à condition de demander à la gérance de porter
+        celles-ci à l’ordre du jour dans les conditions prévues à l’article 17 ci-après.</p>
+
+
+    <p><b>ARTICLE 12 - COMPTES COURANTS</b></p>
+
+    <p>Outre leurs apports, les associés pourront verser ou laisser à disposition de la Société toutes sommes dont
+        elle pourrait avoir besoin. Ces sommes sont inscrites au crédit d'un compte ouvert au nom de l'associé. </p>>
+
+    <p>Le montant maximum desdites sommes, les conditions de leur remboursement et de leur éventuelle rémunération
+        sont fixés par accord entre la gérance et les intéressés. Les intérêts des comptes courants sont portés dans
+        les frais généraux de la société.</p>
+
+
+    <p><u>TITRE IV. - CESSION, TRANSMISSION, RETRAIT ET NANTISSEMENT DES PARTS SOCIALES</u></p>
+
+
+    <p><b>ARTICLE 13 - CESSION ET TRANSMISSION DES PARTS SOCIALES</b></p>
+
+
+    <p><u>1 - Cession entre vifs.</u></p>
+    <p>Toute cession de parts doit être constatée par un acte notarié ou sous seing privé. </p>>
+
+    <p>La cession est rendue opposable à la Société par voie d'inscription sur le registre des transferts tenu par
+        la Société. Ce registre est constitué par la réunion, dans l'ordre chronologique de leur établissement, de
+        feuillets identiques utilisés sur une seule face. Chacun de ces feuillets est réservé à un titulaire de
+        parts sociales à raison de sa propriété ou à plusieurs titulaires à raison de leur copropriété, de leur
+        nue-propriété ou de leur usufruit sur ces parts. </p>
+
+    <p> Pour être opposable aux tiers, la cession doit en outre avoir été déposée au greffe, en annexe au registre
+        du commerce et des sociétés.
+        Lorsque deux époux sont simultanément membres de la Société, les cessions faites par l'un d'eux à l'autre
+        doivent, pour être valables, résulter d'un acte notarié ou d'un acte sous seing privé ayant acquis date
+        certaine autrement que par le décès du cédant, en application des dispositions de l'article 1861 du Code
+        civil. </p>>
+
+    <p>Les parts sociales sont librement cessibles entre associés. Les cessions consenties aux ascendants et
+        descendants ne sont également pas soumises à agrément. </p>
+
+    <p> Les parts ne peuvent être cédées à d'autres personnes qu'avec l’agrément des associés donné dans la forme
+        d'une décision collective extraordinaire. </p>
+
+    <p>A l'effet d'obtenir cette autorisation, l'associé cédant en informe la Société et chacun des associés par
+        lettre recommandée avec demande d'avis de réception, en indiquant les prénoms, nom, profession, domicile et
+        nationalité du cessionnaire proposé, ainsi que le nombre de parts sociales dont la cession est envisagée.
+    </p>
+
+    <p> Dans les 3 mois de cette notification, la gérance doit réunir l'assemblée générale extraordinaire des
+        associés, pour statuer dans les conditions prévues à l'article 17 ci-après, sur l'acceptation ou le refus de
+        la cession proposée. La décision prise n'a pas à être motivée et, en cas de refus, elle ne pourra jamais
+        donner lieu à une réclamation quelconque contre les associés ou contre la Société. Elle est portée à la
+        connaissance du cédant par la gérance par lettre recommandée avec demande d'avis de réception ou remise en
+        main propre. </p>
+
+    <p> Si la cession est agréée, elle est régularisée dans le mois de la notification de l'agrément ; à défaut de
+        régularisation dans ce délai, le cessionnaire doit, à nouveau, être soumis à l'agrément des associés dans
+        les conditions sus-indiquées. </p>
+
+
+    <p>Si l'agrément est refusé, les associés disposent alors d'un délai de six mois pour se porter acquéreurs
+        desdites parts. </p>
+
+    <p> Lorsque plusieurs associés expriment leur volonté d'acquérir, ils sont, sauf convention contraire, réputés
+        acquéreurs à proportion du nombre de parts qu'ils détenaient antérieurement. </p>
+
+    <p>Si aucun associé ne se porte acquéreur, ou s'il existe un reliquat parce que les demandes reçues ne portent
+        pas sur la totalité des parts, la Société peut faire acquérir les parts par un tiers agréé à la majorité des
+        quatre cinquième. La Société peut également procéder au rachat des parts en vue de leur annulation. </p>
+
+    <p> La gérance a pour mission de collecter les offres individuelles d'achat émanant des associés, puis, s'il y a
+        lieu, de susciter l'offre de tiers ou de la Société. </p>
+
+    <p>La gérance notifie au cédant, par lettre recommandée avec demande d'avis de réception, ou par lettre remise
+        en main propre, le nom de ou des acquéreurs proposés, associés ou tiers, ou l'offre de rachat par la
+        Société, ainsi que le prix offert. </p>
+
+    <p> En cas de contestation sur le prix, celui-ci est fixé par un expert désigné, soit par les parties, soit, à
+        défaut d'accord entre elles, par ordonnance du président du tribunal de grande instance statuant en la forme
+        des référés et sans recours possible, le tout sans préjudice du droit du cédant de conserver ses parts. </p>
+
+    <p> Si aucune offre de rachat n'est faite au cédant dans un délai d’un an à compter de la date de la dernière
+        des notifications qu'il a faites à la Société et aux associés, l'agrément à la cession est réputé acquis, à
+        moins que les autres associés, n'aient décidé, dans le même délai, la dissolution de la Société, décision
+        que le cédant peut rendre caduque s'il notifie à la Société, par acte extrajudiciaire ou par lettre
+        recommandée avec demande d'avis de réception, sa renonciation au projet initial de cession dans le délai
+        d'un mois à compter de l'intervention de la décision de dissolution.</p>
+
+    <p><u> 2 - Revendication par le conjoint de la qualité d'associé</u></p>
+
+    <p> La qualité d'associé est reconnue à l’époux ou au pacsé commun en biens pour la moitié des parts souscrites
+        ou acquises au moyen de fonds communs s'il notifie à la Société son intention d'être personnellement
+        associé. </p>
+
+    <p>Si la notification a été effectuée lors de l'apport ou de l'acquisition, l'agrément donné par les associés
+        vaut pour les deux époux ou les deux personnes pacsées. Si le conjoint exerce son droit de revendication
+        postérieurement à la réalisation de la souscription ou de l'acquisition, il sera soumis à l'agrément de la
+        majorité des associés représentant au moins les quatre cinquième des parts sociales. Le conjoint associé
+        sera alors exclu du vote et ses parts ne seront pas prises en compte pour le calcul de la majorité. </p>
+
+    <p>La décision des associés doit être notifiée au conjoint, au plus tard, dans le délai d’un an à compter de sa
+        demande ; à défaut, l'agrément est réputé acquis. En cas de refus d'agrément régulièrement notifié, le
+        conjoint associé le reste pour la totalité des parts de la communauté. Les notifications susvisées sont
+        faites par lettre recommandée avec demande d'avis de réception.</p>
+
+
+    <p><u>3 - Transmissions des parts sociales autres que les cessions.</u></p>
+
+    <p><u>1) Décès d'un associé.</u></p>
+    <p>En cas de décès d'un associé, la Société continue entre les associés survivants et les héritiers, légataires
+        ou conjoint de l'associé décédé étant précisé que sauf en ce qui concerne les héritiers ayant la qualité
+        d'ascendant ou de descendant de l'associé décédé, tout autre héritier ou légataire des parts sociales du
+        défunt ne pourra devenir associé qu'après agrément donné par les autres associés. </p>>
+
+    <p>Les héritiers, légataires ou conjoint non agréés n'ont droit qu'à la valeur des parts sociales de leur
+        auteur. </p>
+
+    <p> Les héritiers, légataires ou conjoint de l'associé décédé doivent justifier de leur qualité dans les trois
+        mois du décès par la production de l'expédition d'un acte de notoriété ou de l'extrait d'un intitulé
+        d'inventaire. </p>
+
+    <p>Sauf en ce qui concerne les ascendants ou les descendants de l'associé décédé, qui sont associés de plein
+        droit, les associés survivants devront se prononcer sur l’agrément de toute autre héritier ou légataire des
+        parts sociales au plus tard dans le délai de trois mois à compter de cette production. </p>
+
+    <p> A cet effet, dans le mois qui suit cette dernière, la gérance doit adresser à chacun des associés survivants
+        une lettre recommandée avec avis de réception leur faisant part du décès, mentionnant les qualités des
+        héritiers et légataires, l'agrément sollicité et rappelant le nombre de parts sociales dont le défunt était
+        propriétaire. Il devra également leur indiquer si la Société envisage ou non de se porter acquéreur desdits
+        titres en cas de refus d’agrément. </p>
+
+    <p>Chaque associé survivant doit, dans les quinze jours qui suivent l'envoi de cette lettre faire connaître par
+        lettre recommandée avec avis de réception s'il accepte ou s'il rejette l'agrément sollicité. En cas de
+        rejet, il doit indiquer le nombre de parts sociales qu'il se propose de racheter, à défaut de rachat des
+        parts par la société en vue de leur annulation. </p>
+
+    <p>La décision d'agrément est prise aux conditions de majorité et quorum requises pour toute décision
+        extraordinaire des associés, abstraction faite des parts sociales du défunt. Cette décision est notifiée
+        dans le délai de trois mois, à compter de la production de l'expédition de l’acte de notoriété ou de
+        l'extrait d'un intitulé d'inventaire justifiant de la qualité d’héritier ou de légataire des parts sociales.
+        Elle n’a pas à être justifiée. </p>
+
+    <p>En cas de rejet de l’agrément sollicité, et si seulement la Société ne formule pas une offre de rachat des
+        parts sociales dont le défunt était propriétaire, les associés pourront acquérir ceux-ci. Les associés
+        consentent à privilégier en premier lieu le rachat des parts par la Société par souci de traitement
+        équitable et égalitaire entre eux. </p>
+
+    <p> En cas de pluralité d'offres d'associés survivants, ceux-ci sont réputés acquéreurs à proportion du nombre
+        de parts sociales détenues par chacun d'eux au jour du décès et dans la limite de leur demande. </p>
+
+    <p>Si la Société ne fait aucune proposition de rachat, si aucun associé ne se porte acquéreur, si les offres
+        d'achat ne portent pas sur la totalité des parts sociales soumises à l'agrément ou si encore les candidats
+        acquéreurs n'acceptent pas la valeur de rachat fixée pour les parts sociales de l'associé décédé la Société
+        est tenue de racheter ces parts en vue de leur annulation. Elle peut également faire acquérir les parts par
+        un tiers agréé à la majorité prévue pour les décisions extraordinaires. </p>
+
+    <p>La valeur des parts est, à défaut d'accord entre les parties déterminée par un expert désigné soit par les
+        parties, soit par ordonnance du Président du Tribunal de Grande Instance statuant en la forme du référé et
+        sans recours possible. </p>
+
+    <p>Le prix est payable comptant lors de la réalisation des cessions ou de la décision de réduction du capital
+        social, lesquelles doivent intervenir dans les trois mois de la détermination définitive du prix. </p>
+
+    <p>A défaut de réalisation du rachat ou de la réduction du capital social dans le délai d’un an à compter de la
+        production de l'expédition d'un acte de notoriété ou de l'extrait d'un intitulé d'inventaire justifiant de
+        la qualité d’ayant droit, les héritiers ou légataires ou le conjoint sont réputés agréés en tant qu'associés
+        de la Société.</p>
+
+
+    <p><u>2) Donation – Liquidation de communauté</u></p>
+
+    <p>La transmission des parts sociales par voie de donation est soumise aux mêmes conditions d'agrément que les
+        cessions susvisées à l’article 13.1.
+        Il en est de même de toute mutation de propriété qui serait l'effet d'une liquidation de communauté de biens
+        entre époux.</p>
+
+
+    <p><u> 3) Autres transmissions entre vifs.</u></p>
+
+    <p> Les échanges de parts sociales, apports, attributions issues notamment d'un partage ou toute opération ayant
+        pour conséquence le transfert d'un droit quelconque de propriété sur une ou plusieurs parts de la société
+        sont soumises aux mêmes conditions et modalités d'agrément que les cessions sus relatées.</p>
+
+
+    <p><b>ARTICLE 14 – DECES - RETRAIT D'UN ASSOCIE</b></p>
+
+    <p> 1. La société n'est pas dissoute par le décès d'un ou plusieurs des associés, gérants ou non, et continue
+        avec les survivants et les héritiers et les représentants de l'associé ou des associés décédés. <br>
+
+        De même, l'absence, l'incapacité civile, la déconfiture, la liquidation ou le redressement judiciaire ou la
+        faillite personnelle de l'un ou plusieurs de ses associés ne met pas fin à la société et, à moins qu'une
+        décision collective des associés n'en prononce la dissolution, celle-ci continue entre les autres associés.
+    </p>
+
+    <p> Il appartiendra à ces derniers de rembourser à l'associé absent, frappé d'incapacité ou en état de
+        liquidation ou de redressement judiciaire ou de faillite personnelle ou à son représentant légal ou
+        judiciaire, le montant des parts qu'il pourrait posséder soit par voie de réduction de capital, soit par
+        voie de rachat, de la manière et dans les conditions et proportions que les associés demeurés en société
+        jugeront convenables. Les associés s’engagent à privilégier en premier lieu le rachat des parts par la
+        Société par souci de traitement équitable et égalitaire entre eux. </p>
+
+    <p> En cas de contestation, la valeur des parts sera déterminée par un expert dans les conditions prévues à
+        l’article 1843-4 du Code civil. </p>
+
+    <p> 2. Sans préjudice des droits des tiers, un associé peut se retirer totalement ou partiellement de la Société
+        après autorisation donnée par la collectivité des associés statuant dans les conditions de majorité prévues
+        pour les décisions extraordinaires. Ce retrait peut être autorisé pour juste motif par une décision de
+        justice. </p>
+
+    <p> La demande de retrait est notifiée à la Société et aux associés par lettre recommandée avec demande d'avis
+        de réception. </p>
+
+    <p> L'associé qui se retire a droit au remboursement par la Société de la valeur de ses parts fixée, à défaut
+        d'accord amiable, par un expert désigné conformément à l'article 1843-4 du Code civil. Si le bien qu'il a
+        apporté et dont les parts concernées ont constitué la rémunération, se trouve encore en nature dans l'actif
+        social lors du retrait, l'associé peut se le faire attribuer, à charge de soulte, s'il y a lieu,
+        conformément au troisième alinéa de l'article 1844-9 du Code civil.</p>
+
+
+    <p><b>ARTICLE 15 - NANTISSEMENT</b></p>
+
+    <p> Les parts sociales peuvent faire l'objet d'un nantissement constaté soit par acte authentique, soit par acte
+        sous seing privé signifié à la société ou accepté par elle dans un acte authentique.
+        Le nantissement donne lieu à la publicité décrite aux articles 53 à 57 du décret n° 78-704 du 3 juillet
+        1978. </p>
+
+    <p>Tout associé peut obtenir des autres associés leur consentement à un projet de nantissement dans les mêmes
+        conditions que leur agrément à une cession de parts. Le consentement donné au projet de nantissement emporte
+        agrément du cessionnaire en cas de réalisation forcée des parts sociales à la condition que cette
+        réalisation soit notifiée un mois avant la vente aux associés et à la société. </p>
+
+    <p>Chaque associé peut se substituer à l'acquéreur dans un délai de cinq jours francs à compter de la vente. Si
+        plusieurs associés exercent cette faculté, ils sont, sauf clause ou convention contraire, réputés acquéreurs
+        à proportion du nombre de parts qu'ils détiennent antérieurement. Si aucun associé n'exerce cette faculté,
+        la société peut racheter les parts elle-même, en vue de leur annulation. </p>
+
+    <p>La réalisation forcée qui ne procède pas d'un nantissement auquel les autres associés ont donné leur
+        consentement doit pareillement être notifiée un mois avant la vente aux associés et à la société. </p>
+
+    <p>Les associés peuvent, dans ce délai, décider la dissolution de la société ou l'acquisition des parts dans
+        les conditions prévues aux articles 1862 et 1863 du Code civil. </p>
+
+    <p> Si la vente a eu lieu, les associés ou la société peuvent exercer la faculté de substitution qui leur est
+        reconnue par l'article 1867 du Code civil. Le non-exercice de cette faculté emporte agrément de l'acquéreur.</p>
+
+    <p><b>ARTICLE 16 - GERANCE</b></p>
+
+    <p><b><u>1 - Désignation - Démission - Révocation</u></b></p>
+
+    <p>La Société est administrée par un ou plusieurs gérants associés ou non, personnes physiques ou morales,
+        désignés pour une durée déterminée ou non par décision collective des associés représentant plus de la
+        moitié des parts sociales. </p>
+
+    <p>Un gérant peut démissionner à tout moment sans avoir à justifier sa décision sous réserve de la notifier à
+        chacun des associés ainsi qu'aux autres gérants, par lettre recommandée ou par lettre remise en main propre,
+        et de respecter un préavis d’un mois. </p>
+
+    <p>La démission n'est recevable en tout état de cause qu'accompagnée d'une convocation de l'assemblée des
+        associés en vue de la nomination d'un ou plusieurs nouveaux gérants. </p>
+
+    <p>A l’exception des deux premiers gérants qui seront révocables par décision extraordinaire des associés, ces
+        derniers pourront mettre fin avant terme au mandat d'un gérant, par décision collective des associés
+        statuant dans les conditions de majorité prévues pour les décisions ordinaires. </p>
+
+    <p> La révocation peut également intervenir par voie de justice pour cause légitime. Tout gérant révoqué sans
+        motif légitime a droit à des dommages et intérêts. </p>
+
+    <p> La nomination et la cessation de fonctions du gérant donnent lieu à publication dans les conditions prévues
+        par les dispositions légales et réglementaires.</p>
+
+
+    <p><b><u>2 - Pouvoirs</u></b></p>
+
+    <p>La gérance peut accomplir tous les actes de gestion que requiert l'intérêt de la Société. Elle dispose des
+        pouvoirs les plus étendus pour la gestion des biens et affaires de la Société, et pour faire et autoriser
+        tous les actes et opérations relatifs à son objet. S'il y a plusieurs gérants, ils exercent séparément ces
+        pouvoirs, sauf le droit qui appartient à chacun de s'opposer à une opération avant qu'elle ne soit conclue.
+    </p>
+
+    <p>L'opposition formée par l'un d'eux aux actes de son ou de ses co-gérants est sans effet à l'égard des tiers,
+        à moins qu'il ne soit établi que ces derniers ont eu connaissance de celle-ci. La conclusion des opérations
+        s'apprécie différemment selon le type d'opérations visées. </p>
+
+    <p>En matière contractuelle, l'opposition doit intervenir avant l'échange des consentements. Pour les actions
+        en justice engagées par la Société, la date limite de validité de l'opposition correspond à la date de dépôt
+        de la requête au greffe du Tribunal compétent. </p>
+
+    <p> Dans ses rapports avec les tiers, le gérant engage la Société à leur égard par les actes et opérations
+        entrant dans l'objet social. Il est investi des pouvoirs les plus étendus pour représenter la Société et
+        agir en son nom en toute circonstance, sans avoir à justifier de pouvoirs spéciaux. </p>
+
+    <p> Toutefois, à titre de règlement intérieur, la Gérance ne pourra, sans l'autorisation préalable de
+        l'assemblée générale des associés statuant à la majorité simple, et sans que cette clause puisse être
+        opposée aux tiers, effectuer l'une des opérations suivantes : </p>
+
+    <p> vente d’un bien immobilier,
+        investissement ou engagement financier quelconque portant sur une somme supérieure à 50 000 euros par
+        opération, à l’exception de tout engagement contracté pour financer le rachat des parts d’un associé par
+        voie de réduction de réduction de capital,
+        emprunt portant sur une somme supérieure à 50 000 euros, à l’exception de tout emprunt contracté pour
+        financer le rachat des parts d’un associé par voie de réduction de réduction de capital. </p>
+
+    <p> La signature sociale est donnée par l'apposition de la signature du ou des gérants, de l'un ou de plusieurs
+        d'entre eux, précédée de la mention "Pour la société SCI LINK IMMO, complétée par l'une des expressions
+        suivantes : "Le gérant", "Un gérant" ou "Les gérants".</p>
+
+
+    <p><b><u>3 - Responsabilité</u></b></p>
+
+    <p>Chaque gérant est responsable individuellement envers la Société et envers les tiers, soit des infractions
+        aux lois et règlements, soit de la violation des statuts, soit des fautes commises dans sa gestion. </p>
+
+    <p>Si plusieurs gérants ont participé aux mêmes faits, leur responsabilité est solidaire à l'égard des tiers et
+        des associés. Toutefois, dans leurs rapports entre eux, le tribunal détermine la part contributive de chacun
+        dans la réparation du dommage. </p>
+
+    <p> Si une personne morale exerce la gérance, ses dirigeants sont soumis aux mêmes conditions et obligations, et
+        encourent les mêmes responsabilités civiles et pénales que s'ils étaient gérants en leur nom propre, sans
+        préjudice de la responsabilité solidaire de la personne morale qu'ils dirigent.</p>
+
+
+    <p><b><u>4 - Rémunération</u></b></p>
+
+    <p>Les gérants peuvent recevoir une rémunération, qui est fixée et peut être modifiée par une décision
+        ordinaire des associés. </p>
+
+    <p> Tout gérant a, par ailleurs, droit au remboursement de ses frais de déplacement et de représentation engagés
+        dans l'intérêt de la Société, sur présentation de toutes pièces justificatives.</p>
+
+
+    <p><b>ARTICLE 17 - DECISIONS COLLECTIVES</b></p>
+
+
+    <p><b>1 - Nature - Majorité</b></p>
+
+    <p>Les décisions excédant les pouvoirs de la Gérance sont prises par les associés et résultent au choix de la
+        gérance, soit d'une assemblée générale, soit d'une consultation écrite des associés, soit encore du
+        consentement unanime de tous les associés donné dans un acte. Tous moyens de communication
+        (visio-conférence, téléphone, etc) peuvent être utilisés dans l’expression des décisions. </p>
+
+    <p> Les décisions collectives des associés sont dites ordinaires ou extraordinaires. </p>
+
+    <p> a) Sont de nature extraordinaire, toutes les décisions emportant modification, directe ou indirecte, des
+        statuts ainsi que celles dont les présents statuts exigent expressément qu'elles revêtent une telle nature
+        ou encore celles qui exigent d'être prises à une condition de majorité autre que la majorité simple. </p>
+
+    <p> L'assemblée générale extraordinaire peut décider notamment : <br>
+        - l'augmentation ou la réduction du capital social ; <br>
+        - la prorogation de la société ;<br>
+        - sa dissolution ;<br>
+        - sa transformation en société de toute autre forme. <br></p>
+
+    <p>Les décisions extraordinaires doivent, pour être valables, être adoptées par un ou plusieurs associés
+        représentant les quatre cinquième au moins du capital social. Les associés peuvent toujours d'un commun
+        accord, prendre les décisions collectives à l'unanimité par acte sous seing privé ou notarié. </p>
+
+    <p> b) Sont de nature ordinaire toutes décisions collectives qui ne relèvent pas de la compétence de l’assemblée
+        générale extraordinaire, notamment : </p>
+
+    <p>- celles s'appliquant à l'approbation du rapport écrit d'ensemble des gérants sur l'activité de la société
+        au cours de l'exercice écoulé comportant l'indication des bénéfices réalisés ou des pertes encourues.</p>
+    <p>- celles s'appliquant à l'affectation et à la répartition des résultats. <p>
+
+    <p>Les décisions de nature ordinaire doivent, pour être valables, être adoptées à la majorité des voix
+        attachées aux parts créées par la société.</p>
+
+
+    <p><b>2 - Modalités</b></p>
+
+    <p>Les décisions collectives des associés s'expriment, soit par la participation de tous les associés à un même
+        acte, authentique ou sous seing privé, soit en assemblée. Elles peuvent aussi résulter d'une consultation
+        par correspondance. Tous moyens de communication (visio-conférence, téléphone, etc) peuvent être utilisés
+        dans l’expression des décisions. </p>
+
+    <p>Assemblées générales </p>
+
+    <p>Les assemblées générales ordinaires ou extraordinaires sont convoquées par le gérant. </p>
+
+    <p>Les associés sont convoqués quinze jours au moins avant la réunion de l'assemblée par lettre recommandée,
+        courriel, télécopie ou lettre remise en main propre. La lettre contient indication de l'ordre du jour de
+        telle sorte que le contenu et la portée des questions qui y sont inscrites apparaissent clairement sans
+        qu'il y ait lieu de se reporter à d'autres documents. La convocation peut être verbale, et l'assemblée
+        réunie sans délai si tous les associés sont présents ou représentés. </p>
+
+    <p> Dès la convocation, le texte du projet de résolutions proposées et tout document nécessaire à l'information
+        des associés sont tenus à leur disposition au siège social où ils peuvent en prendre connaissance ou copie.
+        Les associés peuvent demander que ces documents leur soient adressés soit par simple lettre ou courriel,
+        soit encore à leurs frais par lettre recommandée. </p>
+
+    <p> Lorsque l'ordre du jour porte sur la reddition de compte, la communication desdites pièces et documents a
+        lieu dans les conditions relatées à l'article 20 ci-après. </p>
+
+    <p> Un associé non gérant peut à tout moment, par lettre recommandée, demander au gérant de provoquer une
+        délibération des associés sur une question déterminée. Si le gérant fait droit à la demande, il procède à la
+        convocation des associés ou à leur consultation par écrit. </p>
+
+    <p> Si le gérant s'oppose à la demande ou garde le silence, l'associé demandeur peut, à l'expiration d'un délai
+        d'un mois à dater de sa demande, solliciter du président du tribunal de grande instance, statuant en la
+        forme des référés, la désignation d'un mandataire chargé de provoquer la délibération des associés. </p>
+
+    <p>Chaque associé a le droit de participer aux décisions collectives et dispose d'un nombre de voix égal à
+        celui des parts qu'il possède.
+        Chaque associé peut se faire représenter aux assemblées par son conjoint ou par un autre associé justifiant
+        de son pouvoir. </p>
+
+    <p> La délibération ne peut porter sur aucun autre objet que ceux visés dans l'ordre du jour, sauf à ce qu’un
+        associé demande de porter à l’ordre du jour une délibération supplémentaire et que le gérant fasse droit à
+        sa demande. </p>
+
+    <p> L'assemblée est réunie au siège social ou au domicile du gérant, ou de l'un des gérants s'ils sont
+        plusieurs. </p>
+
+    <p>Elle est présidée par le gérant ou le plus âgé des gérants ; il est constitué un bureau comprenant le
+        président et un secrétaire qui peut être pris en dehors des associés. </p>
+
+    <p> Chaque associé dispose d'un nombre de voix égal à son nombre de parts sociales. </p>
+
+    <p>Les délibérations de l'assemblée générale sont constatées par des procès-verbaux et signés par le Gérant et
+        le cas échéant, par le Président de Séance. S'il n'est pas établi de feuille de présence, les procès-verbaux
+        sont en outre signés par tous les associés présents et par les Mandataires. </p>
+
+    <p> La détermination, même à l'égard des tiers, des membres de l'assemblée, peut résulter de la simple
+        indication de leur nom au procès-verbal. </p>
+
+    <p>Consultation par correspondance </p>
+
+    <p> Si elle le juge utile, la gérance peut consulter les associés par correspondance. </p>
+
+    <p>Dans ce cas, elle doit adresser à chaque associé, par lettre recommandée ou lettre remise en main propre, le
+        texte des résolutions proposées accompagné s'il y a lieu de tous renseignements et explications utiles. </p>
+
+    <p> Les associés disposent d'un délai de 15 jours à compter de la date de réception de cette lettre pour émettre
+        leur vote par écrit. Cette réponse est adressée au siège social par lettre recommandée. </p>
+
+    <p> Chaque associé devra compléter le bulletin de vote en cochant, pour chaque résolution, une case unique
+        correspondant au sens de son vote. Si aucune ou plus d'une case ont été cochées pour une même résolution, le
+        vote sera réputé être un vote de rejet. Le défaut de réponse d'un associé dans le délai indiqué vaut
+        abstention. </p>
+
+    <p>Le procès-verbal de la consultation est établi par la gérance qui y annexe les votes des associés. Les
+        décisions prises par consultation écrite doivent pour être valables réunir les conditions de quorum et de
+        majorité prévues pour les assemblées générales. </p>
+
+
+    <p>Consentement unanime exprimé dans un acte</p>
+
+    <p> En cas de décision collective résultant du consentement unanime de tous les associés exprimé dans un acte,
+        cet acte est signé par tous les associés et retranscrit sur le registre spécial ou sur les feuilles mobiles
+        numérotées visés ci-dessus.
+    </p>
+
+    <p><b>ARTICLE 18 - CONVENTIONS REGLEMENTEES</b></p>
+
+    <p>La gérance, ou, s'il en existe un, le Commissaire aux Comptes, doit présenter à l'Assemblée Générale
+        Annuelle un rapport sur les conventions passées directement ou par personne interposée entre la Société et
+        l'un de ses gérants</p>        .
+
+    <p>Ce rapport doit également mentionner les conventions passées entre la Société et une société dans laquelle
+        la gérance est associée indéfiniment responsable, gérant, administrateur, directeur général, directeur
+        général délégué, membre du directoire ou du conseil de surveillance, ou actionnaire disposant d'une fraction
+        des droits de vote supérieure à 10 %.</p>
+
+    <p>L'Assemblée Générale Annuelle statue sur ce rapport dont le contenu doit être conforme aux dispositions
+        réglementaires.</p>
+
+    <p>Les dispositions qui précèdent ne sont pas applicables aux conventions portant sur les opérations courantes
+        de la Société et conclues à des conditions normales qui, en raison de leur objet ou de leurs implications
+        financières, ne sont significatives pour aucune des parties. (article L 612-5 du Code de commerce).</p>
+
+    <p><b><u>ARTICLE 19 - COMMISSAIRES AUX COMPTES</u></b></p>
+
+    <p>La nomination d'un Commissaire aux Comptes titulaire et d'un Commissaire aux Comptes suppléant peut être
+        décidée par décision ordinaire des associés. Elle est obligatoire dans les cas prévus par la loi et les
+        règlements.</p>
+
+    <p>Le Commissaire aux Comptes exerce ses fonctions dans les conditions prévues par la loi.</p>
+
+
+    <p><b>ARTICLE 20 - EXERCICE SOCIAL - COMPTES SOCIAUX</b></p>
+
+    <p> Chaque exercice social a une durée d'une année, qui commence le 1er janvier et finit le 31 décembre. Par
+        exception, le premier exercice commencera le jour de l'immatriculation de la Société au Registre du commerce
+        et des sociétés et se terminera le 31 décembre 2021.</p>
+
+    <p>Il est tenu au siège social une comptabilité régulière.</p>
+
+    <p>En outre, à la clôture de chaque exercice social, il est dressé par la gérance un inventaire de l'actif et
+        du passif de la Société, un bilan, un compte de résultat et une annexe. Le gérant rend compte de sa gestion
+        aux associés et leur présente un rapport sur l'activité de la Société au cours de l'exercice écoulé
+        comportant l'indication des bénéfices réalisés ou prévisibles et des pertes encourues ou prévues. Ces
+        documents doivent être soumis aux associés dans les six mois de la clôture de l'exercice.</p>
+
+    <p> Le rapport du gérant, le texte des résolutions proposées et tous autres documents nécessaires à
+        l'information des associés sont adressés à chacun d'eux par tous moyens de communication écrite (lettre
+        recommandée, courriel, télécopie ou lettre remise en main propre) quinze jours au moins avant la réunion de
+        l'Assemblée. Ces mêmes documents sont pendant ce délai, tenus à la disposition des associés au siège social
+        où ils peuvent en prendre connaissance ou copie.</p>
+
+
+
+
+    <p><b>ARTICLE 21 - AFFECTATION ET REPARTITION DES RESULTATS</b></p>
+    <p>Le bénéfice net de l'exercice est déterminé, pour chaque exercice, déduction faite des frais généraux et
+        autres charges de la Société, y compris les éventuels amortissements et provisions nécessaires.</p>
+
+    <p> Le bénéfice distribuable est constitué par le bénéfice net de l'exercice diminué des pertes antérieures et
+        augmenté des reports bénéficiaires.</p>
+
+
+    <p>Ce bénéfice est réparti entre les associés, proportionnellement au nombre de parts appartenant à chacun
+        d'eux. Il est inscrit à leur crédit dans les livres sociaux, ou versé effectivement à la date fixée, soit
+        par les associés, soit, à défaut, par la gérance.</p>
+
+    <p>Toutefois, les associés peuvent décider qu'une partie ou la totalité du bénéfice sera reportée à nouveau ou
+        affectée à toutes réserves générales ou spéciales qu'ils auront créées.</p>
+
+
+    <p><b><u> TITRE VI. - TRANSFORMATION - DISSOLUTION - LIQUIDATION
+            </u></b></p>
+
+
+    <p><b>ARTICLE 22 - TRANSFORMATION DE LA SOCIETE</b></p>
+
+    <p>La décision de transformation de la Société en une société en nom collectif, en commandite simple ou par
+        actions, ou en G.I.E. sera prise à l'unanimité des associés réunis en assemblée.</p>
+
+    <p>La transformation de la Société soit en société civile d'un type particulier, soit en société à
+        responsabilité limitée ou en société anonyme sera prononcée dans les conditions de majorité des décisions
+        extraordinaires.</p>
+
+    <p>La transformation de la Société n'entraîne pas la création d'une personne morale nouvelle.</p>
+
+
+
+    <p><b>ARTICLE 23 - DISSOLUTION</b></p>
+    <p> 1. La Société prend fin à l'expiration du terme fixé par les statuts ou pour toute autre cause prévue par
+        l'article 1844-7 du Code civil, et notamment par la dissolution anticipée décidée par les associés à la
+        majorité prévue pour les modifications statutaires.</p>
+
+    <p>Dans le cas où la Société est dépourvue de gérant depuis plus d'un an, tout intéressé peut demander au
+        tribunal la dissolution anticipée de la Société.
+    </p>
+    <p>Un an au moins avant l'expiration de la Société, les associés, statuant en assemblée dans les conditions de
+        majorité des décisions extraordinaires, doivent être consultés à l'effet de décider de la prorogation de la
+        Société.</p>
+
+    <p>2. La réunion de toutes les parts en une seule main n'entraîne pas la dissolution de plein droit de la
+        Société. Tout intéressé peut demander cette dissolution si la situation n'a pas été régularisée dans le
+        délai d'un an.
+        La dissolution, de la Société devenue unipersonnelle entraîne, si l'associé unique est une personne morale,
+        la transmission universelle du patrimoine de la Société à l'associé unique, sans qu'il y ait lieu à
+        liquidation, sous réserve du droit d'opposition des créanciers, conformément aux dispositions de l'article
+        1844-5 du Code civil.</p>
+
+
+    <p>L'appartenance de l'usufruit de toutes les parts sociales à une même personne est sans conséquence sur
+        l'existence de la Société.</p>
+
+    <p><b> ARTICLE 24 - LIQUIDATION</b></p>
+
+
+
+    <p>La dissolution de la Société entraîne sa liquidation. La personnalité morale de la Société subsiste pour les
+        besoins de la liquidation jusqu'à la publication de la clôture de celle-ci.</p>
+
+    <p>Pendant la durée de la liquidation, la dénomination de la Société suivie de la mention "société en
+        liquidation", puis du nom du ou des liquidateurs, doit figurer sur tous actes et documents émanant de la
+        Société et destinés aux tiers.</p>
+    <p> La collectivité des associés nomme un liquidateur, qui peut être le gérant, à la majorité simple des voix ;
+        elle fixe ses pouvoirs et sa rémunération.
+    </p>
+    <p> Le liquidateur dispose des pouvoirs les plus étendus, et notamment celui de pouvoir réaliser l'actif, même à
+        l'amiable, afin de parvenir à l'entière liquidation de la Société. Il peut être autorisé par les associés à
+        continuer les affaires en cours ou à faire entreprendre de nouvelles activités par la Société, pour les
+        besoins de la liquidation.</p>
+
+    <p>Le liquidateur rend compte, une fois par an, de l'accomplissement de sa mission aux associés réunis en
+        assemblée. La décision de clôture de la liquidation est prise par les associés après approbation des comptes
+        définitifs de liquidation.</p>
+
+    <p>Si la clôture de la liquidation n'est pas intervenue dans un délai de trois ans à compter de la dissolution,
+        le ministère public ou tout intéressé peut saisir le tribunal qui fait procéder à la liquidation, ou si
+        celle-ci a été commencée, à son achèvement.</p>
+
+    <p> Après paiement des dettes et remboursement du capital social, le partage de l'actif est effectué entre les
+        associés dans les mêmes proportions que leur participation aux bénéfices. Les règles concernant le partage
+        des successions y compris l'attribution préférentielle s'appliquent au partage entre associés.
+    </p>
+
+    <p><b><u>TITRE VII. - DIVERS</u></b></p>
+
+
+
+    <p><b> ARTICLE 25 - CONTESTATIONS</b></p>
+
+    <p> En cas de pluralité d'associés, toutes les contestations qui pourraient surgir pendant la durée de la
+        Société ou lors de sa liquidation entre les associés ou entre la Société et les associés, relativement aux
+        affaires sociales ou à l'exécution des présents statuts, seront soumises aux tribunaux compétents.</p>
+
+    <p><b> ARTICLE 26 – FRAIS</b></p>
+
+    <p> Les frais et les droits des présentes et de leurs suites seront supportés par la Société et portés en frais
+        généraux dès la première année et en tout cas avant toute distribution de bénéfice.</p>
+
+
+    <p><b> ARTICLE 27 - PUBLICITE - POUVOIRS</b></p>
+
+    <p>La Société ne jouira de la personnalité morale qu'à compter du jour de son immatriculation au Registre du
+        commerce et des sociétés.</p>
+    <p>Tous pouvoirs sont donnés au porteur d'un original ou d'une copie des présentes pour effectuer les
+        formalités de publicité relatives à la constitution de la Société et notamment :
+    </p>
+    <p> - pour signer et faire publier l'avis de constitution dans un journal d'annonces légales dans le département
+        du siège social ;</p>
+    <p>- pour faire procéder à toutes formalités en vue de l'immatriculation de la Société au Registre du commerce
+        et des sociétés ;</p>
+    <p>- et généralement, pour accomplir les formalités prescrites par la loi et accomplir tout acte pour la
+        réalisation de l’objet social de la société</p>
+
+    <p style="text-align: center">
+        <b><u>NOMMINATION DU PREMIER GERANT</u></b>
+        <br>
+    </p>
+
+    <p>
+
+        <b> {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}</b>, soussignée de
+        seconde part, est nommée premier gérant de la société pour une durée illimitée.
+
+
+        <br>Il déclare, qu'aucune prescription, aucune mesure ou décision quelconque ne fait obstacle à l'exercice de ce
+        mandat.
+        <br>
+    </p>
+
+    <p style="text-align: right">
+        <br>Fait à <b>{{ address ?? 'VILLE' }}</b>
+        <br>Le <b>{{ dateCreation ?? 'DATE' }}</b>
+        <br>En QUATRE exemplaires originaux
+        <br>
+    </p>
+
+    {# <di class="row"> #}
+    {# <div class="col-5" style="margin-left: 13%"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div> #}
+    {# <div class="col-4"><b><u><b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b></u></b></div> #}
+    {# </div> #}
+
+    <p style="text-align: right; margin-top: -40px">
+        {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}
+    </p>
+
+    <p>{{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }}
+        (*) Signature suivie de la mention manuscrite ´ Bon pour acceptation des fonctions de Gérant de la SCI LINK
+        IMMO
+    </p>
+
+    <p style="text-align: center; margin-top: 50px;"><b>ANNEXE 1</b></p>
+
+
+    <p style="text-align: center;"><b><u>ETAT DES ACTES ACCOMPLIS POUR LE COMPTE<br>
+                DE LA SOCIETE EN FORMATION<br>
+                AVANT LA SIGNATURE DES STATUTS</u></b></p>
+
+
+
+    <p>Conformément aux dispositions de l'article R.210-5 du Code de commerce, cet état sera annexé aux statuts,
+        dont la signature emportera reprise des engagements par la Société dès que celle-ci aura été immatriculée au
+        Registre du commerce et des sociétés.</p>
+    {# <a class="btn btn-outline-warning" href="javascript:window.print()">Imprimer votre statut</a> #}
+    {# <a class="btn btn-outline-success" href="{{ path('save_status')}}">Sauvegarder Statut </a> #}
+
+{% endblock %}
