@@ -28,6 +28,7 @@ class SecurityController extends AbstractController
             'error' => $error
         ]);
     }
+    
 
     /**
      * @Route("/logout", name="app_logout")
@@ -59,7 +60,7 @@ class SecurityController extends AbstractController
                 $entityManager->flush();
             }
             
-        return new Response($this->render('security/confirmation.html.twig',[
+        return new Response($this->twig->render('security/confirmation.html.twig',[
             
             'user' => $user
             ])

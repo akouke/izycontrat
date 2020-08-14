@@ -13,7 +13,7 @@
 
       <div class="content__body py-8 border-b">
         <p>
-          Hey, {{ user.getFirstName() }} <br><br>Merci d'avoir bien voulu vous enregistrer sur notre plateforme
+          Bonjour, {{ user.getFirstName() }} <br><br>Merci d'avoir bien voulu vous enregistrer sur notre plateforme
         </p>
         <form action="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}" method="get" target="_blank">
         <button class="text-white text-sm tracking-wide bg-black rounded w-full my-8 p-4 ">CONFIRMER VOTRE COMPTE</button>
@@ -25,7 +25,7 @@
 
       <div class="content__footer mt-8 text-center text-grey-darker">
         <h3 class="text-base sm:text-lg mb-4">Merci de choisir IZYcontrat!</h3>
-        <p>www.izy-contrat.com</p>
+        <p>www.izy-contrat.fr</p>
       </div>
 
     </div>

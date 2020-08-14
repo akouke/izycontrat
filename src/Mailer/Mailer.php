@@ -49,6 +49,24 @@ class Mailer
         
         $this->mailer->send($message);
     }
+    
+    public function SendEmailSuccessPayment (Person $person) 
+    {
+           
+        $body = $this ->twig->render('mail/success_mail.html.twig', [
+            
+            'user' => $person
+            
+            ]);
+        $message = (new \Swift_Message())
+        ->setSubject('IZYcontrat Confirmation paiement ')
+        ->setFrom($this->emailFrom)
+        ->setTo($person->getUser()->getEmail())
+        ->setBody($body, 'text/html');
+        //->attach(Swift_Attachment::fromPath('my-document.pdf'))
+        
+        $this->mailer->send($message);
+    }
 
 
 }

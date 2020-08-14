@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Event\UserRegisterEvent;
+use App\Event\UserPaymentEvent;
 
 class RegistrationController extends AbstractController
 {
@@ -66,12 +67,14 @@ class RegistrationController extends AbstractController
 
             $entityManager->flush();
             
-            $UserRegisterEvent = new UserRegisterEvent($person);
+            //$UserRegisterEvent = new UserRegisterEvent($person);
+            $UserPaymentEvent = new UserPaymentEvent($person);
             $eventDispatcher->dispatch(
-                UserRegisterEvent::NAME,
-                $UserRegisterEvent
+                UserPaymentEvent::NAME,
+                $UserPaymentEvent
             
             );
+            
             return $this->redirectToRoute('app_home');
 
            /** return $guardHandler->authenticateUserAndHandleSuccess(

@@ -4,7 +4,7 @@ use App\Mailer\Mailer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
-class UserSubscriber implements EventSubscriberInterface
+class UserSuccessClient implements EventSubscriberInterface
 
 {
     /**
@@ -25,15 +25,16 @@ class UserSubscriber implements EventSubscriberInterface
         
         return [
             
-            UserRegisterEvent::NAME=>'onUserRegister'
-        
+            UserPaymentEvent::NAME=>'onUserPayment'
+          //  UserSuccessPaymentEvent::NAME=>'onUserPayment'
             ];
     }
     
-    public function onUserRegister( UserRegisterEvent $event)
+    
+    public function onUserPayment(UserPaymentEvent $event)
     {
         
-       $this->mailer->SendEmailConfirmation($event->getRegisteredUser());
+       $this->mailer->SendEmailSuccessPayment($event->getpaidUser());
         
     }
     

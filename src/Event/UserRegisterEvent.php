@@ -15,7 +15,8 @@ const NAME='user.register';
  */
 public function __construct (Person $registeredUser) 
 {
- $this->registeredUser = $registeredUser;   
+ $this->registeredUser = $registeredUser; 
+ 
  
 }
 
@@ -27,7 +28,6 @@ public function getRegisteredUser() : Person
 {
  return $this->registeredUser;    
 }
-
 
 
      
