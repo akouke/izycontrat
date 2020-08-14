@@ -202,8 +202,7 @@
 
                 1.Le capital social est fixé à la somme de <b>{{ capitalSocial ?? ' NOMBRE EN LETTRES' }}
                     ({{ capitalNum ?? ' nombre en numéraire' }} €)</b>, divisé en <b>conv(NOMBRE EN LETTRES)
-                    ( {{ nombreAction ?? 'nombre en numéraire' }})</b> actions de NOMBRE en lettres (nombre en numéraire
-                )
+                    ( {{ nombreAction ?? 'nombre en numéraire' }})</b> actions de <b>({{ actionChacune ?? 'nombre en numéraire'}} ) €</b>
                 chacune, et entièrement
                 libérées et attribuées aux associés en rémunération de leur apport.</p>
 
@@ -1288,4 +1287,5 @@
                 immatriculée au Registre du commerce et des sociétés.</p>
         </div>
     </div>
+    {% block footer %} {% endblock %}
 {% endblock %}
