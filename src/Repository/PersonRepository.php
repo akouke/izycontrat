@@ -18,4 +18,31 @@ class PersonRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Person::class);
     }
+    
+    // public function findOneByLastPerson($value): ?Company
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->andWhere('c.user = :val')
+    //         ->setParameter('val', $value)
+    //         ->orderBy('c.id', 'DESC')
+    //         ->getQuery()
+    //         // ->getOneOrNullResult()
+    //         ->getResult()
+    //     ;
+    // }
+    
+    /**
+      * @return Person[] Returns an array of Person objects
+      */
+    public function findLastPerson($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

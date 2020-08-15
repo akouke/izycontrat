@@ -46,6 +46,12 @@ class CreateSasSasuController extends AbstractController
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
     {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -98,9 +104,12 @@ class CreateSasSasuController extends AbstractController
          $formAssociateCompany3->handleRequest($request);
             
             $emailUsed = false;
-            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
-            if($emailVerification){
-                $emailUsed = true;
+            if( $isConnected === false)
+            {
+                $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+                if($emailVerification){
+                    $emailUsed = true;
+                }
             }
             
          if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
@@ -115,14 +124,18 @@ class CreateSasSasuController extends AbstractController
             
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SAS"));
+             
+            if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword(
-                    $user,
-                    "izycontratpassword"
-                    // $request->request->all()['user_sarl']['password']
-                ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
              $company->setClient($user);
              
                 // recup parts
@@ -194,11 +207,12 @@ class CreateSasSasuController extends AbstractController
                 $em->persist($associe5);
             }
             
-            $em->persist($user);
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
+            if($isConnected === false){
+
             $credentials = [
                 'password' => $user->getPassword(),
                 'email' => $user->getEmail(),
@@ -215,6 +229,8 @@ class CreateSasSasuController extends AbstractController
                 $authenticator,
                 'main'
             );
+            
+            }
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
@@ -236,6 +252,7 @@ class CreateSasSasuController extends AbstractController
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
         ]);
 
@@ -249,6 +266,11 @@ class CreateSasSasuController extends AbstractController
                                CompaniesTypesRepository $companyTypeRecup, Request $request, 
                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
     {
+        $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
                
          $company = new Company();
          $person = new Person();
@@ -265,10 +287,13 @@ class CreateSasSasuController extends AbstractController
          $formUser->handleRequest($request);
 
         $emailUsed = false;
+        if( $isConnected === false)
+        {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+        }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -284,18 +309,25 @@ class CreateSasSasuController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SASU"));
              
+             
+             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
              $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+              
              $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             $em->flush();
             
+            if( $isConnected === false ){
             $credentials = [
                 'password' => $user->getPassword(),
                 'email' => $user->getEmail(),
@@ -311,10 +343,11 @@ class CreateSasSasuController extends AbstractController
                 $authenticator,
                 'main'
             );
+            }
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
+                // 'user' => $user->getEmail(),
                 ]);
 
 
@@ -325,6 +358,7 @@ class CreateSasSasuController extends AbstractController
             'formSasuPerson' => $formPerson->createView(),
             'formSasuUser' => $formUser->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
         ]);
 
@@ -338,6 +372,12 @@ class CreateSasSasuController extends AbstractController
                                CompaniesTypesRepository $companyTypeRecup, Request $request,
                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -390,10 +430,13 @@ class CreateSasSasuController extends AbstractController
          $formAssociateCompany3->handleRequest($request);
           
           $emailUsed = false;
+          if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
          if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
             
@@ -408,13 +451,21 @@ class CreateSasSasuController extends AbstractController
             
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SCI"));
+             
+             if($isConnected === false){
+                 
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
              $user->setPassword ( $passwordEncoder->encodePassword(
                     $user,
                     "izycontratpassword" ));
-               
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+               
              $company->setClient($user);
                // recup parts
                  $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
@@ -475,11 +526,13 @@ class CreateSasSasuController extends AbstractController
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
-            $em->persist($user);
+            
             $em->persist($person);
             $em->persist($company);
             $em->flush();
-            
+           
+           if( $isConnected === false)
+           {
             $credentials = [
                 'password' => $user->getPassword(),
                 'email' => $user->getEmail(),
@@ -495,7 +548,7 @@ class CreateSasSasuController extends AbstractController
                 $authenticator,
                 'main'
             );
-            
+           }
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
@@ -514,6 +567,7 @@ class CreateSasSasuController extends AbstractController
             'formAssociateCompany3' => $formAssociateCompany3->createView(), 
             'formSci' => $formCompany->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
         ]);
     }

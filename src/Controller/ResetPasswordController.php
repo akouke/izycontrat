@@ -17,6 +17,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use Twig\Environment;
+use App\Entity\Person;
 
 /**
  * @Route("/reset-password")
@@ -26,18 +28,36 @@ class ResetPasswordController extends AbstractController
     use ResetPasswordControllerTrait;
 
     private $resetPasswordHelper;
-
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper)
+    
+     /**
+     * @var \Swift_Mailer
+     */
+    private $mailer;
+    
+     /**
+     * @var \Twig_environment
+     */
+    private $twig;
+    
+  
+    
+  
+    public function __construct (ResetPasswordHelperInterface $resetPasswordHelper,\Swift_Mailer $mailer, environment $twig) 
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
+        $this->mailer = $mailer;
+        $this->twig = $twig;
+      
+     
     }
+
 
     /**
      * Display & process form to request a password reset.
      *
      * @Route("", name="app_forgot_password_request")
      */
-    public function request(Request $request, MailerInterface $mailer): Response
+    public function request(Request $request, \Swift_Mailer $mailer): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
@@ -131,7 +151,7 @@ class ResetPasswordController extends AbstractController
         ]);
     }
 
-    private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
+    private function processSendingPasswordResetEmail(string $emailFormData, \Swift_Mailer $mailer): RedirectResponse
     {
         /**
          * @var User
@@ -155,10 +175,10 @@ class ResetPasswordController extends AbstractController
             // the lines below and change the redirect to 'app_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
             //
-            // $this->addFlash('reset_password_error', sprintf(
-            //     'There was a problem handling your password reset request - %s',
-            //     $e->getReason()
-            // ));
+            $this->addFlash('reset_password_error', sprintf(
+                'There was a problem handling your password reset request - %s',
+                 $e->getReason()
+               ));
 
             return $this->redirectToRoute('app_check_email');
         }
@@ -166,12 +186,12 @@ class ResetPasswordController extends AbstractController
          * @var string
          */
         $toEmail = $user->getEmail();
-        $email = (new TemplatedEmail())
-            ->from(new Address('contact@izy-contrat.fr', 'Réinitialisation du mot de passe'))
-            ->to($toEmail)
-            ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/email.html.twig')
-            ->context([
+        $email = (new \Swift_Message())
+            ->setFrom('contact@izy-contrat.fr')
+            ->setTo($toEmail)
+            ->setSubject('Your password reset request')
+            ->setBody('reset_password/email.html.twig')
+            ->setContext([
                 'resetToken' => $resetToken,
                 'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(),
             ]);

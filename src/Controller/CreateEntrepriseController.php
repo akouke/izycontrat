@@ -72,6 +72,12 @@ class CreateEntrepriseController extends AbstractController
                                  EventDispatcherInterface $eventDispatcher)
                                  
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -124,10 +130,13 @@ class CreateEntrepriseController extends AbstractController
          $formAssociateCompany3->handleRequest($request);
         
         $emailUsed = false;
+        if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted())
         {
@@ -142,14 +151,18 @@ class CreateEntrepriseController extends AbstractController
             
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SARL"));
+             
+             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword(
-                    $user,
-                    "izycontratpassword"
-                    // $request->request->all()['user_sarl']['password']
-                ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
              $company->setClient($user);
              
                // recup parts
@@ -224,33 +237,38 @@ class CreateEntrepriseController extends AbstractController
             }
             
            
-            
-            $em->persist($user);
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
-            $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                // 'csrf_token' => $request->request->get('_csrf_token'),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
+            if( $isConnected === false)
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    // 'csrf_token' => $request->request->get('_csrf_token'),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
                 );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
-             $UserPaymentEvent = new UserPaymentEvent($person);
-            $eventDispatcher->dispatch(
-                UserPaymentEvent::NAME,
-                $UserPaymentEvent
-            );
+            }
+            
+            if( $emailUsed === false)
+            {
+                $UserPaymentEvent = new UserPaymentEvent($person);
+                $eventDispatcher->dispatch(
+                    UserPaymentEvent::NAME,
+                    $UserPaymentEvent
+                );
+            }
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation' );
@@ -270,6 +288,7 @@ class CreateEntrepriseController extends AbstractController
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
             'typeStatut' => "SARL",
             
@@ -283,6 +302,28 @@ class CreateEntrepriseController extends AbstractController
      {
         //  dd($this->getUser()->getEmail());
          return $this->render('create_entreprise/sarl/SARL_form_prestation.html.twig', [
+            
+        ]);
+         
+     }
+     
+     /**
+     * @Route("/create/entreprise/sarl/prestation/me", name="create_sarl_prestation_me") 
+     */
+     public function createSarlPrestationMe (Request $request, EntityManagerInterface $em)
+     {
+         return $this->render('create_entreprise/me_ei/ME_prestation.html.twig', [
+            
+        ]);
+         
+     }
+     
+      /**
+     * @Route("/create/entreprise/sarl/prestation/ei", name="create_sarl_prestation_ei") 
+     */
+     public function createSarlPrestationEi (Request $request, EntityManagerInterface $em)
+     {
+         return $this->render('create_entreprise/me_ei/EI_prestation.html.twig', [
             
         ]);
          
@@ -341,7 +382,7 @@ class CreateEntrepriseController extends AbstractController
             'description' => 'Charge for Izy Contrat',
             'source' => $token,
         ]);
-        $this->addFlash('success', 'Votre paiement a ete effectue avec succes!');
+        // $this->addFlash('success', 'Votre paiement a ete effectue avec succes!');
         return $this->redirectToRoute('save_status');
         // return $this->render('create_entreprise/enterprise_created.html.twig', [
         //     'amount' => $request->request->get('amount'),
@@ -358,6 +399,12 @@ class CreateEntrepriseController extends AbstractController
                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                                 EventDispatcherInterface $eventDispatcher)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -373,10 +420,13 @@ class CreateEntrepriseController extends AbstractController
          $formUser->handleRequest($request);
         
         $emailUsed = false;
+        if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -393,41 +443,46 @@ class CreateEntrepriseController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("EURL"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             //$randompass = random_bytes(10);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user, "izycontratpassword" ));
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $em->persist($user);
+             $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
              
               
-             $person->setUser($user);
              $company->setClient($user);
              
            
             $em->persist($company);
-             
-            $em->persist($user);
             $em->persist($person);
             
            
             $em->flush();
             
             
-            
-            $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
+            if( $isConnected === false )
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
                 );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
+            }
             
             
             
@@ -443,6 +498,7 @@ class CreateEntrepriseController extends AbstractController
              'formEurlPerson' => $formPerson->createView(),
              'formEurlUser' => $formUser->createView(),
              'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
              'user' => $user,
              'typeStatut' => "EURL",
         ]);
@@ -456,6 +512,12 @@ class CreateEntrepriseController extends AbstractController
                                             CompaniesTypesRepository $companyTypeRecup, Request $request,
                                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -470,11 +532,14 @@ class CreateEntrepriseController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
             
-            $emailUsed = false;
+        $emailUsed = false;
+        if( $isConnected === false)
+          {    
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed == false && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -490,34 +555,42 @@ class CreateEntrepriseController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("MICRO-ENTREPRISE"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $em->persist($user);
              $person->setUser($user);
+                 
+                 }elseif($isConnected === true){
+                     $user = $this->getUser();
+             }
+              
              $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             $em->flush();
 
-             $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                // 'csrf_token' => $request->request->get('_csrf_token'),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
+            if($isConnected === false)
+            {
+                 $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    // 'csrf_token' => $request->request->get('_csrf_token'),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
                 );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
+            }
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -533,6 +606,7 @@ class CreateEntrepriseController extends AbstractController
              'formMePerson' => $formPerson->createView(),
              'formMeUser' => $formUser->createView(),
              'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
              'user' => $user,
            'typeStatut' => 'ME' 
         ]);
@@ -546,6 +620,11 @@ class CreateEntrepriseController extends AbstractController
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
          
          $company = new Company();
          $person = new Person();
@@ -562,10 +641,13 @@ class CreateEntrepriseController extends AbstractController
          $formUser->handleRequest($request);
 
         $emailUsed = false;
+        if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -581,34 +663,42 @@ class CreateEntrepriseController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("EI"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+              
              $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             
             $em->flush();
             
-            $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
+            if($isConnected === false)
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
                 );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
+            }
 
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -624,6 +714,7 @@ class CreateEntrepriseController extends AbstractController
              'formEiPerson' => $formPerson->createView(),
              'formEiUser' => $formUser->createView(),
              'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
              'user' => $user,
          'typeStatut' => 'EI',
         ]);
