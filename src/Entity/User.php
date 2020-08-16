@@ -87,6 +87,13 @@ class User implements AdvancedUserInterface
      * @ORM\OneToMany(targetEntity=Company::class, mappedBy="client")
      */
     private $companies;
+    
+    /**
+     * @SecurityAssert\UserPassword(
+     *     message = "Mot de passe incorrecte"
+     * )
+     */
+    private $oldPassword;
 
     public function __construct()
     {
@@ -156,6 +163,24 @@ class User implements AdvancedUserInterface
         $this->password = $password;
 
         return $this;
+    }
+    
+    //  /**
+    //  * Set oldPassword
+    //  *
+    //  * @param string $oldPassword
+    //  *
+    //  * @return User
+    //  */
+    public function setOldPassword($oldPassword): self
+    {
+        $this->oldPassword = $oldPassword;
+ 
+        return $this;
+    }
+    
+     public function getOldPassword() {
+        return $this->oldPassword;
     }
 
     /**

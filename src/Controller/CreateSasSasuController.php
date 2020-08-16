@@ -128,7 +128,8 @@ class CreateSasSasuController extends AbstractController
             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -211,6 +212,11 @@ class CreateSasSasuController extends AbstractController
             $em->persist($person);
             $em->persist($company);
             $em->flush();
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
             
             if($isConnected === false){
 
@@ -314,7 +320,8 @@ class CreateSasSasuController extends AbstractController
              if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -328,6 +335,12 @@ class CreateSasSasuController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             $em->flush();
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
+            
             
             if( $isConnected === false ){
             $credentials = [
@@ -460,7 +473,8 @@ class CreateSasSasuController extends AbstractController
              $user->setRoles(['ROLE_CLIENT']);
              $user->setPassword ( $passwordEncoder->encodePassword(
                     $user,
-                    "izycontratpassword" ));
+                    "Qt7Xd4Lr" ));
+            $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -533,6 +547,12 @@ class CreateSasSasuController extends AbstractController
             $em->persist($person);
             $em->persist($company);
             $em->flush();
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
+            
            
            if( $isConnected === false)
            {

@@ -26,6 +26,7 @@ Encore
     .addEntry('howitwork', './assets/js/howitwork.js')
     .addEntry('createcompany', './assets/js/createcompany.js')
     .addEntry('fichesci', './assets/js/fichesci.js')
+    .addEntry('success_cancel_payment', './assets/js/success_cancel_payment.js')
 
 
     .addStyleEntry('style_dashboard', './assets/scss/dashboard.scss')

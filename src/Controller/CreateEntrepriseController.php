@@ -43,6 +43,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Event\UserRegisterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -155,7 +156,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -237,11 +239,18 @@ class CreateEntrepriseController extends AbstractController
                 $em->persist($associe5);
             }
             
-           
+
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
+            
+           
             if( $isConnected === false)
             {
                 $credentials = [
@@ -262,14 +271,11 @@ class CreateEntrepriseController extends AbstractController
                 );
             }
             
-            if( $emailUsed === false)
-            {
-                $UserPaymentEvent = new UserPaymentEvent($person);
-                $eventDispatcher->dispatch(
-                    UserPaymentEvent::NAME,
-                    $UserPaymentEvent
-                );
-            }
+         //   if( $emailUsed === false)
+           // {
+                
+            
+          //  }
             
             $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation' );
@@ -447,7 +453,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
                  $user->setIsVerified(false);
                  $user->setRoles(['ROLE_CLIENT']);
-                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
                  $em->persist($user);
              $person->setUser($user);
              
@@ -464,6 +471,12 @@ class CreateEntrepriseController extends AbstractController
             
            
             $em->flush();
+            
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
             
             
             if( $isConnected === false )
@@ -559,7 +572,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
                  $user->setIsVerified(false);
                  $user->setRoles(['ROLE_CLIENT']);
-                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
                  $em->persist($user);
              $person->setUser($user);
                  
@@ -573,6 +587,12 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             $em->flush();
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
+            
 
             if($isConnected === false)
             {
@@ -668,7 +688,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
                  $user->setIsVerified(false);
                  $user->setRoles(['ROLE_CLIENT']);
-                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
                  $em->persist($user);
              $person->setUser($user);
              
@@ -683,6 +704,12 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($person);
             
             $em->flush();
+            $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+            ); 
+            
             
             if($isConnected === false)
             {
