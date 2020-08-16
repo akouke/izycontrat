@@ -268,9 +268,9 @@ class CreateEntrepriseController extends AbstractController
              'stripe_public_key' => $this->getParameter('stripe_public_key'),
              'url_stripe_success' => $this->getParameter('url_stripe_success'),
              'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
-             'offre_izy_basic' => $this->getParameter('offre_izy_basic'),
-             'offre_izy_plus' => $this->getParameter('offre_izy_plus'),
-             'offre_izy_premium' => $this->getParameter('offre_izy_premium'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_sarl_sas_sasu_sci_eurl'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_sarl_sas_sasu_sci_eurl'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_sarl_sas_sasu_sci_eurl'),
          ]);
          
      }
