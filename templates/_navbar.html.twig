@@ -32,12 +32,13 @@
                 </li>
             {% else %}
                 <li class="nav-item">
+
                     {% if emailUsed is defined and emailUsed == true %}
-                        <a class="nav-link" id="connexion" href="" data-toggle="modal" data-target=".bd-example-modal-lg">
-                            Se Connecter 
+                        <a class="nav-link" id="connexion" href="{{ path('login') }}">
+                            Se Connecter
                         </a>
                     {% else %}
-                        <a class="nav-link" id="connexion" href="" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <a class="nav-link" id="connexion" href="{{ path('login') }}">
                             Connexion / Inscription
                         </a>
                     {% endif %}
