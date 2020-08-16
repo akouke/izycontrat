@@ -2,14 +2,14 @@
 
 namespace App\Mailer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Twig\Environment;
 use App\Entity\User;
+use Twig\Environment;
 use App\Entity\Person;
 
 
 class Mailer
 {
-    
+   
     /**
      * @var \Swift_Mailer
      */
@@ -67,6 +67,12 @@ class Mailer
         
         $this->mailer->send($message);
     }
+    
+    
+   
+    
+    
+      
 
 
 }

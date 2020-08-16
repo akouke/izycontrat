@@ -1,8 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
 
 {% block title %}Réinitialisation de mot de passe envoyé{% endblock %}
 
 {% block body %}
+<section class="page-content container-fluid col-10 col-lg-10 pb-4">
     <p>Un email vous a été envoyé, il contient un lien sur lequel vous devez cliquer pour réinitialiser votre mot de passe. Ce lient expire dnas {{ tokenLifetime|date('g') }} heure(s).</p>
     <p>Si vous ne recevez pas ce mail, merci de vérifier vos spams ou <a href="{{ path('app_forgot_password_request') }}">Essayer encore</a>.</p>
+    </section>
 {% endblock %}
