@@ -1,45 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Confirmation de paiement</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<img src="https://www.izy-contrat.fr/images/Logo_Izy_Contrat_H.png" alt="logo Izy Contrat">
+<h1>Bonjour,{{ user.getFirstName() }}</h1>
 
-        
-<div class="app font-sans min-w-screen min-h-screen bg-grey-lighter py-8 px-4">
-
-  <div class="mail__wrapper max-w-md mx-auto">
-
-    <div class="mail__content bg-white p-8 shadow-md">
-
-      <div class="content__header text-center tracking-wide border-b">
-        <div class="text-yellow text-sm font-bold">Izycontrat</div>
-        <h1 class="text-3xl h-48 flex items-center justify-center">Confirmation E-mail </h1>
-      </div>
-
-      <div class="content__body py-8 border-b">
+<div class="content__body py-8 border-b">
         <p>
-          Hey, {{ user.getFirstName() }} <br><br>Merci d'avoir bien voulu vous enregistrer sur notre plateforme
+          Bonjour, {{ user.getFirstName() }} <br><br>Merci d'avoir bien voulu vous enregistrer sur notre plateforme
         </p>
         <form action="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}" method="get" target="_blank">
-        <button class="text-white text-sm tracking-wide bg-black rounded w-full my-8 p-4 ">CONFIRMER VOTRE COMPTE</button>
+        <button class="text-white text-sm tracking-wide bg-black rounded w-full my-8 p-4 ">ACTIVER VOTRE COMPTE</button>
         </form>
         <p class="text-sm">
           Nos salutations'!<br> L'équipe Izycontrat
         </p>
       </div>
 
-      <div class="content__footer mt-8 text-center text-grey-darker">
-        <h3 class="text-base sm:text-lg mb-4">Merci de choisir IZYcontrat!</h3>
-        <p>www.izy-contrat.com</p>
-      </div>
+<p>L'équipe d'Izy Contrat</p>
 
-    </div>
 
-    <div class="mail__meta text-center text-sm text-grey-darker mt-8">
+</body>
+</html>
 
-      <div class="meta__social flex justify-center my-4">
-        <a href="#" class="flex items-center justify-center mr-4 bg-black text-white rounded-full w-8 h-8 no-underline"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="flex items-center justify-center mr-4 bg-black text-white rounded-full w-8 h-8 no-underline"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="flex items-center justify-center bg-black text-white rounded-full w-8 h-8 no-underline"><i class="fab fa-twitter"></i></a>
-      </div>
 
-    </div>
 
-  </div>
 
-</div>
+
+
+

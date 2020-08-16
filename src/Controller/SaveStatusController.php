@@ -52,9 +52,15 @@ class SaveStatusController extends AbstractController
         $numberTransformer = $numberToWords->getNumberTransformer('fr');
         
         $user = $this->getUser();
-        $recupPerson = $detailPerson->findOneByUser($user->getId());
-        $recupCompany = $detailCompany->findOneByClient($user->getId());
-        
+        $recupPerson = $detailPerson->findLastPerson($user->getId());
+        $recupCompany = $detailCompany->findLastCompany($user->getId());
+        if($recupPerson){
+            $recupPerson = $recupPerson['0'];
+        }
+        if($recupCompany){
+            $recupCompany = $recupCompany['0'];
+        }
+        // dd($recupPerson, $recupCompany);
         $associe1 = $associe2 = $associe3 = $associe4 = $associe5 = null;
         $associeCompany1 = $associeCompany2 = $associeCompany3 = $associeCompany4 = null;
         
@@ -64,6 +70,8 @@ class SaveStatusController extends AbstractController
         
         $toWordApportAssocie1 = $toWordApportAssocie2 = $toWordApportAssocie3 = $toWordApportAssocie4 = $toWordApportAssocie5 =
         $toWordApportAssocieCompany1 = $toWordApportAssocieCompany2 = $toWordApportAssocieCompany3 = 0;
+        
+        $maxIntervalleAssocie1 = $maxIntervalleAssocie2 = $maxIntervalleAssocie3 = $maxIntervalleAssocie4 = $maxIntervalleAssocie5 = null;
         
         
         if($recupPerson){
@@ -105,47 +113,58 @@ class SaveStatusController extends AbstractController
             if($iPerson == 1)
             {
                 $associe1 = $recupePersonAssocie[$iPerson-1];
-                $toWordApportAssocie1 = $associe1->getCapitalAmountAdding();
+                $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
             }
             elseif($iPerson == 2)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
-                $associe2 = $recupePersonAssocie[$iPerson-2];
-                $toWordApportAssocie1 = $associe1->getCapitalAmountAdding();
-                $toWordApportAssocie2 = $associe2->getCapitalAmountAdding();
+                $associe1 = $recupePersonAssocie[$iPerson-2];
+                $associe2 = $recupePersonAssocie[$iPerson-1];
+                $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
+                $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + 1;
             }
             elseif($iPerson == 3)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
+                $associe1 = $recupePersonAssocie[$iPerson-3];
                 $associe2 = $recupePersonAssocie[$iPerson-2];
-                $associe3 = $recupePersonAssocie[$iPerson-3];
+                $associe3 = $recupePersonAssocie[$iPerson-1];
                 $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
                 $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
                 $toWordApportAssocie3 = $numberTransformer->toWords($associe3->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + 1;
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + 1;
             }
             elseif($iPerson == 4)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
-                $associe2 = $recupePersonAssocie[$iPerson-2];
-                $associe3 = $recupePersonAssocie[$iPerson-3];
-                $associe4 = $recupePersonAssocie[$iPerson-4];
+                $associe1 = $recupePersonAssocie[$iPerson-4];
+                $associe2 = $recupePersonAssocie[$iPerson-3];
+                $associe3 = $recupePersonAssocie[$iPerson-2];
+                $associe4 = $recupePersonAssocie[$iPerson-1];
                 $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
                 $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
                 $toWordApportAssocie3 = $numberTransformer->toWords($associe3->getCapitalAmountAdding());
                 $toWordApportAssocie4 = $numberTransformer->toWords($associe4->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + 1;
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + 1;
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + $associe4->getCapitalAmountAdding() + 1;
             }
             elseif($iPerson == 5)
             {
-                $associe1 = $recupePersonAssocie[$iPerson-1];
-                $associe2 = $recupePersonAssocie[$iPerson-2];
+                $associe1 = $recupePersonAssocie[$iPerson-5];
+                $associe2 = $recupePersonAssocie[$iPerson-4];
                 $associe3 = $recupePersonAssocie[$iPerson-3];
-                $associe4 = $recupePersonAssocie[$iPerson-4];
-                $associe5 = $recupePersonAssocie[$iPerson-5];
+                $associe4 = $recupePersonAssocie[$iPerson-2];
+                $associe5 = $recupePersonAssocie[$iPerson-1];
                 $toWordApportAssocie1 = $numberTransformer->toWords($associe1->getCapitalAmountAdding());
                 $toWordApportAssocie2 = $numberTransformer->toWords($associe2->getCapitalAmountAdding());
                 $toWordApportAssocie3 = $numberTransformer->toWords($associe3->getCapitalAmountAdding());
                 $toWordApportAssocie4 = $numberTransformer->toWords($associe4->getCapitalAmountAdding());
                 $toWordApportAssocie5 = $numberTransformer->toWords($associe5->getCapitalAmountAdding());
+                $maxIntervalleAssocie2 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + 1;
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + 1;
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + $associe4->getCapitalAmountAdding() + 1;
+                $maxIntervalleAssocie3 = $associe1->getCapitalAmountAdding() + $associe2->getCapitalAmountAdding() + $associe3->getCapitalAmountAdding() + $associe4->getCapitalAmountAdding() + $associe5->getCapitalAmountAdding() + 1;
+                
             }
 
         }
@@ -196,26 +215,26 @@ class SaveStatusController extends AbstractController
             }
             elseif($iCompany == 2)
             {
-                $associeCompany1 = $recupeCompanyAssocie[$iCompany-1];
-                $associeCompany2 = $recupeCompanyAssocie[$iCompany-2];
+                $associeCompany1 = $recupeCompanyAssocie[$iCompany-2];
+                $associeCompany2 = $recupeCompanyAssocie[$iCompany-1];
                 $toWordApportAssocieCompany1 = $numberTransformer->toWords($associeCompany1->getCapitalBring());
                 $toWordApportAssocieCompany2 = $numberTransformer->toWords($associeCompany2->getCapitalBring());
             }
             elseif($iCompany == 3)
             {
-                $associeCompany1 = $recupeCompanyAssocie[$iCompany-1];
+                $associeCompany1 = $recupeCompanyAssocie[$iCompany-3];
                 $associeCompany2 = $recupeCompanyAssocie[$iCompany-2];
-                $associeCompany3 = $recupeCompanyAssocie[$iCompany-3];
+                $associeCompany3 = $recupeCompanyAssocie[$iCompany-1];
                 $toWordApportAssocieCompany1 = $numberTransformer->toWords($associeCompany1->getCapitalBring());
                 $toWordApportAssocieCompany2 = $numberTransformer->toWords($associeCompany2->getCapitalBring());
                 $toWordApportAssocieCompany3 = $numberTransformer->toWords($associeCompany3->getCapitalBring());
             }
             elseif($iCompany == 4)
             {
-                $associeCompany1 = $recupeCompanyAssocie[$iCompany-1];
-                $associeCompany2 = $recupeCompanyAssocie[$iCompany-2];
-                $associeCompany3 = $recupeCompanyAssocie[$iCompany-3];
-                $associeCompany4 = $recupeCompanyAssocie[$iCompany-4];
+                $associeCompany1 = $recupeCompanyAssocie[$iCompany-4];
+                $associeCompany2 = $recupeCompanyAssocie[$iCompany-3];
+                $associeCompany3 = $recupeCompanyAssocie[$iCompany-2];
+                $associeCompany4 = $recupeCompanyAssocie[$iCompany-1];
                 $toWordApportAssocieCompany1 = $numberTransformer->toWords($associeCompany1->getCapitalBring());
                 $toWordApportAssocieCompany2 = $numberTransformer->toWords($associeCompany2->getCapitalBring());
                 $toWordApportAssocieCompany3 = $numberTransformer->toWords($associeCompany3->getCapitalBring());
@@ -313,6 +332,15 @@ class SaveStatusController extends AbstractController
             'partChacuneNum' => ($companyCapitalSocial / $partTotal),
             'partChacuneWord' => $numberTransformer->toWords($companyCapitalSocial / $partTotal),
             'isManager' => $manager,
+            'maxIntervalleAssocie2' => $maxIntervalleAssocie2,
+            'maxIntervalleAssocie3' => $maxIntervalleAssocie3,
+            'maxIntervalleAssocie4' => $maxIntervalleAssocie4,
+            'maxIntervalleAssocie5' => $maxIntervalleAssocie5,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
+            
+            'numberPerson' => $iPerson,
+            'iCompany' => $iCompany,
+            
         ]);
       }
 
@@ -320,6 +348,92 @@ class SaveStatusController extends AbstractController
       {
         $html = $this->renderView('create_entreprise/sarl/EURL_status.html.twig', [
             'title' => "Recu Creation de EURL",
+            'dateCreation' => date('d/m/Y'),
+            'person' => $recupPerson,
+            'civilite' => ($civility == 2 ? 'Monsieur' : 'Madame'),
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'phoneNumber' => $phoneNumber,
+            'address' => $address,
+            'country' => $country,
+            'capitalApport' => $capital,
+            'situation' => $married,
+            'nationality' => $nationality,
+            'dateNaissance' => $dateBirth,
+            'hasCompany' => $hasCompany,
+            'score' => $score,
+            '$specialization' => $specialization,
+            'associatePart' => $associatePart,
+            
+            'totalToWord' => $numberTransformer->toWords($recupCompany->getTotalCapital()),
+            'totalToNum' => $recupCompany->getTotalCapital(),
+            
+            'associe1' => $associe1,
+            'associe2' => $associe2,
+            'associe3' => $associe3,
+            'associe4' => $associe4,
+            'associe5' => $associe5,
+            
+            'toWordApportAssocie1' => $toWordApportAssocie1,
+            'toWordApportAssocie2' => $toWordApportAssocie2,
+            'toWordApportAssocie3' => $toWordApportAssocie3,
+            'toWordApportAssocie4' => $toWordApportAssocie4,
+            'toWordApportAssocie5' => $toWordApportAssocie5,
+            
+            'associeCompany1' => $associeCompany1,
+            'associeCompany2' => $associeCompany2,
+            'associeCompany3' => $associeCompany3,
+            
+            'toWordApportAssocieCompany1' => $toWordApportAssocieCompany1,
+            'toWordApportAssocieCompany2' => $toWordApportAssocieCompany2,
+            'toWordApportAssocieCompany3' => $toWordApportAssocieCompany3,
+            
+            'company' => $recupCompany,
+            'companyName' => $companyName,
+            'companyIscreated' => $companyIsCreated,
+            'companyHasProtection' => $companyHasProtection,
+            'companyHasAssociate' => $companyHasAssociate,
+            'companyHasDirector' => $companyHasDirector,
+            'companyHeadOffice' => $companyHeadOffice,
+            'capitalNum' => $companyCapitalSocial,
+            'capitalWord' => $numberTransformer->toWords($companyCapitalSocial),
+            'companyCapitalSocial' => $companyCapitalSocial,
+            'companyBankName' => $companyBankName,
+            'companyAssociates' => $companyAssociates,
+            'companyAddress' => $companyAddress,
+            'companyCountry' => $companyCountry,
+            'companyType' => $companyType,
+            'regimeMicroEntreprise' => $regimeMicroEntreprise,
+            'companyTradeName' => $companyTradeName,
+            'companyManager' => $companyManager,
+            'companyAddressManager' => $companyAddressManager,
+            'activitySector' => $activitySector,
+            'priority' => $priority,
+            'president' => $president,
+            'generalDirector' => $generalDirector,
+            'companyTotalCapital' => $companyTotalCapital,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
+            'socialObject' => $socialObject,
+            
+            'associeCompany1' => $associeCompany1,
+            'associeCompany2' => $associeCompany2,
+            'associeCompany3' => $associeCompany3,
+            'associeCompany4' => $associeCompany4,
+            
+            'totalPartNum' => $partTotal,
+            'totalPartWord' => $numberTransformer->toWords($partTotal),
+            'partChacuneNum' => ($companyCapitalSocial / $partTotal),
+            'partChacuneWord' => $numberTransformer->toWords($companyCapitalSocial / $partTotal),
+            'isManager' => $manager,
+            
+            'numberPerson' => $iPerson,
+            'iCompany' => $iCompany,
+        ]);
+      }
+      elseif($recupCompany->getCompanyType()->getName() == "SAS")
+      {
+        $html = $this->renderView('create_entreprise/sas_sasu/SAS_status.html.twig', [
+            'title' => "Recu Creation de SAS",
             'dateCreation' => date('d/m/Y'),
             'person' => $recupPerson,
             'civilite' => ($civility == 2 ? 'Monsieur' : 'Madame'),
@@ -396,7 +510,203 @@ class SaveStatusController extends AbstractController
             'partChacuneNum' => ($companyCapitalSocial / $partTotal),
             'partChacuneWord' => $numberTransformer->toWords($companyCapitalSocial / $partTotal),
             'isManager' => $manager,
+            'maxIntervalleAssocie2' => $maxIntervalleAssocie2,
+            'maxIntervalleAssocie3' => $maxIntervalleAssocie3,
+            'maxIntervalleAssocie4' => $maxIntervalleAssocie4,
+            'maxIntervalleAssocie5' => $maxIntervalleAssocie5,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
+            
+            'numberPerson' => $iPerson,
+            'iCompany' => $iCompany,
+            
         ]);
+      }
+      elseif($recupCompany->getCompanyType()->getName() == "SASU")
+      {
+        $html = $this->renderView('create_entreprise/sas_sasu/SASU_status.html.twig', [
+            'title' => "Recu Creation de SASU",
+            'dateCreation' => date('d/m/Y'),
+            'person' => $recupPerson,
+            'civilite' => ($civility == 2 ? 'Monsieur' : 'Madame'),
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'phoneNumber' => $phoneNumber,
+            'address' => $address,
+            'country' => $country,
+            'capitalApport' => $capital,
+            'situation' => $married,
+            'nationality' => $nationality,
+            'dateNaissance' => $dateBirth,
+            'hasCompany' => $hasCompany,
+            'score' => $score,
+            '$specialization' => $specialization,
+            'associatePart' => $associatePart,
+            
+            'totalToWord' => $numberTransformer->toWords($recupCompany->getTotalCapital()),
+            'totalToNum' => $recupCompany->getTotalCapital(),
+            
+            'associe1' => $associe1,
+            'associe2' => $associe2,
+            'associe3' => $associe3,
+            'associe4' => $associe4,
+            'associe5' => $associe5,
+            
+            'toWordApportAssocie1' => $toWordApportAssocie1,
+            'toWordApportAssocie2' => $toWordApportAssocie2,
+            'toWordApportAssocie3' => $toWordApportAssocie3,
+            'toWordApportAssocie4' => $toWordApportAssocie4,
+            'toWordApportAssocie5' => $toWordApportAssocie5,
+            
+            'associeCompany1' => $associeCompany1,
+            'associeCompany2' => $associeCompany2,
+            'associeCompany3' => $associeCompany3,
+            
+            'toWordApportAssocieCompany1' => $toWordApportAssocieCompany1,
+            'toWordApportAssocieCompany2' => $toWordApportAssocieCompany2,
+            'toWordApportAssocieCompany3' => $toWordApportAssocieCompany3,
+            
+            'company' => $recupCompany,
+            'companyName' => $companyName,
+            'companyIscreated' => $companyIsCreated,
+            'companyHasProtection' => $companyHasProtection,
+            'companyHasAssociate' => $companyHasAssociate,
+            'companyHasDirector' => $companyHasDirector,
+            'companyHeadOffice' => $companyHeadOffice,
+            'capitalNum' => $companyCapitalSocial,
+            'capitalWord' => $numberTransformer->toWords($companyCapitalSocial),
+            'companyCapitalSocial' => $companyCapitalSocial,
+            'companyBankName' => $companyBankName,
+            'companyAssociates' => $companyAssociates,
+            'companyAddress' => $companyAddress,
+            'companyCountry' => $companyCountry,
+            'companyType' => $companyType,
+            'regimeMicroEntreprise' => $regimeMicroEntreprise,
+            'companyTradeName' => $companyTradeName,
+            'companyManager' => $companyManager,
+            'companyAddressManager' => $companyAddressManager,
+            'activitySector' => $activitySector,
+            'priority' => $priority,
+            'president' => $president,
+            'generalDirector' => $generalDirector,
+            'companyTotalCapital' => $companyTotalCapital,
+            'socialObject' => $socialObject,
+            
+            'associeCompany1' => $associeCompany1,
+            'associeCompany2' => $associeCompany2,
+            'associeCompany3' => $associeCompany3,
+            'associeCompany4' => $associeCompany4,
+            
+            'totalPartNum' => $partTotal,
+            'totalPartWord' => $numberTransformer->toWords($partTotal),
+            'partChacuneNum' => ($companyCapitalSocial / $partTotal),
+            'partChacuneWord' => $numberTransformer->toWords($companyCapitalSocial / $partTotal),
+            'isManager' => $manager,
+            'maxIntervalleAssocie2' => $maxIntervalleAssocie2,
+            'maxIntervalleAssocie3' => $maxIntervalleAssocie3,
+            'maxIntervalleAssocie4' => $maxIntervalleAssocie4,
+            'maxIntervalleAssocie5' => $maxIntervalleAssocie5,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
+            
+            'numberPerson' => $iPerson,
+            'iCompany' => $iCompany,
+            
+        ]);
+      }
+      elseif($recupCompany->getCompanyType()->getName() == "SCI")
+      {
+        $html = $this->renderView('create_entreprise/sci/sci_status.html.twig', [
+            'title' => "Recu Creation de SAS",
+            'dateCreation' => date('d/m/Y'),
+            'person' => $recupPerson,
+            'civilite' => ($civility == 2 ? 'Monsieur' : 'Madame'),
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'phoneNumber' => $phoneNumber,
+            'address' => $address,
+            'country' => $country,
+            'capitalApport' => $capital,
+            'situation' => $married,
+            'nationality' => $nationality,
+            'dateNaissance' => $dateBirth,
+            'hasCompany' => $hasCompany,
+            'score' => $score,
+            '$specialization' => $specialization,
+            'associatePart' => $associatePart,
+            
+            'totalToWord' => $numberTransformer->toWords($recupCompany->getTotalCapital()),
+            'totalToNum' => $recupCompany->getTotalCapital(),
+            
+            'associe1' => $associe1,
+            'associe2' => $associe2,
+            'associe3' => $associe3,
+            'associe4' => $associe4,
+            'associe5' => $associe5,
+            
+            'toWordApportAssocie1' => $toWordApportAssocie1,
+            'toWordApportAssocie2' => $toWordApportAssocie2,
+            'toWordApportAssocie3' => $toWordApportAssocie3,
+            'toWordApportAssocie4' => $toWordApportAssocie4,
+            'toWordApportAssocie5' => $toWordApportAssocie5,
+            
+            'associeCompany1' => $associeCompany1,
+            'associeCompany2' => $associeCompany2,
+            'associeCompany3' => $associeCompany3,
+            
+            'toWordApportAssocieCompany1' => $toWordApportAssocieCompany1,
+            'toWordApportAssocieCompany2' => $toWordApportAssocieCompany2,
+            'toWordApportAssocieCompany3' => $toWordApportAssocieCompany3,
+            
+            'company' => $recupCompany,
+            'companyName' => $companyName,
+            'companyIscreated' => $companyIsCreated,
+            'companyHasProtection' => $companyHasProtection,
+            'companyHasAssociate' => $companyHasAssociate,
+            'companyHasDirector' => $companyHasDirector,
+            'companyHeadOffice' => $companyHeadOffice,
+            'capitalNum' => $companyCapitalSocial,
+            'capitalWord' => $numberTransformer->toWords($companyCapitalSocial),
+            'companyCapitalSocial' => $companyCapitalSocial,
+            'companyBankName' => $companyBankName,
+            'companyAssociates' => $companyAssociates,
+            'companyAddress' => $companyAddress,
+            'companyCountry' => $companyCountry,
+            'companyType' => $companyType,
+            'regimeMicroEntreprise' => $regimeMicroEntreprise,
+            'companyTradeName' => $companyTradeName,
+            'companyManager' => $companyManager,
+            'companyAddressManager' => $companyAddressManager,
+            'activitySector' => $activitySector,
+            'priority' => $priority,
+            'president' => $president,
+            'generalDirector' => $generalDirector,
+            'companyTotalCapital' => $companyTotalCapital,
+            'socialObject' => $socialObject,
+            
+            'associeCompany1' => $associeCompany1,
+            'associeCompany2' => $associeCompany2,
+            'associeCompany3' => $associeCompany3,
+            'associeCompany4' => $associeCompany4,
+            
+            'totalPartNum' => $partTotal,
+            'totalPartWord' => $numberTransformer->toWords($partTotal),
+            'partChacuneNum' => ($companyCapitalSocial / $partTotal),
+            'partChacuneWord' => $numberTransformer->toWords($companyCapitalSocial / $partTotal),
+            'isManager' => $manager,
+            'maxIntervalleAssocie2' => $maxIntervalleAssocie2,
+            'maxIntervalleAssocie3' => $maxIntervalleAssocie3,
+            'maxIntervalleAssocie4' => $maxIntervalleAssocie4,
+            'maxIntervalleAssocie5' => $maxIntervalleAssocie5,
+            'companyTotalCapitalWord' => $numberTransformer->toWords($companyTotalCapital),
+            
+            'numberPerson' => $iPerson,
+            'iCompany' => $iCompany,
+            
+        ]);
+      }
+      elseif($recupCompany->getCompanyType()->getName() == "EI" || $recupCompany->getCompanyType()->getName() == "MICRO-ENTREPRISE")
+      {
+          $this->addFlash('success', 'Votre dossier a ete bien crees');
+          return $this->redirectToRoute('dashboard_home');
       }
 
         // Load HTML to Dompdf
@@ -420,14 +730,15 @@ class SaveStatusController extends AbstractController
         /** @var User $user */
         $user=$this->getUser();
 
-        $pdfFilepath =   $dossierClient.'/'.'statut_'.$user->getEmail().'.pdf';
+        $numRandom = random_int(0, 1000);
+        $pdfFilepath =   $dossierClient.'/'.'statut_'.$user->getEmail().$numRandom.'.pdf';
 
 
         $upload = new Upload();
        
         
         $upload->setUser($user);
-        $upload->setStatus('statut_'.$user->getEmail().'.pdf');
+        $upload->setStatus('statut_'.$user->getEmail().$numRandom.'.pdf');
 
         $em->persist($upload);
    

@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="conexop")
+     * @Route("/connexion", name="login")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -30,6 +30,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
 
     /**
      * @Route("/logout", name="app_logout")

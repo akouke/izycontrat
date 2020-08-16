@@ -221,7 +221,7 @@ table {
 
 {#<body>#}
 <section>
-      <h2 class="titre">OFFRES IZY CONTRAT</h2>
+      <h2 class="titre">OFFRES MICRO-ENTREPRISE</h2>
   <div class="container-fluid">
     <div class="container">
       <div class="row">
@@ -236,7 +236,7 @@ table {
               <h2>IZY BASIC</h2>
             </div>
             <div class="price">
-              <h4>49<sup>€</sup><sub><small>HT</small></sub></h4>
+              <h4>19<sup>€</sup><sub><small>HT</small></sub></h4>
             </div>
             <div class="option">
               <ul>
@@ -252,16 +252,15 @@ table {
         <div class="col-sm-3">
           <div class="card text-center">
             <div class="title">
-              <b><span class="ribbon1"><span>Plus Populaire</span></span></b>
               {#<i class="fa fa-plane" aria-hidden="true"></i>#}
               <h2>IZY PLUS</h2>
             </div>
             <div class="price">
-              <h4>149<sup>€</sup><sub><small>HT</small></sub></h4>
+              <h4>59<sup>€</sup><sub><small>HT</small></sub></h4>
             </div>
             <div class="option">
               <ul>
-                <li> <i class="fa fa-check" aria-hidden="true"></i> On s'en occupe </li>
+                <li> <i class="fa fa-check" aria-hidden="true"></i> Je délègue </li>
                 {#<li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
               </ul>
             </div>
@@ -272,15 +271,15 @@ table {
         <div class="col-sm-3">
           <div class="card text-center">
             <div class="title">
-              {#<i class="fa fa-rocket" aria-hidden="true"></i>#}
+              <b><span class="ribbon1"><span>Plus Populaire</span></span></b>
               <h2> IZY PREMIUM </h2>
             </div>
             <div class="price">
-              <h4>289<sup>€</sup><sub><small>HT</small></sub></h4>
+              <h4>89<sup>€</sup><sub><small>HT</small></sub></h4>
             </div>
             <div class="option">
               <ul>
-              <li> <i class="fa fa-check" aria-hidden="true"></i> Traitement <b>EXPRESS</b> </li>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> On s'occupe de tout ! </li>
               {#<li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
               </ul>
             </div>
@@ -292,174 +291,67 @@ table {
       </div>
       {#debut table details#}
     <table class="table table-hover table-bordered" style="text-align:center;padding-left:200px; padding-right:200px;">
-    {#<thead>#}
-    {#  <tr >#}
-    {#      <th valign="top" style="padding-top: -50px;">#}
-    {#       <h3>Creation de mon SARL</h3><p class="text-muted text-sm">Choix de prestation</p>#}
-    {#      </th>#}
-    {#      <th>#}
-    {#         <div class="card text-center">#}
-    {#            <div class="title">#}
-                  {#<i class="fa fa-paper-plane" aria-hidden="true"></i>#}
-    {#              <h2>Basic</h2>#}
-    {#            </div>#}
-    {#            <div class="price">#}
-    {#              <h4>0<sup>€</sup><sub>HT</sub></h4>#}
-    {#            </div>#}
-    {#            <div class="option">#}
-    {#                  <ul>#}
-    {#                  <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
-    {#                  </ul>#}
-    {#            </div>#}
-    {#            <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>#}
-    {#        </div>#}
-    {#      </th>#}
-    {#      <th>#}
-    {#           <div class="card text-center">#}
-    {#        <div class="title">#}
-              {#<i class="fa fa-plane" aria-hidden="true"></i>#}
-    {#          <h2> Standard</h2>#}
-    {#        </div>#}
-    {#        <div class="price">#}
-    {#          <h4>100<sup>€</sup><sub>HT</sub></h4>#}
-    {#        </div>#}
-    {#        <div class="option">#}
-    {#          <ul>#}
-    {#              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
-    {#           </ul>#}
-    {#        </div>#}
-    {#        <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>#}
-    {#      </div>#}
-    {#      </th>#}
-    {#      <th>#}
-    {#          <div class="card text-center">#}
-                  {#<div class="card-header">#}
-                      {#le plus populaire#}
-                  {#</div>#}
-    {#        <div class="title">#}
-              {#<i class="fa fa-rocket" aria-hidden="true"></i>#}
-    {#          <h2> Premium</h2>#}
-    {#        </div>#}
-    {#        <div class="price">#}
-    {#          <h4>200<sup>€</sup><sub>HT</sub></h4>#}
-    {#        </div>#}
-    {#        <div class="option">#}
-    {#            <ul>#}
-    {#              <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
-    {#           </ul>#}
-    {#        </div>#}
-    {#        <a href="{{ path('create_sarl_payement')}}">Choisir ce forfait </a>#}
-    {#      </div>#}
-    {#      </th>#}
-    {#  </tr>#}
-    {#</thead>#}
+ 
     <tbody>
 
       <tr>
         <td colspan="4" align="left" style="padding-left:20px;" class="bg-secondary"><b>Dossier juridique</b></td>
       </tr>
       <tr>
-        <td class="bg-light">Statuts</td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td class="bg-light">Cerfa P0</td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
       <tr>
-        <td class="bg-light">Cerfa M0 + dossier complet</td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td class="bg-light">Dossier complet</td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
       <tr>
         <td class="bg-light">Assistance par email</td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
 
       <tr>
         <td colspan="4" align="left" style="padding-left:20px;" class="bg-secondary"><b>Formalités administratives</b></td>
       </tr>
-            <tr>
+       <tr>
         <td class="bg-light">Vérification de mon dossier par un formaliste</td>
         <td><i style="color:red;" class="glyphicon glyphicon-remove"></i> <b>-</b> </td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
-       <tr>
-        <td class="bg-light">Immatriculation auprès du Greffe</td>
-        <td><b>-</b> </td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-      </tr>
-      <tr>
-        <td class="bg-light">Inscription au registre des bénéficiaires effectifs</td>
-        <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-      </tr>
+
       <tr>
         <td colspan="4" align="left" style="padding-left:20px;" class="bg-secondary"><b>Accompagnement</b></td>
       </tr>
       <tr>
-        <td class="bg-light">Traitement EXPRESS (48h)</td>
+        <td class="bg-light">Accompagnement par un juriste sur toutes vos questions (charges sociales, régime fiscal, etc.)</td>
         <td><b>-</b></td>
-        <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
       <tr>
-        <td class="bg-light">Assurance anti-rejet du Greffe</td>
+        <td class="bg-light">Traitement EXPRESS (24h)</td>
         <td><b>-</b></td>
         <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
       <tr>
-        <td class="bg-light">Je reçois mon dossier par la poste</td>
+        <td class="bg-light">Demande d'ACRE</td>
         <td><b>-</b></td>
         <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
       <tr>
-        <td class="bg-light">Statuts au format Word</td>
+        <td class="bg-light">Assistance IZY CONTRAT (30 jours)</td>
         <td><b>-</b></td>
         <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-      </tr>
-      <tr>
-        <td class="bg-light">Accompagnement par un expert</td>
-        <td><b>-</b></td>
-        <td>Par e-mail</td>
-        <td>Par téléphone</td>
-      </tr>
-      <tr>
-        <td class="bg-light">Accompagnement par un juriste dédié (90 jours)</td>
-        <td><b>-</b></td>
-        <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-      </tr>
-      <tr>
-        <td colspan="4" align="left" style="padding-left:20px;" class="bg-secondary"><b>Services</b></td>
-      </tr>
-      <tr>
-        <td class="bg-light">Radiation du statut Auto-entrepreneur</td>
-        <td><b>-</b></td>
-        <td><b>-</b></td>
-        <td><i style="color:limegreen" class="fa fa-check fa-lg"></i></td>
-      </tr>
-      <tr>
-        <td colspan="4" align="center" style="padding-left:20px;" class="bg-secondary"><b>Frais administratifs OBLIGATOIRE POUR L'IMMATRICULATION</b></td>
-      </tr>
-      <tr>
-        <td class="bg-light">Publication de l'annonce légale</td>
-        <td>140-200 €</td>
-        <td>140-200 €</td>
-        <td>140-200 €</td>
-      </tr>
-      <tr>
-        <td class="bg-light">Frais d'immatriculation au Greffe</td>
-        <td><b>-</b></td>
-        <td>50-67 €</td>
-        <td>50-67 €</td>
+        <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
       
     </tbody>

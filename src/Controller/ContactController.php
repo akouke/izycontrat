@@ -10,33 +10,40 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Swift\Mime\SimpleMessage;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class ContactController extends AbstractController
 {
     /**
      * @Route("/contact/", name="app_contact")
      * @param Request $request
-     * @param MailerInterface $mailer
+     * @param \Swift_Mailer $mailer
+     * @param \Twig_environment $twig
      * @return Response
      * @throws TransportExceptionInterface
      */
-    public function index(Request $request, MailerInterface $mailer): Response
+    public function index(Request $request, \Swift_Mailer $mailer,environment $twig): Response
     {
+        
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
+        $body = $this->render('contact/email_contact.html.twig', [
+            
+            'contact' => $contact
+            
+            ]);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $email = (new Email())
-                ->from($contact->getEmail())
-                ->to('contact@izy-contrat.fr')
-                ->subject('Izy Contrat : Nouveau message du formulaire de contact')
-                ->html($this->renderView('contact/email_contact.html.twig', [
-                    'contact' => $contact
-                ]));
+             $message = (new \Swift_Message())
+                ->setFrom($contact->getEmail())
+                ->setTo('contact@izy-contrat.fr')
+                ->setSubject('Izy Contrat : Nouveau message du formulaire de contact')
+                ->setBody($body, 'text/html');
 
-            $mailer->send($email);
+            $mailer->send($message);
             $this->addFlash('success', 'Votre message a bien été envoyé.');
             return $this->redirectToRoute('app_contact');
         }

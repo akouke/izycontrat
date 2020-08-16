@@ -32,8 +32,15 @@ services:
     # please note that last definitions always *replace* previous ones
 
     'App\Event\UserRegisterEvent': ~
+    'App\Event\UserPaymentEvent': ~
 
     App\Mailer\Mailer:
        arguments:
            $emailFrom: '%email_from%'
+           
+           
+           
+    
+
+   
 
