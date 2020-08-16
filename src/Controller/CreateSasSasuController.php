@@ -34,6 +34,10 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use NumberToWords\NumberToWords;
+use App\Event\UserRegisterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateSasSasuController extends AbstractController
 {
@@ -44,7 +48,8 @@ class CreateSasSasuController extends AbstractController
     public function createSas(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
-                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
     {
          $isConnected = false;
          
@@ -271,7 +276,8 @@ class CreateSasSasuController extends AbstractController
     public function createSasu(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                CompaniesTypesRepository $companyTypeRecup, Request $request, 
-                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                               EventDispatcherInterface $eventDispatcher)
     {
         $isConnected = false;
          
@@ -385,7 +391,8 @@ class CreateSasSasuController extends AbstractController
      public function createSCI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                CompaniesTypesRepository $companyTypeRecup, Request $request,
-                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                               EventDispatcherInterface $eventDispatcher)
      {
          $isConnected = false;
          

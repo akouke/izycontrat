@@ -539,7 +539,8 @@ class CreateEntrepriseController extends AbstractController
      public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                             EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                             CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                             EventDispatcherInterface $eventDispatcher)
      {
          $isConnected = false;
          
@@ -655,7 +656,8 @@ class CreateEntrepriseController extends AbstractController
      public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
-                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
      {
          $isConnected = false;
          

@@ -91,8 +91,8 @@ class DashboardController extends AbstractController
         if ($this->isGranted(['ROLE_LAWYER'])) {
             $formUser = $this->createForm(LawyerType::class, $user);
         } else {
-            $formUser = $this->createForm(UserChangePasswordType::class, $user)
-            ->add('save', SubmitType::class, ['label' => "Modifier Password"]);
+            $formUser = $this->createForm(UserChangePasswordType::class, $user);
+            // ->add('save', SubmitType::class, ['label' => "Modifier Password"]);
         }
         $formUser->handleRequest($request);
             
