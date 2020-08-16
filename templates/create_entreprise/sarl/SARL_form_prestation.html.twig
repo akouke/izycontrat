@@ -293,6 +293,26 @@ table {
 {#            <div id="error-message"></div>#}
           </div>
         </div>
+        <div class="col-sm-3">
+          <div class="card text-center">
+            <div class="title">
+              {#<i class="fa fa-rocket" aria-hidden="true"></i>#}
+              <h2> IZY TEST </h2>
+            </div>
+            <div class="price">
+              <h4>0,01<sup>€</sup><sub><small>HT</small></sub></h4>
+            </div>
+            <div class="option">
+              <ul>
+              <li> <i class="fa fa-check" aria-hidden="true"></i> Traitement <b>TEST</b> </li>
+              {#<li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
+              </ul>
+            </div>
+            <a id="checkout-button-price_1HGpfRJ1VSvMwQdg1DTT18UH"
+               role="link"><b>Choisir ce forfait</b> </a>
+{#            <div id="error-message"></div>#}
+          </div>
+        </div>
         <!-- END Col three -->
 
       </div>
@@ -550,6 +570,34 @@ table {
           // them to Checkout.
           stripe.redirectToCheckout({
             lineItems: [{price: '{{ offre_izy_basic }}', quantity: 1}],
+            mode: 'payment',
+            // Do not rely on the redirect to the successUrl for fulfilling
+            // purchases, customers may not always reach the success_url after
+            // a successful payment.
+            // Instead use one of the strategies described in
+            // https://stripe.com/docs/payments/checkout/fulfillment
+            successUrl: '{{ url_stripe_success }}',
+            cancelUrl: '{{ url_stripe_canceled }}',
+          })
+                  .then(function (result) {
+                    if (result.error) {
+                      // If `redirectToCheckout` fails due to a browser or network
+                      // error, display the localized error message to your customer.
+                      var displayError = document.getElementById('error-message');
+                      displayError.textContent = result.error.message;
+                    }
+                  });
+        });
+      })();
+      (function() {
+        var stripe = Stripe('{{ stripe_public_key }}');
+
+        var checkoutButton = document.getElementById('checkout-button-price_1HGpfRJ1VSvMwQdg1DTT18UH');
+        checkoutButton.addEventListener('click', function () {
+          // When the customer clicks on the button, redirect
+          // them to Checkout.
+          stripe.redirectToCheckout({
+            lineItems: [{price: 'price_1HGpfRJ1VSvMwQdg1DTT18UH', quantity: 1}],
             mode: 'payment',
             // Do not rely on the redirect to the successUrl for fulfilling
             // purchases, customers may not always reach the success_url after
