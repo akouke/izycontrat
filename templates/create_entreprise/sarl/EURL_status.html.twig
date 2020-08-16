@@ -19,13 +19,11 @@
     
     
 <h2><br>
-{% set name = 'IZY CONTRAT' %}
-{% set lastName = "Abdoulaye" %}
-{% set firstName = "SECK" %}
-{% set civilite = "M. " %}
 
-    {% if name is defined %}
-        {{ name }}
+<h2><br>
+
+    {% if company.name is defined %}
+        {{ company.name }}
     {% else %}
         'NOM DE LA SOCIETE'
     {% endif %}
@@ -44,8 +42,8 @@ au capital de
 
 <p><u>Siège social</u> : 
     <b>
-        {% if address is defined %}
-        {{ adress }}
+        {% if company is defined %}
+        {{ company.address }} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}
         {% else %}
         'ADRESSE'
         {% endif %}
@@ -64,13 +62,13 @@ au capital de
         
     Né(e) le <b>{{ dateNaissance ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
     De nationalité Française, <br>
-    Demeurant  à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+    Demeurant  à <b>{{ address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
     <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
 </p>
 
 <p style="text-align: center;"><b>A établi, ainsi qu'il suit, les statuts de la société par actions simplifiée unipersonnelle qu'il / elle a décidé d'instituer.</b></p>
 
-<h2 style="text-align: center;"><b>TITRE I — FORME - OBJET - DENOMINATION - SIEGE - DUREE - EXERCICE - GERANCE</b></h2>
+<h4 style="text-align: center;"><b>TITRE I — FORME - OBJET - DENOMINATION - SIEGE - DUREE - EXERCICE - GERANCE</b></h4>
 <p>
    <b> ARTICLE 1 -  Forme </b><br>
 
@@ -110,7 +108,7 @@ au capital de
 <p>
    <b> ARTICLE 4 - Siège social </b> <br>
 
-    Le siège social est fixé : <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE'}}</b> <br>
+    Le siège social est fixé : <b> {{ company.address ?? ' VILLE (CODE POSTAL) – ADRESSE'}}</b> <br>
     
     Il pourra être transféré dans le même département ou dans un département limitrophe par simple décision de la gérance, sous réserve de ratification par la prochaine décision de l'associé unique ou par la prochaine décision collective extraordinaire des associés, et en tout lieu par décision de l'associé unique ou par décision collective extraordinaire des associés.
     <br>
@@ -143,7 +141,7 @@ au capital de
     De nationalité Française, <br>
     Demeurant  à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> 
     <br>
-    exerce la fonction de Gérant de la Société sans limitation de durée
+    exerce la fonction de Gérant de la Société sans limitation de durée.
     <br>
     {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
     , Gérant associé unique, intervenant aux présents statuts, déclare accepter les fonctions qui lui sont conférées.
@@ -152,7 +150,7 @@ au capital de
     <br>
 </p>
 
-<h2 style="text-align: center;"><b>TITRE II — APPORTS - CAPITAL - PARTS SOCIALES</b></h2>
+<h4 style="text-align: center;"><b>TITRE II — APPORTS - CAPITAL - PARTS SOCIALES</b></h4>
 
 <p>
     <b>ARTICLE 8 -  Apports</b> 
@@ -165,14 +163,14 @@ au capital de
      <br>
        Ci…………{{ capitalNum ?? '0.00'}} Euros………………………………
      <br>
-       <b>Total des apports en numéraire : ……………{{ capitalNum ?? '0.00'}} Euros………………</b>
+       <b>Total des apports en numéraire : ……………{{ capitalNum ?? '0.00'}} Euros………………</b> <br>
        
-       Ladite somme de {{ capitalWord ?? ' NOMBRE EN LETTRES' }} euros ({{ capitalNum ?? 'nombre en numéraire'}} €), 
-       correspondant à 100%(nombre en numéraire) parts sociales au nominal de NOMBRE EN LETTRE 
-       (nombre en numéraire) Euros chacune, souscrites et libérées en totalité, 
+       Ladite somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} euros ({{ capitalNum ?? 'nombre en numéraire'}} €)</b>, 
+       correspondant à 100%(nombre en numéraire) parts sociales au nominal de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} 
+       ({{ capitalNum ?? 'nombre en numéraire'}}) Euros </b> chacune, souscrites et libérées en totalité, 
        est déposée au crédit d'un compte ouvert au nom de la Société en formation, 
-       à la banque ainsi qu'en atteste un certificat établi en date du {{ today ?? 'JOUR/ MOIS/ ANNEE'}} par la 
-       {{ banqName ?? 'NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE'}} , dépositaire des fonds, auquel est demeurée annexée 
+       à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateCreation ?? 'JOUR/ MOIS/ ANNEE'}} </b>par la 
+       <b>{{ companyBankName ?? 'NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE'}}</b> , dépositaire des fonds, auquel est demeurée annexée 
        la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
        <br>
        Cette somme sera retirée par le Gérant de la société ou son mandataire sur présentation du certificat délivré par le Greffier du tribunal de commerce du lieu du siège social attestant l'immatriculation de la société au registre du commerce.
@@ -184,19 +182,19 @@ au capital de
 <p>
     <b>ARTICLE 9 -  Capital social</b> 
     <br>
-    Le capital social est fixé à la somme de {{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? 'nombre en numéraire'}} €)
+    Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? 'nombre en numéraire'}} €)</b>
     <br>
-    Il est divisé en {{ nombrePart ?? 'NOMBRE' }} parts de {{ capitalNum ?? 'NOMBRE'}} € chacune, numérotées de 1 à {{ nombrePart ?? 'NOMBRE DE PARTS SOCIALES' }}, 
+    Il est divisé en {{ totalPartNum ?? 'NOMBRE' }} parts de {{ capitalNum ?? 'NOMBRE'}} € chacune, numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }}, 
     attribuées en totalité à {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, 
     associé unique, entièrement libérées et souscrites en totalité :
     <br>
     {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
     <br>
-    A concurrence de {{ nombrePart ?? 'NOMBRE' }} parts numérotées de 1 à {{ nombrePart ?? 'NOMBRE DE PARTS SOCIALES' }} inclus, 
+    A concurrence de {{ totalPartNum ?? 'NOMBRE' }} parts numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }} inclus, 
     <br>
-    ci……………{{ nombrePart ?? '0' }} parts………………………… 
+    ci……………{{ totalPartNum ?? '0' }} parts………………………… 
     <br>
-       <b>Total égal au nombre de parts composant le capital social : ………{{ nombrePart ?? '0' }} parts………</b>
+       <b>Total égal au nombre de parts composant le capital social : ………{{ totalPartNum ?? '0' }} parts………</b>
        <br>
        L’associé unique déclare expressément que ces parts sont toutes intégralement libérées et souscrites en totalité.
     
@@ -275,6 +273,7 @@ au capital de
 <p>
     
     <b>ARTICLE 12 - Cession — Transmission</b>
+    <br>
     <u>I - Cession</u>
     <br>
     
@@ -327,7 +326,7 @@ au capital de
     <br>
 </p>
 
-    <h2 style="text-align: center;"><b>TITRE III — GÉRANCE</b></h2>
+    <h4 style="text-align: center;"><b>TITRE III — GÉRANCE</b></h4>
     
 <p>
     
@@ -396,7 +395,7 @@ au capital de
    <br> 
 </p>
 
-    <h2 style="text-align: center;"><b>TITRE IV - CONVENTIONS ENTRE LA SOCIÉTÉ ET LA GÉRANCE OU UN ASSOCIÉ</b></h2>
+    <h4 style="text-align: center;"><b>TITRE IV - CONVENTIONS ENTRE LA SOCIÉTÉ ET LA GÉRANCE OU UN ASSOCIÉ</b></h4>
 <p>
     <ol>
         <li>Les conventions, autres que celles portant sur des opérations courantes conclues à des conditions normales (article L 223-20 du Code de commerce), qui interviennent directement ou par personne interposée entre la Société et l’un de ses Gérants ou associés, sont soumises à la procédure d’approbation prévue par la loi.
@@ -413,7 +412,7 @@ au capital de
     <br>
 </p>
 
-<h2 style="text-align: center;"><b>TITRE V — DECISIONS DE L’ASSOCIEE UNIQUE OU DES ASSOCIES</b></h2>
+<h4 style="text-align: center;"><b>TITRE V — DECISIONS DE L’ASSOCIEE UNIQUE OU DES ASSOCIES</b></h4>
     
 <p>
     
@@ -439,7 +438,7 @@ au capital de
  <br>
 </p>
 
-  <h2 style="text-align: center;"><b>TITRE VI — CONTROLE DE LA SOCIETE</b></h2>
+  <h4 style="text-align: center;"><b>TITRE VI — CONTROLE DE LA SOCIETE</b></h4>
   
 <p>
     <b>ARTICLE 21 -  Commissaires aux comptes</b>
@@ -449,7 +448,7 @@ au capital de
     <br>Le Commissaire aux comptes exerce ses fonctions dans les conditions prévues par la loi.
 </p>
 
-    <h2 style="text-align: center;"><b>TITRE VII —COMPTES SOCIAUX - BENEFICES - DIVIDENDES</b></h2>
+    <h4 style="text-align: center;"><b>TITRE VII —COMPTES SOCIAUX - BENEFICES - DIVIDENDES</b></h4>
     
 <p>
     
@@ -483,7 +482,7 @@ au capital de
 <br>
 </p>
 
-   <h2 style="text-align: center;"><b>TITRE VIII — PROROGATION - DISSOLUTION - LIQUIDATION - CONTESTATIONS</b></h2>
+   <h4 style="text-align: center;"><b>TITRE VIII — PROROGATION - DISSOLUTION - LIQUIDATION - CONTESTATIONS</b></h4>
 
 <p>
     
@@ -524,7 +523,7 @@ au capital de
     <br>
 </p>
 
-  <h2 style="text-align: center;"><b>TITRE IX — FORMALITES</b></h2>
+  <h4 style="text-align: center;"><b>TITRE IX — FORMALITES</b></h4>
 
 <p>
     
@@ -543,7 +542,7 @@ au capital de
     <b>ARTICLE 28 - Actes souscrits au nom de la Société en formation</b>
 
     <br>L’immatriculation de la Société au Registre du Commerce et des Sociétés entraînera de plein droit reprise par la Société desdits actes et engagements.
-    <br>En outre, {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}, Gérant associé unique, agira au nom et pour le compte de la Société en formation, jusqu’à son immatriculation au Registre du Commerce et des Sociétés. Il passera les actes et prendra les engagements pour le compte de la Société.
+    <br>En outre, <b> {{ civilite ?? 'CIVILITE' }} {{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, Gérant associé unique, agira au nom et pour le compte de la Société en formation, jusqu’à son immatriculation au Registre du Commerce et des Sociétés. Il passera les actes et prendra les engagements pour le compte de la Société.
     <br>L’immatriculation de la Société au Registre du Commerce et des Sociétés comportera reprise de ces actes et engagements
     
     <br>

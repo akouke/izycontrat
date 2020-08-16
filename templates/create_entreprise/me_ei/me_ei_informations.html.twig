@@ -256,7 +256,7 @@ input[type="checkbox"] {
               <input id="nameCompany" name="nameCompany" placeholder="nom societe" value="{{company.name}}" disabled>
               
               <label for="forme">forme</label>
-              <input id="forme" name="forme" placeholder="forme juridique" value="{{company.companyType.name == 'IE' ? 'Entreprise Individuel' : company.companyType.name}}" disabled>
+              <input id="forme" name="forme" placeholder="forme juridique" value="{{company.companyType.name == 'EI' ? 'Entreprise Individuel' : company.companyType.name}}" disabled>
               
               <label for="address">Adresse</label>
               <input id="address" name="address" placeholder="adresse" value="{{company.address}}" disabled>
@@ -276,7 +276,11 @@ input[type="checkbox"] {
            </div>
           </div>
           </div>
-        <a class="btn btn-success" href="{{ path('create_sarl_prestation')}}"> Suivant </a>
+          {% if company.companyType.name == 'EI'%}
+            <a class="btn btn-warning" href="{{ path('create_sarl_prestation_ei')}}"> Suivant </a>
+          {% else %}
+            <a class="btn btn-warning" href="{{ path('create_sarl_prestation_me')}}"> Suivant </a>
+          {% endif %}
         {#<input id="sendOrder" type="reset" value="Cancel Order">#}
         {#<input id="sendOrder" type="button" value="Contact Me">#}
       </form>

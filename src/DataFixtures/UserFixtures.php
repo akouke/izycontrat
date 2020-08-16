@@ -56,6 +56,7 @@ class UserFixtures extends Fixture
                 $user,
                 'password'
             ));
+            $user->setEnabled('true');
             $this->addReference('person_' . $refNumber, $user);
             $manager->persist($user);
             $refNumber++;

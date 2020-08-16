@@ -21,6 +21,7 @@
         "symfony/flex": "^1.1",
         "symfony/form": "4.4.*",
         "symfony/framework-bundle": "4.4.*",
+        "symfony/mailchimp-mailer": "4.4.*",
         "symfony/mailer": "4.4.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "^1.0",
@@ -36,10 +37,10 @@
         "symfony/web-link": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.5",
         "symfony/yaml": "4.4.*",
+        "symfonycasts/reset-password-bundle": "^1.1",
         "symfonycasts/verify-email-bundle": "^1.0",
         "vich/uploader-bundle": "^1.14",
-        "willdurand/js-translation-bundle": "^3.0",
-      "ext-http": "*"
+        "willdurand/js-translation-bundle": "^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",

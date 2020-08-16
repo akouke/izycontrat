@@ -1,0 +1,199 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Izy technique SARL{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('home') }}
+    {{ encore_entry_link_tags('technical_sheet') }}
+{% endblock %}
+
+{% block body %}
+    <section class="homeTop d-flex justify-content-center">
+        <img class="homePicture img-fiche" src="/images/sarl.png" alt="image principale">
+        <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
+            <p>CRÉER UNE SARL</p>
+            <a href="{{ path('create_sarl') }}" class="btn btn-secondary btnHome">Je crée ma SARL !</a>
+        </div>
+    </section>
+    <div class="container text-justify p-4">
+        <div class="row justify-content-center mt-4 ">
+            <h2 class="text-center">Qu’est-ce qu’une SARL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Une société à responsabilité limitée (SARL) est une entreprise constituée de deux associés au minimum
+                (s’il n’y a qu’un seul associé on parle d’EURL ou de SARL unipersonnelle) et 100 maximum, ils peuvent
+                être personne physique ou personne morale. Il s’agit de la forme de société la plus répandue en
+                France.</p>
+            <p>Elle est adaptée pour les activités artisanales, commerciales, industrielles et les professions
+                libérales, et permet, comme son nom l’indique, de limiter la responsabilité des associés au montant de
+                leurs apports.
+            </p>
+        </div>
+
+
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel est le montant du capital social d’une SARL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Le capital social est obligatoirement inscrit dans les statuts. Il est fixé librement par les associés
+                sans minimum de montant, et peut être fixe ou variable. Le capital social est constitué des apports en
+                numéraire (somme d’argent) ou en nature (du matériel informatique, un brevet…) des associés qui
+                reçoivent en contrepartie des parts sociales et des droits sociaux.</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quel peut être l’objet social d’une SARL ?</h2>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <p>L’objet social d’une SARL est là pour définir quelle activité la société va exercer. Il est indispensable
+                de consulter tous les associés pour la rédaction de l’objet social afin d’éviter d’avoir recours à des
+                modifications ultérieures qui sont contraignantes et coûteuses.</p>
+            <p>L’objet social permet aussi de définir l’étendue des pouvoirs du gérant de la SARL, celui-ci peut voir sa
+                responsabilité engagée s’il prend une décision non comprise dans les statuts.</p>
+            <p>Pour être valide l’objet social doit être licite, réalisable et constitué dans l’intérêt commun des
+                associés, il ne doit pas être contraire aux bonnes mœurs et nuire à l’ordre public. L’objet social d’une
+                SARL ne peut concerner des activités d’assurance, d’épargne ou de capitalisation, des débits de tabac ou
+                encore des laboratoires d’analyses médicales.</p>
+            <p>Il est important que l’objet social soit rédigé de manière claire et précise, il ne doit pas être trop
+                large ou trop restrictif. Il est conseillé d’y mentionner les activités futures de la société pour
+                éviter une future modification des statuts. Il convient de demander conseil à un spécialiste pour la
+                rédaction, afin d’éviter d’éventuelle sanction, comme une nullité de l’objet social, causée par une
+                mauvaise rédaction.</p>
+
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quels sont les droits des associés d’une SARL ?</h2>
+        </div>
+        <div class="row mt-4">
+
+            <p>Les associés d’une SARL disposent de divers droits.</p>
+            <p>Ils bénéficient d’un droit à l’information permanent pour prendre connaissance des documents relatifs à
+                la SARL, et d’un droit d’information préalable à toute assemblée ou consultation écrite.</p>
+            <p>La participation au capital via leurs apports ouvre des droits financiers aux associés. Il s’agit d’un
+                droit de percevoir les bénéfices de la SARL (de façon proportionnelle à leurs apports), et d’un droit de
+                remboursement de leurs apports en cas de liquidation de la société. Il peut exister une clause dans les
+                statuts prévoyant une répartition contraire des bénéfices, sous réserve qu’elle ne prive aucun associé
+                de son droit aux bénéfices.</p>
+            <p>Les associés possèdent également des droits politiques, ils peuvent participer et voter aux assemblées.
+                Ce droit de vote est proportionnel à la part détenue dans la société.</p>
+            <p>Enfin, ils disposent d’un droit d’alerte, c’est-à-dire qu’ils peuvent poser, par écrit, des questions au
+                gérant sur tout fait de nature à compromettre la continuité de l’exploitation.</p>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Qui peut être gérant d’une SARL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La SARL peut être régie par un ou plusieurs gérants, ils sont obligatoirement des personnes physiques,
+                mais pas nécessairement des associés de la SARL. Il peut s’agir de toute personne de nationalité
+                française, résidente d’un État européen ou disposant d’un titre de séjour.</p>
+            <p>Le nombre de gérant est fixé dans les statuts. Ils peuvent être nommés directement dans les statuts, ou
+                plus simplement par acte séparé.</p>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quels sont les pouvoirs du gérant d’une SARL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>Le gérant d’une SARL dispose des pleins pouvoirs, cela signifie qu’il peut agir au nom et pour le compte
+                de
+                la société. Les pouvoirs du gérant lui permettent de réaliser des actes de gestion, d’administration et
+                de
+                disposition des biens de l’entreprise, d’embaucher de nouveaux salariés, de signer des contrats ou
+                encore
+                d’agir en justice.</p>
+            <p>Les pouvoirs sont avant tout limités par l’objet social de la société. En effet, si le gérant réalise des
+                actes n’entrant pas dans le champ de l’objet social il peut voir sa responsabilité personnelle
+                engagée.</p>
+            <p>Les associés peuvent également prévoir dans les statuts de la SARL des clauses limitant les pouvoirs du
+                gérant.</p>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quel est le statut social du gérant d’une SARL ?</h2>
+        </div>
+
+        <div class="row mt-4">
+            <p class="mt-2">Le statut du gérant de SARL peut être de différentes natures, il dépend du nombre de parts
+                sociales détenues, et de si le gérant est associé ou non de la SARL.</p>
+            <p>Si le gérant est associé de la SARL il existe deux cas de figure :</p>
+            <div class="row justify-content-center">
+                <ul class="col-9">
+                    <li class="mt-2">Il est associé majoritaire, c’est-à-dire qu’il possède plus de la moitié des parts
+                        sociales de la SARL. Dans ce cas, il relève de la catégorie des travailleurs non salariés (TNS)
+                        et
+                        est affilié à la Sécurité sociale des indépendants (SSI).
+                    </li>
+                    <li class="mt-2"> Il est associé égalitaire ou minoritaire, c’est-à-dire qu’il possède la moitié ou
+                        moins des parts sociales de la SARL. Dans ce cas, il est dirigeant assimilé salarié et relève du
+                        régime général de la Sécurité sociale.
+                    </li>
+                </ul>
+                <p>Si le gérant n’est pas associé de la SARL, son statut dépend de l’existence ou non d’une rémunération
+                    :
+                </p>
+                <ul class="col-9">
+                    <li class="mt-2">S’il perçoit une rémunération le gérant a le statut d’assimilé salarié, et est
+                        soumis
+                        au régime général de la Sécurité sociale.
+                    </li>
+                    <li class="mt-2"> S’il ne perçoit aucune rémunération le gérant il n’a aucun statut social, et n’est
+                        donc affilié à aucun régime de protection sociale.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quel est le régime fiscal d’une SARL ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La SARL est soumise par défaut à l’impôt sur les sociétés (IS) calculé sur le bénéfice imposable. Si la
+                SARL ne
+                réalise pas de bénéfices alors elle n’est pas imposable. Le taux d’imposition de l’IS est de :</p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">15% pour les bénéfices inférieurs à 38 120 €</li>
+                <li class="mt-2">28% pour les bénéfices supérieurs à 38 120 €</li>
+            </ul>
+        </div>
+        <div class="row mt-4">
+            <p>Il est possible d’opter pour l’impôt sur le revenu (IR) sous certaines conditions :</p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">Il s’agit d’une SARL de famille ;</li>
+                <li class="mt-2">Qui exerce à titre principal une activité industrielle, commerciale, artisanale,
+                    agricole ou libérale (sauf activité de gestion de son propre patrimoine mobilier ou immobilier) ;
+                </li>
+                <li class="mt-2">Créées depuis moins de 5 ans au moment de l’option ;</li>
+                <li class="mt-2">Avec un effectif n’excédant pas 50 salariés ;</li>
+                <li class="mt-2">
+                    Dont le chiffre d’affaires annuel ou total de bilan est inférieur à 10 millions d’euros ;
+                </li>
+                <li class="mt-2">N’est pas cotée en bourse ;</li>
+                <li class="mt-2">Dont les droits de vote sont détenus, à hauteur de 50% au moins, par une ou des
+                    personnes physiques, et à hauteur de 34% au moins, par une ou plusieurs personnes ayant la qualité
+                    de dirigeants.
+                </li>
+            </ul>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Qu’est-ce qu’une SARL de famille ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p> Une SARL de famille est, comme son nom l’indique, composée d’associés dont tous les membres sont
+                directement
+                issus de la même famille (enfants, parents, grands-parents, frères et sœurs, conjoints ou liés par un
+                Pacs).</p>
+            <p>Une SARL de famille ne peut pas concerner une activité libérale, seulement une activité industrielle,
+                commerciale ou artisanale.</p>
+            <p>La SARL de famille permet aux associés d’être imposés sur le revenu.</p>
+        </div>
+        <p>Vous avez trouvé une réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre projet en
+            quelques clics !</p>
+        <p>Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span
+                        class="text-secondary">IZY</span> CONTRAT</span> est là pour vous aider.</p>
+
+    </div>
+{% endblock %}

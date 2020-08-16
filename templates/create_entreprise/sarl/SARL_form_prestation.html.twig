@@ -168,7 +168,43 @@ table {
 .text-sm {
     font-size: 12px;
 }
+.ribbon1 {
+  position: absolute;
+  top: -6.1px;
+  right: 10px;
+}
 
+.ribbon1 span {
+  position: relative;
+  display: block;
+  text-align: center;
+  color: white;
+  background: #F8463F;
+  font-size: 12px;
+  line-height: 1;
+  padding: 12px 8px 10px;
+  border-top-right-radius: 8px;
+  width: 90px;
+}
+.ribbon1 span:before, .ribbon1 span:after {
+  position: absolute;
+  content: "";
+}
+.ribbon1 span:before {
+ height: 6px;
+ width: 6px;
+ left: -6px;
+ top: 0;
+ background: #F8463F;
+}
+.ribbon1 span:after {
+ height: 6px;
+ width: 8px;
+ left: -8px;
+ top: 0;
+ border-radius: 8px 8px 0 0;
+ background: #C02031;
+}
 </style> 
 
 {#<h1 class="haut">Choix de la Prestation</h1>#}
@@ -218,6 +254,7 @@ table {
         <div class="col-sm-3">
           <div class="card text-center">
             <div class="title">
+              <b><span class="ribbon1"><span>Plus Populaire</span></span></b>
               {#<i class="fa fa-plane" aria-hidden="true"></i>#}
               <h2>IZY PLUS</h2>
             </div>

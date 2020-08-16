@@ -3,11 +3,12 @@
 {% block title %}Fiche client - {{ client.lastName }} {{ client.firstName }}{% endblock %}
 
 {% block body %}
-    <div class="page-content container-fluid col-10 col-lg-10">
-        <div class="clientNote row row-cols-1 row-cols-md-1 row-cols-xl-3">
+    <div class="row page-content container-fluid col-10 col-lg-10">
+        <div class="clientNote row">
             <div class="clientInformation col pb-4 bg-light d-flex flex-column">
-                <img class="profilePicture" src="{{ client.user.profilePicture }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">
-                <h2>{{ client.lastName }}
+                <img class="profilePicture" src="{{ client.user.profilePicture ?? '' }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">
+                <h2>{{ client.gender == 2 ? 'Monsieur' : 'Madame'}}
+                    {{ client.lastName }}
                     {{ client.firstName }}</h2>
                 <h3>Mail</h3>
                 {{ client.user.email }}
@@ -15,8 +16,51 @@
                 {{ client.address }}
                 <h3>Téléphone</h3>
                 {{ client.phoneNumber|phone }}
+                <h3>Nationality</h3>
+                {{ client.nationality}}
             </div>
+
+
+        {#<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">#}
+        {% for company in client.user.companies %}
+            <div class="col pb-4">
+            {#<h2 class="profilePicture">Societe</h2>#}
+                <div class="clientInformation col pb-4 bg-light d-flex flex-column">
+                    {#<div class="card-body">#}
+
+                        <h2> Nom societe</h2>
+                            {{ company.name ?? ''}}
+
+                        <h3> Statut </h3>
+                            {{ company.companyType.name ?? ''}}
+
+                        <h3>Capital Social</h3>  
+                            {{ company.capitalSocial ?? ''}}
+  
+                          <h3>Addresse</h3>
+                          adresse: ({{ company.address ?? '' }}); adresse manager:({{ company.addressManager ?? '' }}); departement:({{ company.country ?? '' }})
+                        
+                        <h3>Protecion</h3>
+                        {{ company.hasProtection ?? ''}}
+                        
+                        <h3> Priorite</h3>
+                            {{ company.priority.name ?? ''}}
+                       
+                        <h3> Banque</h3>
+                            {{ company.bankName ?? ''}}
+                        
+                        <h3> Secteur D'activiter</h3>
+                            {{ company.activitySector.name ?? ''}}
+                        
+                        <h3> Objet Sociale</h3>
+                            {{ company.socialObject ?? ''}}
+                        
+                    {#</div>#}
+                </div>
+            </div>
+        {% endfor %}
         </div>
+        <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
     </div>
 {% endblock %}
 {% block stylesheets %}

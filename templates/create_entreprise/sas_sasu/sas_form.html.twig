@@ -1,5 +1,6 @@
 {#{% extends '_layout.html.twig' %}#}
 {% extends 'base.html.twig' %}
+{% block dashboard %}{% endblock %}
 {#{% block navbar %}{% endblock %}#}
 {% block title %}Je cree mon {{ typeStatut == 'SAS' ? 'SAS' : 'SASU' }} {% endblock %}
 
@@ -30,6 +31,19 @@
       text-align: center;
       
     }
+    
+    {% if typeStatut == 'SASU'%}
+        #progressbar li {
+        list-style-type: none;
+        color:#BEA058;
+        text-transform: uppercase;
+        font-size: 12px;
+        width: 10.33%;
+        float: left;
+        position: relative;
+        letter-spacing: 1px;
+       }
+    {% endif %}
 </style>
 {#<div class="container-fluid">#}
 <!-- MultiStep Form -->

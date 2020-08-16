@@ -1,5 +1,6 @@
 {#{% extends '_layout.html.twig' %}#}
 {% extends 'base.html.twig' %}
+{% block dashboard %}{% endblock %}
 {#{% block navbar %}{% endblock %}#}
 {% block title %}Je cree mon SCI {% endblock %}
 
@@ -30,6 +31,15 @@
       text-align: center;
       
     }
+    #progressbar li {
+        list-style-type: none;
+        color:#BEA058;
+        text-transform: uppercase;
+        font-size: 12px;
+        width: 10.50%;
+        float: left;
+        position: relative;
+        letter-spacing: 1px;
 </style>
 {#<div class="container-fluid">#}
 <!-- MultiStep Form -->
@@ -508,7 +518,6 @@
     {{form_end(formSci)}}
        
         </div>
-        <!-- link to designify.me code snippets -->
 
 </div>
 <!-- /.MultiStep Form -->

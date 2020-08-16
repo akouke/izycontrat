@@ -1,1 +1,40 @@
-<h3>Hi {{ user.getFirstName() }}</h3>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Confirmation de paiement</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<img src="https://www.izy-contrat.fr/images/Logo_Izy_Contrat_H.png" alt="logo Izy Contrat">
+<h1>Bonjour,{{ user.getFirstName() }}</h1>
+
+<div class="content__body py-8 border-b">
+        <p>
+          Bonjour, {{ user.getFirstName() }} <br><br>Merci d'avoir bien voulu vous enregistrer sur notre plateforme
+        </p>
+        <form action="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}" method="get" target="_blank">
+        <button class="text-white text-sm tracking-wide bg-black rounded w-full my-8 p-4 ">ACTIVER VOTRE COMPTE</button>
+        </form>
+        <p class="text-sm">
+          Nos salutations'!<br> L'équipe Izycontrat
+        </p>
+      </div>
+
+<p>L'équipe d'Izy Contrat</p>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
