@@ -21,7 +21,6 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('js_dashboard', './assets/js/dashboard.js')
     .addEntry('home', './assets/js/home.js')
-    .addEntry('login', './assets/js/login.js')
     .addEntry('fields', './assets/js/fields.js')
     .addEntry('howitwork', './assets/js/howitwork.js')
     .addEntry('createcompany', './assets/js/createcompany.js')
@@ -41,7 +40,7 @@ Encore
     .addStyleEntry('about', './assets/scss/about.scss')
     .addStyleEntry('tab1', './assets/scss/tab1.scss')
     .addStyleEntry('create_entreprise', './assets/scss/create_entreprise.scss')
-
+    .addStyleEntry('login', './assets/scss/login.scss')
 
 
 
