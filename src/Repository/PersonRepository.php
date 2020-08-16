@@ -22,9 +22,8 @@ class PersonRepository extends ServiceEntityRepository
     // public function findOneByLastPerson($value): ?Company
     // {
     //     return $this->createQueryBuilder('c')
-    //         ->andWhere('c.user = :val')
+    //         ->andWhere('c.user = :val and c.id = c.associates')
     //         ->setParameter('val', $value)
-    //         ->orderBy('c.id', 'DESC')
     //         ->getQuery()
     //         // ->getOneOrNullResult()
     //         ->getResult()

@@ -136,6 +136,7 @@ class CreateSasSasuController extends AbstractController
                  $user = $this->getUser();
              }
              
+             $person->setHasCompany(true);
              $company->setClient($user);
              
                 // recup parts
@@ -321,6 +322,7 @@ class CreateSasSasuController extends AbstractController
                  $user = $this->getUser();
              }
               
+             $person->setHasCompany(true);
              $company->setClient($user);
             
             $em->persist($company);
@@ -465,7 +467,8 @@ class CreateSasSasuController extends AbstractController
              }elseif($isConnected === true){
                  $user = $this->getUser();
              }
-               
+             
+             $person->setHasCompany(true);
              $company->setClient($user);
                // recup parts
                  $apportAssocieCompany1 = $associateCompany1->getCapitalBring();

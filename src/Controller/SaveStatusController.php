@@ -703,6 +703,11 @@ class SaveStatusController extends AbstractController
             
         ]);
       }
+      elseif($recupCompany->getCompanyType()->getName() == "EI" || $recupCompany->getCompanyType()->getName() == "MICRO-ENTREPRISE")
+      {
+          $this->addFlash('success', 'Votre dossier a ete bien crees');
+          return $this->redirectToRoute('dashboard_home');
+      }
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);

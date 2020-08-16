@@ -163,6 +163,7 @@ class CreateEntrepriseController extends AbstractController
                  $user = $this->getUser();
              }
              
+             $person->setHasCompany(true);
              $company->setClient($user);
              
                // recup parts
@@ -454,7 +455,7 @@ class CreateEntrepriseController extends AbstractController
                  $user = $this->getUser();
              }
              
-              
+             $person->setHasCompany(true); 
              $company->setClient($user);
              
            
@@ -566,6 +567,7 @@ class CreateEntrepriseController extends AbstractController
                      $user = $this->getUser();
              }
               
+              $person->setHasCompany(true);
              $company->setClient($user);
             
             $em->persist($company);
@@ -674,6 +676,7 @@ class CreateEntrepriseController extends AbstractController
                  $user = $this->getUser();
              }
               
+              $person->setHasCompany(true);
              $company->setClient($user);
             
             $em->persist($company);
