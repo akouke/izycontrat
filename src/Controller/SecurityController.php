@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="app_login")
+     * @Route("/connexion", name="conexop")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
