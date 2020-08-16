@@ -245,7 +245,9 @@ table {
               </ul>
               
             </div>
-            <a href="{{ path('create_sarl_payement_basic') }}"><b>Choisir ce forfait</b> </a>
+            <a id="checkout-button-{{ offre_izy_basic }}"
+               role="link"><b>Choisir ce forfait</b> </a>
+            <div id="error-message"></div>
           </div>
         </div>
         <!-- END Col one -->
@@ -265,7 +267,9 @@ table {
                 {#<li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
               </ul>
             </div>
-            <a href="{{ path('create_sarl_payement_plus')}}"><b>Choisir ce forfait</b> </a>
+            <a id="checkout-button-{{ offre_izy_plus }}"
+               role="link"><b>Choisir ce forfait</b> </a>
+            <div id="error-message"></div>
           </div>
         </div>
         <!-- END Col two -->
@@ -284,7 +288,9 @@ table {
               {#<li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
               </ul>
             </div>
-            <a href="{{ path('create_sarl_payement_premium')}}"><b>Choisir ce forfait</b> </a>
+            <a id="checkout-button-{{ offre_izy_premium }}"
+               role="link"><b>Choisir ce forfait</b> </a>
+            <div id="error-message"></div>
           </div>
         </div>
         <!-- END Col three -->
@@ -461,7 +467,7 @@ table {
         <td>50-67 €</td>
         <td>50-67 €</td>
       </tr>
-      
+
     </tbody>
   </table>
       {#fin table details#}
@@ -477,4 +483,92 @@ table {
 {#</div>#}
 
 {% block footer %}{% endblock %}
+  {% block javascripts %}
+    <script>
+      (function() {
+        var stripe = Stripe('{{ stripe_public_key }}');
+
+        var checkoutButton = document.getElementById('checkout-button-{{ offre_izy_premium }}');
+        checkoutButton.addEventListener('click', function () {
+          // When the customer clicks on the button, redirect
+          // them to Checkout.
+          stripe.redirectToCheckout({
+            lineItems: [{price: '{{ offre_izy_premium }}', quantity: 1}],
+            mode: 'payment',
+            // Do not rely on the redirect to the successUrl for fulfilling
+            // purchases, customers may not always reach the success_url after
+            // a successful payment.
+            // Instead use one of the strategies described in
+            // https://stripe.com/docs/payments/checkout/fulfillment
+            successUrl: '{{ url_stripe_success }}',
+            cancelUrl: '{{ url_stripe_canceled }}',
+          })
+                  .then(function (result) {
+                    if (result.error) {
+                      // If `redirectToCheckout` fails due to a browser or network
+                      // error, display the localized error message to your customer.
+                      var displayError = document.getElementById('error-message');
+                      displayError.textContent = result.error.message;
+                    }
+                  });
+        });
+      })();
+      (function() {
+        var stripe = Stripe('{{ stripe_public_key }}');
+
+        var checkoutButton = document.getElementById('checkout-button-{{ offre_izy_plus }}');
+        checkoutButton.addEventListener('click', function () {
+          // When the customer clicks on the button, redirect
+          // them to Checkout.
+          stripe.redirectToCheckout({
+            lineItems: [{price: '{{ offre_izy_plus }}', quantity: 1}],
+            mode: 'payment',
+            // Do not rely on the redirect to the successUrl for fulfilling
+            // purchases, customers may not always reach the success_url after
+            // a successful payment.
+            // Instead use one of the strategies described in
+            // https://stripe.com/docs/payments/checkout/fulfillment
+            successUrl: '{{ url_stripe_success }}',
+            cancelUrl: '{{ url_stripe_canceled }}',
+          })
+                  .then(function (result) {
+                    if (result.error) {
+                      // If `redirectToCheckout` fails due to a browser or network
+                      // error, display the localized error message to your customer.
+                      var displayError = document.getElementById('error-message');
+                      displayError.textContent = result.error.message;
+                    }
+                  });
+        });
+      })();
+      (function() {
+        var stripe = Stripe('{{ stripe_public_key }}');
+
+        var checkoutButton = document.getElementById('checkout-button-{{ offre_izy_basic }}');
+        checkoutButton.addEventListener('click', function () {
+          // When the customer clicks on the button, redirect
+          // them to Checkout.
+          stripe.redirectToCheckout({
+            lineItems: [{price: '{{ offre_izy_basic }}', quantity: 1}],
+            mode: 'payment',
+            // Do not rely on the redirect to the successUrl for fulfilling
+            // purchases, customers may not always reach the success_url after
+            // a successful payment.
+            // Instead use one of the strategies described in
+            // https://stripe.com/docs/payments/checkout/fulfillment
+            successUrl: '{{ url_stripe_success }}',
+            cancelUrl: '{{ url_stripe_canceled }}',
+          })
+                  .then(function (result) {
+                    if (result.error) {
+                      // If `redirectToCheckout` fails due to a browser or network
+                      // error, display the localized error message to your customer.
+                      var displayError = document.getElementById('error-message');
+                      displayError.textContent = result.error.message;
+                    }
+                  });
+        });
+      })();
+    </script>
+    {% endblock %}
 {% endblock %}
