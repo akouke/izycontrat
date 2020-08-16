@@ -1,35 +1,42 @@
+{% extends '_layout.html.twig' %}
+{% block title %}Connexion{% endblock %}
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('login') }}
+ {% endblock %}
 {% block body %}
-    <div class="modal fade bd-example-modal-lg w-100" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-modal="{{ error.messageKey is defined ? 'true' : 'false' }}" aria-hidden="true">
-        <div class="modal-dialog d-flex flex-row">
-            <div class="modal-content d-flex flex-column">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {% if error is defined and error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-                    <form id="login" method="post" action="{{ path('app_login') }} ">
-                        <div class="form-group d-flex flex-column">
-                            <label for="email">Mail</label>
-                            <input type="email" value="{{ last_username ?? '' }}" name="email" id="email" class="form-control" required autofocus>
+    <section class="page-content">
+        <div class="row text-center justify-content-center">
+            <h1 class="h3 mb-5 font-weight-normal mt-5">Mon espace personnel</h1>
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <!-- Login Form -->
+                    <form id="login" method="post">
+                        <label for="login">Email</label>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-secondary"><i
+                                            class="fas fa-user text-light"></i></span>
+                            </div>
+                            <input value="{{ last_username }}" name="email" id="email"
+                                   class="form-control" required
+                                   placeholder="Dupont@gmail.com" autofocus>
                         </div>
-                        <div class="form-group d-flex flex-column">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" name="password" id="password" class="form-control" required>
+                        <label for="inputPassword" class="mt-2">Mot de passe</label>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-secondary"><i class="fas fa-key text-light"></i></span>
+                            </div>
+                            <input type="password" name="password" id="inputPassword" placeholder="Mot de passe"
+                                   class="form-control" required>
                         </div>
+                        <button class="btn btn-lg btn-dark text-color-button mt-3 mb-3" type="submit">
+                            Connexion
+                        </button>
                         <input type="hidden" name="_csrf_token"
-                               value="{{ csrf_token('authenticate') }}"
-                        >
-                        <div class="checkbox mb-3">
-                            <label>
-                                <input type="checkbox" name="_remember_me"> Rester connecté
-                            </label>
-                        </div>
+                               value="{{ csrf_token('authenticate') }}">
                     </form>
                     <button class="btn btn-lg btn-primary order-0" type="submit" form="login">Se connecter</button>
                 </div>
@@ -41,12 +48,7 @@
                     <a class="btn btn-lg btn-outline-primary order-1" href="{{ path('user_register') }}">S'inscrire</a>
                     <a href="{{ path('app_forgot_password_request') }}">mot de passe oublié ?</a>
                 </div>
-                {% endif %}
             </div>
         </div>
-    </div>
+    </section>
 {% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('login') }}
-        {% endblock %}
-
