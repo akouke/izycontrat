@@ -217,11 +217,12 @@ class CreateSasSasuController extends AbstractController
             $em->persist($person);
             $em->persist($company);
             $em->flush();
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
             if($isConnected === false){
 
@@ -244,7 +245,22 @@ class CreateSasSasuController extends AbstractController
             
             }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            if( $emailUsed === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
         }   
@@ -341,11 +357,12 @@ class CreateSasSasuController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             $em->flush();
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
             
             if( $isConnected === false ){
@@ -366,7 +383,22 @@ class CreateSasSasuController extends AbstractController
             );
             }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            if( $emailUsed === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
                 // 'user' => $user->getEmail(),
                 ]);
@@ -554,11 +586,12 @@ class CreateSasSasuController extends AbstractController
             $em->persist($person);
             $em->persist($company);
             $em->flush();
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
            
            if( $isConnected === false)
@@ -579,7 +612,23 @@ class CreateSasSasuController extends AbstractController
                 'main'
             );
            }
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+           
+           if( $emailUsed === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
         }   

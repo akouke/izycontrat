@@ -244,11 +244,7 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->flush();
             
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            
             
            
             if( $isConnected === false)
@@ -269,15 +265,24 @@ class CreateEntrepriseController extends AbstractController
                     $authenticator,
                     'main'
                 );
+                
             }
             
-         //   if( $emailUsed === false)
-           // {
+            if( $emailUsed === false)
+            {
                 
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
             
-          //  }
-            
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation' );
 
         }   
@@ -506,11 +511,11 @@ class CreateEntrepriseController extends AbstractController
            
             $em->flush();
             
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
             
             if( $isConnected === false )
@@ -532,9 +537,22 @@ class CreateEntrepriseController extends AbstractController
                 );
             }
             
+            if( $emailUsed === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
             
-            
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
             return $this->redirectToRoute('create_sarl_prestation', [
                 ]);
             
@@ -622,11 +640,12 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             $em->flush();
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
 
             if($isConnected === false)
@@ -647,6 +666,21 @@ class CreateEntrepriseController extends AbstractController
                     $authenticator,
                     'main'
                 );
+            }
+            
+            if( $emailUsed === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             }
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
@@ -739,12 +773,12 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             
-            $em->flush();
-            $UserInfoEvent = new UserInfoEvent($person);
-                $eventDispatcher->dispatch(
-                UserInfoEvent::NAME,
-                $UserInfoEvent
-            ); 
+            // $em->flush();
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
             
             if($isConnected === false)
@@ -764,6 +798,21 @@ class CreateEntrepriseController extends AbstractController
                     $authenticator,
                     'main'
                 );
+            }
+            
+            if( $emailUsed === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             }
 
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
