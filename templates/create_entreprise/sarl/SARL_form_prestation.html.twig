@@ -300,7 +300,7 @@ table {
               <h2> IZY TEST </h2>
             </div>
             <div class="price">
-              <h4>0,01<sup>€</sup><sub><small>HT</small></sub></h4>
+              <h4>1,00<sup>€</sup><sub><small>HT</small></sub></h4>
             </div>
             <div class="option">
               <ul>
@@ -308,7 +308,7 @@ table {
               {#<li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>#}
               </ul>
             </div>
-            <a id="checkout-button-price_1HGpfRJ1VSvMwQdg1DTT18UH"
+            <a id="checkout-button-price_1HH2WuJ1VSvMwQdgiYDXwPyx"
                role="link"><b>Choisir ce forfait</b> </a>
 {#            <div id="error-message"></div>#}
           </div>
@@ -590,14 +590,14 @@ table {
         });
       })();
       (function() {
-        var stripe = Stripe('{{ stripe_public_key }}');
+        var stripe = Stripe('pk_test_51H2XzXJ1VSvMwQdgGQaYJXROFk79EphP7fsOeyIyi6nYxq4mWcDSH9C2cZueDM4Id32hjL3ooDdDbuz9dw8WTvuw003FLT7gdg');
 
-        var checkoutButton = document.getElementById('checkout-button-price_1HGpfRJ1VSvMwQdg1DTT18UH');
+        var checkoutButton = document.getElementById('checkout-button-price_1HH2WuJ1VSvMwQdgiYDXwPyx');
         checkoutButton.addEventListener('click', function () {
           // When the customer clicks on the button, redirect
           // them to Checkout.
           stripe.redirectToCheckout({
-            lineItems: [{price: 'price_1HGpfRJ1VSvMwQdg1DTT18UH', quantity: 1}],
+            lineItems: [{price: 'price_1HH2WuJ1VSvMwQdgiYDXwPyx', quantity: 1}],
             mode: 'payment',
             // Do not rely on the redirect to the successUrl for fulfilling
             // purchases, customers may not always reach the success_url after
