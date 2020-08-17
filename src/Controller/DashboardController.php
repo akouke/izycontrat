@@ -185,20 +185,25 @@ class DashboardController extends AbstractController
     }
     
      /**
-     * @Route("/admin/clients/delete/{id}", name="clients_delete")
+     * @Route("/admin/client/delete/{id}", name="clients_delete")
      */
-    public function delete(Person $client): Response
+    public function deleteClient(Person $client): Response
     {
         $user = $this->getUser();
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
-        
+        try{
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($client);
             $entityManager->flush();
-     
-
+            $this->addFlash('success', 'le client a bien ete supprime');
+            
+        }catch (\Throwable $th) 
+          {
+            $this->addFlash('danger', 'la suppression n\'a pas reussit contacter l\'administrateur au besion');  
+              
+          }
         return $this->redirectToRoute('dashboard_admin_clients');
     }
 }

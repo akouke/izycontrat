@@ -73,6 +73,8 @@ class CreateEntrepriseController extends AbstractController
                                  EventDispatcherInterface $eventDispatcher)
                                  
      {
+       try
+       {
          $isConnected = false;
          
           if($this->getUser()){
@@ -305,6 +307,13 @@ class CreateEntrepriseController extends AbstractController
             'typeStatut' => "SARL",
             
         ]);
+        
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
+          
     }
     
     
@@ -321,8 +330,23 @@ class CreateEntrepriseController extends AbstractController
     /**
      * @Route("/create/success", name="generate_status_success")
      */
-    public function sucessGenerateStatus()
+    public function sucessGenerateStatus(EventDispatcherInterface $eventDispatcher, PersonRepository $recupPerson)
     {
+        $person = new Person();
+        try
+        {
+           $person = $recupPerson->findOneByUser($this->getUser()->getId());
+
+          if($person)
+          {
+            $UserPaymentEvent = new UserPaymentEvent($person);
+                    $eventDispatcher->dispatch(
+                    UserPaymentEvent::NAME,
+                    $UserPaymentEvent
+            ); 
+          }
+        }catch (\Throwable $th) { }
+              
         return $this->render('paiement/success.html.twig');
         // return $this->redirectToRoute('save_status');
     }
@@ -455,6 +479,8 @@ class CreateEntrepriseController extends AbstractController
                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                                 EventDispatcherInterface $eventDispatcher)
      {
+      try
+       {
          $isConnected = false;
          
           if($this->getUser()){
@@ -578,6 +604,12 @@ class CreateEntrepriseController extends AbstractController
              'user' => $user,
              'typeStatut' => "EURL",
         ]);
+        
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
     }
 
     /**
@@ -589,6 +621,8 @@ class CreateEntrepriseController extends AbstractController
                                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                                              EventDispatcherInterface $eventDispatcher)
      {
+       try
+       {
          $isConnected = false;
          
           if($this->getUser()){
@@ -701,7 +735,10 @@ class CreateEntrepriseController extends AbstractController
                 ]);
 
         }        
-
+        if( $request->getMethod() == "POST" )
+        {
+            $this->addFlash('danger', 'Cet adresse mail '.$user->getEmail().' existe deja veuillez vous connecter!');
+        }
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formMe' => $formCompany->createView(),
              'formMePerson' => $formPerson->createView(),
@@ -711,6 +748,12 @@ class CreateEntrepriseController extends AbstractController
              'user' => $user,
            'typeStatut' => 'ME' 
         ]);
+      
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
     }
     
     /**
@@ -722,6 +765,8 @@ class CreateEntrepriseController extends AbstractController
                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                               EventDispatcherInterface $eventDispatcher)
      {
+      try
+       {
          $isConnected = false;
          
           if($this->getUser()){
@@ -833,7 +878,10 @@ class CreateEntrepriseController extends AbstractController
                 ]);
 
         }        
-        
+        if( $request->getMethod() == "POST" )
+        {
+            $this->addFlash('danger', 'Cet adresse mail '.$user->getEmail().' existe deja veuillez vous connecter!');
+        }
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formEi' => $formCompany->createView(),
              'formEiPerson' => $formPerson->createView(),
@@ -843,6 +891,12 @@ class CreateEntrepriseController extends AbstractController
              'user' => $user,
          'typeStatut' => 'EI',
         ]);
+        
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
     }
     
     /**
