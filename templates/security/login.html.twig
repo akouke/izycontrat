@@ -15,7 +15,7 @@
                     <!-- Login Form -->
                     <form id="login" method="post">
                         {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>{{ dump(error) }}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
                         <label for="login">Email</label>
                         <div class="input-group form-group">
