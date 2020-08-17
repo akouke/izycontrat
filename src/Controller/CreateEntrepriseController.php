@@ -268,7 +268,7 @@ class CreateEntrepriseController extends AbstractController
                 
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);
@@ -314,7 +314,17 @@ class CreateEntrepriseController extends AbstractController
      */
     public function sucessPayment()
     {
+        // return $this->render('paiement/success.html.twig');
+        return $this->redirectToRoute('save_status');
+    }
+    
+    /**
+     * @Route("/create/success", name="generate_status_success")
+     */
+    public function sucessGenerateStatus()
+    {
         return $this->render('paiement/success.html.twig');
+        // return $this->redirectToRoute('save_status');
     }
     
       /**
@@ -537,7 +547,7 @@ class CreateEntrepriseController extends AbstractController
                 );
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);
@@ -668,7 +678,7 @@ class CreateEntrepriseController extends AbstractController
                 );
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);
@@ -800,7 +810,7 @@ class CreateEntrepriseController extends AbstractController
                 );
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);

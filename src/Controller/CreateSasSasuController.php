@@ -245,7 +245,7 @@ class CreateSasSasuController extends AbstractController
             
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);
@@ -383,7 +383,7 @@ class CreateSasSasuController extends AbstractController
             );
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);
@@ -613,7 +613,7 @@ class CreateSasSasuController extends AbstractController
             );
            }
            
-           if( $emailUsed === false)
+           if( $isConnected === false)
             {
                 
                 $UserInfoEvent = new UserInfoEvent($person);
