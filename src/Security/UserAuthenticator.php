@@ -76,7 +76,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Votre adresse email est incorrecte ');
         }
 
         return $user;
@@ -107,6 +107,6 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_home');
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }
