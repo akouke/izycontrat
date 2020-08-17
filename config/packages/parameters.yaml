@@ -2,7 +2,7 @@ parameters:
   stripe_public_key: pk_live_51H2XzXJ1VSvMwQdgBq6WSmnaJB6HjPPMuUPXjol4iJvOi08T08ZsZxte2nHopGYlIsB6Xxtcug3xZXlDF6OzzaAM00Dd7hhIAP
 
   url_stripe_success: https://izy-contrat.fr/success
-  url_stripe_canceled: https://izy-contrat.fr/canceled
+  url_stripe_canceled: https://izy-contrat.fr/cancel
 
   offre_izy_basic_me_ei: price_1HGkvHJ1VSvMwQdgGbzDJpNE
   offre_izy_plus_me_ei: price_1HGkv7J1VSvMwQdg77cXr1Py
