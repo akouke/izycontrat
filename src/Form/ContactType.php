@@ -27,6 +27,7 @@ class ContactType extends AbstractType
                 'attr' => ['class' => "w-100 p-3", 'placeholder' => "0687654321"],
                 'label' => 'Numéro de téléphone',
                 'help' => "Votre numéro de téléphone doit être composé de 10 chiffres seulement.",
+                'required' =>false,
             ])
             ->add('email', EmailType::class, [
                 'attr' => ['class' => "w-100 p-3", 'placeholder' => "jacques.dubois@gmail.com"],

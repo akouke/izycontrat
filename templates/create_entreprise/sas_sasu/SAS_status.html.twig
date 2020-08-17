@@ -30,7 +30,7 @@
             au capital de
             <b>
                 {% if capitalNum is defined %}
-                {{ capitalNum }} euros 
+                {{ capitalNum }} euros
                 {% else %}
                 'NOMBRE NUMERAIRE' euros
                 {% endif %}
@@ -54,97 +54,97 @@
             <h2 style="color: black; text-align: center;">STATUTS</h2>
             <hr>
             <b>LES SOUSSIGNES :</b>
-           
+
               {% if associe1 is defined and associe1 is not null %}
                 <p>
                      <br><b>{{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}}</b>, <br>
-                        
+
                     Né le <b>{{ associe1.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
                     De nationalité Française, <br>
                     Demeurant  à <b>{{ associe1.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
                     <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
                 </p>
-                
+
                 <p style="text-align: center;"><br> <b>DE PREMIERE PART</b> </p>
                 {% endif %}
-                
+
                 {% if associe2 is defined and associe2 is not null %}
                 <p>
                    <br><b>{{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}}</b>, <br>
-                        
+
                     Né le <b>{{ associe2.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
                     De nationalité Française, <br>
                     Demeurant  à <b>{{ associe2.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
                     <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
                 </p>
-                
+
                 <p style="text-align: center;"><br> <b>DE SECONDE PART</b> </p>
                 {% endif %}
-                
-                
+
+
                 {% if associe3 is defined and associe3 is not null %}
                 <p>
                    <br><b>{{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}}</b>, <br>
-                        
+
                     Né le <b>{{ associe3.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
                     De nationalité Française, <br>
                     Demeurant  à <b>{{ associe3.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
                     <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
                 </p>
-                
+
                 <p style="text-align: center;"><br> <b>DE TROISIEME PART</b> </p>
                 {% endif %}
-                
-                
+
+
                 {% if associe4 is defined and associe4 is not null %}
                 <p>
                    <br><b>{{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}}</b>, <br>
-                        
+
                     Né le <b>{{ associe4.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
                     De nationalité Française, <br>
                     Demeurant  à <b>{{ associe4.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
                     <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
                 </p>
-                
+
                 <p style="text-align: center;"><br> <b>DE QUATRIEME PART</b> </p>
                 {% endif %}
-                
-                
+
+
                 {% if associe5 is defined and associe5 is not null %}
                 <p>
                    <br><b>{{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}}</b>, <br>
-                        
+
                     Né le <b>{{ associe5.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
                     De nationalité Française, <br>
                     Demeurant  à <b>{{ associe5.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
                     <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
                 </p>
-                
+
                 <p style="text-align: center;"><br> <b>DE CINQUIEME PART</b> </p>
                 {% endif %}
-                
+
                    {% if associeCompany1.id is defined %}
                 <p>
-                    Société <b> {{ associeCompany1.name ?? '' }}</b> representer par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>
+                    Société <b> {{ associeCompany1.name ?? '' }}</b> représentée par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>
                 </p>
                 <p style="text-align: center;"><br> <b> {%if numberPerson == 1%}DE SECONDE PART{% elseif numberPerson == 2%}DE TROISIEME PART{% elseif numberPerson == 3%}DE QUATRIEME PART{% elseif numberPerson == 4%}DE CINQUIEME PART{%endif%} </b> </p>
                     {% endif %}
-                
+
                     {% if associeCompany2.id is defined %}
                 <p>
-                    Société <b> {{ associeCompany2.name ?? '' }}</b> representer par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>
+                    Société <b> {{ associeCompany2.name ?? '' }}</b> représentée par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>
                  </p>
                  <p style="text-align: center;"><br> <b>D' AUTRE PART</b> </p>
                     {% endif %}
-                    
+
                     {% if associeCompany3.id is defined %}
                 <p>
-                    - Par la société <b> {{ associeCompany3.name ?? '' }}</b> representer par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+                    - Par la société <b> {{ associeCompany3.name ?? '' }}</b> représentée par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
                 </p>
                 <p style="text-align: center;"><br> <b>DE Z PART</b> </p>
-    
+
             {% endif %}
-    
+
 
             <p style="text-align: center;"><b>Ont établi, ainsi qu'il suit, les statuts de la société par actions
                     simplifiée
@@ -236,50 +236,50 @@
                 Registre du commerce et des sociétés, sauf les cas de dissolution anticipée ou de prorogation.
             </p>
 
-            
+
             <p>
                <b> ARTICLE 6 -  APPORTS </b> <br>
-            
+
                 Il est fait les apports numéraires suivants : <br>
                 {#Associes Persons#}
                  {% if associe1 is defined and associe1 is not null %}
                 - Par <b> {{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe1.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
                 {% endif %}
-                
+
                 {% if associe2 is defined and associe2 is not null %}
                 - Par <b> {{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe2.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
                 {% endif %}
-                
+
                 {% if associe3 is defined and associe3 is not null %}
                 - Par <b> {{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe3.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
                 {% endif %}
-                
+
                 {% if associe4 is defined and associe4 is not null %}
                 - Par <b> {{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie4 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe4.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
                 {% endif %}
-                
+
                 {% if associe5 is defined and associe5 is not null %}
                 - Par <b> {{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie5 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe5.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
                 {% endif %}
-                
+
                 {#Associes Companies#}
                  {% if associeCompany1.id is defined %}
-                - Par la société <b> {{ associeCompany1.name ?? '' }}</b> representer par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany1.capitalBring ?? ' 0.0'}} €</b> <br>
+                - Par la société <b> {{ associeCompany1.name ?? '' }}</b> représentée par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany1.capitalBring ?? ' 0.0'}} €</b> <br>
                 {% endif %}
                 {% if associeCompany2.id is defined %}
-                - Par la société <b> {{ associeCompany2.name ?? '' }}</b> representer par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany2.capitalBring ?? ' 0.0'}} €</b> <br>
+                - Par la société <b> {{ associeCompany2.name ?? '' }}</b> représentée par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany2.capitalBring ?? ' 0.0'}} €</b> <br>
                 {% endif %}
                 {% if associeCompany3.id is defined %}
-                - Par la société <b> {{ associeCompany3.name ?? '' }}</b> representer par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+                - Par la société <b> {{ associeCompany3.name ?? '' }}</b> représentée par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
                 {% endif %}
-                
-                Soit au total, la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} €</b>, ci	<b> {{ totalToNum ?? ' 0.00' }} €</b> 
+
+                Soit au total, la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} €</b>, ci	<b> {{ totalToNum ?? ' 0.00' }} €</b>
                 <p style="text-align: right">==========================</p>
-                
-                La totalité de cet apport en numéraire, soit la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} euros ( {{ totalToNum ?? ' 0.00' }} €)</b>,  
-                a été dès avant ce jour, déposée au crédit d'un compte ouvert au nom de la Société en formation, 
-                à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par 
-                la <b>{{ company.bankName ?? ' NOM BANQUE' }} – {{ addressBank ?? ' ADRESSE'}} – {{ villeBank ?? '(CODE POSTAL) VILLE '}}</b>, dépositaire des fonds, auquel est demeurée annexée 
+
+                La totalité de cet apport en numéraire, soit la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} euros ( {{ totalToNum ?? ' 0.00' }} €)</b>,
+                a été dès avant ce jour, déposée au crédit d'un compte ouvert au nom de la Société en formation,
+                à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par
+                la <b>{{ company.bankName ?? ' NOM BANQUE' }} – {{ addressBank ?? ' ADRESSE'}} – {{ villeBank ?? '(CODE POSTAL) VILLE '}}</b>, dépositaire des fonds, auquel est demeurée annexée
                 la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
                 <br>
             </p>
@@ -287,10 +287,10 @@
 
             <p><b>ARTICLE 7 - CAPITAL SOCIAL</b><br>
 
-                1.Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? ' nombre en numéraire'}} €)</b>, divisé en 
-                  <b>{{ totalPartWord ?? 'NOMBRE EN LETTRES'}} ( {{ totalPartNum ?? 'nombre en numéraire'}})</b> parts sociales de <b>{{ partChacuneWord ?? 'NOMBRE EN LETTRES'}} ({{ partChacuneNum ?? 'nombre en numéraire'}} )</b> chacune, 
+                1.Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? ' nombre en numéraire'}} €)</b>, divisé en
+                  <b>{{ totalPartWord ?? 'NOMBRE EN LETTRES'}} ( {{ totalPartNum ?? 'nombre en numéraire'}})</b> parts sociales de <b>{{ partChacuneWord ?? 'NOMBRE EN LETTRES'}} ({{ partChacuneNum ?? 'nombre en numéraire'}} )</b> chacune,
                    et entièrement libérées et attribuées aux associés en rémunération de leur apport.
-                
+
                 </p>
 
             <p>
@@ -311,29 +311,29 @@
                 {% if associe5 is defined and associe5 is not null %}
                   - A <b>{{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}}</b>, à concurrence de <b> {{ toWordApportAssocie5 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, numérotées de {{ maxIntervalleAssocie4 ?? ' 0.0'}} à <b> {{ maxIntervalleAssocie5 ?? '0.0'}}</b>, <br> ci	<b> {{ associe5.capitalAmountAdding ?? ' 0.0'}} parts</b> <br>
                 {% endif%}
-                
+
                 {#{% for i in  0..numberPerson %}#}
                 {#    {% if i == numberPerson %}#}
-                
+
                        {% if associeCompany1.id is defined %}
                          - A la société <b> {{ associeCompany1.name ?? '' }} </b>, à concurrence de <b> {{ toWordApportAssocieCompany1 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, ci	<b>{{ associeCompany1.capitalBring ?? ' 0.0'}} parts</b><br>
                         {% endif %}
-                            
+
                         {% if associeCompany2.id is defined %}
                          - A la société <b> {{ associeCompany2.name ?? '' }} </b>, à concurrence de <b> {{ toWordApportAssocieCompany2 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, ci	<b>{{ associeCompany2.capitalBring ?? ' 0.0'}} parts</b><br>
                         {% endif %}
-                                
+
                         {% if associeCompany3.id is defined %}
                          - A la société <b> {{ associeCompany3.name ?? '' }} </b>, à concurrence de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} parts</b><br>
                         {% endif %}
-                        
+
                 {#    {% endif %}#}
                 {#{% endfor %}#}
-                
-                
-                
+
+
+
                 Total égal au nombre de parts composant le capital social : <b>{{ companyTotalCapitalWord ?? 'NOMBRE EN LETTRES' }}</b> parts sociales, ci <b>{{ companyTotalCapital ?? '0' }} parts</b>
-                
+
                 <br>Les soussignés déclarent que toutes les parts sociales représentant le capital social leur appartiennent, sont réparties entre eux dans les proportions indiquées ci-dessus correspondant à leurs apports respectifs et qu'elles sont toutes souscrites et libérées comme indiqué ci-dessus.
                 <br>
             </p>
@@ -1382,55 +1382,55 @@
                 <br>
             </p>
 
-            
+
            {% if associe1 is defined and associe1 is not null %}
             <p>
                 <b>{{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}}
             </p>
             {% endif %}
-            
+
             {% if associe2 is defined and associe2 is not null %}
             <p>
                 <b>{{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}}
             </p>
             {% endif %}
-            
+
             {% if associe3 is defined and associe3 is not null %}
             <p>
                 <b>{{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}}
             </p>
             {% endif %}
-            
+
             {% if associe4 is defined and associe4 is not null %}
             <p>
                 <b>{{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}}
             </p>
             {% endif %}
-            
+
             {% if associe5 is defined and associe5 is not null %}
             <p>
                 <b>{{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}}
             </p>
             {% endif %}
-            
-              
+
+
                {% if associeCompany1.id is defined %}
             <p>
-                Société <b> {{ associeCompany1.name ?? '' }}</b> representer par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>
+                Société <b> {{ associeCompany1.name ?? '' }}</b> représentée par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>
             </p>
                 {% endif %}
-            
+
                 {% if associeCompany2.id is defined %}
             <p>
-                Société <b> {{ associeCompany2.name ?? '' }}</b> representer par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>
+                Société <b> {{ associeCompany2.name ?? '' }}</b> représentée par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>
              </p>
                 {% endif %}
-                
+
                 {% if associeCompany3.id is defined %}
             <p>
-                - Par la société <b> {{ associeCompany3.name ?? '' }}</b> representer par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+                - Par la société <b> {{ associeCompany3.name ?? '' }}</b> représentée par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
             </p>
-                
+
            {% endif %}
 
 
