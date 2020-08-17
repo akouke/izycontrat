@@ -37,9 +37,9 @@ class RegistrationController extends AbstractController
         EventDispatcherInterface $eventDispatcher,
         TokenGenerator $tokenGenerator
     ): ?Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_home');
+//         }
         $person = new Person();
         $user = new User();
         $person->setUser($user);
@@ -106,9 +106,9 @@ class RegistrationController extends AbstractController
         GuardAuthenticatorHandler $guardHandler,
         UserAuthenticator $authenticator
     ): ?Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_home');
+//         }
         $person = new Person();
         $user = new User();
         $person->setUser($user);
