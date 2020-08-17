@@ -328,7 +328,7 @@ class CreateEntrepriseController extends AbstractController
     }
     
       /**
-     * @Route("/cancel", name="url_stripe_cancel")
+     * @Route("/cancel", name="url_stripe_canceled")
      */
     public function cancelPayment()
     {
