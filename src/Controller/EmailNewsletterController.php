@@ -53,7 +53,8 @@ class EmailNewsletterController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('email_newsletter/new.html.twig', [
+        $this->addFlash('danger', 'Veuillez entrer une adresse mail valide');
+        return $this->redirectToRoute('app_home',  [
             'email_newsletter' => $emailNewsletter,
             'form' => $form->createView(),
         ]);
