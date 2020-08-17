@@ -2,10 +2,10 @@
 {#{% extends 'base.html.twig' %}#}
 {% block dashboard %}{% endblock %}
 
-{% block stylesheets %} 
+{% block stylesheets %}
 {{ parent() }}
-{{ encore_entry_link_tags('createcompany') }}  
-{{ encore_entry_link_tags('tab1') }}  
+{{ encore_entry_link_tags('createcompany') }}
+{{ encore_entry_link_tags('tab1') }}
 {% endblock %}
 
 {% block title %}Je cree mon {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} {% endblock %}
@@ -16,7 +16,7 @@
    b{
         margin: 0 0px 0 20px;
     }
-    
+
     .haut{
         margin-top: 80px;
         margin-left: 3%;
@@ -29,7 +29,7 @@
       margin-bottom: 1%;
       width: 34%;
       text-align: center;
-      
+
     }
     {% if typeStatut == 'EURL'%}
         #progressbar li {
@@ -54,74 +54,74 @@
             <a data-toggle="tab" > <b> 4 - Société créée !</b> </a>
         </ul>
  </div>
- 
+
  <div class="row">
     <div class="col-md-12">
-        
+
         <div id="msform" class="">
             <!-- progressbar -->
             <ul id="progressbar">
-                <li class="active">delai et evolution</li>
+                <li class="active">delai et évolution</li>
                 <li>Nom Societe</li>
                 {% if typeStatut == 'EURL'%}
                   <li>Nom Commercial</li>
                 {% endif %}
                 <li> dépôt de marque  </li>
-                <li> Secteur d'activite</li>
+                <li> Secteur d'activité</li>
                 <li>Gérant</li>
-                <li>siege</li>
+                <li>siège</li>
                 <li>capital social</li>
                 {% if typeStatut == 'SARL' %}
-                    <li>Mes Associes</li>
+                    <li>Mes Associés</li>
                     <li>Directeur Général</li>
                 {% endif%}
               <li>Informations de contact</li>
             </ul>
 
-    
+
 {% if typeStatut == 'SARL'%}
 
 {{form_start(formSarl)}}
     {# debut information concernant le clien#}
     {{form_start(formPerson)}}
-  
+
         {#debut information de connexion user#}
         {{ form_start(formUser )}}
-        
+
             {#debut information associe1#}
             {{ form_start(formAssocie1 )}}
-            
+
                  {#debut information associe2#}
                  {{ form_start(formAssocie2 )}}
-                 
+
                      {#debut information associe2#}
                      {{ form_start(formAssocie3 )}}
-                 
+
                          {#debut information associe2#}
                          {{ form_start(formAssocie4 )}}
-                         
+
                              {#debut information associe2#}
                              {{ form_start(formAssocie5 )}}
-                                 
+
                                  {#debut information company associer#}
                                  {{ form_start(formAssociateCompany) }}
-                                 
+
                                  {#debut information company2 associer#}
                                  {{ form_start(formAssociateCompany2) }}
-                                 
+
                                  {#debut information company3 associer#}
                                  {{ form_start(formAssociateCompany3) }}
-       
+
       {% endif %}
-        
+
         {% if typeStatut == 'EURL' %}
-        
-        {{ form_start(formEurl) }}  
-        {{ form_start(formEurlPerson) }} 
-        {{ form_start(formEurlUser) }} 
-        
+
+        {{ form_start(formEurl) }}
+        {{ form_start(formEurlPerson) }}
+        {{ form_start(formEurlUser) }}
+
         {% endif %}
-              
+
   {% if emailUsed == true %}
       <div class="alert alert-danger">
             Cet adresse Email: <strong>{{ user.email }}</strong> existe déja veuillez vous connecter!
@@ -130,11 +130,11 @@
             </a>
       </div>
     {% endif%}
-    
+
 
     <fieldset>
       <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} ?</h2>
-       <div class="tailInput">  
+       <div class="tailInput">
         {% if typeStatut == 'SARL' %}
          {{ form_widget(formSarl.priority)}}
          {% else %}
@@ -150,107 +150,107 @@
                {{ form_widget(formEurl.companyType) }}
                {{ form_widget(formEurl.addressManager) }}
                {#{{ form_widget(formEurl.manager)}}#}
-               {{ form_widget(formEurl.hasDirector)}} 
-               {{ form_widget(formEurl.country)}} 
-               {{ form_widget(formEurl.socialObject)}} 
-               {{ form_widget(formEurlPerson.married)}} 
-               {{ form_widget(formEurlPerson.nationality)}} 
+               {{ form_widget(formEurl.hasDirector)}}
+               {{ form_widget(formEurl.country)}}
+               {{ form_widget(formEurl.socialObject)}}
+               {{ form_widget(formEurlPerson.married)}}
+               {{ form_widget(formEurlPerson.nationality)}}
               {% endif %}
          </div>
        </div>
           <div>
                 Exerciez-vous votre activité sous le régime de la micro-entreprise ?
                 {% if typeStatut == 'SARL' %}
-                    {{ form_row(formSarl.regimeMicroEntreprise)}} 
+                    {{ form_row(formSarl.regimeMicroEntreprise)}}
                 {% else %}
-                   {{ form_row(formEurl.regimeMicroEntreprise)}} 
+                   {{ form_row(formEurl.regimeMicroEntreprise)}}
                 {% endif %}
                 {#{{ form_label(formSarl.regimeME, 'Your Name') }}#}
           </div>
-          <a href="{{ path('create_entreprise')}}"  class="action-button-previous btn"> Annuler </a> 
+          <a href="{{ path('create_entreprise')}}"  class="action-button-previous btn"> Annuler </a>
           <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-          
+
     </fieldset>
 
-  
+
    <fieldset>
-        <h2 class="fs-title ">Quel nom choississez vous pour votre entreprise?</h2>
-            <div class="tailInput">  
+        <h2 class="fs-title ">Quel nom choisissez vous pour votre entreprise?</h2>
+            <div class="tailInput">
              {% if typeStatut == 'SARL' %}
-               {{ form_widget(formSarl.name)}} 
+               {{ form_widget(formSarl.name)}}
              {% else %}
-               {{ form_widget(formEurl.name)}} 
+               {{ form_widget(formEurl.name)}}
               {% endif %}
             </div>
             <div  class="alert alert-info" role="alert">
                 <small>
-                  (Le nom servira à identifier votre société. Il devra figurer sur tous les documents commerciaux de 
-                  votre société y compris les factures Vous devez renseigner ici la dénomination sociale 
+                  (Le nom servira à identifier votre société. Il devra figurer sur tous les documents commerciaux de
+                  votre société y compris les factures Vous devez renseigner ici la dénomination sociale
                   qui est différent du nom commercial)
               </small>
             </div>
-                        
+
             {% if typeStatut == 'SARL' %}
                     <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>
-                    <div class="tailInput">  
-                        {{ form_widget(formSarl.tradeName)}} 
+                    <div class="tailInput">
+                        {{ form_widget(formSarl.tradeName)}}
                     </div>
                     <div class="alert alert-info" role="alert">
                         <small>
-                           (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise 
+                           (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise
                             est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
                         </small>
                     </div>
             {% endif %}
- 
-       
+
+
             <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
             <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
      </fieldset>
-       
-     {% if typeStatut == 'EURL' %}     
+
+     {% if typeStatut == 'EURL' %}
      <fieldset>
       <h2 class="fs-title ">Quel nom choississez vous pour votre entreprise ?</h2>
-            <div class="tailInput">  
-               {{ form_widget(formEurl.tradeName)}}  
+            <div class="tailInput">
+               {{ form_widget(formEurl.tradeName)}}
              </div>
             <div class="alert alert-info" role="alert">
-              (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise 
+              (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise
                est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
             </div>
         <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
         <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-        
+
     </fieldset>
     {% endif %}
-  
-  
+
+
   <fieldset>
 
         <h2 class="fs-title ">Souhaitez-vous protéger votre nom de société par un dépôt de marque ?</h2>
-            <div class="tailInput">  
+            <div class="tailInput">
                 {% if typeStatut == 'SARL' %}
-                   {{ form_widget(formSarl.hasProtection)}} 
+                   {{ form_widget(formSarl.hasProtection)}}
                 {% else %}
-                   {{ form_widget(formEurl.hasProtection)}} 
+                   {{ form_widget(formEurl.hasProtection)}}
                 {% endif %}
               </div>
             <div  class="alert alert-info" role="alert">
-               (Déposer une marque ou logo permet notamment de se protéger 
+               (Déposer une marque ou logo permet notamment de se protéger
                 contre un concurrent qui utiliserait votre marque de manière abusive)
             </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
               <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
   </fieldset>
-  
+
 
   <fieldset>
-  
+
         <h2 class="fs-title ">Quel est votre secteur d’activité ? </h2>
-            <div class="tailInput"> 
+            <div class="tailInput">
               {% if typeStatut == 'SARL' %}
-                   {{ form_widget(formSarl.activitySector)}} 
+                   {{ form_widget(formSarl.activitySector)}}
                 {% else %}
                    {{ form_widget(formEurl.activitySector)}}
              {% endif %}
@@ -265,29 +265,29 @@
         <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
         <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
   </fieldset>
-  
+
 
   <fieldset>
 
             <h2 class="fs-title "> Serez-vous le Gérant de la {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} ?   </h2>
-                  <div class="tailInput"> 
+                  <div class="tailInput">
                     {% if typeStatut == 'SARL' %}
-                        {{ form_widget(formSarl.manager)}} 
+                        {{ form_widget(formSarl.manager)}}
                     {% else %}
                         {{ form_widget(formEurl.manager)}}
                     {% endif %}
                 </div>
                 <div  class="alert alert-info" role="alert">
-                    (Le Gérant est la personne en charge de diriger la société et est le plus fréquemment un 
+                    (Le Gérant est la personne en charge de diriger la société et est le plus fréquemment un
                     associé de la société. Cependant, il ne peut y avoir qu'un seul Gérant.)
                 </div>
-                        
+
             <h2 class="fs-title ">Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </h2>
-                 <div class="tailInput">  
+                 <div class="tailInput">
                      {% if typeStatut == 'SARL' %}
-                         {{ form_widget(formSarl.hasAssociate)}} 
+                         {{ form_widget(formSarl.hasAssociate)}}
                      {% else %}
-                         {{ form_widget(formEurl.hasAssociate)}} 
+                         {{ form_widget(formEurl.hasAssociate)}}
                      {% endif %}
                   </div>
                     {% if typeStatut == 'EURL' %}
@@ -304,29 +304,29 @@
              <fieldset>
                   {#<div class="card-body">#}
                     <h2 class="fs-title ">Où sera le siège social de votre société ?</h2>
-             
+
                      {% if typeStatut == 'SARL' %}
-                        <strong> Au domicile du Président (le plus fréquent) </strong> 
+                        <strong> Au domicile du Président (le plus fréquent) </strong>
                           <div class="tailInput">
-                                {{ form_widget(formSarl.addressManager)}} 
+                                {{ form_widget(formSarl.addressManager)}}
                            </div>
-                        <strong> A une adresse de domiciliation </strong> 
+                        <strong> À une adresse de domiciliation </strong>
                           <div class="tailInput">
                                 {{ form_widget(formSarl.country)}}
                           </div>
-                      
-                       <strong> Dans un bureau, local, etc… </strong> 
+
+                       <strong> Dans un bureau, local, etc… </strong>
                           <div class="tailInput">
                                 {{ form_widget(formSarl.address)}}
                           </div>
-                          
-                       {% else %} 
-                      
-                          <strong> Dans un bureau, local, etc… </strong> 
+
+                       {% else %}
+
+                          <strong> Dans un bureau, local, etc… </strong>
                           <div class="tailInput">
                                  {{ form_widget(formEurl.address)}}
                           </div>
-        
+
                       {% endif %}
                 {#</div>#}
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
@@ -336,34 +336,34 @@
 
             <fieldset>
                   <h2 class="fs-title ">Quel est le montant total du capital social de votre société ?</h2>
-                    <div class="tailInput">  
+                    <div class="tailInput">
                      {% if typeStatut == 'SARL' %}
-                       {{ form_widget(formSarl.capitalSocial)}} 
+                       {{ form_widget(formSarl.capitalSocial)}}
                      {% else %}
                         {{ form_widget(formEurl.capitalSocial)}}
                      {% endif %}
                     </div>
                     <div  class="alert alert-info" role="alert">
                         <small>
-                             (Cet argent permettra de financer les premières dépenses et de démarrer l'activité. 
-                             Le capital social minimum est d'un euro mais 70% de nos clients choisissent un capital 
-                             entre 500€ et 2000€. Si vous souhaitez prévoir un capital variable ou faire un apport en nature, 
+                             (Cet argent permettra de financer les premières dépenses et de démarrer l'activité.
+                             Le capital social minimum est d'un euro mais 70% de nos clients choisissent un capital
+                             entre 500€ et 2000€. Si vous souhaitez prévoir un capital variable ou faire un apport en nature,
                              veuillez nous contacter ou le préciser plus tard.)
                         </small>
                     </div>
-                      
+
                     <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2>
-                     <div class="tailInput">  
+                     <div class="tailInput">
                         {% if typeStatut == 'SARL' %}
-                           {{ form_widget(formSarl.bankName)}} 
+                           {{ form_widget(formSarl.bankName)}}
                         {% else %}
-                           {{ form_widget(formEurl.bankName)}} 
+                           {{ form_widget(formEurl.bankName)}}
                        {% endif %}
                       </div>
                       <div class="alert alert-info" role="alert">
                           <small>
-                           (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création 
-                           de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ». 
+                           (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création
+                           de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ».
                            Ce document est indispensable pour immatriculer votre société)
                           </small>
                       </div>
@@ -372,90 +372,90 @@
             </fieldset>
 
 
-  {% if typeStatut == 'SARL' %}   
+  {% if typeStatut == 'SARL' %}
             <fieldset>
                 <h2 class="fs-title ">Qui sont les associés de votre société </h2>
 
                     <details style="text-align:left; margin:1%; padding:1%; margin-left: 5%; width: 88%;"><summary class="bg-secondary form-control" ><strong><i class="fas fa-user-circle"></i> Un Particulier ?</strong></summary>
                                  <small  class="badge badge-warning" >
-                                   (Chaque apport donne droit à des actions à l'associé. 
+                                   (Chaque apport donne droit à des actions à l'associé.
                                    La somme des apports des associés constituent le capital social de la société)
                                  </small>
                              <div class="row">
-                               <div class="col-2">  
-                                 {{ form_row(formAssocie1.gender) }} 
+                               <div class="col-2">
+                                 {{ form_row(formAssocie1.gender) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie1.firstName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie1.firstName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie1.lastName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie1.lastName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie1.capitalAmountAdding) }} 
-                               </div>
-                             </div>
-                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
-                        <div class="row">
-                            <div class="col-2">  
-                                 {{ form_row(formAssocie2.gender) }} 
-                               </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie2.firstName) }} 
-                               </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie2.lastName) }} 
-                               </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie2.capitalAmountAdding) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie1.capitalAmountAdding) }}
                                </div>
                              </div>
                         <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
                         <div class="row">
-                            <div class="col-2">  
-                                 {{ form_row(formAssocie3.gender) }} 
+                            <div class="col-2">
+                                 {{ form_row(formAssocie2.gender) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie3.firstName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie2.firstName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie3.lastName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie2.lastName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie3.capitalAmountAdding) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie2.capitalAmountAdding) }}
                                </div>
                              </div>
                         <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
                         <div class="row">
-                            <div class="col-2">  
-                                 {{ form_row(formAssocie4.gender) }} 
+                            <div class="col-2">
+                                 {{ form_row(formAssocie3.gender) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie4.firstName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie3.firstName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie4.lastName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie3.lastName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie4.capitalAmountAdding) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie3.capitalAmountAdding) }}
+                               </div>
+                             </div>
+                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
+                        <div class="row">
+                            <div class="col-2">
+                                 {{ form_row(formAssocie4.gender) }}
+                               </div>
+                               <div class="col">
+                                 {{ form_row(formAssocie4.firstName) }}
+                               </div>
+                               <div class="col">
+                                 {{ form_row(formAssocie4.lastName) }}
+                               </div>
+                               <div class="col">
+                                 {{ form_row(formAssocie4.capitalAmountAdding) }}
                                </div>
                              </div>
                         <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
                          <div class="row">
-                            <div class="col-2">  
-                                 {{ form_row(formAssocie5.gender) }} 
+                            <div class="col-2">
+                                 {{ form_row(formAssocie5.gender) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie5.firstName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie5.firstName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie5.lastName) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie5.lastName) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssocie5.capitalAmountAdding) }} 
+                               <div class="col">
+                                 {{ form_row(formAssocie5.capitalAmountAdding) }}
                                </div>
                          </div>
-                         
+
                         </details>
                         </details>
                         </details>
@@ -465,102 +465,102 @@
                     </details>
                      <details style="text-align:left; margin:1%; margin-left: 6%; width: 86%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Une Société ?</strong></summary>
                              <div class="row">
-                               <div class="col">  
-                                 {{ form_row(formAssociateCompany.name) }} 
+                               <div class="col">
+                                 {{ form_row(formAssociateCompany.name) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssociateCompany.companyType) }} 
+                               <div class="col">
+                                 {{ form_row(formAssociateCompany.companyType) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssociateCompany.legalRepresentative) }} 
+                               <div class="col">
+                                 {{ form_row(formAssociateCompany.legalRepresentative) }}
                                </div>
-                               <div class="col">  
-                                 {{ form_row(formAssociateCompany.capitalBring) }} 
+                               <div class="col">
+                                 {{ form_row(formAssociateCompany.capitalBring) }}
                                </div>
                              </div>
                               <p style="text-align: center">
                                <small> (Le nom de la société correspond généralement à la dénomination sociale.) </small>
                                <small class="bg-info">
-                                 <br>(Les apports en capital social sont mis à disposition de la société par les associés afin d’assurer 
-                                 son fonctionnement. En contrepartie, chaque associé reçoit des actions qui lui assurent des 
+                                 <br>(Les apports en capital social sont mis à disposition de la société par les associés afin d’assurer
+                                 son fonctionnement. En contrepartie, chaque associé reçoit des actions qui lui assurent des
                                  pouvoirs économiques et décisionnels.)
                               </small>
                               </p>
                              <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associé société 2 ?</strong></summary>
-                
+
                                      <div class="row">
-                                       <div class="col">  
-                                         {{ form_row(formAssociateCompany2.name) }} 
+                                       <div class="col">
+                                         {{ form_row(formAssociateCompany2.name) }}
                                        </div>
-                                       <div class="col">  
-                                         {{ form_row(formAssociateCompany2.companyType) }} 
+                                       <div class="col">
+                                         {{ form_row(formAssociateCompany2.companyType) }}
                                        </div>
-                                       <div class="col">  
-                                         {{ form_row(formAssociateCompany2.legalRepresentative) }} 
+                                       <div class="col">
+                                         {{ form_row(formAssociateCompany2.legalRepresentative) }}
                                        </div>
-                                       <div class="col">  
-                                         {{ form_row(formAssociateCompany2.capitalBring) }} 
-                                         
+                                       <div class="col">
+                                         {{ form_row(formAssociateCompany2.capitalBring) }}
+
                                        </div>
                                      </div>
                                      <div>
                                          {#Répartition en % <br>#}
                                          {#100%#}
                                      </div>
-                                     
+
                                      <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associé société 3 ?</strong></summary>
-                
+
                                          <div class="row">
-                                           <div class="col">  
-                                             {{ form_row(formAssociateCompany3.name) }} 
+                                           <div class="col">
+                                             {{ form_row(formAssociateCompany3.name) }}
                                            </div>
-                                           <div class="col">  
-                                             {{ form_row(formAssociateCompany3.companyType) }} 
+                                           <div class="col">
+                                             {{ form_row(formAssociateCompany3.companyType) }}
                                            </div>
-                                           <div class="col">  
-                                             {{ form_row(formAssociateCompany3.legalRepresentative) }} 
+                                           <div class="col">
+                                             {{ form_row(formAssociateCompany3.legalRepresentative) }}
                                            </div>
-                                           <div class="col">  
-                                             {{ form_row(formAssociateCompany3.capitalBring) }} 
+                                           <div class="col">
+                                             {{ form_row(formAssociateCompany3.capitalBring) }}
                                            </div>
                                          </div>
                                     </details>
                             </details>
-                    
+
                     </details>
-                    
+
                     <div  class="alert alert-info" role="alert">
-                      Renseignez ici l’identité des associés de votre société, vous inclus si vous êtes associé. 
+                      Renseignez ici l’identité des associés de votre société, vous inclus si vous êtes associé.
                       Vous pouvez ajouter un associé en cliquant sur le bouton "Ajouter un associé" en bas de page<br>
                         <small  class="badge badge-warning">
                           Si vous ne possédez pas certaines informations, ne vous en faites pas, <br>
-                          sauvegardez votre dossier ou passez aux questions suivantes, vous pouvez les renseigner plus tard. 
+                          sauvegardez votre dossier ou passez aux questions suivantes, vous pouvez les renseigner plus tard.
                         </small>
                     </div>
-            
-            
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
-            
-            <fieldset>
-                    <h2 class="fs-title ">Souhaitez-vous nommer un Directeur Général ? </h2>
-                
-                <div class="tailInput">  
-                  {{ form_widget(formSarl.hasDirector)}} 
-              </div>
-            <div class="alert alert-info" role="alert">
-                La nomination d’un Directeur Général (DG) est facultatif. Si un DG est nommé, il assiste 
-                le Gérant dans ses missions. Il représente aussi la société et a le droit de signer des documents 
-                au nom et pour le compte de la société. Le ou les DG d'une SARL sont en général également associés.
-            </div>
-           
+
 
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
-            
-    {% endif %}     
+
+            <fieldset>
+                    <h2 class="fs-title ">Souhaitez-vous nommer un Directeur Général ? </h2>
+
+                <div class="tailInput">
+                  {{ form_widget(formSarl.hasDirector)}}
+              </div>
+            <div class="alert alert-info" role="alert">
+                La nomination d’un Directeur Général (DG) est facultative. Si un DG est nommé, il assiste
+                le Gérant dans ses missions. Il représente aussi la société et a le droit de signer des documents
+                au nom et pour le compte de la société. Le ou les DG d'une SARL sont en général également associés.
+            </div>
+
+
+                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
+                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
+            </fieldset>
+
+    {% endif %}
 
 
             <fieldset>
@@ -573,59 +573,59 @@
                        {{ form_widget(formEurlPerson.gender) }}
                     {% endif %}
                  </div>
-                 <div class="tailInput">  
+                 <div class="tailInput">
                      {% if typeStatut == 'SARL' %}
-                       {{ form_widget(formPerson.firstName) }} 
+                       {{ form_widget(formPerson.firstName) }}
                     {% else %}
-                       {{ form_widget(formEurlPerson.firstName) }} 
+                       {{ form_widget(formEurlPerson.firstName) }}
                     {% endif %}
                  </div>
-                 <div class="tailInput"> 
+                 <div class="tailInput">
                      {% if typeStatut == 'SARL' %}
-                       {{ form_widget(formPerson.lastName) }} 
+                       {{ form_widget(formPerson.lastName) }}
                     {% else %}
-                       {{ form_widget(formEurlPerson.lastName) }} 
+                       {{ form_widget(formEurlPerson.lastName) }}
                     {% endif %}
                  </div>
                  {#</div>#}
-                
+
              <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
-             <div class="tailInput"> 
+             <div class="tailInput">
                  {% if typeStatut == 'SARL' %}
-                       {{ form_widget(formPerson.phoneNumber) }} 
+                       {{ form_widget(formPerson.phoneNumber) }}
                     {% else %}
-                       {{ form_widget(formEurlPerson.phoneNumber) }} 
+                       {{ form_widget(formEurlPerson.phoneNumber) }}
                     {% endif %}
              </div>
-              
+
               {#debut information de connexion user#}
                  <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
-                 <div class="tailInput"> 
+                 <div class="tailInput">
                      {% if typeStatut == 'SARL' %}
-                        {{ form_widget(formUser.email) }} 
+                        {{ form_widget(formUser.email) }}
                     {% else %}
                        {{ form_widget(formEurlUser.email) }}
                     {% endif %}
-                    
+
                     {% if emailUsed == true %}
                       <div class="badge badge-danger">
                         Erreur: Cet adresse Email: <b>{{ user.email }}</b> existe déja!
                       </div>
                     {% endif%}
                  </div>
-           
+
 
                 <input type="button" name="previous" class="previous action-button-previous mid" value="Revoir"/>
                 <input type="submit" class="action-button" value="Enregistrer"/>
             </fieldset>
-  
+
 
     {% if typeStatut == 'EURL' %}
-        
+
         {{ form_end(formEurl) }}
         {{ form_end(formEurlPerson) }}
-        {{ form_start(formEurlUser) }} 
-        
+        {{ form_start(formEurlUser) }}
+
     {% endif %}
 
                     {% if typeStatut == 'SARL' %}
@@ -635,42 +635,42 @@
                                              {{ form_end(formAssociateCompany2) }}
                                             {#debut information company associer#}
                                              {{ form_end(formAssociateCompany) }}
-                                 
+
                                         {#fin information associe5#}
                                         {{ form_end(formAssocie5 )}}
-                                        
+
                                  {#fin information associe4#}
                                  {{ form_end(formAssocie4 )}}
-                                 
+
                             {#fin information associe3#}
                             {{ form_end(formAssocie3 )}}
-                            
+
                         {#fin information associe2#}
                         {{ form_end(formAssocie2 )}}
-                        
+
                     {#fin information associe1#}
                    {{ form_end(formAssocie1 )}}
-                   
+
               {{ form_end(formUser) }}
               {#fin information de connexion user#}
-              
+
          {{form_end(formPerson)}}
          {#fin information concernant le client#}
-         
+
     {{form_end(formSarl)}}
-    
+
     {% endif %}
         </div>
       </div>
   </div>
-  
+
   {% block javascripts %}
-    
+
     {{ parent() }}
     {{ encore_entry_script_tags('createcompany') }}
 
 {% endblock %}
- 
+
 {% block footer %}{% endblock %}
 {% endblock %}
-    
+

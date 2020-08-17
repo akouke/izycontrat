@@ -18,8 +18,8 @@ class UserChangePasswordType extends AbstractType
             // ->add('email')
             // ->add('roles')
             ->add('oldPassword', PasswordType::class, [
-                 'label'=>'Current password', 
-                 'mapped' => false, 
+                 'label'=>'Mot de passe actuel',
+                 'mapped' => false,
                  'constraints' => new UserPassword()
                  ])
             ->add('password', RepeatedType::class, [
@@ -28,8 +28,8 @@ class UserChangePasswordType extends AbstractType
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'mapped' => false,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Nouveau mot de passe'],
+                'second_options' => ['label' => 'Répétition du mot de passe'],
             ]);
             // ->add('profilePicture')
             // ->add('isVerified')

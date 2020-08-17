@@ -3,8 +3,8 @@
 {% block dashboard %}{% endblock %}
 {% block title %}Vos informations {% endblock %}
 
- {% block body %} 
-  
+ {% block body %}
+
   <style>
 
 body {
@@ -216,7 +216,7 @@ input[type="checkbox"] {
   </style>
 
   <h1>Details de vos Informations!</h1>
-      <p>Voici la liste de toutes les informations renseignees pour la creation de votre entreprise!</p>
+      <p>Voici la liste de toutes les informations renseignées pour la création de votre entreprise!</p>
 
       <form id="envoi1" name="envoi1" method="post" action="">
        <div class="container">
@@ -227,46 +227,46 @@ input[type="checkbox"] {
 
              <label for="fName">Civilite</label>
               <input id="fName" name="fName" type="text" placeholder="" value="{{ person.gender == 1 ? 'Madame' : 'Monsieur'}}" disabled>
-              
+
               <label for="fName">Votre Nom</label>
               <input id="fName" name="fName" type="text" placeholder="" value="{{person.firstName}}" disabled>
 
               <label for="lName">Votre Prenom</label>
               <input id="lName" name="lName" type="text" placeholder="" value="{{person.lastName}}" disabled>
-              
+
               <label for="nationality">Votre Nationalite</label>
               <input id="nationality" name="nationality" placeholder="votre nationalite" value="{{person.nationality}}" disabled>
-              
+
               <label for="situation">Votre Situation</label>
               <input id="situation" name="situation" placeholder="" value="{{ person.married == true ? 'Marie(e)' : 'Celibataire'}}" disabled>
-              
+
               <label for="mail">Votre Email</label>
               <input id="mail" name="mail" placeholder="" value="{{user.email}}" disabled>
 
               <label for="phone">Votre Numero</label>
               <input id="phone" name="phone" type="tel" placeholder="" value="{{person.phoneNumber}}"  disabled>
-    
+
             </fieldset>
            </div>
            <div class="col">
             <fieldset id="specifications">
               <legend>Informations Entreprise</legend>
-              
+
              <label for="nameCompany">Nom</label>
               <input id="nameCompany" name="nameCompany" placeholder="nom societe" value="{{company.name}}" disabled>
-              
+
               <label for="forme">forme</label>
               <input id="forme" name="forme" placeholder="forme juridique" value="{{company.companyType.name == 'EI' ? 'Entreprise Individuel' : company.companyType.name}}" disabled>
-              
+
               <label for="address">Adresse</label>
               <input id="address" name="address" placeholder="adresse" value="{{company.address}}" disabled>
-              
-              <label for="secteurActivity">Secteur d'activite</label>
+
+              <label for="secteurActivity">Secteur d'activité</label>
               <input id="secteurActivity" name="secteurActivity" placeholder="secteur d'activite" value="{{company.activitySector.name == null ? company.activitySector.nameOther : company.activitySector.name}}" disabled>
-    
-              <label for="dc">delai de creation</label>
+
+              <label for="dc">delai de création</label>
                <input  id="dc" name="dc" value="{{company.priority.name}}"  disabled>
-   
+
               <label for="es">Evolution ME</label>
               <input   id="es" name="es" value="{{company.regimeMicroEntreprise == true ? 'OUI' : 'NON'}}"  disabled>
 
