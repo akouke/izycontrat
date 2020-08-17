@@ -40,6 +40,10 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use NumberToWords\NumberToWords;
 use Symfony\Component\HttpFoundation\Response;
+use App\Event\UserRegisterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -65,8 +69,16 @@ class CreateEntrepriseController extends AbstractController
      public function createSarl (GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                  EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                  CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                 EventDispatcherInterface $eventDispatcher)
+                                 
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -119,10 +131,13 @@ class CreateEntrepriseController extends AbstractController
          $formAssociateCompany3->handleRequest($request);
         
         $emailUsed = false;
+        if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted())
         {
@@ -137,14 +152,20 @@ class CreateEntrepriseController extends AbstractController
             
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SARL"));
+             
+             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword(
-                    $user,
-                    "izycontratpassword"
-                    // $request->request->all()['user_sarl']['password']
-                ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
+             $person->setHasCompany(true);
              $company->setClient($user);
              
                // recup parts
@@ -162,24 +183,25 @@ class CreateEntrepriseController extends AbstractController
             $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
             $company->setTotalCapital($somTotal);
 
-            $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
-            $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
-            $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
-            $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
-            $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
-            $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
-            $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
-            $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
+            // Part en pourcentage
+            // $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
+            // $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
+            // $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
+            // $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
+            // $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
+            // $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
+            // $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
+            // $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
 
-            $associateCompany1->setCompanyPart($partAssocieCompany1);
-            $associateCompany2->setCompanyPart($partAssocieCompany2);
-            $associateCompany3->setCompanyPart($partAssocieCompany3);
+            $associateCompany1->setCompanyPart($apportAssocieCompany1);
+            $associateCompany2->setCompanyPart($apportAssocieCompany2);
+            $associateCompany3->setCompanyPart($apportAssocieCompany3);
             
-            $associe1->setAssociatePart($partAssocie1);
-            $associe2->setAssociatePart($partAssocie2);
-            $associe3->setAssociatePart($partAssocie3);
-            $associe4->setAssociatePart($partAssocie4);
-            $associe5->setAssociatePart($partAssocie5);
+            $associe1->setAssociatePart($apportAssocie1);
+            $associe2->setAssociatePart($apportAssocie2);
+            $associe3->setAssociatePart($apportAssocie3);
+            $associe4->setAssociatePart($apportAssocie4);
+            $associe5->setAssociatePart($apportAssocie5);
             
              // pour un associer de type Societer
              if($associateCompany1->getName() !== null){
@@ -216,30 +238,51 @@ class CreateEntrepriseController extends AbstractController
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
+            
 
-            $em->persist($user);
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
-            $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                // 'csrf_token' => $request->request->get('_csrf_token'),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
-                );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            
+           
+            if( $isConnected === false)
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    // 'csrf_token' => $request->request->get('_csrf_token'),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
+                );
+                
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
             return $this->redirectToRoute('create_sarl_prestation' );
 
         }   
@@ -257,11 +300,41 @@ class CreateEntrepriseController extends AbstractController
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
             'typeStatut' => "SARL",
             
         ]);
     }
+    
+    
+    
+    /**
+     * @Route("/success", name="url_stripe_success")
+     */
+    public function sucessPayment()
+    {
+        // return $this->render('paiement/success.html.twig');
+        return $this->redirectToRoute('save_status');
+    }
+    
+    /**
+     * @Route("/create/success", name="generate_status_success")
+     */
+    public function sucessGenerateStatus()
+    {
+        return $this->render('paiement/success.html.twig');
+        // return $this->redirectToRoute('save_status');
+    }
+    
+      /**
+     * @Route("/cancel", name="url_stripe_cancel")
+     */
+    public function cancelPayment()
+    {
+        return $this->render('paiement/cancel.html.twig');
+    }
+    
     
     /**
      * @Route("/create/entreprise/sarl/prestation", name="create_sarl_prestation") 
@@ -270,8 +343,45 @@ class CreateEntrepriseController extends AbstractController
      {
         //  dd($this->getUser()->getEmail());
          return $this->render('create_entreprise/sarl/SARL_form_prestation.html.twig', [
-            
-        ]);
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+             'url_stripe_success' => $this->getParameter('url_stripe_success'),
+             'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_sarl_sas_sasu_sci_eurl'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_sarl_sas_sasu_sci_eurl'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_sarl_sas_sasu_sci_eurl'),
+         ]);
+         
+     }
+     
+     /**
+     * @Route("/create/entreprise/sarl/prestation/me", name="create_sarl_prestation_me") 
+     */
+     public function createSarlPrestationMe (Request $request, EntityManagerInterface $em)
+     {
+         return $this->render('create_entreprise/me_ei/ME_prestation.html.twig', [
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+             'url_stripe_success' => $this->getParameter('url_stripe_success'),
+             'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_me_ei'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_me_ei'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_me_ei'),
+         ]);
+         
+     }
+     
+      /**
+     * @Route("/create/entreprise/sarl/prestation/ei", name="create_sarl_prestation_ei") 
+     */
+     public function createSarlPrestationEi (Request $request, EntityManagerInterface $em)
+     {
+         return $this->render('create_entreprise/me_ei/EI_prestation.html.twig', [
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+             'url_stripe_success' => $this->getParameter('url_stripe_success'),
+             'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_me_ei'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_me_ei'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_me_ei'),
+         ]);
          
      }
 
@@ -328,7 +438,7 @@ class CreateEntrepriseController extends AbstractController
             'description' => 'Charge for Izy Contrat',
             'source' => $token,
         ]);
-        $this->addFlash('success', 'Votre paiement a ete effectue avec succes!');
+        // $this->addFlash('success', 'Votre paiement a ete effectue avec succes!');
         return $this->redirectToRoute('save_status');
         // return $this->render('create_entreprise/enterprise_created.html.twig', [
         //     'amount' => $request->request->get('amount'),
@@ -342,8 +452,15 @@ class CreateEntrepriseController extends AbstractController
      public function createEurl(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                 EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                 CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                EventDispatcherInterface $eventDispatcher)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -359,10 +476,13 @@ class CreateEntrepriseController extends AbstractController
          $formUser->handleRequest($request);
         
         $emailUsed = false;
+        if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -379,39 +499,73 @@ class CreateEntrepriseController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("EURL"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
+                 $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
+             $person->setHasCompany(true); 
              $company->setClient($user);
-            
+             
+           
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             
+           
             $em->flush();
             
-            $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
-                );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            
+            if( $isConnected === false )
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
+                );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
             return $this->redirectToRoute('create_sarl_prestation', [
                 ]);
-
+            
 
         }        
     
@@ -420,6 +574,7 @@ class CreateEntrepriseController extends AbstractController
              'formEurlPerson' => $formPerson->createView(),
              'formEurlUser' => $formUser->createView(),
              'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
              'user' => $user,
              'typeStatut' => "EURL",
         ]);
@@ -431,8 +586,15 @@ class CreateEntrepriseController extends AbstractController
      public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                             EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                             CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                             EventDispatcherInterface $eventDispatcher)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -447,11 +609,14 @@ class CreateEntrepriseController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
             
-            $emailUsed = false;
+        $emailUsed = false;
+        if( $isConnected === false)
+          {    
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed == false && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -467,34 +632,66 @@ class CreateEntrepriseController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("MICRO-ENTREPRISE"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
+                 $em->persist($user);
              $person->setUser($user);
+                 
+                 }elseif($isConnected === true){
+                     $user = $this->getUser();
+             }
+              
+              $person->setHasCompany(true);
              $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             $em->flush();
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
 
-             $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                // 'csrf_token' => $request->request->get('_csrf_token'),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
+            if($isConnected === false)
+            {
+                 $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    // 'csrf_token' => $request->request->get('_csrf_token'),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
                 );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -510,6 +707,7 @@ class CreateEntrepriseController extends AbstractController
              'formMePerson' => $formPerson->createView(),
              'formMeUser' => $formUser->createView(),
              'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
              'user' => $user,
            'typeStatut' => 'ME' 
         ]);
@@ -521,8 +719,14 @@ class CreateEntrepriseController extends AbstractController
      public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
-                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
          
          $company = new Company();
          $person = new Person();
@@ -539,10 +743,13 @@ class CreateEntrepriseController extends AbstractController
          $formUser->handleRequest($request);
 
         $emailUsed = false;
+        if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -558,34 +765,65 @@ class CreateEntrepriseController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("EI"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
+                 $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+              
+              $person->setHasCompany(true);
              $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             
-            $em->flush();
+            // $em->flush();
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
-            $credentials = [
-                'password' => $user->getPassword(),
-                'email' => $user->getEmail(),
-                ];
-                $request->getSession()->set(
-                    Security::LAST_USERNAME,
-                    $credentials['email']
+            
+            if($isConnected === false)
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
                 );
-
-             $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main'
-            );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
 
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
                 'company' => $company,
@@ -601,6 +839,7 @@ class CreateEntrepriseController extends AbstractController
              'formEiPerson' => $formPerson->createView(),
              'formEiUser' => $formUser->createView(),
              'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
              'user' => $user,
          'typeStatut' => 'EI',
         ]);

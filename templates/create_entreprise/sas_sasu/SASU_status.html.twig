@@ -19,13 +19,8 @@
 
 
         <h2><br>
-            {% set name = 'IZY CONTRAT' %}
-            {% set lastName = "Abdoulaye" %}
-            {% set firstName = "SECK" %}
-            {% set civilite = "M. " %}
-
-            {% if name is defined %}
-                {{ name }}
+             {% if company.name is defined %}
+                {{ company.name }}
             {% else %}
                 'NOM DE LA SOCIETE'
             {% endif %}
@@ -44,10 +39,10 @@
 
         <p><u>Siège social</u> :
             <b>
-                {% if address is defined %}
-                    {{ adress }}
+                {% if company is defined %}
+                {{ company.address }} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}
                 {% else %}
-                    'ADRESSE'
+                'ADRESSE'
                 {% endif %}
             </b>
         </p>
@@ -64,7 +59,7 @@
 
                 Né le <b>{{ dateNaissance ?? 'DATE' }} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
                 De nationalité Française, <br>
-                Demeurant à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                Demeurant à <b>{{ address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
                 <b>{{ situation ?? 'Célibataire / Marié' }}</b> <br>
             </p>
 
@@ -87,7 +82,7 @@
 
                 La Société a pour objet, en France et à l'étranger :</p>
 
-            <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE' }}</b><br>
+            <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE' }}  {{company.activitySector.nameOther ?? ''}}</b><br>
 
             <p>Toutes opérations industrielles et commerciales se rapportant à :<br>
                 - la création, l'acquisition, la location, la prise en location-gérance de tous fonds de commerce, la
@@ -117,7 +112,7 @@
 
             <p><b>ARTICLE 4 - SIEGE SOCIAL</b><br>
 
-                Le siège social est fixé à <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE' }}</b> <br>
+                Le siège social est fixé à <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE' }}  {{ company.country ?? ''}} {{ company.addressManager ?? ''}}</b> <br>
 
             <p>Il pourra être transféré dans la région <b>PROVENCE-ALPES-COTE D’AZUR</b> par une simple décision du
                 président,
@@ -139,18 +134,16 @@
 
             <p><b><u>Apports en numéraire</u></b><br>
 
-                Une somme en numéraire d'un montant total de <b> conv(NOMBRE EN LETTRES)
-                    €</b><b>{{ associe.apport ?? ' 0.0' }} €</b>,
-                correspondant au montant du capital social et à <b>( {{ nombreAction ?? 'nombre en numéraire' }})
+                Une somme en numéraire d'un montant total de <b> {{ capitalWord ?? ' NOMBRE EN LETTRES' }} EUROS</b><b>{{ capitalNum ?? '0.00'}} €</b>,
+                correspondant au montant du capital social et à <b>( {{ capitalNum ?? '0.00'}})
                     actions</b>,
                 souscrites en totalité et intégralement libérées, ainsi qu'il
                 résulte du certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par la
-                <b>{{ bankName ?? ' NOM BANQUE' }}– {{ addressBank ?? ' ADRESSE' }}
-                    – {{ villeBank ?? '(CODE POSTAL) VILLE ' }}</b> , dépositaire des fonds, sur présentation de l'état
+                <b>{{ companyBankName ?? 'NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE'}}</b> , dépositaire des fonds, sur présentation de l'état
                 de
                 souscription mentionnant la somme versée par l'associé unique.
 
-                Cette somme de ( {{ total ?? ' nombre en numéraire' }} €) a été régulièrement déposée à un compte ouvert
+                Cette somme de ( {{ capitalNum ?? '0.00'}} €) a été régulièrement déposée à un compte ouvert
                 au
                 nom de la Société en
                 formation, à ladite banque.</p>
@@ -158,11 +151,11 @@
 
             <p><b>ARTICLE 7 - CAPITAL SOCIAL</b><br>
 
-                Le capital social est fixé à la somme de <b>{{ capitalSocial ?? ' NOMBRE EN LETTRES' }}
-                    ({{ capitalNum ?? ' nombre en numéraire' }} €)</b></p>
+                Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }}
+                    ({{ capitalNum ?? '0.00'}} €)</b></p>
 
-            <p>Il est divisé en <b>( {{ nombreAction ?? 'nombre en numéraire' }}) actions</b> de
-                <b>({{ actionChacune ?? 'nombre en numéraire' }} ) €</b> chacune, entièrement libérées.</p>
+            <p>Il est divisé en <b>( 1 ) actions</b> de
+                <b>({{ capitalNum ?? '0.00'}} ) €</b> chacune, entièrement libérées.</p>
 
             <p><b>ARTICLE 8 - MODIFICATIONS DU CAPITAL SOCIAL</b><br>
 

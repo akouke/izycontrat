@@ -1,0 +1,1 @@
+require('../scss/success_cancel_payment.scss');

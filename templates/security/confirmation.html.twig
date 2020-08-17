@@ -2,19 +2,20 @@
 
 
 {% block body %}
-
+<section class="text-center pos-r">
     {% if user %}
         <h5>Félicitations votre compte a bien été activer!</h5><br>
         
         Pour vous connecter cliquer 
         
-            <a href="{{ url('app_login') }}"> ICI</a>
+            <a href="{{ url('login') }}"> ICI</a>
         </p>
         
     {% else %}
      
          <h5>Echec !! Merci de verifier votre boite email</h5><br>
+         <a href="{{ url('login') }}"> ICI</a>
      {% endif %}   
-     
+ </section>    
      
 {% endblock %}

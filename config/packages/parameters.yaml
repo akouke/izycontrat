@@ -1,9 +1,17 @@
 parameters:
-  stripe_public_key: pk_test_51H2XzXJ1VSvMwQdgGQaYJXROFk79EphP7fsOeyIyi6nYxq4mWcDSH9C2cZueDM4Id32hjL3ooDdDbuz9dw8WTvuw003FLT7gdg
-  stripe_secret_key: sk_test_51H2XzXJ1VSvMwQdgqDSlHIbKHp3AcVgdJpWGQPbrsLLqiVUFv2nkdnGDnbuPjZRm6am5yHRu3oXNsESNVkDLDoCT00dJFRaQ7Z
+  stripe_public_key: pk_live_51H2XzXJ1VSvMwQdgBq6WSmnaJB6HjPPMuUPXjol4iJvOi08T08ZsZxte2nHopGYlIsB6Xxtcug3xZXlDF6OzzaAM00Dd7hhIAP
+  stripe_secret_key: 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
   prix_izy_basic: 49
   prix_izy_plus: 149
   prix_izy_premium: 289
+  url_stripe_success: https://izy-contrat.fr/success
+  url_stripe_canceled: https://izy-contrat.fr/canceled
+  offre_izy_basic_me_ei: price_1HGkvHJ1VSvMwQdgGbzDJpNE
+  offre_izy_plus_me_ei: price_1HGkv7J1VSvMwQdg77cXr1Py
+  offre_izy_premium_me_ei: price_1HGkv0J1VSvMwQdg2j6ayaGJ
+  offre_izy_basic_sarl_sas_sasu_sci_eurl: price_1HGkvOJ1VSvMwQdgJGkqOY1m
+  offre_izy_plus_sarl_sas_sasu_sci_eurl: price_1HGkvVJ1VSvMwQdg72KdA7XD
+  offre_izy_premium_sarl_sas_sasu_sci_eurl: price_1HGkviJ1VSvMwQdgcWjmtSTI
   payment:
     currency: EUR
     decimal: true

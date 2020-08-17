@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Informations de connexion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<img src="https://www.izy-contrat.fr/images/Logo_Izy_Contrat_H.png" alt="logo Izy Contrat">
+<h4>Bonjour, {{ user.getFirstName() }}</h4>
+
+
+<p>Vous venez de vous inscrire sur notre plateforme. Ci dessous vos informations de connexion</p>
+
+<p>Login : {{ user.getUser().getEmail() }} </p>
+<p>Password : <strong>Qt7Xd4Lr</strong> </p>
+
+<p>Vous pouvez changer votre mot de passe dans votre espace personnel.<br>
+    votre Espace personnel accessible à l'adresse suivante : <a href="https://www.izy-contrat.fr/" target="_blank">www.izy-contrat.fr</a> à l'aide de
+    </p>
+
+
+<p>L'équipe d'Izy Contrat</p>
+
+
+</body>
+</html>
+

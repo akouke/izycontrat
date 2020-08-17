@@ -26,16 +26,16 @@ class UserSubscriber implements EventSubscriberInterface
         return [
             
             UserRegisterEvent::NAME=>'onUserRegister'
+        
             ];
     }
     
     public function onUserRegister( UserRegisterEvent $event)
     {
         
-       $this->mailer->SendEmailConfirmation ($event->getRegisteredUser());
+       $this->mailer->SendEmailConfirmation($event->getRegisteredUser());
         
     }
-    
     
 }
 ?>

@@ -41,11 +41,11 @@
                     <!-- Remind Passowrd -->
                     <div id="formFooter">
                         <div class="row justify-content-center flex-column text-center">
-                            <p><a href="">Mot de passe oublié ?</a></p>
+                            <a  href="{{ path('user_register') }}">S'inscrire</a>
+                            <a href="{{ path('app_forgot_password_request') }}">mot de passe oublié ?</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 {% endblock %}

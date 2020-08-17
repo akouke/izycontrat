@@ -34,6 +34,10 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use NumberToWords\NumberToWords;
+use App\Event\UserRegisterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateSasSasuController extends AbstractController
 {
@@ -44,8 +48,15 @@ class CreateSasSasuController extends AbstractController
     public function createSas(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
-                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
     {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -98,9 +109,12 @@ class CreateSasSasuController extends AbstractController
          $formAssociateCompany3->handleRequest($request);
             
             $emailUsed = false;
-            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
-            if($emailVerification){
-                $emailUsed = true;
+            if( $isConnected === false)
+            {
+                $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+                if($emailVerification){
+                    $emailUsed = true;
+                }
             }
             
          if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
@@ -115,14 +129,20 @@ class CreateSasSasuController extends AbstractController
             
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SAS"));
+             
+            if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword(
-                    $user,
-                    "izycontratpassword"
-                    // $request->request->all()['user_sarl']['password']
-                ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
+             $person->setHasCompany(true);
              $company->setClient($user);
              
                 // recup parts
@@ -138,25 +158,17 @@ class CreateSasSasuController extends AbstractController
             //parts operation : repartition and (not / by 0 or null)
             $somTotal = $apportAssocie1 + $apportAssocie2 + $apportAssocie3 + $apportAssocie4 + $apportAssocie5 + $apportAssocieCompany1 + $apportAssocieCompany2 + $apportAssocieCompany3;
             $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
+            $company->setTotalCapital($somTotal);
 
-            $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
-            $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
-            $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
-            $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
-            $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
-            $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
-            $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
-            $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
-
-            $associateCompany1->setCompanyPart($partAssocieCompany1);
-            $associateCompany2->setCompanyPart($partAssocieCompany2);
-            $associateCompany3->setCompanyPart($partAssocieCompany3);
+            $associateCompany1->setCompanyPart($apportAssocieCompany1);
+            $associateCompany2->setCompanyPart($apportAssocieCompany2);
+            $associateCompany3->setCompanyPart($apportAssocieCompany3);
             
-            $associe1->setAssociatePart($partAssocie1);
-            $associe2->setAssociatePart($partAssocie2);
-            $associe3->setAssociatePart($partAssocie3);
-            $associe4->setAssociatePart($partAssocie4);
-            $associe5->setAssociatePart($partAssocie5);
+            $associe1->setAssociatePart($apportAssocie1);
+            $associe2->setAssociatePart($apportAssocie2);
+            $associe3->setAssociatePart($apportAssocie3);
+            $associe4->setAssociatePart($apportAssocie4);
+            $associe5->setAssociatePart($apportAssocie5);
 
              // pour un associer de type Societer
              if($associateCompany1->getName() !== null){
@@ -202,11 +214,18 @@ class CreateSasSasuController extends AbstractController
                 $em->persist($associe5);
             }
             
-            $em->persist($user);
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
+            if($isConnected === false){
+
             $credentials = [
                 'password' => $user->getPassword(),
                 'email' => $user->getEmail(),
@@ -224,7 +243,24 @@ class CreateSasSasuController extends AbstractController
                 'main'
             );
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
         }   
@@ -244,6 +280,7 @@ class CreateSasSasuController extends AbstractController
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
         ]);
 
@@ -255,8 +292,14 @@ class CreateSasSasuController extends AbstractController
     public function createSasu(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                CompaniesTypesRepository $companyTypeRecup, Request $request, 
-                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                               EventDispatcherInterface $eventDispatcher)
     {
+        $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
                
          $company = new Company();
          $person = new Person();
@@ -273,10 +316,13 @@ class CreateSasSasuController extends AbstractController
          $formUser->handleRequest($request);
 
         $emailUsed = false;
+        if( $isConnected === false)
+        {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+        }
             
         if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
@@ -292,18 +338,34 @@ class CreateSasSasuController extends AbstractController
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SASU"));
              
+             
+             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+              
+             $person->setHasCompany(true);
              $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             $em->flush();
             
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
+            
+            if( $isConnected === false ){
             $credentials = [
                 'password' => $user->getPassword(),
                 'email' => $user->getEmail(),
@@ -319,10 +381,26 @@ class CreateSasSasuController extends AbstractController
                 $authenticator,
                 'main'
             );
+            }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
+                // 'user' => $user->getEmail(),
                 ]);
 
 
@@ -333,6 +411,7 @@ class CreateSasSasuController extends AbstractController
             'formSasuPerson' => $formPerson->createView(),
             'formSasuUser' => $formUser->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
         ]);
 
@@ -344,8 +423,15 @@ class CreateSasSasuController extends AbstractController
      public function createSCI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                CompaniesTypesRepository $companyTypeRecup, Request $request,
-                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                               EventDispatcherInterface $eventDispatcher)
      {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -398,10 +484,13 @@ class CreateSasSasuController extends AbstractController
          $formAssociateCompany3->handleRequest($request);
           
           $emailUsed = false;
+          if( $isConnected === false)
+          {
             $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
             if($emailVerification){
                 $emailUsed = true;
             }
+          }
             
          if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
             
@@ -416,13 +505,23 @@ class CreateSasSasuController extends AbstractController
             
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SCI"));
+             
+             if($isConnected === false){
+                 
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
              $user->setPassword ( $passwordEncoder->encodePassword(
                     $user,
-                    "izycontratpassword" ));
-               
+                    "Qt7Xd4Lr" ));
+            $user->setEnabled(true);
+             $em->persist($user);
              $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
+             $person->setHasCompany(true);
              $company->setClient($user);
                // recup parts
                  $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
@@ -437,25 +536,17 @@ class CreateSasSasuController extends AbstractController
             //parts operation : repartition and (not / by 0 or null)
             $somTotal = $apportAssocie1 + $apportAssocie2 + $apportAssocie3 + $apportAssocie4 + $apportAssocie5 + $apportAssocieCompany1 + $apportAssocieCompany2 + $apportAssocieCompany3;
             $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
+            $company->setTotalCapital($somTotal);
 
-            $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
-            $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
-            $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
-            $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
-            $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
-            $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
-            $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
-            $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
-
-            $associateCompany1->setCompanyPart($partAssocieCompany1);
-            $associateCompany2->setCompanyPart($partAssocieCompany2);
-            $associateCompany3->setCompanyPart($partAssocieCompany3);
+            $associateCompany1->setCompanyPart($apportAssocieCompany1);
+            $associateCompany2->setCompanyPart($apportAssocieCompany2);
+            $associateCompany3->setCompanyPart($apportAssocieCompany3);
             
-            $associe1->setAssociatePart($partAssocie1);
-            $associe2->setAssociatePart($partAssocie2);
-            $associe3->setAssociatePart($partAssocie3);
-            $associe4->setAssociatePart($partAssocie4);
-            $associe5->setAssociatePart($partAssocie5);
+            $associe1->setAssociatePart($apportAssocie1);
+            $associe2->setAssociatePart($apportAssocie2);
+            $associe3->setAssociatePart($apportAssocie3);
+            $associe4->setAssociatePart($apportAssocie4);
+            $associe5->setAssociatePart($apportAssocie5);
              // pour un associer de type Societer
              if($associateCompany1->getName() !== null){
                  $associateCompany1->setPerson($person);
@@ -491,11 +582,20 @@ class CreateSasSasuController extends AbstractController
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
-            $em->persist($user);
+            
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
+           
+           if( $isConnected === false)
+           {
             $credentials = [
                 'password' => $user->getPassword(),
                 'email' => $user->getEmail(),
@@ -511,8 +611,24 @@ class CreateSasSasuController extends AbstractController
                 $authenticator,
                 'main'
             );
+           }
+           
+           if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
         }   
@@ -530,6 +646,7 @@ class CreateSasSasuController extends AbstractController
             'formAssociateCompany3' => $formAssociateCompany3->createView(), 
             'formSci' => $formCompany->createView(),
             'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
             'user' => $user,
         ]);
     }
