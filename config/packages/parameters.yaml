@@ -4,8 +4,8 @@ parameters:
   prix_izy_basic: 49
   prix_izy_plus: 149
   prix_izy_premium: 289
-  url_stripe_success: https://localhost:8000/success
-  url_stripe_canceled: https://localhost:8000/canceled
+  url_stripe_success: https://54.204.158.111:8000/success
+  url_stripe_canceled: https://54.204.158.111:8000/canceled
   offre_izy_basic_me_ei: price_1HGkvHJ1VSvMwQdgGbzDJpNE
   offre_izy_plus_me_ei: price_1HGkv7J1VSvMwQdg77cXr1Py
   offre_izy_premium_me_ei: price_1HGkv0J1VSvMwQdg2j6ayaGJ

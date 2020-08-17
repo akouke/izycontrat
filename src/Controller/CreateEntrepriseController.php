@@ -302,6 +302,25 @@ class CreateEntrepriseController extends AbstractController
         ]);
     }
     
+    
+    
+    /**
+     * @Route("/success", name="url_stripe_success")
+     */
+    public function sucessPayment()
+    {
+        return $this->render('paiement/success.html.twig');
+    }
+    
+      /**
+     * @Route("/cancel", name="url_stripe_cancel")
+     */
+    public function cancelPayment()
+    {
+        return $this->render('paiement/cancel.html.twig');
+    }
+    
+    
     /**
      * @Route("/create/entreprise/sarl/prestation", name="create_sarl_prestation") 
      */
