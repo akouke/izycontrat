@@ -11,7 +11,7 @@
                     {{ client.lastName }}
                     {{ client.firstName }}</h2>
                 <h3>Mail</h3>
-                <a class="card-text" href="mailto:{{ client.user.email }}">{{ client.user.email }}</a>
+                <a class="card-text" href="mailto:{{ client.user.email ?? '' }}">{{ client.user.email ?? '' }}</a>
                 {#{{ client.user.email }}#}
                 <h3>Adresse</h3>
                 {{ client.address }}

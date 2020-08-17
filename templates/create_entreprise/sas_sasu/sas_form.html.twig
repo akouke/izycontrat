@@ -121,9 +121,12 @@
         {% endif %}
               
                 {% if emailUsed == true %}
-                      <div class="alert alert-danger">
-                         Erreur: Cet adresse Email: <strong>{{ user.email }}</strong> existe déja!
-                      </div>
+                    <div class="alert alert-danger">
+                        Cet adresse Email: <strong>{{ user.email }}</strong> existe déja veuillez vous connecter!
+                        <a class="btn btn-warning" id="connexion" href="" data-toggle="modal" data-target=".bd-example-modal-lg">
+                            Se Connecter
+                        </a>
+                    </div>
                     {% endif%}
             <!-- fieldsets -->
             <fieldset>
