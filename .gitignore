@@ -36,3 +36,5 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /public/uploads/article
 /public/assets/
+
+config/packages/parameters.yaml

@@ -34,6 +34,10 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use NumberToWords\NumberToWords;
+use App\Event\UserRegisterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateSasSasuController extends AbstractController
 {
@@ -44,7 +48,8 @@ class CreateSasSasuController extends AbstractController
     public function createSas(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
-                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
     {
          $isConnected = false;
          
@@ -128,7 +133,8 @@ class CreateSasSasuController extends AbstractController
             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -212,6 +218,12 @@ class CreateSasSasuController extends AbstractController
             $em->persist($company);
             $em->flush();
             
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
             if($isConnected === false){
 
             $credentials = [
@@ -233,7 +245,22 @@ class CreateSasSasuController extends AbstractController
             
             }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
         }   
@@ -265,7 +292,8 @@ class CreateSasSasuController extends AbstractController
     public function createSasu(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                CompaniesTypesRepository $companyTypeRecup, Request $request, 
-                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                               EventDispatcherInterface $eventDispatcher)
     {
         $isConnected = false;
          
@@ -314,7 +342,8 @@ class CreateSasSasuController extends AbstractController
              if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -328,6 +357,13 @@ class CreateSasSasuController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             $em->flush();
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
             
             if( $isConnected === false ){
             $credentials = [
@@ -347,7 +383,22 @@ class CreateSasSasuController extends AbstractController
             );
             }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation', [
                 // 'user' => $user->getEmail(),
                 ]);
@@ -372,7 +423,8 @@ class CreateSasSasuController extends AbstractController
      public function createSCI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                CompaniesTypesRepository $companyTypeRecup, Request $request,
-                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                               EventDispatcherInterface $eventDispatcher)
      {
          $isConnected = false;
          
@@ -460,7 +512,8 @@ class CreateSasSasuController extends AbstractController
              $user->setRoles(['ROLE_CLIENT']);
              $user->setPassword ( $passwordEncoder->encodePassword(
                     $user,
-                    "izycontratpassword" ));
+                    "Qt7Xd4Lr" ));
+            $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -533,6 +586,13 @@ class CreateSasSasuController extends AbstractController
             $em->persist($person);
             $em->persist($company);
             $em->flush();
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
            
            if( $isConnected === false)
            {
@@ -552,7 +612,23 @@ class CreateSasSasuController extends AbstractController
                 'main'
             );
            }
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+           
+           if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation');
 
         }   

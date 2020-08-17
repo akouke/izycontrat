@@ -706,7 +706,8 @@ class SaveStatusController extends AbstractController
       elseif($recupCompany->getCompanyType()->getName() == "EI" || $recupCompany->getCompanyType()->getName() == "MICRO-ENTREPRISE")
       {
           $this->addFlash('success', 'Votre dossier a ete bien crees');
-          return $this->redirectToRoute('dashboard_home');
+        //   return $this->redirectToRoute('dashboard_home');
+         return $this->redirectToRoute('generate_status_success');
       }
 
         // Load HTML to Dompdf
@@ -746,7 +747,8 @@ class SaveStatusController extends AbstractController
   
         file_put_contents($pdfFilepath, $output);
         
-       return $this->redirectToRoute('dashboard_home');
+    //   return $this->redirectToRoute('dashboard_home');
+        return $this->redirectToRoute('generate_status_success');
         
     }
     

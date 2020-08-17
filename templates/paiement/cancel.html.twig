@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement Rejeté{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('success_cancel_payment') }}
+
+{% endblock %}
+{% block body %}
+<section class="page-content container-fluid col-10 col-lg-10 pb-4">
+
+<div class="successmessage">
+<h1>
+  <p  style="text-align:center">Paiement Rejeté</p></h1>
+
+<p style="text-align:center">Votre paiement a échoué<br>
+</p><br>
+</div>
+<center>
+ <a href="{{ path('app_home') }}">
+<input type="button" class="buttonfull btn btn-default btn-primary " value="OK">
+</a>
+</center>
+{% endblock %}

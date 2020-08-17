@@ -11,11 +11,13 @@
                     {{ client.lastName }}
                     {{ client.firstName }}</h2>
                 <h3>Mail</h3>
-                {{ client.user.email }}
+                <a class="card-text" href="mailto:{{ client.user.email ?? '' }}">{{ client.user.email ?? '' }}</a>
+                {#{{ client.user.email }}#}
                 <h3>Adresse</h3>
                 {{ client.address }}
                 <h3>Téléphone</h3>
-                {{ client.phoneNumber|phone }}
+                <a class="card-text" href="tel:{{ client.phoneNumber|phone }}">{{ client.phoneNumber|phone }}</a>
+                {#{{ client.phoneNumber|phone }}#}
                 <h3>Nationality</h3>
                 {{ client.nationality}}
             </div>
@@ -59,9 +61,14 @@
                 </div>
             </div>
         {% endfor %}
+        <div class ="row">
+            <div class="col">
+             <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
+            </div>
+            <div class="col">
+             <a href="{{ path('dashboard_clients_delete', {'id': client.id}) }}" class="btn btn-danger mt-3 d-inline-block" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ client.lastName }} {{ client.firstName }}?');">Supprimer le client </a>
+            </div>
         </div>
-        <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
-    </div>
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}

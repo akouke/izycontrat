@@ -43,6 +43,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Event\UserRegisterEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -155,7 +156,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
              $em->persist($user);
              $person->setUser($user);
              
@@ -237,11 +239,14 @@ class CreateEntrepriseController extends AbstractController
                 $em->persist($associe5);
             }
             
-           
+
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
+            
+            
+           
             if( $isConnected === false)
             {
                 $credentials = [
@@ -260,18 +265,24 @@ class CreateEntrepriseController extends AbstractController
                     $authenticator,
                     'main'
                 );
+                
             }
             
-            if( $emailUsed === false)
+            if( $isConnected === false)
             {
-                $UserPaymentEvent = new UserPaymentEvent($person);
+                
+                $UserInfoEvent = new UserInfoEvent($person);
                 $eventDispatcher->dispatch(
-                    UserPaymentEvent::NAME,
-                    $UserPaymentEvent
-                );
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             }
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             return $this->redirectToRoute('create_sarl_prestation' );
 
         }   
@@ -295,6 +306,35 @@ class CreateEntrepriseController extends AbstractController
             
         ]);
     }
+    
+    
+    
+    /**
+     * @Route("/success", name="url_stripe_success")
+     */
+    public function sucessPayment()
+    {
+        // return $this->render('paiement/success.html.twig');
+        return $this->redirectToRoute('save_status');
+    }
+    
+    /**
+     * @Route("/create/success", name="generate_status_success")
+     */
+    public function sucessGenerateStatus()
+    {
+        return $this->render('paiement/success.html.twig');
+        // return $this->redirectToRoute('save_status');
+    }
+    
+      /**
+     * @Route("/cancel", name="url_stripe_cancel")
+     */
+    public function cancelPayment()
+    {
+        return $this->render('paiement/cancel.html.twig');
+    }
+    
     
     /**
      * @Route("/create/entreprise/sarl/prestation", name="create_sarl_prestation") 
@@ -401,7 +441,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
                  $user->setIsVerified(false);
                  $user->setRoles(['ROLE_CLIENT']);
-                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
                  $em->persist($user);
              $person->setUser($user);
              
@@ -418,6 +459,12 @@ class CreateEntrepriseController extends AbstractController
             
            
             $em->flush();
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
             
             if( $isConnected === false )
@@ -439,9 +486,22 @@ class CreateEntrepriseController extends AbstractController
                 );
             }
             
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            }
             
-            
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
             return $this->redirectToRoute('create_sarl_prestation', [
                 ]);
             
@@ -465,7 +525,8 @@ class CreateEntrepriseController extends AbstractController
      public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                             EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                                             CompaniesTypesRepository $companyTypeRecup, Request $request,
-                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                             EventDispatcherInterface $eventDispatcher)
      {
          $isConnected = false;
          
@@ -513,7 +574,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
                  $user->setIsVerified(false);
                  $user->setRoles(['ROLE_CLIENT']);
-                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
                  $em->persist($user);
              $person->setUser($user);
                  
@@ -527,6 +589,13 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             $em->flush();
+            
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
 
             if($isConnected === false)
             {
@@ -546,6 +615,21 @@ class CreateEntrepriseController extends AbstractController
                     $authenticator,
                     'main'
                 );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             }
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
@@ -574,7 +658,8 @@ class CreateEntrepriseController extends AbstractController
      public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
                               CompaniesTypesRepository $companyTypeRecup, Request $request,
-                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail)
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
      {
          $isConnected = false;
          
@@ -622,7 +707,8 @@ class CreateEntrepriseController extends AbstractController
              if($isConnected === false){
                  $user->setIsVerified(false);
                  $user->setRoles(['ROLE_CLIENT']);
-                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
                  $em->persist($user);
              $person->setUser($user);
              
@@ -636,7 +722,13 @@ class CreateEntrepriseController extends AbstractController
             $em->persist($company);
             $em->persist($person);
             
-            $em->flush();
+            // $em->flush();
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
             
             if($isConnected === false)
             {
@@ -655,6 +747,21 @@ class CreateEntrepriseController extends AbstractController
                     $authenticator,
                     'main'
                 );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
             }
 
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [

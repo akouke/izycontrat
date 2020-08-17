@@ -1,7 +1,9 @@
 parameters:
   stripe_public_key: pk_live_51H2XzXJ1VSvMwQdgBq6WSmnaJB6HjPPMuUPXjol4iJvOi08T08ZsZxte2nHopGYlIsB6Xxtcug3xZXlDF6OzzaAM00Dd7hhIAP
+
   url_stripe_success: https://localhost:8000/success
   url_stripe_canceled: https://localhost:8000/canceled
+
   offre_izy_basic_me_ei: price_1HGkvHJ1VSvMwQdgGbzDJpNE
   offre_izy_plus_me_ei: price_1HGkv7J1VSvMwQdg77cXr1Py
   offre_izy_premium_me_ei: price_1HGkv0J1VSvMwQdg2j6ayaGJ
