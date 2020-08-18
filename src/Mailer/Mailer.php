@@ -41,8 +41,8 @@ class Mailer
             
             ]);
         $message = (new \Swift_Message())
-        ->setSubject('IZYcontrat Confirmation Email ')
-        ->setFrom($this->emailFrom)
+        ->setSubject('IZY contrat Confirmation Email ')
+        ->setFrom('contact@izy-contrat.fr')
         ->setTo($person->getUser()->getEmail())
         ->setBody($body, 'text/html');
         //->attach(Swift_Attachment::fromPath('https://raw.githubusercontent.com/akouke/izycontrat/master/assets/izy_contrat_fr_cgu_cgvu.pdf'));

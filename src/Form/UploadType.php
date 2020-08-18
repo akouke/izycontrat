@@ -19,6 +19,7 @@ class UploadType extends AbstractType
                 'required' => true,
                 'allow_delete' => true,
                 'download_uri' => true,
+                'attr' => ['style' => 'opacity: 100;'],
             ])
         ;
     }
