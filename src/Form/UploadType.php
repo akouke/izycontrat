@@ -15,10 +15,11 @@ class UploadType extends AbstractType
     {
         $builder
             ->add('statusFile', VichFileType::class, [
-                'label' => 'Fichier à télécharger',
+                'label' => 'fichier à télécharger',
                 'required' => true,
                 'allow_delete' => true,
                 'download_uri' => true,
+                'attr' => ['style' => 'opacity: 100; text-align:center;'],
             ])
         ;
     }
