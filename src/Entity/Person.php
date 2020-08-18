@@ -22,7 +22,7 @@ class Person
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true , onDelete="CASCADE")
      */
     private $user;
 

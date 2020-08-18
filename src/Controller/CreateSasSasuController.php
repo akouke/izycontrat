@@ -51,6 +51,8 @@ class CreateSasSasuController extends AbstractController
                               ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                               EventDispatcherInterface $eventDispatcher)
     {
+      try
+       {
          $isConnected = false;
          
           if($this->getUser()){
@@ -283,6 +285,12 @@ class CreateSasSasuController extends AbstractController
             'isConnected' => $isConnected,
             'user' => $user,
         ]);
+        
+        }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
 
     }
     
@@ -295,6 +303,8 @@ class CreateSasSasuController extends AbstractController
                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                                EventDispatcherInterface $eventDispatcher)
     {
+     try
+      {
         $isConnected = false;
          
           if($this->getUser()){
@@ -414,6 +424,12 @@ class CreateSasSasuController extends AbstractController
             'isConnected' => $isConnected,
             'user' => $user,
         ]);
+        
+      }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
 
     }
     
@@ -426,6 +442,8 @@ class CreateSasSasuController extends AbstractController
                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
                                EventDispatcherInterface $eventDispatcher)
      {
+      try
+       {
          $isConnected = false;
          
           if($this->getUser()){
@@ -649,6 +667,13 @@ class CreateSasSasuController extends AbstractController
             'isConnected' => $isConnected,
             'user' => $user,
         ]);
+        
+      }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
+     
     }
     
 }

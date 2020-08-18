@@ -18,7 +18,6 @@
         {{ form_row(registrationForm.user.email) }}
         {{ form_row(registrationForm.user.password) }}
         {{ form_row(registrationForm.user.agreeTerms)|replace({'#CGU#': '<a class="text-secondary" href="">Conditions Générales de Ventes et d’Utilisation</a>'})|raw }}
-
         <button type="submit" class="btn btn-primary">Valider l'inscription</button>
     {{ form_end(registrationForm) }}
     </div>

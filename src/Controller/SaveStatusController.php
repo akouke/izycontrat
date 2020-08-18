@@ -36,6 +36,9 @@ class SaveStatusController extends AbstractController
     public function saveStatut(string $dossierClient, EntityManagerInterface $em, PersonRepository $detailPerson, 
                                 CompanyRepository $detailCompany, AssociateCompanyInfoRepository $detailCompanyAssociate)
     {
+        
+     try
+      {
         if(!$this->getUser()){
              return $this->redirectToRoute('create_entreprise' );
          }
@@ -746,7 +749,9 @@ class SaveStatusController extends AbstractController
         $em->flush();
   
         file_put_contents($pdfFilepath, $output);
-        
+     
+      }catch (\Throwable $th) { }
+    
     //   return $this->redirectToRoute('dashboard_home');
         return $this->redirectToRoute('generate_status_success');
         

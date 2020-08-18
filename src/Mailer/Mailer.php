@@ -41,8 +41,8 @@ class Mailer
             
             ]);
         $message = (new \Swift_Message())
-        ->setSubject('IZYcontrat Confirmation Email ')
-        ->setFrom($this->emailFrom)
+        ->setSubject('IZY contrat Confirmation Email ')
+        ->setFrom('contact@izy-contrat.fr')
         ->setTo($person->getUser()->getEmail())
         ->setBody($body, 'text/html');
         //->attach(Swift_Attachment::fromPath('my-document.pdf'))
@@ -63,7 +63,7 @@ class Mailer
         ->setFrom($this->emailFrom)
         ->setTo($person->getUser()->getEmail())
         ->setBody($body, 'text/html');
-        //->attach(Swift_Attachment::fromPath('my-document.pdf'))
+        //->attach(\Swift_Attachment::fromPath('cgv/izy_contrat_fr_cgu_cgvu.pdf'));
         
         $this->mailer->send($message);
     }
@@ -80,7 +80,7 @@ class Mailer
             
             ]);
         $message = (new \Swift_Message())
-        ->setSubject('IZYcontrat Confirmation paiement ')
+        ->setSubject('Inscription IZYcontrat ')
         ->setFrom($this->emailFrom)
         ->setTo($person->getUser()->getEmail())
         ->setBody($body, 'text/html');

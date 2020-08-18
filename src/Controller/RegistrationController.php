@@ -18,6 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Event\UserRegisterEvent;
 use App\Event\UserPaymentEvent;
 use App\Event\UserPasswordEvent;
+//use App\Event\UserInfoEvent;
 
 class RegistrationController extends AbstractController
 {
@@ -37,9 +38,9 @@ class RegistrationController extends AbstractController
         EventDispatcherInterface $eventDispatcher,
         TokenGenerator $tokenGenerator
     ): ?Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_home');
+//         }
         $person = new Person();
         $user = new User();
         $person->setUser($user);
@@ -70,6 +71,12 @@ class RegistrationController extends AbstractController
             
             //$UserRegisterEvent = new UserRegisterEvent($person);
             //EMail de validation EMail déclenché lors de l'inscription d'un internaute sur le site.
+           
+          /**  $UserPaymentEvent= new UserPaymentEvent($person);
+                $eventDispatcher->dispatch(
+                UserPaymentEvent::NAME,
+                $UserPaymentEvent);
+           **/
             $UserRegisterEvent = new UserRegisterEvent($person);
             $eventDispatcher->dispatch(
                 UserRegisterEvent::NAME,
@@ -106,9 +113,9 @@ class RegistrationController extends AbstractController
         GuardAuthenticatorHandler $guardHandler,
         UserAuthenticator $authenticator
     ): ?Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_home');
+//         }
         $person = new Person();
         $user = new User();
         $person->setUser($user);
