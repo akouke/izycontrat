@@ -45,7 +45,7 @@ class Mailer
         ->setFrom($this->emailFrom)
         ->setTo($person->getUser()->getEmail())
         ->setBody($body, 'text/html');
-        //->attach(Swift_Attachment::fromPath('my-document.pdf'))
+        //->attach(Swift_Attachment::fromPath('https://raw.githubusercontent.com/akouke/izycontrat/master/assets/izy_contrat_fr_cgu_cgvu.pdf'));
         
         $this->mailer->send($message);
     }
@@ -62,7 +62,9 @@ class Mailer
         ->setSubject('IZYcontrat Confirmation paiement ')
         ->setFrom($this->emailFrom)
         ->setTo($person->getUser()->getEmail())
-        ->setBody($body, 'text/html');
+        ->setBody($body, 'text/html')
+        ->attach(\Swift_Attachment::fromPath('https://raw.githubusercontent.com/akouke/izycontrat/master/assets/izy_contrat_fr_cgu_cgvu.pdf'));
+
         //->attach(\Swift_Attachment::fromPath('cgv/izy_contrat_fr_cgu_cgvu.pdf'));
         
         $this->mailer->send($message);

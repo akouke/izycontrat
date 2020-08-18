@@ -1341,16 +1341,16 @@
             <p><b>ARTICLE 40 - NOMINATION DES DIRIGEANTS</b>
             <p>
 
-            <p><u><b>Nomination du Président</b></u></p>
+            <p><u><b>Nomination du(de la) Président(e)</b></u></p>
 
             <p>
                 {% if isManager == true %}
                      <b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b>, désigné en tête des
-                    présentes, est nommé premier président de la société, aux termes des présents statuts pour une durée
+                    présentes, est nommé(e) premier(e) président(e) de la société, aux termes des présents statuts pour une durée
                     illimitée.
                 {% else %}
                     <b> 'CIVILITE' 'Prénom' 'NOM', désigné en tête des
-                    présentes, est nommé premier président de la société, aux termes des présents statuts pour une durée
+                    présentes, est nommé(e) premier(e) président(e) de la société, aux termes des présents statuts pour une durée
                     illimitée.
                 {% endif %}
                 </p>
@@ -1364,8 +1364,8 @@
             <p><u><b>Nomination du Directeur Général</b></u></p>
 
             <p>{{ DGcivilite ?? ' CIVILITE' }} {{ DGlastName ?? ' Prénom' }} {{ DGfirstName ?? ' NOM' }} ou DENOMINATION
-                SOCIALE (si entreprise), désignée en tête des présentes, est nommée
-                premier
+                SOCIALE (si entreprise), désignée en tête des présentes, est nommé(e)
+                premier(e)
                 directeur général de la société, aux termes des présents statuts pour une durée illimitée, ce qui est
                 accepté
                 par {{ DGcivilite ?? ' CIVILITE' }} {{ DGlastName ?? ' Prénom' }} {{ DGfirstName ?? ' NOM' }} ou DENOMINATION

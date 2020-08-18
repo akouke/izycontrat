@@ -55,7 +55,8 @@ class SaveStatusController extends AbstractController
         $numberTransformer = $numberToWords->getNumberTransformer('fr');
         
         $user = $this->getUser();
-        $recupPerson = $detailPerson->findLastPerson($user->getId());
+        // $recupPerson = $detailPerson->findLastPerson($user->getId());
+        $recupPerson = $detailPerson->findLastPersonEmail($user->getEmail());
         $recupCompany = $detailCompany->findLastCompany($user->getId());
         if($recupPerson){
             $recupPerson = $recupPerson['0'];

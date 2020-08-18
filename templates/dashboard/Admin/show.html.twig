@@ -3,32 +3,34 @@
 {% block title %}Fiche client - {{ client.lastName }} {{ client.firstName }}{% endblock %}
 
 {% block body %}
-    <div class="row page-content container-fluid col-10 col-lg-10">
-        <div class="clientNote row">
-            <div class="clientInformation col pb-4 bg-light d-flex flex-column">
-                <img class="profilePicture" src="{{ client.user.profilePicture ?? '' }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">
+    <div class="row page-content container-fluid col-12 col-lg-12">
+        <div class ="row">
+            <div class="col">
+             <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
+            </div>
+        </div> 
+        <div class=" row">
+                
+            <div class="clientInformation  col  bg-light d-flex flex-column">
+                {#<img class="profilePicture" src="{{ client.user.profilePicture ?? '' }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">#}
                 <h2>{{ client.gender == 2 ? 'Monsieur' : 'Madame'}}
                     {{ client.lastName }}
                     {{ client.firstName }}</h2>
                 <h3>Mail</h3>
                 <a class="card-text" href="mailto:{{ client.user.email ?? '' }}">{{ client.user.email ?? '' }}</a>
-                {#{{ client.user.email }}#}
+
                 <h3>Adresse</h3>
                 {{ client.address }}
                 <h3>Téléphone</h3>
                 <a class="card-text" href="tel:{{ client.phoneNumber|phone }}">{{ client.phoneNumber|phone }}</a>
-                {#{{ client.phoneNumber|phone }}#}
+
                 <h3>Nationality</h3>
                 {{ client.nationality}}
             </div>
 
-
-        {#<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">#}
-        {% for company in client.user.companies %}
-            <div class="col pb-4">
-            {#<h2 class="profilePicture">Societe</h2>#}
-                <div class="clientInformation col pb-4 bg-light d-flex flex-column">
-                    {#<div class="card-body">#}
+            <div class="col">
+                <div class="clientInformation col bg-light d-flex flex-column">
+                {% for company in client.user.companies %}
 
                         <h2> Nom societe</h2>
                             {{ company.name ?? ''}}
@@ -58,17 +60,45 @@
                             {{ company.socialObject ?? ''}}
                         
                     {#</div>#}
+                      {% endfor %}
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+              
+               <div class="col">
+                <div class="clientInformation col bg-light d-flex flex-column">
+                     <h2>Dossiers Clients</h2>
+                        <table class="table">
+                            <tbody>
+                                {% for upload in uploads %}
+                                    <tr>
+                                        <td>{{ upload.status }}</td>
+                                        <td>
+                                            {{ include('upload/_delete_form.html.twig') }}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/uploads/status/{{ upload.status }}" target="_blank">Voir</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">dossier vide!</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
         <div class ="row">
             <div class="col">
              <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
             </div>
             <div class="col">
-             <a href="{{ path('dashboard_clients_delete', {'id': client.id}) }}" class="btn btn-danger mt-3 d-inline-block" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ client.lastName }} {{ client.firstName }}?');">Supprimer le client </a>
+             <a href="{{ path('dashboard_clients_delete', {'id': client.id}) }}" class="btn btn-danger" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ client.lastName }} {{ client.firstName }}?');">Supprimer le client </a>
             </div>
         </div>
+            </div>
+          </div>
+        
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}

@@ -64,7 +64,7 @@ class CreateEntrepriseController extends AbstractController
     }
     
     /**
-     * @Route("/create/entreprise/sarl", name="create_sarl") 
+     * @Route("/create/entreprise/sarl", name="create_sarl", methods={"GET","POST"}) 
      */
      public function createSarl (GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                  EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -167,6 +167,7 @@ class CreateEntrepriseController extends AbstractController
                  $user = $this->getUser();
              }
              
+             $person->setEmailPerson($user->getEmail());
              $person->setHasCompany(true);
              $company->setClient($user);
              
@@ -410,7 +411,7 @@ class CreateEntrepriseController extends AbstractController
      }
     
     /**
-     * @Route("/create/entreprise/eurl", name="create_eurl") 
+     * @Route("/create/entreprise/eurl", name="create_eurl", methods={"GET","POST"}) 
      */
      public function createEurl(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                 EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -476,6 +477,7 @@ class CreateEntrepriseController extends AbstractController
                  $user = $this->getUser();
              }
              
+             $person->setEmailPerson($user->getEmail());
              $person->setHasCompany(true); 
              $company->setClient($user);
              
@@ -552,7 +554,7 @@ class CreateEntrepriseController extends AbstractController
     }
 
     /**
-     * @Route("/create/entreprise/micro-entreprise", name="create_me") 
+     * @Route("/create/entreprise/micro-entreprise", name="create_me", methods={"GET","POST"}) 
      */
      public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                             EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -617,6 +619,7 @@ class CreateEntrepriseController extends AbstractController
                      $user = $this->getUser();
              }
               
+                 $person->setEmailPerson($user->getEmail());
               $person->setHasCompany(true);
              $company->setClient($user);
             
@@ -696,7 +699,7 @@ class CreateEntrepriseController extends AbstractController
     }
     
     /**
-     * @Route("/create/entreprise/ei", name="create_ei") 
+     * @Route("/create/entreprise/ei", name="create_ei", methods={"GET","POST"}) 
      */
      public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -761,9 +764,10 @@ class CreateEntrepriseController extends AbstractController
                  $user = $this->getUser();
              }
               
-              $person->setHasCompany(true);
+            $person->setEmailPerson($user->getEmail());
+             $person->setHasCompany(true);
              $company->setClient($user);
-            
+
             $em->persist($company);
             $em->persist($person);
             

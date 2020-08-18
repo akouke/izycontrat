@@ -43,7 +43,7 @@ class CreateSasSasuController extends AbstractController
 {
     
     /**
-     * @Route("/create/sas", name="create_sas")
+     * @Route("/create/sas", name="create_sas", methods={"GET","POST"})
      */
     public function createSas(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                               EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -144,6 +144,7 @@ class CreateSasSasuController extends AbstractController
                  $user = $this->getUser();
              }
              
+             $person->setEmailPerson($user->getEmail());
              $person->setHasCompany(true);
              $company->setClient($user);
              
@@ -295,7 +296,7 @@ class CreateSasSasuController extends AbstractController
     }
     
      /**
-     * @Route("/create/sasu", name="create_sasu")
+     * @Route("/create/sasu", name="create_sasu", methods={"GET","POST"})
      */
     public function createSasu(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -361,6 +362,7 @@ class CreateSasSasuController extends AbstractController
                  $user = $this->getUser();
              }
               
+             $person->setEmailPerson($user->getEmail());
              $person->setHasCompany(true);
              $company->setClient($user);
             
@@ -434,7 +436,7 @@ class CreateSasSasuController extends AbstractController
     }
     
       /**
-     * @Route("/create/entreprise/sci", name="create_sci") 
+     * @Route("/create/entreprise/sci", name="create_sci", methods={"GET","POST"}) 
      */
      public function createSCI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
@@ -539,6 +541,7 @@ class CreateSasSasuController extends AbstractController
                  $user = $this->getUser();
              }
              
+             $person->setEmailPerson($user->getEmail());
              $person->setHasCompany(true);
              $company->setClient($user);
                // recup parts

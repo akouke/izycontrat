@@ -12,15 +12,14 @@
 </head>
 <body>
 <img src="https://www.izy-contrat.fr/images/Logo_Izy_Contrat_H.png" alt="logo Izy Contrat">
-<h1>Bonjour,{{ user.getFirstName() }}</h1>
-
+<h4>Bonjour,{{ user.getFirstName() }}</h4>
+<br><br>
 <div class="content__body py-8 border-b">
         <p>
-          Bonjour, {{ user.getFirstName() }} <br><br>Merci d'avoir bien voulu vous enregistrer sur notre plateforme
+        Merci d'avoir bien voulu vous enregistrer sur notre plateforme.<br>
+          Merci de cliquer sur ce <a href="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}" method="get" target="_blank"> lien</a> pour activer votre compte pour commencer à créer votre entreprise.
         </p>
-        <form action="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}" method="get" target="_blank">
-        <button class="text-white text-sm tracking-wide bg-black rounded w-full my-8 p-4 ">ACTIVER VOTRE COMPTE</button>
-        </form>
+      
         <p class="text-sm">
           Nos salutations'!<br> L'équipe Izycontrat
         </p>

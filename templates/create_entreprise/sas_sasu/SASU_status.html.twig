@@ -114,7 +114,7 @@
 
                 Le siège social est fixé à <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE' }}  {{ company.country ?? ''}} {{ company.addressManager ?? ''}}</b> <br>
 
-            <p>Il pourra être transféré dans la région <b>PROVENCE-ALPES-COTE D’AZUR</b> par une simple décision du
+            <p>Il pourra être transféré dans la région <b>{{ company.country ?? 'Nom région'}}</b> par une simple décision du
                 président,
                 habilité à modifier les statuts à cet effet, sous réserve de ratification par la prochaine décision de
                 l'associé unique ou par la prochaine décision collective extraordinaire des associés, et en tout lieu
@@ -134,8 +134,8 @@
 
             <p><b><u>Apports en numéraire</u></b><br>
 
-                Une somme en numéraire d'un montant total de <b> {{ capitalWord ?? ' NOMBRE EN LETTRES' }} EUROS</b><b>{{ capitalNum ?? '0.00'}} €</b>,
-                correspondant au montant du capital social et à <b>( {{ capitalNum ?? '0.00'}})
+                Une somme en numéraire d'un montant total de <b> {{ capitalWord ?? ' NOMBRE EN LETTRES' }} EUROS</b><b> {{ capitalNum ?? '0.00'}} €</b>,
+                correspondant au montant du capital social et à <b>( {{ capitalNum ?? '0.00'}} )
                     actions</b>,
                 souscrites en totalité et intégralement libérées, ainsi qu'il
                 résulte du certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par la
@@ -152,10 +152,10 @@
             <p><b>ARTICLE 7 - CAPITAL SOCIAL</b><br>
 
                 Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }}
-                    ({{ capitalNum ?? '0.00'}} €)</b></p>
+                    ( {{ capitalNum ?? '0.00'}} €)</b></p>
 
-            <p>Il est divisé en <b>( 1 ) actions</b> de
-                <b>({{ capitalNum ?? '0.00'}} ) €</b> chacune, entièrement libérées.</p>
+            <p>Il est divisé en <b>( {{ capitalNum ?? '0.00'}} ) actions</b> de
+                <b>( 1 ) €</b> chacune, entièrement libérées.</p>
 
             <p><b>ARTICLE 8 - MODIFICATIONS DU CAPITAL SOCIAL</b><br>
 
@@ -849,7 +849,7 @@
 
 
             <p style="text-align: right">
-                <br>Fait à <b>{{ address ?? 'VILLE' }}</b>
+                <br>Fait à <b>{{ address ?? '2, Rue Charles Plumier, 45100 Orléans' }}</b>
                 <br>Le <b>{{ dateCreation ?? 'DATE' }}</b>
                 <br>En QUATRE exemplaires originaux
                 <br>
@@ -858,10 +858,10 @@
 
             <p style="text-align: center">
                 {{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }} <br>
-                Bon pour acceptation des fonctions de présidente
+                Bon pour acceptation des fonctions de président(e).
             </p>
 
-
+            <br><br>
             <p style="text-align: center; margin-top: 50px;"><b>ANNEXE 1</b></p>
 
 

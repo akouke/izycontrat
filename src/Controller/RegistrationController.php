@@ -72,17 +72,18 @@ class RegistrationController extends AbstractController
             //$UserRegisterEvent = new UserRegisterEvent($person);
             //EMail de validation EMail déclenché lors de l'inscription d'un internaute sur le site.
            
-          /**  $UserPaymentEvent= new UserPaymentEvent($person);
+           /** $UserPaymentEvent= new UserPaymentEvent($person);
                 $eventDispatcher->dispatch(
                 UserPaymentEvent::NAME,
-                $UserPaymentEvent);
-           **/
+                $UserPaymentEvent);**/
+           
             $UserRegisterEvent = new UserRegisterEvent($person);
             $eventDispatcher->dispatch(
                 UserRegisterEvent::NAME,
                 $UserRegisterEvent
-            );
-            
+            ); 
+        //   dd($UserRegisterEvent);
+           $this->addFlash('success', 'vos informations ont ete bien enregistrees et un mail vous est envoye');
             return $this->redirectToRoute('app_home');
 
            /** return $guardHandler->authenticateUserAndHandleSuccess(

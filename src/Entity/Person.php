@@ -71,12 +71,6 @@ class Person
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string", message="Mauvais format de données")
-     * @Assert\NotBlank(message="L'adresse ne doit pas être vide")
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "L'adresse doit contenir au maximum {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $address;
 
@@ -162,6 +156,11 @@ class Person
      * @ORM\Column(type="date", nullable=true)
      */
     private $dateBirth;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $emailPerson;
 
     public function __construct()
     {
@@ -548,6 +547,18 @@ class Person
     public function setDateBirth(?\DateTimeInterface $dateBirth): self
     {
         $this->dateBirth = $dateBirth;
+
+        return $this;
+    }
+
+    public function getEmailPerson(): ?string
+    {
+        return $this->emailPerson;
+    }
+
+    public function setEmailPerson(?string $emailPerson): self
+    {
+        $this->emailPerson = $emailPerson;
 
         return $this;
     }

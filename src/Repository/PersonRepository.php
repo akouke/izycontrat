@@ -44,4 +44,21 @@ class PersonRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    
+    /**
+      * @return Person[] Returns an array of Person objects
+      */
+    public function findLastPersonEmail($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.emailPerson = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+    
 }

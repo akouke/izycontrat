@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Person;
 use App\Entity\User;
+use App\Repository\UploadRepository;
 use App\Form\ClientType;
 use App\Form\LawyerType;
 use App\Form\UserChangePasswordType;
@@ -101,7 +102,7 @@ class DashboardController extends AbstractController
             $newPassword = $formUser->get('password')->getData();
             $lenNewPassword = strlen($newPassword);
             if($lenNewPassword < 8){
-                $this->addFlash('danger', 'Votre mot de passe de '.$lenNewPassword.' caracters est trop court! 8 caracters au minimun');
+                $this->addFlash('danger', 'Votre mot de passe de '.$lenNewPassword.' caracteres est trop court! 8 caracteres au minimun');
                 return $this->redirectToRoute('dashboard_profile_edit_user');
             }
             // dd($lenNewPassword);
@@ -146,13 +147,32 @@ class DashboardController extends AbstractController
      * @param Person $client
      * @return Response
      */
-    public function adminClientsShow(Person $client)
+    public function adminClientsShow(Person $client, UploadRepository $uploadsRecup, string $dossierClient)
     {
         $user = $this->getUser();
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
-        return $this->render('dashboard/Admin/show.html.twig', ['client' => $client]);
+        
+        // dd($client->getUser());
+        // $uploads = $uploadsRecup->findByUser($client->getUser());
+        $uploads = $uploadsRecup->findAllUpload($client->getUser());
+
+    //   $d = $dossierClient."/";
+
+    
+    //     $mot = trim($uploads['0']->getStatus());
+
+    //     $path = $d.$mot;
+        // $d->close();
+        
+        // }
+        // dd($uploads);
+        
+        return $this->render('dashboard/Admin/show.html.twig', [
+            'client' => $client,
+            'uploads' => $uploads,
+            ]);
     }
 
     /**

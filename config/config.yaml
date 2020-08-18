@@ -29,3 +29,17 @@ welp_mailchimp:
           type: text
           public: true
           ...
+swiftmailer:
+    transport:        gmail
+    username:         cheikhousy@gmail.com
+    password:         Medinasy87
+    Host:             localhost
+    port:             465
+    encryption:       ssl
+    auth-mode:        login
+    spool: { type: 'memory' }
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
+            verify_peer_name: false
