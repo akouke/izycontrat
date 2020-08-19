@@ -15,20 +15,3 @@ parameters:
     decimal: true
     premium_amount: 1
     
-swiftmailer:
-    url: '%env(MAILER_URL)%'
-    spool: { type: 'memory' }
-    transport:        smtp
-    username:         contact@izy-contrat.fr
-    password:         Alisa451izycontrat
-    host:             ssl0.ovh.net
-    port:             587
-    encryption:       tls
-    auth-mode:        login
-    spool: { type: 'memory' }
-    stream_options:
-        ssl:
-            allow_self_signed: true
-            verify_peer: false
-            verify_peer_name: false
-
