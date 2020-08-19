@@ -257,10 +257,10 @@ class CreateSasSasuController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
             
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
@@ -404,10 +404,10 @@ class CreateSasSasuController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
             
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
@@ -643,10 +643,10 @@ class CreateSasSasuController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
             
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');

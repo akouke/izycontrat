@@ -19,55 +19,25 @@
 
     .haut{
         margin-top: 80px;
-        margin-left: 3%;
     }
     .breadcrumb{
         background: none;
     }
-     .tailInput{
-      margin-left:33%;
-      margin-bottom: 1%;
-      width: 34%;
-      text-align: center;
 
-    }
-    #progressbar li {
-        list-style-type: none;
-        color:#BEA058;
-        text-transform: uppercase;
-        font-size: 12px;
-        width: 10.50%;
-        float: left;
-        position: relative;
-        letter-spacing: 1px;
+     #progressbar li {
+            list-style-type: none;
+            color:#BEA058;
+            text-transform: uppercase;
+            font-size: 12px;
+            width: 13.33%;
+            float: left;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+
 </style>
-{#<div class="container-fluid">#}
-<!-- MultiStep Form -->
-<div class="breadcrumb progression haut">
-            <ul class="nav nav-tabs">
-                <a data-toggle="tab" class="active"> <b>1 - Détail de votre projet</b></a>
-                <a data-toggle="tab" > <b>2 - Choix de la prestation</b> </a>
-                <a data-toggle="tab"> <b> 3 - Paiement</b> </a>
-                <a data-toggle="tab" > <b> 4 - Société créée !</b> </a>
-            </ul>
-        </div>
-<div class="row">
-    <div class="col-md-12">
 
-        <div id="msform" class="">
-            <!-- progressbar -->
-            <ul id="progressbar">
-                <li class="active">delai et évolution</li>
-                <li>Nom Societe</li>
-                <li>Nom Commercial</li>
-                <li> Secteur d'activité</li>
-                <li>siège</li>
-                <li>capital social</li>
-                <li>Banque</li>
-                    <li>Mes Associés</li>
-                    {#<li>Directeur Général</li>#}
-              <li>Informations de contact</li>
-            </ul>
 
 {{form_start(formSci)}}
     {# debut information concernant le clien#}
@@ -99,7 +69,35 @@
 
                         {#debut information company3 associer#}
                         {{ form_start(formAssociateCompany3) }}
+    <div class="container-fluid">
+<!-- MultiStep Form -->
 
+    <div class="container-fluid breadcrumb progression haut" style="min-width: 450px;">
+        <ul class="nav nav-tabs">
+            <a data-toggle="tab" class="active"><b>1-Projet</b></a>
+            <a data-toggle="tab" > <b>2-Prestation</b></a>
+            <a data-toggle="tab"> <b>3-Paiement</b></a>
+            <a data-toggle="tab" ><b>4-créée!</b></a>
+        </ul>
+    </div>
+
+<div id="msform" >
+            
+            <div class="mx-auto" style="min-width: 530px;" >
+                <ul id="progressbar">
+                    {#<li>delai</li>#}
+                    <li class="active cli">Nom</li>
+                    {#<li>Nom</li>#}
+                    <li class="cli">Secteur</li>
+                    <li class="cli">Siège</li>
+                    <li class="cli">Capital</li>
+                    {#<li>Banque</li>#}
+                    <li class="cli">Associé</li>
+                  <li class="cli">Contact</li>
+                </ul>
+            </div>
+            
+<div class="container-fluid mx-auto">
               {% if emailUsed == true %}
                       <div class="alert alert-danger">
                          Erreur: Cet adresse Email: <strong>{{ user.email }}</strong> existe déja!
@@ -108,35 +106,19 @@
             <!-- fieldsets -->
             <fieldset>
                       <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre SCI ?</h2>
-                       <div class="tailInput">
+                       <div class="mx-auto mt-2" style="max-width: 400px;">
 
                          {{ form_widget(formSci.priority)}}
 
                         <div class="d-none">
-                                 {{ form_widget(formSci.companyType) }}
-                                 {{ form_widget(formSci.socialObject) }}
-                                 {{ form_widget(formPerson.married)}}
-                                 {{ form_widget(formPerson.nationality)}}
-
+                              {{ form_row(formSci.regimeMicroEntreprise)}} {{ form_widget(formSci.socialObject)}} {{ form_widget(formSci.hasDirector)}} {{ form_widget(formSci.hasProtection)}} {{ form_widget(formSci.hasAssociate)}}{{ form_widget(formSci.manager)}}{{ form_widget(formPerson.nationality)}}{{ form_widget(formSci.companyType) }}{{ form_widget(formSci.socialObject) }}{{ form_widget(formPerson.married)}}
                                {#{{ form_widget(formSci.addressManager) }}#}
-                               {{ form_widget(formSci.manager)}}
-                               {{ form_widget(formSci.hasAssociate)}}
-                               {{ form_widget(formSci.hasProtection)}}
-                               {{ form_widget(formSci.hasDirector)}}
                                {#{{ form_widget(formSci.country)}} #}
-                               {{ form_widget(formSci.socialObject)}}
-                                {{ form_row(formSci.regimeMicroEntreprise)}}
                          </div>
                        </div>
-            <a href="{{ path('create_entreprise')}}"  class="action-button-previous btn"> Annuler </a>
-            <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
-
-            <fieldset>
-                 {#<h2 class="fs-title ">Step #2 CREATE QUOTE REQUEST</h2>#}
-                     {#<div class="card-body">#}
+                       
                         <h2 class="fs-title ">Quel nom choisissez vous pour votre entreprise?</h2>
-                         <div class="tailInput">
+                         <div class="mx-auto mt-2" style="max-width: 400px;">
 
                            {{ form_widget(formSci.name)}}
 
@@ -148,28 +130,67 @@
                               qui est différent du nom commercial)
                           </small>
                         </div>
-
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
-
-            <fieldset>
-                         <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>
-                             <div class="tailInput">
+                        
+                        <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>
+                             <div class="mx-auto mt-2" style="max-width: 400px;">
                                  {{ form_widget(formSci.tradeName)}}
                               </div>
                             <div class="alert alert-info" role="alert">
                               (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise
                               est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
                             </div>
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
+                            
+            <a href="{{ path('create_entreprise')}}"  class="action-button-previous btn"> Annuler </a>
+            <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
+
+            {#<fieldset>#}
+                 {#<h2 class="fs-title ">Step #2 CREATE QUOTE REQUEST</h2>#}
+                     {#<div class="card-body">#}
+            {#            <h2 class="fs-title ">Quel nom choisissez vous pour votre entreprise?</h2>#}
+            {#             <div class="mx-auto mt-2" style="max-width: 400px;">#}
+
+            {#               {{ form_widget(formSci.name)}}#}
+
+            {#              </div>#}
+            {#            <div  class="alert alert-info" role="alert">#}
+            {#                <small>#}
+            {#                  (Le nom servira à identifier votre société. Il devra figurer sur tous les documents commerciaux de#}
+            {#                  votre société y compris les factures. Vous devez renseigner ici la dénomination sociale#}
+            {#                  qui est différent du nom commercial)#}
+            {#              </small>#}
+            {#            </div>#}
+                        
+            {#            <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>#}
+            {#                 <div class="mx-auto m-2" style="max-width: 400px;">#}
+            {#                     {{ form_widget(formSci.tradeName)}}#}
+            {#                  </div>#}
+            {#                <div class="alert alert-info" role="alert">#}
+            {#                  (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise#}
+            {#                  est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)#}
+            {#                </div>#}
+
+            {#    <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>#}
+            {#    <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>#}
+            {#</fieldset>#}
+
+            {#<fieldset>#}
+            {#             <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>#}
+            {#                 <div class="mx-auto m-2" style="max-width: 400px;">#}
+            {#                     {{ form_widget(formSci.tradeName)}}#}
+            {#                  </div>#}
+            {#                <div class="alert alert-info" role="alert">#}
+            {#                  (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise#}
+            {#                  est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)#}
+            {#                </div>#}
+            {#    <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>#}
+            {#    <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>#}
+            {#</fieldset>#}
 
              <fieldset>
                   {#<div class="card-body">#}
                     <h2 class="fs-title ">Quel est votre secteur d’activité ? </h2>
-                     <div class="tailInput">
+                     <div class="mx-auto mt-2" style="max-width: 400px;">
 
                            {{ form_widget(formSci.activitySector)}}
 
@@ -181,7 +202,7 @@
                     <p>
                       Merci de préciser votre activité
                     </p>
-                    <div class="tailInput">
+                    <div class="mx-auto mt-2" style="max-width: 400px;">
                       <input type="text" id="company_activitySector_autre" name="company_activitySector_autre" placeholder=" Si Autre secteur d'activite" class="form-control" />
                     </div>
                      <div  class="alert alert-info" role="alert">
@@ -196,29 +217,62 @@
              <fieldset>
                   {#<div class="card-body">#}
                     <h2 class="fs-title ">Où sera le siège social de votre société ?</h2>
-
-                        <strong> Au domicile du Président (le plus fréquent) </strong>
-                          <div class="tailInput">
-                                {{ form_widget(formSci.addressManager)}}
-                           </div>
-                        <strong> À une adresse de domiciliation </strong>
-                          <div class="tailInput">
-                                    {{ form_widget(formSci.country)}}
-                          </div>
-
-                       <strong> Dans un bureau, local, etc… </strong>
-                          <div class="tailInput">
-                                {{ form_widget(formSci.address)}}
-                          </div>
-
-                {#</div>#}
+                    
+                    <div id="accordion">
+                            <div class="card-header bg-light" id="headingOne">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <label class="radio"><input type="radio" name="collapse" value=""> Au domicile du Président (le plus fréquent) </label>
+                                </button>
+                              </h5>
+                            </div>
+                        
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                <div class="mx-auto m-2" style="max-width: 400px;">
+                                  {{ form_widget(formSci.addressManager)}}
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="card-header bg-light" id="headingTwo">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  <label class="radio"><input type="radio" name="collapse" value="">  À une adresse de domiciliation ?  </label>
+                                </button>
+                              </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                              <div class="card-body">
+                                  <div class="mx-auto m-2" style="max-width: 400px;">
+                                        {{ form_widget(formSci.country)}}
+                                  </div>
+                              </div>
+                            </div>
+                            
+                            <div class="card-header bg-light" id="headingThree">
+                              <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <label class="radio"><input type="radio" name="collapse" value="">  Dans un bureau, local, etc… ?  </label>
+                                </button>
+                              </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                              <div class="card-body">
+                                  <div class="mx-auto m-2" style="max-width: 400px;">
+                                        {{ form_widget(formSci.address)}}
+                                  </div>                              
+                              </div>
+                            </div>
+                        </div>
+                    
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
 
             <fieldset>
                   <h2 class="fs-title ">Quel est le montant total du capital social de votre société ?</h2>
-                     <div class="tailInput">
+                     <div class="mx-auto m-2" style="max-width: 400px;">
                        {{ form_widget(formSci.capitalSocial)}}
                       </div>
                     <div  class="alert alert-info" role="alert">
@@ -229,14 +283,9 @@
                              veuillez nous contacter ou le préciser plus tard.)
                         </small>
                     </div>
-
-                <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
-                <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
-            </fieldset>
-
-            <fieldset>
+                    
                     <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2>
-                     <div class="tailInput">
+                     <div class="mx-auto m-2" style="max-width: 400px;">
 
                            {{ form_widget(formSci.bankName)}}
 
@@ -249,19 +298,38 @@
                            passez la question, vous pourrez la préciser au moment d'effectuer vos formalités de création.)
                           </small>
                       </div>
+
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
 
+            {#<fieldset>#}
+            {#        <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2>#}
+            {#         <div class="mx-auto m-2" style="max-width: 400px;">#}
+
+            {#               {{ form_widget(formSci.bankName)}}#}
+
+            {#          </div>#}
+            {#          <div class="alert alert-info" role="alert">#}
+            {#              <small>#}
+            {#               (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création#}
+            {#               de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ».#}
+            {#               Ce document est indispensable pour immatriculer votre société. Si vous n'avez pas encore choisi votre banque,#}
+            {#               passez la question, vous pourrez la préciser au moment d'effectuer vos formalités de création.)#}
+            {#              </small>#}
+            {#          </div>#}
+            {#    <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>#}
+            {#    <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>#}
+            {#</fieldset>#}
+
             <fieldset>
                 <h2 class="fs-title ">Qui sont les associés de votre société </h2>
 
-                    <details style="text-align:left; margin:1%; padding:1%; margin-left: 5%; width: 88%;"><summary class="bg-secondary form-control" ><strong><i class="fas fa-user-circle"></i> Un Particulier ?</strong></summary>
-                                 <small  class="badge badge-warning" >
-                                   (Chaque apport donne droit à des actions à l'associé.
-                                   La somme des apports des associés constituent le capital social de la société)
+                    <details style="text-align:left; margin:1%; padding:1%; margin-left: 1%; width: 98%;"><summary class="bg-secondary form-control" ><strong><i class="fas fa-user-circle"></i> Un Particulier ?</strong></summary>
+                                 <small  class="badge badge-warning text-wrap" >
+                                   (Chaque apport donne droit à des actions à l'associé. La somme des apports des associés constituent le capital social de la société)
                                  </small>
-                             <div class="row">
+                             <div class="row ">
                                <div class="col-2">
                                  {{ form_row(formAssocie1.gender) }}
                                </div>
@@ -275,7 +343,7 @@
                                  {{ form_row(formAssocie1.capitalAmountAdding) }}
                                </div>
                              </div>
-                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
+                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter +1 ?</strong></summary>
                         <div class="row">
                             <div class="col-2">
                                  {{ form_row(formAssocie2.gender) }}
@@ -290,7 +358,7 @@
                                  {{ form_row(formAssocie2.capitalAmountAdding) }}
                                </div>
                              </div>
-                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
+                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter +2 ?</strong></summary>
                         <div class="row">
                             <div class="col-2">
                                  {{ form_row(formAssocie3.gender) }}
@@ -305,7 +373,7 @@
                                  {{ form_row(formAssocie3.capitalAmountAdding) }}
                                </div>
                              </div>
-                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
+                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter +3 ?</strong></summary>
                         <div class="row">
                             <div class="col-2">
                                  {{ form_row(formAssocie4.gender) }}
@@ -320,7 +388,7 @@
                                  {{ form_row(formAssocie4.capitalAmountAdding) }}
                                </div>
                              </div>
-                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter un autre Associé ?</strong></summary>
+                        <details style="text-align:left; width: 100%;"><summary class="bg-warning form-control" ><strong><i class="fas fa-user-plus"></i> Ajouter +4 ?</strong></summary>
                          <div class="row">
                             <div class="col-2">
                                  {{ form_row(formAssocie5.gender) }}
@@ -343,7 +411,7 @@
                             {#</form>#}
                             <br>
                     </details>
-                     <details style="text-align:left; margin:1%; margin-left: 6%; width: 86%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Une Société ?</strong></summary>
+                     <details style="text-align:left; margin:1%; margin-left: 2%; width: 96%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Une Société ?</strong></summary>
                              <div class="row">
                                <div class="col">
                                  {{ form_row(formAssociateCompany.name) }}
@@ -366,7 +434,7 @@
                                  pouvoirs économiques et décisionnels.)
                               </small>
                               </p>
-                             <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associé société 2 ?</strong></summary>
+                             <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter +1 ?</strong></summary>
 
                                      <div class="row">
                                        <div class="col">
@@ -388,7 +456,7 @@
                                          {#100%#}
                                      </div>
 
-                                     <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter Associé société 3 ?</strong></summary>
+                                     <details style="text-align:left; margin:1%; width: 100%;"><summary class="bg-secondary form-control "><strong><i class="fas fa-building"></i> Ajouter +2 ?</strong></summary>
 
                                          <div class="row">
                                            <div class="col">
@@ -412,8 +480,8 @@
                     <div  class="alert alert-info" role="alert">
                       Renseignez ici l’identité des associés de votre société, vous inclus si vous êtes associé.
                       Vous pouvez ajouter un associé en cliquant sur le bouton "Ajouter un associé" en bas de page<br>
-                        <small  class="badge badge-warning">
-                          Si vous ne possédez pas certaines informations, ne vous en faites pas, <br>
+                        <small  class="badge badge-warning text-wrap">
+                          Si vous ne possédez pas certaines informations, ne vous en faites pas,
                           sauvegardez votre dossier ou passez aux questions suivantes, vous pouvez les renseigner plus tard.
                         </small>
                     </div>
@@ -444,25 +512,25 @@
                  <h2 class="fs-title ">Vos informations de contact nous servirons à finaliser la création de votre dossier. </h2>
 
                 {#<div class="row">#}
-                 <div class="tailInput">
+                 <div class="mx-auto m-2" style="max-width: 400px;">
 
                          {{ form_widget(formPerson.gender) }}
 
                  </div>
-                 <div class="tailInput">
+                 <div class="mx-auto m-2" style="max-width: 400px;">
 
                        {{ form_widget(formPerson.firstName) }}
 
                  </div>
-                 <div class="tailInput">
+                 <div class="mx-auto m-2" style="max-width: 400px;">
 
                        {{ form_widget(formPerson.lastName) }}
 
                  </div>
                  {#</div>#}
 
-             <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
-             <div class="tailInput">
+             <small style="margin-top: -10px;" class="badge badge-info text-wrap" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
+             <div class="mx-auto m-2" style="max-width: 400px;">
 
                        {{ form_widget(formPerson.phoneNumber) }}
 
@@ -470,22 +538,28 @@
 
               {#debut information de connexion user#}
               {#{{ form_start(formUser )}}#}
-                 <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
-                 <div class="tailInput">
+                 <small style="margin-top: -10px;" class="badge badge-info text-wrap" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
+                 <div class="mx-auto m-2" style="max-width: 400px;">
 
                         {{ form_widget(formUser.email) }}
 
                         {% if emailUsed == true %}
-                      <div class="badge badge-danger">
+                      <div class="badge badge-danger text-wrap">
                          Erreur: Cet adresse Email: {{ user.email }} existe déja!
                       </div>
                     {% endif%}
                  </div>
 
 
-                <input type="button" name="previous" class="previous action-button-previous mid" value="Revoir"/>
+                <input type="button" name="previous" class="previous action-button-previous mid" value="Retour"/>
                 <input type="submit" class="action-button" value="Enregistrer"/>
             </fieldset>
+</div>
+
+
+</div>
+<!-- /.MultiStep Form -->
+</div>
 
                                         {#debut information company3 associer#}
                                              {{ form_end(formAssociateCompany3) }}
@@ -517,11 +591,7 @@
 
     {{form_end(formSci)}}
 
-        </div>
-
-</div>
-<!-- /.MultiStep Form -->
-</div>
+        {#</div>#}
 
 {% block javascripts %}
 

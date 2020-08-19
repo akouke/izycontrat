@@ -29,13 +29,14 @@
         .breadcrumb{
             background: none;
         }
-        .tailInput{
-            margin-left:33%;
-            margin-bottom: 1%;
-            width: 34%;
-            text-align: center;
+        /*.tailInput{*/
+        /*    margin-left:33%;*/
+        /*    margin-bottom: 1%;*/
+        /*    width: 34%;*/
+        /*    text-align: center;*/
+        /*    min-width: 25%;*/
 
-        }
+        /*}*/
 
         #progressbar li {
             list-style-type: none;
@@ -50,29 +51,31 @@
     </style>
 
 
-    <div class="breadcrumb progression haut">
+    <div class="container-fluid breadcrumb progression haut" style="min-width: 450px;">
         <ul class="nav nav-tabs">
-            <a data-toggle="tab" class="active"><b>1 - Détail de votre projet</b></a>
-            <a data-toggle="tab" > <b>2 - Vos Informations</b></a>
-            <a data-toggle="tab"> <b>3 - Paiement</b></a>
-            <a data-toggle="tab" ><b>4 - Société créée !</b></a>
+            <a data-toggle="tab" class="active"><b>1-Projet</b></a>
+            <a data-toggle="tab" > <b>2-Prestation</b></a>
+            <a data-toggle="tab"> <b>3-Paiement</b></a>
+            <a data-toggle="tab" ><b>4-créée!</b></a>
         </ul>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="container-fluid">
+        {#<div class="col-md-12">#}
 
             <div id="msform" class="">
                 <!-- progressbar -->
-                <ul id="progressbar">
-                    <li class="active">delai et evolution</li>
-                    <li>Nom Societe</li>
-                    <li>Secteur d'activite</li>
-                    <li>Objet Social</li>
-                    <li>siege</li>
-                    <li>marie(e)/celibataire</li>
-                    <li>Informations de contact</li>
-                </ul>
+                <div style="min-width: 530px;">
+                    <ul id="progressbar">
+                        <li class="active">delai</li>
+                        <li>Nom</li>
+                        <li>Secteur</li>
+                        <li>Objet</li>
+                        <li>siege</li>
+                        <li>situation</li>
+                        <li>contact</li>
+                    </ul>
+                </div>
 
                 {% if typeStatut == 'ME'%}
                     {{ form_start(formMe) }}
@@ -98,7 +101,7 @@
                 <!-- fieldsets -->
                 <fieldset>
                     <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre {{ typeStatut == 'ME' ? 'ME' : 'EI' }} ?</h2>
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.priority)}}
                         {% else %}
@@ -150,7 +153,7 @@
                 <fieldset>
 
                     <h2 class="fs-title ">Quel nom choisissez vous pour votre entreprise?</h2>
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.name)}}
                         {% else %}
@@ -174,7 +177,7 @@
                 <fieldset>
 
                     <h2 class="fs-title ">Quel est votre secteur d’activité ? </h2>
-                    <div class="tailInput">
+                    <div class="mx-auto mb-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.activitySector)}}
                         {% else %}
@@ -184,7 +187,7 @@
                     <p>
                         Si autre merci de le préciser :
                     </p>
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         <input type="text" id="company_activitySector_autre" name="company_activitySector_autre" placeholder=" Si Autre secteur d'activite" class="form-control" />
                     </div>
                     {#</div>#}
@@ -197,7 +200,7 @@
                 <fieldset>
 
                     <h2 class="fs-title ">Quel est l’objet social de votre entreprise ?  </h2>
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.socialObject)}}
                         {% else %}
@@ -219,7 +222,7 @@
                 <fieldset>
 
                     <h2 class="fs-title "> Où souhaitez-vous exercer votre activité ? </h2>
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.address)}}
                         {% else %}
@@ -229,7 +232,7 @@
 
                     {% if typeStatut == 'ME' %}
                         <h2 class="fs-title "> Quelle est votre nationalité ?  </h2>
-                        <div class="tailInput">
+                        <div class="mx-auto" style="max-width: 400px;">
                             {{ form_widget(formMePerson.nationality)}}
                         </div>
                         <div  class="alert alert-info" role="alert">
@@ -246,7 +249,7 @@
                 <fieldset>
 
                     <h2 class="fs-title "> Êtes-vous marié(e) ? </h2>
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.married)}}
                         {% else %}
@@ -271,21 +274,21 @@
                 <fieldset>
                     <h2 class="fs-title ">Vos informations de contact nous servirons à finaliser la création de votre dossier. </h2>
 
-                    <div class="tailInput">
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.gender) }}
                         {% else %}
                             {{ form_widget(formEiPerson.gender) }}
                         {% endif %}
                     </div>
-                    <div class="tailInput">
+                    <div class="mx-auto m-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.firstName) }}
                         {% else %}
                             {{ form_widget(formEiPerson.firstName) }}
                         {% endif %}
                     </div>
-                    <div class="tailInput">
+                    <div class="mx-auto m-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.lastName) }}
                         {% else %}
@@ -293,8 +296,8 @@
                         {% endif %}
                     </div>
 
-                    <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
-                    <div class="tailInput">
+                    <small style="margin-top: -10px;" class="badge badge-info text-wrap" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.phoneNumber) }}
                         {% else %}
@@ -302,22 +305,22 @@
                         {% endif %}
                     </div>
 
-                    <small style="margin-top: -10px;" class="badge badge-info" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
-                    <div class="tailInput">
+                    <small style="margin-top: -10px;" class="badge badge-info text-wrap" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
+                    <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMeUser.email) }}
                         {% else %}
                             {{ form_widget(formEiUser.email) }}
                         {% endif %}
                         {% if emailUsed == true %}
-                            <div class="badge badge-danger">
+                            <div class="badge badge-danger text-wrap">
                                 Erreur: Cet adresse Email: {{ user.email }} existe déja!
                             </div>
                         {% endif%}
                     </div>
 
 
-                    <input type="button" name="previous" class="previous action-button-previous mid" value="Revoir"/>
+                    <input type="button" name="previous" class="previous action-button-previous mid" value="Retour"/>
                     <input type="submit" class="action-button" value="Enregistrer"/>
                 </fieldset>
 
@@ -339,7 +342,7 @@
                 {% endif %}
 
             </div>
-        </div>
+        {#</div>#}
     </div>
 
     {% block javascripts %}

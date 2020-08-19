@@ -12,231 +12,248 @@
 {% endblock %}
 
 {% block body %}
-    <section class="homeTop d-flex justify-content-center">
-        <img class="homePicture" src="/images/sci.png" alt="image principale">
+<section class="homeTop d-flex justify-content-center">
+    <img class="homePicture" src="/images/sci.jpg" alt="image principale">
 
-        <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
-            <p>CRÉER UNE SCI</p>
-            <p>La SCI ou Société Civile Immobilière est une structure qui vous permet de faciliter la transmission d’un
-                bien immobilier. Créer votre SCI et recevez vos statuts en quelques minutes, c’est super IZY !</p>
-            <a href="{{ path('create_sci') }}" class="btn btn-secondary btnHome">Je crée ma SCI !</a>
-        </div>
-    </section>
-    <div class="container text-justify p-4">
-        <div class="row justify-content-center mt-4">
-            <h2 class="text-center">Qu’est-ce qu’une société civile immobilière ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>La SCI est une société qui permet de constituer, de gérer et/ou de transmettre un patrimoine immobilier.
-                Il peut s’agir également de l’achat, de construction ou de location d’immeubles. La SCI est également
-                identifiée sous l’appellation de Société de Gestion Immobilière (SGI).
-            </p>
-            <p>La SCI a une personnalité morale et bénéficie d’un patrimoine distinct de celui de ses créateurs (ou
-                associés).
-            </p>
-        </div>
+    <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
+        <p>CRÉER UNE SCI</p>
+        <p>La SCI ou Société Civile Immobilière est une structure qui vous permet de faciliter la transmission d’un
+            bien immobilier. Créer votre SCI et recevez vos statuts en quelques minutes, c’est super IZY !</p>
+        <a href="{{ path('create_sci') }}" class="btn btn-secondary btnHome">Je crée ma SCI !</a>
+    </div>
+</section>
+<div class="container page-content text-justify  p-4">
+    <div class="row justify-content-center mt-4">
+        <h2 class="text-center">Qu’est-ce qu’une société civile immobilière ?</h2>
+    </div>
+    <div>
+        <p class="row mt-4">
+        <p>La SCI est une société qui permet de constituer, de gérer et/ou de transmettre un patrimoine immobilier.
+            Il peut s’agir également de l’achat, de construction ou de location d’immeubles. La SCI est également
+            identifiée sous l’appellation de Société de Gestion Immobilière (SGI).
+        </p>
+        <p>La SCI a une personnalité morale et bénéficie d’un patrimoine distinct de celui de ses créateurs (ou
+            associés).
+        </p>
+        <p>Il est important de rappeler que la SCI ne peut être constituée « d’un associé unique ». Le minimum
+            requit
+            par la loi est 2 associés.</p>
+
+        <p> Par ailleurs, au cours de la pratique, il peut arriver que les parts sociales se retrouvent entre les
+            mains
+            d’un seul associé (cas de décès, par exemple, de l’un des associés parmi les deux), le gérant de la SCI
+            deviendra donc l’unique associé et devra régulariser la situation rapidement (délai d’un an à compter du
+            décès).</p>
+
+        <p> Étant une Société Civile par la forme, la loi autorise le recours à la SCI que pour les activités civiles
+            ayant un objet immobilier.</p>
+
+        <p>Mais dans la pratique, on peut observer plusieurs recours à la forme de la SCI pour exploiter des activités
+            considérées juridiquement comme commerciales. C’est le cas de l’achat ou la construction habituelle des
+            immeubles uniquement dans le but de les revendre.</p>
+    </div>
+    <div class="row justify-content-center">
+        <h2 class="text-center"> Comment créer une SCI ?</h2>
+    </div>
+    <div>
+        <p>La création d’une SCI, comme pour toute société, se fait par la rédaction des statuts. Il s’agit d’une
+            étape primordiale et obligatoire. La rédaction des statuts doit se faire par écrit (acte notarié ou acte
+            sous seing privé) et doit comporter les mentions obligatoires suivantes :
+        </p>
+    </div>
+    <div class="row justify-content-center">
+        <ul class="col-9">
+            <li class="mt-2">Le siège social</li>
+            <li class="mt-2">La forme société : Société Civile Immobilière</li>
+            <li class="mt-2">L’objet social</li>
+            <li class="mt-2">Les apports des associés</li>
+            <li class="mt-2">Le capital social</li>
+            <li class="mt-2">Les informations sur le fonctionnement de la société</li>
+            <li class="mt-2">La durée de la société (maximum 99 ans avec possibilité de renouvellement)</li>
+        </ul>
+    </div>
+    <div>
+        <p>Rédiger soi-même ses statuts est dangereux et source d’erreurs coûteuses, mais heureusement IZY CONTRAT
+            est là pour vous aider !
+        </p>
+    </div>
+    <div class="row mt-4 justify-content-center">
+        <h2 class="text-center">Qui peut créer une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p>La création d’une SCI nécessite deux (minimum) ou plusieurs associés (il n’existe pas de maximum), sous
+            risque d’être frappé de nullité. Lorsqu’il s’agit d’une création d’une SCI en famille, on parle de SCI
+            familiale. Les associés peuvent être des personnes physiques ou des personnes morales.</p>
+    </div>
+    <div class="row mt-4 justify-content-center">
+        <h2 class="text-center">Comment devenir associé d’une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p>Pour devenir associé dans une SCI, il faut effectuer un apport au capital social. Il peut s’agir :</p>
         <div class="row justify-content-center">
-            <h2 class="text-center"> Comment créer une SCI ?</h2>
+            <ul class="col-9">
+                <li class="mt-2">D’un apport en numéraire (une somme d’argent) et/ou ;</li>
+                <li class="mt-2">D’un apport en industrie (un savoir-faire, par exemple une compétence
+                    professionnelle) et/ou ;
+                </li>
+                <li class="mt-2">D’un apport en nature (des biens, par exemple un immeuble ou un brevet).</li>
+            </ul>
         </div>
-        <div>
-            <p>La création d’une SCI, comme pour toute société, se fait par la rédaction des statuts. Il s’agit d’une
-                étape primordiale et obligatoire. La rédaction des statuts doit se faire par écrit (acte notarié ou acte
-                sous seing privé) et doit comporter les mentions obligatoires suivantes :
-            </p>
-            <div class="row justify-content-center">
-                <ul class="col-9">
-                    <li class="mt-2">Le siège social</li>
-                    <li class="mt-2">La forme société : Société Civile Immobilière</li>
-                    <li class="mt-2">L’objet social</li>
-                    <li class="mt-2">Les apports des associés</li>
-                    <li class="mt-2">Le capital social</li>
-                    <li class="mt-2">Les informations sur le fonctionnement de la société</li>
-                    <li class="mt-2">La durée de la société (maximum 99 ans avec possibilité de renouvellement)</li>
-                </ul>
-            </div>
-            <p>Rédiger soi-même ses statuts est dangereux et source d’erreurs coûteuses, mais heureusement IZY CONTRAT
-                est là pour vous aider !
-            </p>
-        </div>
-        <div class="row mt-4 justify-content-center">
-            <h2 class="text-center">Qui peut créer une SCI ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>La création d’une SCI nécessite deux (minimum) ou plusieurs associés (il n’existe pas de maximum), sous
-                risque d’être frappé de nullité. Lorsqu’il s’agit d’une création d’une SCI en famille, on parle de SCI
-                familiale. Les associés peuvent être des personnes physiques ou des personnes morales.</p>
-        </div>
-        <div class="row mt-4 justify-content-center">
-            <h2 class="text-center">Comment devenir associé d’une SCI ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>Pour devenir associé dans une SCI, il faut effectuer un apport au capital social. Il peut s’agir :</p>
-            <div class="row justify-content-center">
-                <ul class="col-9">
-                    <li class="mt-2">D’un apport en numéraire (une somme d’argent) et/ou ;</li>
-                    <li class="mt-2">D’un apport en industrie (un savoir-faire, par exemple une compétence
-                        professionnelle) et/ou ;
-                    </li>
-                    <li class="mt-2">D’un apport en nature (des biens, par exemple un immeuble ou un brevet).</li>
-                </ul>
-            </div>
-            <p>Après cet apport, les associés reçoivent des parts sociales proportionnelles à leur apport.</p>
-            <p>Pour devenir associé d’une SCI, il faut avoir la capacité juridique.</p>
-            <p>Toute personne majeure peut être associée d’une SCI. S’il s’agit d’un majeur protégé, il peut se faire
-                représenter par son tuteur ou curateur.</p>
-            <p>Un mineur émancipé (âgé de plus de 16 ans) peut être associé d’une SCI. Un mineur non émancipé peut être
-                associé d’une SCI, à condition de se faire représenter par ses parents ou son tuteur.</p>
-            <p>Il est important de noter qu’un commerçant ne peut pas être associé dans une SCI.</p>
+        <p>Après cet apport, les associés reçoivent des parts sociales proportionnelles à leur apport.</p>
+        <p>Pour devenir associé d’une SCI, il faut avoir la capacité juridique.</p>
+        <p>Toute personne majeure peut être associée d’une SCI. S’il s’agit d’un majeur protégé, il peut se faire
+            représenter par son tuteur ou curateur.</p>
+        <p>Un mineur émancipé (âgé de plus de 16 ans) peut être associé d’une SCI. Un mineur non émancipé peut être
+            associé d’une SCI, à condition de se faire représenter par ses parents ou son tuteur.</p>
+        <p>Il est important de noter qu’un commerçant ne peut pas être associé dans une SCI.</p>
 
-        </div>
+    </div>
 
-        <div class="row mt-4 justify-content-center">
-            <h2 class="text-center">Comment déterminer le capital social d’une SCI ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>Ce sont les associés de la SCI qui décident (dans les statuts) si le capital social est fixe ou variable.
-                Le montant constituant le capital social d’une SCI est d’au minimum 1 € et sans limitation maximum.</p>
-        </div>
-        <div class="row mt-4 justify-content-center">
-            <h2 class="text-center">Quels sont les droits des associés d’une SCI ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>Devenir associé d’une SCI ouvre des droits fixés par la loi et d’autres prévus par les statuts :</p>
-            <div class="row justify-content-center">
-                <ul class="col-9">
-                    <li class="mt-2">Droit de partager les bénéfices ou de supporter les pertes (la modalité de partage
-                        doit être définie dans les statuts) ;
-                    </li>
-                    <li class="mt-2">Droit d’être informé sur le fonctionnement de la SCI (défini par les statuts) :
-                    </li>
-                    <li class="mt-2">Droits politiques permettant de prendre des décisions collectives dans les
-                        assemblées (AGO ou AGE) (périodicité prévue dans les statuts). Les associés peuvent se
-                        constituer en Assemblée Générale Ordinaire pour prendre des décisions courantes ou en Assemblée
-                        Générale Extraordinaire concernant des décisions très importantes, comme la vente d’un immeuble
-                        ou la modification des statuts ;
-                    </li>
-                    <li class="mt-2">Cession des parts sociales entre associés, nécessite tout de même l’agrément de
-                        tous les associés, sauf s’il s’agit d’une cession entre membres de la famille (notamment entre
-                        ascendants, descendants, conjoints, héritiers) ;
-                    </li>
-                    <li class="mt-2">Droit d’insérer une clause de préemption. Il s’agit d’une clause permettant de
-                        prioriser les associés en cas de vente d’une part d’un des associés ;
-                    </li>
-                    <li class="mt-2">Interdiction d’insérer une clause d’inaliénabilité (clause interdisant la cession
-                        des parts pendant une certaine durée).
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row mt-4 justify-content-center">
-            <h2 class="text-center">Qui peut être gérant d’une SCI ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>Concernant le choix du gérant d’une société civile immobilière, il peut ou non être associé. En cas de
-                rémunération, le gérant bénéficie du régime général de la Sécurité sociale.
-            </p>
-            <p>Lorsque le gérant est une tierce personne (donc non associé), mais salarié de la SCI, il peut bénéficier
-                du statut d’assimilé-salarié.
-            </p>
-            <p>Lorsqu’il s’agit d’une SCI ayant un gérant associé unique, celui-ci a le statut de Travailleur Non
-                Salarié (TNS).
-            </p>
-            <p>Dans une SCI ayant une activité commerciale, lorsque le gérant est rémunéré il a le statut de travailleur
-                indépendant.
-            </p>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <h2 class="text-center">Quelles sont les obligations des associés d’une SCI ?</h2>
-        </div>
-        <div class="row mt-4">
-            <p>Les obligations peuvent être fixées par les associés eux-mêmes dans les statuts à la création de la SCI.
-                Par ailleurs, ils ne doivent pas porter atteinte aux intérêts de la SCI.
-            </p>
-
-            <div class="row justify-content-center mt-4">
-                <h2 class="text-center">Comment déterminer l’objet social d’une SCI ?
-                </h2>
-            </div>
-            <div class="row mt-4"><p>Il s’agit d’une étape importante dans la création d’une SCI, car l’objet social va
-                    définir « la raison d’être » de la SCI. Il est également important, car il permet de définir les
-                    actions pouvant engager la responsabilité du gérant de la SCI.
-                </p>
-                <p>En général, la SCI ayant une forme civile, elle doit voir une activité civile. L’objet social peut,
-                    par exemple, être la location d’immeubles, la transmission d’immeubles en famille (SCI familiale),
-                    ou encore l’achat d’immeubles.
-                </p>
-                <p>La SCI peut réaliser une activité commerciale comme l’achat ou la construction d’immeubles dans le
-                    but de les revendre.
-                </p>
-            </div>
-            <div class="row justify-content-center mt-4">
-                <h2 class="text-center">Quelle responsabilité pour les associés et le gérant d’une SCI ?</h2>
-            </div>
-            <div class="row mt-4">
-                <p> En cas de dettes impayées, les créanciers peuvent d’abord engager la responsabilité de la personne
-                    morale de la société civile immobilière.
-                </p>
-                <p>La responsabilité des associés ne peut s’engager que subsidiairement en cas de non-paiement par la
-                    personne morale (SCI). Les associés d’une SCI peuvent voir leur responsabilité engagée de façon
-                    illimitée à hauteur de la part sociale de chacun. Une déclaration d’insaisissabilité peut limiter
-                    cette responsabilité.</p>
-                <p>En ce qui concerne le gérant d’une SCI, il peut être tenu responsable devant les associés ou tiers en
-                    cas de violation des statuts, ou de la loi par négligence ou manœuvre frauduleuse. Le dirigeant
-                    d’une SCI peut donc engager personnellement sa responsabilité pénale, civile ou même fiscale.
-                </p>
-            </div>
-            <div class="row justify-content-center mt-4">
-                <h2 class="text-center">Quelle dénomination pour une SCI ?</h2>
-            </div>
-            <div class="row mt-4">
-                <p>La SCI doit posséder obligatoirement une dénomination sociale, représentée par les noms des associés.
-                    Le nom peut être suivi d’une mention, par exemple « et associés » ou « et fils ».
-                </p>
-                <p>Il faut bien choisir le nom de la SCI en fonction de l’activité afin de ne pas porter confusion à la
-                    clientèle.</p>
-                <p>La dénomination doit être licite, c'est-à-dire qu’elle ne doit pas être contraire à l’ordre public et
-                    aux bonnes mœurs.
-                </p>
-                <p>Elle peut comporter certains caractères spéciaux (/, &, *), mais pas de symbole monétaire (€, $, £,
-                    etc.).
-                </p>
-                <p>La dénomination doit être accompagnée de la mention SCI. Il est aussi possible d’ajouter un nom
-                    d’enseigne.
-                </p>
-                <p>Il faut par ailleurs vérifier sur le site d’Infogreffe et de l’INPI que le nom choisi est disponible,
-                    il ne doit pas faire l’objet d’une protection de la propriété intellectuelle.
-                </p>
-            </div>
-            <div class="row justify-content-center mt-4">
-                <h2 class="text-center">Quel est le régime fiscal d’une SCI ?
-                </h2>
-            </div>
-            <div class="row mt-4">
-                <p>Par défaut, le régime fiscal d’une SCI est celui de l’imposition sur le revenu (IR). La catégorie des
-                    revenus des associés d’une SCI se nomme revenus fonciers. L’imposition se fait de façon
-                    proportionnelle aux revenus des associés. Les revenus fonciers font également l’objet de
-                    prélèvements sociaux.
-
-                </p>
-                <p>L’inconvénient du régime IR est qu’on ne peut pas bénéficier au niveau de l’imposition d’un
-                    amortissement de l’immeuble, alors que pour le régime d’imposition sur les sociétés (IS)
-                    l’amortissement du bien (à l’exception des terrains qui ne s’amortissent pas avec le temps) a pour
-                    conséquence l’amortissement fiscal.
-                </p>
-                <p>Les associés peuvent par ailleurs opter pour une imposition sur les sociétés afin de déduire
-                    plusieurs frais de recettes de la société.
-                </p>
-            </div>
-            <div class="row justify-content-center mt-4">
-                <p>Vous avez trouvé réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre projet
-                    en quelques clics !
-                </p>
-                <p>Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span
-                                class="text-secondary">IZY </span>CONTRAT </span> est là pour vous aider.
-                </p>
-            </div>
+    <div class="row mt-4 justify-content-center p-4">
+        <h2 class="text-center">Comment déterminer le capital social d’une SCI ?</h2>
+    </div>
+    <div class="row mt-4 p-4">
+        <p>Ce sont les associés de la SCI qui décident (dans les statuts) si le capital social est fixe ou variable.
+            Le montant constituant le capital social d’une SCI est d’au minimum 1 € et sans limitation maximum.</p>
+    </div>
+    <div class="row mt-4 justify-content-center">
+        <h2 class="text-center">Quels sont les droits des associés d’une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p>Devenir associé d’une SCI ouvre des droits fixés par la loi et d’autres prévus par les statuts :</p>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">Droit de partager les bénéfices ou de supporter les pertes (la modalité de partage
+                    doit être définie dans les statuts) ;
+                </li>
+                <li class="mt-2">Droit d’être informé sur le fonctionnement de la SCI (défini par les statuts) :
+                </li>
+                <li class="mt-2">Droits politiques permettant de prendre des décisions collectives dans les
+                    assemblées (AGO ou AGE) (périodicité prévue dans les statuts). Les associés peuvent se
+                    constituer en Assemblée Générale Ordinaire pour prendre des décisions courantes ou en Assemblée
+                    Générale Extraordinaire concernant des décisions très importantes, comme la vente d’un immeuble
+                    ou la modification des statuts ;
+                </li>
+                <li class="mt-2">Cession des parts sociales entre associés, nécessite tout de même l’agrément de
+                    tous les associés, sauf s’il s’agit d’une cession entre membres de la famille (notamment entre
+                    ascendants, descendants, conjoints, héritiers) ;
+                </li>
+                <li class="mt-2">Droit d’insérer une clause de préemption. Il s’agit d’une clause permettant de
+                    prioriser les associés en cas de vente d’une part d’un des associés ;
+                </li>
+                <li class="mt-2">Interdiction d’insérer une clause d’inaliénabilité (clause interdisant la cession
+                    des parts pendant une certaine durée).
+                </li>
+            </ul>
         </div>
     </div>
-{% endblock %}
 
+    <div class="row mt-4 justify-content-center">
+        <h2 class="text-center">Qui peut être gérant d’une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p>Concernant le choix du gérant d’une société civile immobilière, il peut ou non être associé. En cas de
+            rémunération, le gérant bénéficie du régime général de la Sécurité sociale.
+        </p>
+        <p>Lorsque le gérant est une tierce personne (donc non associé), mais salarié de la SCI, il peut bénéficier
+            du statut d’assimilé-salarié.
+        </p>
+        <p>Lorsqu’il s’agit d’une SCI ayant un gérant associé unique, celui-ci a le statut de Travailleur Non
+            Salarié (TNS).
+        </p>
+        <p>Dans une SCI ayant une activité commerciale, lorsque le gérant est rémunéré il a le statut de travailleur
+            indépendant.
+        </p>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <h2 class="text-center">Quelles sont les obligations des associés d’une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p>Les obligations peuvent être fixées par les associés eux-mêmes dans les statuts à la création de la SCI.
+            Par ailleurs, ils ne doivent pas porter atteinte aux intérêts de la SCI.
+        </p>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <h2 class="text-center">Comment déterminer l’objet social d’une SCI ?
+        </h2>
+    </div>
+    <div class="row mt-4"><p>Il s’agit d’une étape importante dans la création d’une SCI, car l’objet social va
+            définir « la raison d’être » de la SCI. Il est également important, car il permet de définir les
+            actions pouvant engager la responsabilité du gérant de la SCI.
+        </p>
+        <p>En général, la SCI ayant une forme civile, elle doit voir une activité civile. L’objet social peut,
+            par exemple, être la location d’immeubles, la transmission d’immeubles en famille (SCI familiale),
+            ou encore l’achat d’immeubles.
+        </p>
+        <p>La SCI peut réaliser une activité commerciale comme l’achat ou la construction d’immeubles dans le
+            but de les revendre.
+        </p>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <h2 class="text-center">Quelle responsabilité pour les associés et le gérant d’une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p> En cas de dettes impayées, les créanciers peuvent d’abord engager la responsabilité de la personne
+            morale de la société civile immobilière.
+        </p>
+        <p>La responsabilité des associés ne peut s’engager que subsidiairement en cas de non-paiement par la
+            personne morale (SCI). Les associés d’une SCI peuvent voir leur responsabilité engagée de façon
+            illimitée à hauteur de la part sociale de chacun. Une déclaration d’insaisissabilité peut limiter
+            cette responsabilité.</p>
+        <p>En ce qui concerne le gérant d’une SCI, il peut être tenu responsable devant les associés ou tiers en
+            cas de violation des statuts, ou de la loi par négligence ou manœuvre frauduleuse. Le dirigeant
+            d’une SCI peut donc engager personnellement sa responsabilité pénale, civile ou même fiscale.
+        </p>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <h2 class="text-center">Quelle dénomination pour une SCI ?</h2>
+    </div>
+    <div class="row mt-4">
+        <p>La SCI doit posséder obligatoirement une dénomination sociale, représentée par les noms des associés.
+            Le nom peut être suivi d’une mention, par exemple « et associés » ou « et fils ».
+        </p>
+        <p>Il faut bien choisir le nom de la SCI en fonction de l’activité afin de ne pas porter confusion à la
+            clientèle.</p>
+        <p>La dénomination doit être licite, c'est-à-dire qu’elle ne doit pas être contraire à l’ordre public et
+            aux bonnes mœurs.
+        </p>
+        <p>Elle peut comporter certains caractères spéciaux (/, &, *), mais pas de symbole monétaire (€, $, £,
+            etc.).
+        </p>
+        <p>La dénomination doit être accompagnée de la mention SCI. Il est aussi possible d’ajouter un nom
+            d’enseigne.
+        </p>
+        <p>Il faut par ailleurs vérifier sur le site d’Infogreffe et de l’INPI que le nom choisi est disponible,
+            il ne doit pas faire l’objet d’une protection de la propriété intellectuelle.
+        </p>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <h2 class="text-center">Quel est le régime fiscal d’une SCI ?
+        </h2>
+    </div>
+    <div class="row mt-4">
+        <p>Par défaut, le régime fiscal d’une SCI est celui de l’imposition sur le revenu (IR). La catégorie des
+            revenus des associés d’une SCI se nomme revenus fonciers. L’imposition se fait de façon
+            proportionnelle aux revenus des associés. Les revenus fonciers font également l’objet de
+            prélèvements sociaux.
+
+        </p>
+        <p>L’inconvénient du régime IR est qu’on ne peut pas bénéficier au niveau de l’imposition d’un
+            amortissement de l’immeuble, alors que pour le régime d’imposition sur les sociétés (IS)
+            l’amortissement du bien (à l’exception des terrains qui ne s’amortissent pas avec le temps) a pour
+            conséquence l’amortissement fiscal.
+        </p>
+        <p>Les associés peuvent par ailleurs opter pour une imposition sur les sociétés afin de déduire
+            plusieurs frais de recettes de la société.
+        </p>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <p>Vous avez trouvé réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre projet
+            en quelques clics !
+        </p>
+        <p>Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span
+                        class="text-secondary">IZY </span>CONTRAT </span> est là pour vous aider.
+        </p>
+    </div>
+</div>
+    {% endblock %}

@@ -42,6 +42,7 @@ Encore
     .addStyleEntry('tab1', './assets/scss/tab1.scss')
     .addStyleEntry('create_entreprise', './assets/scss/create_entreprise.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
+    .addStyleEntry('footer_style', './assets/scss/footer.scss')
 
 
 

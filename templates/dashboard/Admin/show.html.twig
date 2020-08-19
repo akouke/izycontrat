@@ -17,7 +17,7 @@
                     {{ client.lastName }}
                     {{ client.firstName }}</h2>
                 <h3>Mail</h3>
-                <a class="card-text" href="mailto:{{ client.user.email ?? '' }}">{{ client.user.email ?? '' }}</a>
+                <a class="card-text" href="mailto:{{ user.emailPerson ?? '' }}">{{ client.emailPerson ?? '' }}</a>
 
                 <h3>Adresse</h3>
                 {{ client.address }}
@@ -30,7 +30,7 @@
 
             <div class="col">
                 <div class="clientInformation col bg-light d-flex flex-column">
-                {% for company in client.user.companies %}
+                {% for company in user.companies %}
 
                         <h2> Nom societe</h2>
                             {{ company.name ?? ''}}

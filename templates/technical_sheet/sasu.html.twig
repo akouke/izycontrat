@@ -10,12 +10,14 @@
 
 {% block body %}
     <section class="homeTop d-flex justify-content-center">
-        <img class="homePicture img-fiche" src="/images/image-sasu.png" alt="image principale">
+        <img class="homePicture img-fiche" src="/images/image-sasu.jpg" alt="image principale">
         <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
-            <p>CRÉER UNE SASU</p>
-            <p>La SASU est une SAS avec un seul associé. Elle offre une grande liberté quant à l’organisation et le
+            <p class="">La SASU est une SAS avec un seul associé. Elle offre une grande liberté quant à l’organisation
+                et le
                 fonctionnement de votre société. Créer votre SASU et recevez vos statuts en quelques minutes, c’est
                 super IZY ! </p>
+            <p>CRÉER UNE SASU</p>
+
             <a href="{{ path('create_sasu') }}" class="btn btn-secondary btnHome">Je crée ma SASU !</a>
         </div>
     </section>
@@ -25,12 +27,12 @@
         </div>
         <div class="row mt-4">
             <p class="">La SASU (Société par Actions Simplifiée Unipersonnelle) est une SAS (Société par
-                        Actions Simplifiée) ne
-                        comportant qu’un seul associé, celui-ci peut être une personne physique ou une personne morale.
-                        Il s’agit d’une forme juridique flexible offrant une grande liberté dans son mode d’organisation et dans
-                        son fonctionnement.
-                        Cette forme juridique est très populaire et est utilisée de plus en plus fréquemment par les
-                        entrepreneurs</p>
+                Actions Simplifiée) ne
+                comportant qu’un seul associé, celui-ci peut être une personne physique ou une personne morale.
+                Il s’agit d’une forme juridique flexible offrant une grande liberté dans son mode d’organisation et dans
+                son fonctionnement.
+                Cette forme juridique est très populaire et est utilisée de plus en plus fréquemment par les
+                entrepreneurs</p>
         </div>
 
         <div class="row justify-content-center mt-4">
@@ -47,7 +49,8 @@
                 est là pour vous aider !</p>
         </div>
         <div class="row mt-4 justify-content-center">
-            <h2 class="text-center">Quelles sont les mentions obligatoires devant figurer dans les statuts d’une SASU ?</h2>
+            <h2 class="text-center">Quelles sont les mentions obligatoires devant figurer dans les statuts d’une SASU
+                ?</h2>
         </div>
         <div class="row mt-4 justify-content-center">
             <ul class="col-9 ">
@@ -134,193 +137,194 @@
             <p class="">Le régime fiscal par défaut des SASU est l’impôt sur les sociétés (IS) prélevé sur
                 les bénéfices réalisés au cours d’un exercice annuel.
                 Dans ce cas, les taux applicables forfaitaires sont les suivants :</p>
-
-            <div class="row mt-4 justify-content-center">
-                <ul class="col-9">
-                    <li class="mb-3">Taux réduit de 15 % pour la tranche inférieure à 38 120 € de bénéfices sous réserve
-                        :
-                        <ul>
-                            <li class="ml-5">D’un chiffre d’affaires hors taxe inférieur à 7,63 millions d’euros.</li>
-                            <li class="ml-5">D’un capital entièrement reversé et détenu à au moins 75 % par des
-                                personnes physiques.
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="mb-3">Taux réduit de 28 % pour la tranche comprise entre 38 120 € et 500 000 € de
-                        bénéfices.
-                    </li>
-                    <li class="mb-3">Taux normal de 31 % pour la tranche supérieure à 500 000 € de bénéfices.</li>
-                </ul>
-            </div>
-
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <ul class="col-9">
+                <li class="mb-3">Taux réduit de 15 % pour la tranche inférieure à 38 120 € de bénéfices sous réserve
+                    :
+                    <ul>
+                        <li class="ml-5">D’un chiffre d’affaires hors taxe inférieur à 7,63 millions d’euros.</li>
+                        <li class="ml-5">D’un capital entièrement reversé et détenu à au moins 75 % par des
+                            personnes physiques.
+                        </li>
+                    </ul>
+                </li>
+                <li class="mb-3">Taux réduit de 28 % pour la tranche comprise entre 38 120 € et 500 000 € de
+                    bénéfices.
+                </li>
+                <li class="mb-3">Taux normal de 31 % pour la tranche supérieure à 500 000 € de bénéfices.</li>
+            </ul>
+        </div>
+        <div>
             <p class="">Il est possible d’effectuer une demande pour être soumis à l’impôt sur le revenu
                 (IR).
                 L’option doit être demandée dans les 3 mois qui suivent le début de l’exercice de la société.
                 La SASU, pour y prétendre, doit remplir les critères suivants :</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <ul class="col-9 ">
+                <li class="mb-3"> Avoir 5 ans d’ancienneté maximum au moment de la demande.</li>
+                <li class="mb-3"> Exercer une activité commerciale, artisanale, agricole ou libérale.</li>
+                <li class="mb-3"> Avoir un chiffre d’affaires inférieur (ou un total de bilan) à 10 millions
+                    d’euros.
+                </li>
+                <li class="mb-3"> Avoir moins de 50 salariés.</li>
+                <li class="mb-3"> Ne pas être cotée en bourse.</li>
+            </ul>
+        </div>
 
-            <div class="row mt-4 justify-content-center">
-                <ul class="col-9 ">
-                    <li class="mb-3"> Avoir 5 ans d’ancienneté maximum au moment de la demande.</li>
-                    <li class="mb-3"> Exercer une activité commerciale, artisanale, agricole ou libérale.</li>
-                    <li class="mb-3"> Avoir un chiffre d’affaires inférieur (ou un total de bilan) à 10 millions
-                        d’euros.
-                    </li>
-                    <li class="mb-3"> Avoir moins de 50 salariés.</li>
-                    <li class="mb-3"> Ne pas être cotée en bourse.</li>
-                </ul>
-            </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center"> À quelles aides peut prétendre le créateur d’une SASU ?</h2>
+        </div>
 
-            <div class="row mt-4 justify-content-center">
-                <h2 class="text-center"> À quelles aides peut prétendre le créateur d’une SASU ?</h2>
-            </div>
+        <div class="row mt-4">
+            <p class="mt-2">À des exonérations de charges : </p>
+        </div>
 
-            <div class="row mt-4">
-                <p class="mt-2">À des exonérations de charges : </p>
-            </div>
-
-            <div class="row justify-content-center mt-4">
-                    <ul class="col-9">
-                        <li class="mb-3"> L’ACRE (Aide aux Créateurs et Repreneurs d’Entreprise) : Exonération des
-                            cotisations sociales pendant 1 an.
-                        </li>
-                        <li class="mb-3">Le statut JEI (Jeune Entreprise Innovante) : Exonération fiscale et sociale
-                            pour les PME
-                        </li>
-                    </ul>
-            </div>
-
-
-            <p class="mt-2"> À un allègement fiscal : </p>
-
-            <div class="row justify-content-center mt-4">
-                <ul class="col-9">
-                    <li class="mb-3"> Le CIR (Crédit d’Impôt Recherche) : Crédit d’impôt pour les entreprises engageant
-                        des
-                        dépenses en recherche et développement
-                    </li>
-                </ul>
-            </div>
-
-            <p class="mt-2"> À un accompagnement : </p>
-
-            <div class="row justify-content-center mt-4">
-                <ul class="col-9">
-                    <li class="mb-3"> CAPE (Contrat d’Appui au Projet d’Entreprise) : Accompagnement par une
-                        entreprise ou une association
-                    </li>
-                    <li>Le NACRE (Nouvel Accompagnement pour la Création ou la Reprise
-                        d’Entreprise) : Accompagnement dans le projet de création ou de reprise
-                        d’une entreprise
-                    </li>
-                </ul>
-            </div>
-
-            <p class="mt-2">À des allocations</p>
-
-            <div class="row justify-content-center mt-4">
-                <ul class="col-9">
-                    <li class="mb-3"> L’ARE : Allocation d’aide au retour à l’emploi</li>
-                    <li>L’ARCE : Aide à la reprise ou à la création d’entreprise</li>
-                </ul>
-            </div>
-
-            <p class="mt-2">À des aides financières spéciales</p>
-
-            <div class="row justify-content-center mt-4">
-                <ul class="col-9">
-                    <li class="mb-3"> L’aide forfaitaire pour les travailleurs handicapés
-                    </li>
-                    <li>La garantie ÉGALITÉ Femmes</li>
-                </ul>
-            </div>
-
-            <div class="row mt-4 justify-content-center">
-                <h2 class="text-center"> Quels pouvoirs pour l’associé unique d’une SASU ?</h2>
-            </div>
-
-            <div class="row mt-4">
-                <p>L’associé unique d’une SASU prend les décisions seul, il se doit de respecter les règles établis dans
-                    les statuts.
-                    Il est le seul à pouvoir prendre les décisions relatives à l’approbation des comptes annuels,
-                    à l’affectation du résultat et entraînant une modification des statuts.</p>
-            </div>
+        <div class="row justify-content-center mt-4">
+            <ul class="col-9">
+                <li class="mb-3"> L’ACRE (Aide aux Créateurs et Repreneurs d’Entreprise) : Exonération des
+                    cotisations sociales pendant 1 an.
+                </li>
+                <li class="mb-3">Le statut JEI (Jeune Entreprise Innovante) : Exonération fiscale et sociale
+                    pour les PME
+                </li>
+            </ul>
+        </div>
 
 
-            <div class="row mt-4 justify-content-center">
-                <h2 class="text-center"> Quels droits pour l’associé unique d’une SASU ?</h2>
-            </div>
+        <p class="mt-2"> À un allègement fiscal : </p>
 
-            <div class="row mt-4">
-                <p>L’associé unique possède plusieurs droits.</p>
+        <div class="row justify-content-center mt-4">
+            <ul class="col-9">
+                <li class="mb-3"> Le CIR (Crédit d’Impôt Recherche) : Crédit d’impôt pour les entreprises engageant
+                    des
+                    dépenses en recherche et développement
+                </li>
+            </ul>
+        </div>
 
-                <p>Tout d’abord, c’est à lui que revient le droit de prendre les décisions,
-                    il prend seul toutes les décisions confiées par les statuts et la loi.</p>
+        <p class="mt-2"> À un accompagnement : </p>
 
-                <p>Ensuite, l’associé unique a un droit d’informations sur sa société, il peut consulter, quand il le
-                    souhaite,
-                    les documents relatifs aux trois derniers exercices sociaux, comme les comptes annuels et les
-                    rapports des commissaires aux comptes.
-                    Il doit également recevoir,
-                    avant toute prise de décision, les informations qui lui sont nécessaires pour agir judicieusement.
-                    Il est en droit de questionner,
-                    par écrit, deux fois par an, le président sur les faits qui seraient de nature à compromettre la
-                    pérennité de la société.</p>
+        <div class="row justify-content-center mt-4">
+            <ul class="col-9">
+                <li class="mb-3"> CAPE (Contrat d’Appui au Projet d’Entreprise) : Accompagnement par une
+                    entreprise ou une association
+                </li>
+                <li>Le NACRE (Nouvel Accompagnement pour la Création ou la Reprise
+                    d’Entreprise) : Accompagnement dans le projet de création ou de reprise
+                    d’une entreprise
+                </li>
+            </ul>
+        </div>
 
-                <p>De plus, l’associé unique possède des droits financiers. C’est lui qui décide comment sont distribués
-                    les dividendes et pour quel montant. En tant qu’associé unique il a le droit de percevoir
-                    l’intégralité des dividendes distribués lors de l’affectation du résultat. Il a également droit
-                    d’être remboursé de son apport en capital, s’il reste des fonds, en cas de liquidation de la SASU.</p>
+        <p class="mt-2">À des allocations</p>
 
-                <p>Enfin, l’associé unique peut agir en justice pour défendre ses droits personnels contre les
-                    dirigeants, ou au nom de la société pour remettre en cause la responsabilité du président.</p>
-            </div>
+        <div class="row justify-content-center mt-4">
+            <ul class="col-9">
+                <li class="mb-3"> L’ARE : Allocation d’aide au retour à l’emploi</li>
+                <li>L’ARCE : Aide à la reprise ou à la création d’entreprise</li>
+            </ul>
+        </div>
 
-            <div class="row mt-4 justify-content-center">
-                <h2 class="text-center">Qui est le président d’une SASU ?</h2>
-            </div>
+        <p class="mt-2">À des aides financières spéciales</p>
 
-            <div class="row mt-4">
-                <p>Le président est nommé lors de la constitution des statuts de la société, il peut s’agir d’une
-                    personne physique ou morale. Le président d’une SASU est le mandataire social de la société, il est
-                    là pour la représenter à l’égard des tiers.</p>
+        <div class="row justify-content-center mt-4">
+            <ul class="col-9">
+                <li class="mb-3"> L’aide forfaitaire pour les travailleurs handicapés
+                </li>
+                <li>La garantie ÉGALITÉ Femmes</li>
+            </ul>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center"> Quels pouvoirs pour l’associé unique d’une SASU ?</h2>
+        </div>
 
-                <p>Le président est là pour assurer la gestion quotidienne de la société, ses pouvoirs sont encadrés par
-                    les statuts. L’associé unique peut cumuler la fonction de président, dans ce cas il possède les
-                    pleins pouvoirs.</p>
-            </div>
+        <div class="row mt-4 ">
+            <p>L’associé unique d’une SASU prend les décisions seul, il se doit de respecter les règles établis dans
+                les statuts.
+                Il est le seul à pouvoir prendre les décisions relatives à l’approbation des comptes annuels,
+                à l’affectation du résultat et entraînant une modification des statuts.</p>
+        </div>
 
-            <div class="row mt-4 justify-content-center">
-                <h2 class="text-center"> Quelle rémunération pour le président d’une SASU ?</h2>
-            </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center"> Quels droits pour l’associé unique d’une SASU ?</h2>
+        </div>
 
-            <div class="row mt-4">
-                <p>La rémunération du président d’une SASU n’est pas obligatoire. Si une rémunération est effectivement
-                    prévue, elle doit être définie dans sa composition, son montant et dans ses modalités de versement.
-                    Il peut s’agir d’un montant fixe ou d’un montant variable, d’un mixte des deux, ou encore
-                    d’avantages en nature.</p>
+        <div class="row mt-4">
+            <p>L’associé unique possède plusieurs droits.</p>
 
-                <p>À partir du moment où le président perçoit une rémunération, il obtient le statut d’assimilé salarié
-                    et doit recevoir un bulletin de paye. Il est alors affilié au régime général de la Sécurité sociale
-                    et bénéficie de la même couverture sociale que les cadres salariés, sauf en ce qui concerne
-                    l’assurance chômage à laquelle il n’a pas droit en tant que mandataire social.</p>
+            <p>Tout d’abord, c’est à lui que revient le droit de prendre les décisions,
+                il prend seul toutes les décisions confiées par les statuts et la loi.</p>
 
-            </div>
+            <p>Ensuite, l’associé unique a un droit d’informations sur sa société, il peut consulter, quand il le
+                souhaite,
+                les documents relatifs aux trois derniers exercices sociaux, comme les comptes annuels et les
+                rapports des commissaires aux comptes.
+                Il doit également recevoir,
+                avant toute prise de décision, les informations qui lui sont nécessaires pour agir judicieusement.
+                Il est en droit de questionner,
+                par écrit, deux fois par an, le président sur les faits qui seraient de nature à compromettre la
+                pérennité de la société.</p>
 
-            <div class="row mt-4 justify-content-center">
-                <h2 class="text-center">Quelles responsabilités incombent à l’associé et au président d’une SASU ?</h2>
-            </div>
+            <p>De plus, l’associé unique possède des droits financiers. C’est lui qui décide comment sont distribués
+                les dividendes et pour quel montant. En tant qu’associé unique il a le droit de percevoir
+                l’intégralité des dividendes distribués lors de l’affectation du résultat. Il a également droit
+                d’être remboursé de son apport en capital, s’il reste des fonds, en cas de liquidation de la
+                SASU.</p>
 
-            <div class="row mt-4 mb-5">
-                <p>Le président de la SASU engage sa responsabilité civile, pénale et fiscale en tant que dirigeant de
-                    société.
-                    L’associé unique a quant à lui une responsabilité limitée au montant de ses apports.
-                </p>
+            <p>Enfin, l’associé unique peut agir en justice pour défendre ses droits personnels contre les
+                dirigeants, ou au nom de la société pour remettre en cause la responsabilité du président.</p>
+        </div>
 
-                <p>Vous avez trouvé une réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre
-                    projet en quelques clics !
-                    Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span class="text-secondary">IZY</span>  CONTRAT</span> est là pour vous aider.</p>
-            </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Qui est le président d’une SASU ?</h2>
+        </div>
+
+        <div class="row mt-4">
+            <p>Le président est nommé lors de la constitution des statuts de la société, il peut s’agir d’une
+                personne physique ou morale. Le président d’une SASU est le mandataire social de la société, il est
+                là pour la représenter à l’égard des tiers.</p>
+
+            <p>Le président est là pour assurer la gestion quotidienne de la société, ses pouvoirs sont encadrés par
+                les statuts. L’associé unique peut cumuler la fonction de président, dans ce cas il possède les
+                pleins pouvoirs.</p>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center"> Quelle rémunération pour le président d’une SASU ?</h2>
+        </div>
+
+        <div class="row mt-4">
+            <p>La rémunération du président d’une SASU n’est pas obligatoire. Si une rémunération est effectivement
+                prévue, elle doit être définie dans sa composition, son montant et dans ses modalités de versement.
+                Il peut s’agir d’un montant fixe ou d’un montant variable, d’un mixte des deux, ou encore
+                d’avantages en nature.</p>
+
+            <p>À partir du moment où le président perçoit une rémunération, il obtient le statut d’assimilé salarié
+                et doit recevoir un bulletin de paye. Il est alors affilié au régime général de la Sécurité sociale
+                et bénéficie de la même couverture sociale que les cadres salariés, sauf en ce qui concerne
+                l’assurance chômage à laquelle il n’a pas droit en tant que mandataire social.</p>
+
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quelles responsabilités incombent à l’associé et au président d’une SASU ?</h2>
+        </div>
+
+        <div class="row mt-4 mb-5">
+            <p>Le président de la SASU engage sa responsabilité civile, pénale et fiscale en tant que dirigeant de
+                société.
+                L’associé unique a quant à lui une responsabilité limitée au montant de ses apports.
+            </p>
+
+            <p>Vous avez trouvé une réponse à toutes vos interrogations ? Alors c’est parti, donnez vie à votre
+                projet en quelques clics !
+                Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span
+                            class="text-secondary">IZY</span>  CONTRAT</span> est là pour vous aider.</p>
         </div>
     </div>
+
+
 
 {% endblock %}

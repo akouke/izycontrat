@@ -44,7 +44,7 @@ class ContactController extends AbstractController
                 ->setBody($body, 'text/html');
 
             $mailer->send($message);
-            $this->addFlash('success', 'Votre message a bien été envoyé.');
+            $this->addFlash('success', 'Votre message a bien été envoyé. Nous vous contacterons très prochainement');
             return $this->redirectToRoute('app_contact');
         }
         return $this->render('contact/contact.html.twig', [

@@ -112,7 +112,7 @@
 
             <p><b>ARTICLE 4 - SIEGE SOCIAL</b><br>
 
-                Le siège social est fixé à <b> {{ company.adress ?? ' VILLE (CODE POSTAL) – ADRESSE' }}  {{ company.country ?? ''}} {{ company.addressManager ?? ''}}</b> <br>
+                Le siège social est fixé à <b> {{ company.address ?? ' VILLE (CODE POSTAL) – ADRESSE' }}  {{ company.country ?? ''}} {{ company.addressManager ?? ''}}</b> <br>
 
             <p>Il pourra être transféré dans la région <b>{{ company.country ?? 'Nom région'}}</b> par une simple décision du
                 président,
@@ -849,7 +849,7 @@
 
 
             <p style="text-align: right">
-                <br>Fait à <b>{{ address ?? '2, Rue Charles Plumier, 45100 Orléans' }}</b>
+                <br>Fait à <b>{{ address ?? 'VILLE' }}</b>
                 <br>Le <b>{{ dateCreation ?? 'DATE' }}</b>
                 <br>En QUATRE exemplaires originaux
                 <br>

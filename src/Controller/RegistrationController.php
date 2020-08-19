@@ -60,6 +60,7 @@ class RegistrationController extends AbstractController
                     $request->request->all()['registration_user']['user']['password']
                 )
             );
+            $user->setRoles(['ROLE_CLIENT']);
             $user->setConfirmationToken($tokenGenerator->getRandomSecureToken(30));
             $user->setIsVerified(false);
             $entityManager = $this->getDoctrine()->getManager();
@@ -83,7 +84,7 @@ class RegistrationController extends AbstractController
                 $UserRegisterEvent
             ); 
         //   dd($UserRegisterEvent);
-           $this->addFlash('success', 'vos informations ont ete bien enregistrees et un mail vous est envoye');
+           $this->addFlash('success', 'vos informations ont été bien enregistées. Vous recevrez un mail de validation pour pouvoir accéder à votre espace personnel');
             return $this->redirectToRoute('app_home');
 
            /** return $guardHandler->authenticateUserAndHandleSuccess(

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Person;
 use App\Entity\User;
 use App\Repository\UploadRepository;
+use App\Repository\UserRepository;
 use App\Form\ClientType;
 use App\Form\LawyerType;
 use App\Form\UserChangePasswordType;
@@ -147,16 +148,24 @@ class DashboardController extends AbstractController
      * @param Person $client
      * @return Response
      */
-    public function adminClientsShow(Person $client, UploadRepository $uploadsRecup, string $dossierClient)
+    public function adminClientsShow(Person $client, UploadRepository $uploadsRecup, string $dossierClient, UserRepository $userRecup)
     {
         $user = $this->getUser();
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
         
-        // dd($client->getUser());
+        if($client->getUser() === null ){
+            
+            $user = $userRecup->findOneByEmail($client->getEmailPerson()) ;
+        }
+        else{
+            $user = $client->getUser();
+        }
+        // dd($client->getUser(), $client);
         // $uploads = $uploadsRecup->findByUser($client->getUser());
-        $uploads = $uploadsRecup->findAllUpload($client->getUser());
+        // dd($user, $client);
+        $uploads = $uploadsRecup->findAllUpload($user);
 
     //   $d = $dossierClient."/";
 
@@ -172,6 +181,7 @@ class DashboardController extends AbstractController
         return $this->render('dashboard/Admin/show.html.twig', [
             'client' => $client,
             'uploads' => $uploads,
+            'user' => $user,
             ]);
     }
 

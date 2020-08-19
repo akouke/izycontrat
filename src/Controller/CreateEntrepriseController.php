@@ -280,10 +280,10 @@ class CreateEntrepriseController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
             
             return $this->redirectToRoute('create_sarl_prestation' );
@@ -523,10 +523,10 @@ class CreateEntrepriseController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
             
             // $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
@@ -663,10 +663,10 @@ class CreateEntrepriseController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoye');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
             
             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
@@ -679,7 +679,7 @@ class CreateEntrepriseController extends AbstractController
         }        
         if( $request->getMethod() == "POST" )
         {
-            $this->addFlash('danger', 'Cet adresse mail '.$user->getEmail().' existe deja veuillez vous connecter!');
+            $this->addFlash('danger', 'Cette adresse mail '.$user->getEmail().' existe déjà veuillez vous connecter!');
         }
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formMe' => $formCompany->createView(),
@@ -807,10 +807,10 @@ class CreateEntrepriseController extends AbstractController
                 $UserInfoEvent
                ); 
                
-              $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
             }
             else{
-                $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
             }
 
              return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
@@ -823,7 +823,7 @@ class CreateEntrepriseController extends AbstractController
         }        
         if( $request->getMethod() == "POST" )
         {
-            $this->addFlash('danger', 'Cet adresse mail '.$user->getEmail().' existe deja veuillez vous connecter!');
+            $this->addFlash('danger', 'Cette adresse mail '.$user->getEmail().' existe déjà, veuillez vous connecter!');
         }
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formEi' => $formCompany->createView(),
