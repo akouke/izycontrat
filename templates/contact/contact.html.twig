@@ -10,25 +10,25 @@
                 {{ form_start(form) }}
 
                 <div class="float-left col">{{ form_label(form.firstname) }}</div>
-                <div class="text-danger col">{{ form_errors(form.firstname) }}</div>
+
                 {{ form_widget(form.firstname) }}
 
                 <div class="float-left col">{{ form_label(form.lastname) }}</div>
-                <div class="text-danger col">{{ form_errors(form.lastname) }}</div>
+
                 {{ form_widget(form.lastname) }}
 
                 <div class="float-left col">{{ form_label(form.phone) }}</div>
-                <div class="col text-danger">{{ form_errors(form.phone) }}</div>
+
                 {{ form_widget(form.phone) }}
                 <small class="float-left text-muted col">{{ form_help(form.phone) }}</small>
 
                 <div class="float-left col">{{ form_label(form.email) }}</div>
-                <div class="col text-danger">{{ form_errors(form.email) }}</div>
+
                 {{ form_widget(form.email) }}
                 <small class="float-left text-muted col">{{ form_help(form.email) }}</small>
 
                 <div class="float-left col">{{ form_label(form.message) }}</div>
-                <div class="col text-danger">{{ form_errors(form.message) }}</div>
+
                 {{ form_widget(form.message) }}
                 <small class="float-left text-muted">{{ form_help(form.message) }}</small>
 

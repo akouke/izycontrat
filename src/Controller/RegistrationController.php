@@ -28,6 +28,8 @@ class RegistrationController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param UserAuthenticator $authenticator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param TokenGenerator $tokenGenerator
      * @return Response
      */
     public function registerUser(
@@ -69,20 +71,20 @@ class RegistrationController extends AbstractController
             $entityManager->persist($person);
 
             $entityManager->flush();
-            
+
             //$UserRegisterEvent = new UserRegisterEvent($person);
             //EMail de validation EMail déclenché lors de l'inscription d'un internaute sur le site.
-           
+
            /** $UserPaymentEvent= new UserPaymentEvent($person);
                 $eventDispatcher->dispatch(
                 UserPaymentEvent::NAME,
                 $UserPaymentEvent);**/
-           
+
             $UserRegisterEvent = new UserRegisterEvent($person);
             $eventDispatcher->dispatch(
                 UserRegisterEvent::NAME,
                 $UserRegisterEvent
-            ); 
+            );
         //   dd($UserRegisterEvent);
            $this->addFlash('success', 'vos informations ont été bien enregistées. Vous recevrez un mail de validation pour pouvoir accéder à votre espace personnel');
             return $this->redirectToRoute('app_home');
