@@ -1,7 +1,9 @@
 {% extends '_layout.html.twig' %}
-
 {% block title %}Inscription{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('register_user') }}
+{% endblock %}
 {% block body %}
 <section class="page-content container-fluid col-10 col-lg-10 pb-4">
     <h2>Inscription</h2>
@@ -23,14 +25,11 @@
     </div>
 </section>
 {% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('register_user') }}
-{% endblock %}
+
 {% block javascripts %}
     <script>
-        document.getElementById('registration_form_phoneNumber').addEventListener("keyup", function(e){
-            if (e.key !== "Backspace" || e.key !== "Delete"){
+        document.getElementById('registration_form_phoneNumber').addEventListener("keyup", function(e)}
+            if (e.key !== "Backspace" || e.key !== "Delete")}
                 const txt = this.value;
                 if (txt.length===2 || txt.length===5 || txt.length===6 || txt.length===8 || txt.length===11)
                     this.value=this.value+" ";

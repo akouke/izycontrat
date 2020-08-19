@@ -14,10 +14,10 @@ class EmailNewsletterType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-        'label' => 'email',
-        'attr' => [
-            'placeholder' => 'Saisissez votre adresse e-mail'
-        ]]);
+                'label' => 'email',
+                'attr' => [
+                    'placeholder' => 'Saisissez votre adresse e-mail'
+                ]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
