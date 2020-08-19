@@ -16,7 +16,7 @@
                             </div>
                         {% endfor %}
                     {% endfor %}
-                    <h2 class="mb-5">Articles</h2>
+                    <h1 class="mb-5 text-center">Articles</h1>
 
                     {% for article in articles |sort((b, a) => a.createdAt <=> b.createdAt) %}
                         <div class="card mb-3">
