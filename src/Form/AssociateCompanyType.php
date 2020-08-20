@@ -42,7 +42,7 @@ class AssociateCompanyType extends AbstractType
                 'required'    => false,
             ])
             ->add('legalRepresentative', TextType::class, [
-                'label' => 'Representant',
+                'label' => 'Représentant',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(

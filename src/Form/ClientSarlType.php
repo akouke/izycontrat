@@ -17,11 +17,11 @@ class ClientSarlType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Prenom',
+                'label' => 'Prénom',
                 'mapped' => true,
                 // 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Votre Nom',
+                    'placeholder' => 'Votre Prénom',
                 ),
                 'required'    => true,
             ])
@@ -30,7 +30,7 @@ class ClientSarlType extends AbstractType
                 'mapped' => true,
                 // 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Votre Prenom',
+                    'placeholder' => 'Votre Nom',
                 ),
                 'required'    => true,
             ])
@@ -39,12 +39,12 @@ class ClientSarlType extends AbstractType
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Numero telephone',
+                    'placeholder' =>'Votre numéro de téléphone',
                 ),
                 'required'    => true,
             ])
              ->add('gender', ChoiceType::class, [
-                'label' => 'Civilite',
+                'label' => 'Civilité',
                 // 'expanded' => true,
                 'choices' => [
                                 'Monsieur' => 2,
