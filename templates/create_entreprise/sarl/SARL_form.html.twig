@@ -24,32 +24,38 @@
     .breadcrumb{
         background: none;
     }
-    /* .tailInput{*/
-    /*  margin-left:33%;*/
-    /*  margin-bottom: 1%;*/
-    /*  width: 34%;*/
-    /*  text-align: center;*/
-
-    /*}*/
-    {#{% if typeStatut == 'EURL'%}#}
-    /*    #progressbar li {*/
-    /*    list-style-type: none;*/
-    /*    color:#BEA058;*/
-    /*    text-transform: uppercase;*/
-    /*    font-size: 12px;*/
-    /*    width: 10.33%;*/
-    /*    float: left;*/
-    /*    position: relative;*/
-    /*    letter-spacing: 1px;*/
-    /*   }*/
-    {#{% endif %}#}
+    
+    {% if typeStatut == 'EURL'%}
+        #progressbar li {
+            list-style-type: none;
+            color: #BEA058;
+            text-transform: uppercase;
+            font-size: 12px;
+            width: 8.83%;
+            float: left;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        {% endif %}
+        {% if typeStatut == 'SARL'%}
+        #progressbar li {
+            list-style-type: none;
+            color: #BEA058;
+            text-transform: uppercase;
+            font-size: 12px;
+            width: 8.13%;
+            float: left;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        {% endif %}
 </style>
 
 
-<div class="breadcrumb progression haut">
+<div class="breadcrumb progression haut"  style="min-width: 360px;">
         <ul class="nav nav-tabs">
-            <a data-toggle="tab" class="active"> <b>1 - Mon projet</b></a>
-            <a data-toggle="tab" > <b>2 - Ma prestation</b> </a>
+            <a data-toggle="tab" class="active"> <b>1 - Détails</b></a>
+            <a data-toggle="tab" > <b>2 - Préstation</b> </a>
             <a data-toggle="tab"> <b> 3 - Paiement</b> </a>
             <a data-toggle="tab" > <b> 4 - créée !</b> </a>
         </ul>
@@ -60,23 +66,25 @@
 
         <div id="msform" class="">
             <!-- progressbar -->
-            {#<ul id="progressbar">#}
-            {#    <li class="active">delai et évolution</li>#}
-            {#    <li>Nom Societe</li>#}
-            {#    {% if typeStatut == 'EURL'%}#}
-            {#      <li>Nom Commercial</li>#}
-            {#    {% endif %}#}
-            {#    <li> dépôt de marque  </li>#}
-            {#    <li> Secteur d'activité</li>#}
-            {#    <li>Gérant</li>#}
-            {#    <li>siège</li>#}
-            {#    <li>capital social</li>#}
-            {#    {% if typeStatut == 'SARL' %}#}
-            {#        <li>Mes Associés</li>#}
-            {#        <li>Directeur Général</li>#}
-            {#    {% endif%}#}
-            {#  <li>Informations de contact</li>#}
-            {#</ul>#}
+            <ul id="progressbar">
+                <li class="active"></li>
+                <li></li>
+                  <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                {% if typeStatut == 'EURL'%}
+                <li></li>
+                {% endif %}
+                <li></li>
+                <li></li>
+                <li></li>
+                {% if typeStatut == 'SARL' %}
+                    <li></li>
+                    <li></li>
+                {% endif%}
+              <li></li>
+            </ul>
 
 
 {% if typeStatut == 'SARL'%}
@@ -143,6 +151,7 @@
                  {{ form_widget(formSarl.socialObject) }}
                  {{ form_widget(formPerson.married)}}
                  {{ form_widget(formPerson.nationality)}}
+                 {{ form_widget(formSarl.hasAssociate)}}
              {% else %}
                {{ form_widget(formEurl.companyType) }}
                {{ form_widget(formEurl.addressManager) }}
@@ -288,25 +297,25 @@
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
 
-            <fieldset>
 
+         {% if typeStatut == 'EURL' %}
+        <fieldset>
             <h2 class="fs-title ">Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </h2>
                  <div class="mx-auto mb-2" style="max-width: 400px;">
-                     {% if typeStatut == 'SARL' %}
-                         {{ form_widget(formSarl.hasAssociate)}}
-                     {% else %}
+                     {#{% if typeStatut == 'SARL' %}#}
+                     {#    {{ form_widget(formSarl.hasAssociate)}}#}
+                     {#{% else %}#}
                          {{ form_widget(formEurl.hasAssociate)}}
-                     {% endif %}
+                     {#{% endif %}#}
                   </div>
-                    {% if typeStatut == 'EURL' %}
                         <div class="alert alert-info" role="alert">
                           (L'entrée d'un nouvel associé dans votre SARLU transformera celle-ci en SARL.)
                         </div>
-                    {% endif %}
 
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
+        {% endif %}
 
 
              <fieldset>
@@ -663,7 +672,7 @@
                  </div>
 
 
-                <input type="button" name="previous" class="previous action-button-previous mid" value="Revoir"/>
+                <input type="button" name="previous" class="previous action-button-previous mid" value="Retour"/>
                 <input type="submit" class="action-button" value="Enregistrer"/>
             </fieldset>
 
