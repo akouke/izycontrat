@@ -52,6 +52,11 @@ class AssociateCompanyInfo
      */
     private $capitalBring;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $companyPart;
+
 
     public function getId(): ?int
     {
@@ -139,6 +144,18 @@ class AssociateCompanyInfo
     public function setCapitalBring(?string $capitalBring): self
     {
         $this->capitalBring = $capitalBring;
+
+        return $this;
+    }
+
+    public function getCompanyPart(): ?float
+    {
+        return $this->companyPart;
+    }
+
+    public function setCompanyPart(?float $companyPart): self
+    {
+        $this->companyPart = $companyPart;
 
         return $this;
     }

@@ -3,21 +3,102 @@
 {% block title %}Fiche client - {{ client.lastName }} {{ client.firstName }}{% endblock %}
 
 {% block body %}
-    <div class="page-content container-fluid col-10 col-lg-10">
-        <div class="clientNote row row-cols-1 row-cols-md-1 row-cols-xl-3">
-            <div class="clientInformation col pb-4 bg-light d-flex flex-column">
-                <img class="profilePicture" src="{{ client.user.profilePicture }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">
-                <h2>{{ client.lastName }}
+    <div class="row page-content container-fluid col-12 col-lg-12">
+        <div class ="row">
+            <div class="col">
+             <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
+            </div>
+        </div> 
+        <div class=" row">
+                
+            <div class="clientInformation  col  bg-light d-flex flex-column">
+                {#<img class="profilePicture" src="{{ client.user.profilePicture ?? '' }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">#}
+                <h2>{{ client.gender == 2 ? 'Monsieur' : 'Madame'}}
+                    {{ client.lastName }}
                     {{ client.firstName }}</h2>
                 <h3>Mail</h3>
-                {{ client.user.email }}
+                <a class="card-text" href="mailto:{{ user.emailPerson ?? '' }}">{{ client.emailPerson ?? '' }}</a>
+
                 <h3>Adresse</h3>
                 {{ client.address }}
                 <h3>Téléphone</h3>
-                {{ client.phoneNumber|phone }}
+                <a class="card-text" href="tel:{{ client.phoneNumber|phone }}">{{ client.phoneNumber|phone }}</a>
+
+                <h3>Nationality</h3>
+                {{ client.nationality}}
+            </div>
+
+            <div class="col">
+                <div class="clientInformation col bg-light d-flex flex-column">
+                {% for company in user.companies %}
+
+                        <h2> Nom societe</h2>
+                            {{ company.name ?? ''}}
+
+                        <h3> Statut </h3>
+                            {{ company.companyType.name ?? ''}}
+
+                        <h3>Capital Social</h3>  
+                            {{ company.capitalSocial ?? ''}}
+  
+                          <h3>Addresse</h3>
+                          adresse: ({{ company.address ?? '' }}); adresse manager:({{ company.addressManager ?? '' }}); departement:({{ company.country ?? '' }})
+                        
+                        <h3>Protecion</h3>
+                        {{ company.hasProtection ?? ''}}
+                        
+                        <h3> Priorite</h3>
+                            {{ company.priority.name ?? ''}}
+                       
+                        <h3> Banque</h3>
+                            {{ company.bankName ?? ''}}
+                        
+                        <h3> Secteur D'activiter</h3>
+                            {{ company.activitySector.name ?? ''}}
+                        
+                        <h3> Objet Sociale</h3>
+                            {{ company.socialObject ?? ''}}
+                        
+                    {#</div>#}
+                      {% endfor %}
+                    </div>
+                </div>
+              
+               <div class="col">
+                <div class="clientInformation col bg-light d-flex flex-column">
+                     <h2>Dossiers Clients</h2>
+                        <table class="table">
+                            <tbody>
+                                {% for upload in uploads %}
+                                    <tr>
+                                        <td>{{ upload.status }}</td>
+                                        <td>
+                                            {{ include('upload/_delete_form.html.twig') }}
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/uploads/status/{{ upload.status }}" target="_blank">Voir</a>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4">dossier vide!</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        <div class ="row">
+            <div class="col">
+             <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
+            </div>
+            <div class="col">
+             <a href="{{ path('dashboard_clients_delete', {'id': client.id}) }}" class="btn btn-danger" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ client.lastName }} {{ client.firstName }}?');">Supprimer le client </a>
             </div>
         </div>
-    </div>
+            </div>
+          </div>
+        
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}

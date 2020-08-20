@@ -1,71 +1,73 @@
-@import '_vars';
+@import "app";
 
 .homeTop {
+  height: 100vh;
+  width: 100%;
+  background: rgba(50, 50, 50, 0.6);
+
+  .homePicture {
+    object-position: center;
+    object-fit: cover;
+  }
+
+  img {
+    position: absolute;
     height: 100vh;
     width: 100%;
-    background: rgba(50, 50, 50, 0.6);
+    right: 0;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    z-index: -1;
+    opacity: 1;
+  }
 
-    .homePicture{
-        object-position: center;
-        object-fit: cover;
-    }
+  .homeTxt {
+    width: 80%;
+    padding-top: 80px;
+  }
 
-    img {
-        position: absolute;
-        height: 100vh;
-        width: 100%;
-        right: 0;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        box-sizing: border-box;
-        z-index: -1;
-        opacity: 1;
-    }
+  .homeTxt * {
+    margin-top: $spacing;
+    margin-bottom: $spacing;
+    color: $light-color;
+    text-align: center;
+  }
 
-    .homeTxt {
-        width: 40%;
-        padding-top: 80px;
-    }
+  p {
+    font-size: $font-size-sub-title;
+  }
 
-    .homeTxt * {
-        margin-top: $spacing;
-        margin-bottom: $spacing;
-        color: $light-color;
-        text-align: center;
+  .btnHome {
+    margin-top: $spacing;
+    width: calc(250px + (300 - 250) * ((100vw - 300px) / (1600 - 300)));
+    height: calc(30px + (40 - 30) * ((100vw - 300px) / (1600 - 300)));
+  }
+}
+
+.partners {
+  padding-bottom: $spacing-l;
+
+  h2 {
+    margin-top: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
+
+  .partner {
+    width: 30%;
+    margin-bottom: $spacing-xl;
+
+    .partner-pic {
+      max-width: 100%;
+      max-height: 40px + $spacing-xl;
+      object-fit: contain;
     }
 
     p {
-        font-size: $font-size-sub-title;
+      margin-top: $spacing;
     }
-
-    .btnHome {
-        margin-top: $spacing;
-        width: calc(250px + (300 - 250) * ((100vw - 300px) / (1600 - 300)));
-        height: calc(30px + (40 - 30) * ((100vw - 300px) / (1600 - 300)));
-    }
+  }
 }
 
-.partners{
-    padding-bottom: $spacing-l;
 
-    h2{
-        margin-top: $spacing-xl;
-        margin-bottom: $spacing-xl;
-    }
-
-    .partner{
-        width: 30%;
-        margin-bottom: $spacing-xl;
-
-        .partner-pic{
-            max-width: 100%;
-            max-height: 40px + $spacing-xl;
-            object-fit: contain;
-        }
-
-        p{
-            margin-top: $spacing;
-        }
-    }
-}

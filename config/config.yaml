@@ -1,0 +1,45 @@
+welp_mailchimp:
+  api_key: 0cf80c125643be6542cb581fbe1df6a6-us17
+  lists:
+    listId1:
+      subscriber_provider: 'votre_app.provider1' # provider fourni en cas de synchronisation totale
+      webhook_secret: 'thisIsASecret' # webhook secret qui permet de sécuriser la liaison entre MailChimp et votre application
+      webhook_url: 'https://myapp.com/mailchimp/webhook/endpoint' # L'url webhook en enregistré dans la liste MailChimp
+      merge_fields:
+        -
+          tag: FNAME
+          name: First Name
+          type: text
+          public: true
+        -
+          tag: LNAME
+          name: Last Name
+          type: text
+          public: true
+        -
+          tag: FIRSTTAG
+          name: My first tag
+          type: text
+          options:
+            size: 5
+            ...
+        -
+          tag: SECONDTAG
+          name: My second tag
+          type: text
+          public: true
+          ...
+swiftmailer:
+    transport:        gmail
+    username:         cheikhousy@gmail.com
+    password:         Medinasy87
+    Host:             localhost
+    port:             465
+    encryption:       ssl
+    auth-mode:        login
+    spool: { type: 'memory' }
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
+            verify_peer_name: false

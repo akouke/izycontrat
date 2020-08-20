@@ -39,7 +39,7 @@ class ClientSarlType extends AbstractType
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Votre numero de telephone',
+                    'placeholder' => 'Numero telephone',
                 ),
                 'required'    => true,
             ])

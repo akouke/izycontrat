@@ -1,0 +1,41 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <section class="page-content container-fluid col-10 col-lg-10">
+        <h1 class="text-center">Contact</h1>
+        <div class="container mt-5 mb-5">
+            <div class="col">
+                {{ form_start(form) }}
+
+                <div class="float-left col">{{ form_label(form.firstname) }}</div>
+
+                {{ form_widget(form.firstname) }}
+
+                <div class="float-left col">{{ form_label(form.lastname) }}</div>
+
+                {{ form_widget(form.lastname) }}
+
+                <div class="float-left col">{{ form_label(form.phone) }}</div>
+
+                {{ form_widget(form.phone) }}
+                <small class="float-left text-muted col">{{ form_help(form.phone) }}</small>
+
+                <div class="float-left col">{{ form_label(form.email) }}</div>
+
+                {{ form_widget(form.email) }}
+                <small class="float-left text-muted col">{{ form_help(form.email) }}</small>
+
+                <div class="float-left col">{{ form_label(form.message) }}</div>
+
+                {{ form_widget(form.message) }}
+                <small class="float-left text-muted">{{ form_help(form.message) }}</small>
+
+                <div class="mt-5 text-center"><button class="btn btn-primary">Envoyer</button></div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

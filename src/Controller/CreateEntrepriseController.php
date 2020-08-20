@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controller;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -8,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Company;
 use App\Entity\Person;
 use App\Entity\User;
+use App\Entity\Upload;
 use App\Entity\AssociateCompanyInfo;
 use App\Entity\ActivitySector;
 use App\Form\CompanyType;
@@ -23,17 +26,24 @@ use App\Form\AssociateCompanyType;
 use App\Form\AssociateCompany2Type;
 use App\Form\AssociateCompany3Type;
 use App\Repository\CompaniesTypesRepository;
+use App\Repository\ActivitySectorRepository;
+use App\Repository\UserRepository;
+use App\Repository\PersonRepository;
+use App\Repository\CompanyRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
-
-// Include Dompdf required namespaces
+use Symfony\Component\Security\Core\User\UserInterface;
+use App\Security\UserAuthenticator;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-
-//conversion numbertoletter
-// use App\Services\NumberToLetter;
 use NumberToWords\NumberToWords;
+use Symfony\Component\HttpFoundation\Response;
+use App\Event\UserRegisterEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserPaymentEvent;
+use App\Event\UserInfoEvent;
 
 class CreateEntrepriseController extends AbstractController
 {
@@ -42,12 +52,7 @@ class CreateEntrepriseController extends AbstractController
      */
     public function index()
     {
-        //  $user = $this->getUser();
-        // dd($user);
-        return $this->render('create_entreprise/create_entreprise.html.twig', [
-            'controller_name' => 'CreateEntrepriseController',
-            'controller_firstname' => 'M. xxxxxx',
-        ]);
+        return $this->render('create_entreprise/create_entreprise.html.twig', [ ]);
     }
     
      /**
@@ -58,45 +63,24 @@ class CreateEntrepriseController extends AbstractController
         return $this->render('create_entreprise/comparatif_statut.html.twig');
     }
     
-     /**
-     * @Route("/create/save", name="save_status")
-     */
-    public function saveStatut()
-    {
-        
-         // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
-        
-        // Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
-        
-        // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('create_entreprise/sarl/SARL_status.html.twig', [
-            'title' => "Recu Creation de SARL"
-        ]);
-        
-        // Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-        
-        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the HTML as PDF
-        $dompdf->render();
-
-        // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => false
-        ]);
-        // return $this->render('create_entreprise/save_statut.html.twig');
-    }
-    
     /**
-     * @Route("/create/entreprise/sarl", name="create_sarl") 
+     * @Route("/create/entreprise/sarl", name="create_sarl", methods={"GET","POST"}) 
      */
-     public function createSarl (Request $request, UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em, CompaniesTypesRepository $companyTypeRecup)
+     public function createSarl (GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                                 EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                                 CompaniesTypesRepository $companyTypeRecup, Request $request,
+                                 ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                 EventDispatcherInterface $eventDispatcher)
+                                 
      {
+       try
+       {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -109,7 +93,7 @@ class CreateEntrepriseController extends AbstractController
          $associate4CompanyInfo = new AssociateCompanyInfo();
          $associate5CompanyInfo = new AssociateCompanyInfo();
          
-         $associateCompany = new AssociateCompanyInfo();
+         $associateCompany1 = new AssociateCompanyInfo();
          $associateCompany2 = new AssociateCompanyInfo();
          $associateCompany3 = new AssociateCompanyInfo();
          
@@ -130,10 +114,9 @@ class CreateEntrepriseController extends AbstractController
          $formAssocie4 = $this->createForm(Associate4Type::class, $associe4);
          $formAssocie5 = $this->createForm(Associate5Type::class, $associe5);
          
-         $formAssociateCompany = $this->createForm(AssociateCompanyType::class, $associateCompany);
+         $formAssociateCompany = $this->createForm(AssociateCompanyType::class, $associateCompany1);
          $formAssociateCompany2 = $this->createForm(AssociateCompany2Type::class, $associateCompany2);
          $formAssociateCompany3 = $this->createForm(AssociateCompany3Type::class, $associateCompany3);
-        //  $formAssocie2 = $this->createForm(AssociatePersonType::class, $associe2);
          
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
@@ -148,33 +131,85 @@ class CreateEntrepriseController extends AbstractController
          $formAssociateCompany->handleRequest($request);
          $formAssociateCompany2->handleRequest($request);
          $formAssociateCompany3->handleRequest($request);
-        //  $formAssocie2->handleRequest($request);
-            
-        // dump($company, $person, $user, $associe1, $associe2);
         
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()){
+        $emailUsed = false;
+        if( $isConnected === false)
+          {
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
+          }
             
-            if ($request->request->all()['company']['activitySector'] === "14")
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted())
+        {
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("SARL"));
+             
+             if($isConnected === false){
              $user->setIsVerified(false);
              $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword(
-                    $user,
-                    "izycontratpassword"
-                    // $request->request->all()['user_sarl']['password']
-                ));
+             $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+             $user->setEnabled(true);
+             $em->persist($user);
              $person->setUser($user);
              
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
+             $person->setEmailPerson($user->getEmail());
+             $person->setHasCompany(true);
+             $company->setClient($user);
+             
+               // recup parts
+                 $apportAssocieCompany1 = $associateCompany1->getCapitalBring();
+                 $apportAssocieCompany2 = $associateCompany2->getCapitalBring();
+                 $apportAssocieCompany3 = $associateCompany3->getCapitalBring();
+                $apportAssocie1 = $associe1->getCapitalAmountAdding();
+                $apportAssocie2 = $associe2->getCapitalAmountAdding();
+                $apportAssocie3 = $associe3->getCapitalAmountAdding();
+                $apportAssocie4 = $associe4->getCapitalAmountAdding();
+                $apportAssocie5 = $associe5->getCapitalAmountAdding();
+                
+            //parts operation : repartition and (not / by 0 or null)
+            $somTotal = $apportAssocie1 + $apportAssocie2 + $apportAssocie3 + $apportAssocie4 + $apportAssocie5 + $apportAssocieCompany1 + $apportAssocieCompany2 + $apportAssocieCompany3;
+            $somTotal = ( $somTotal < 1 ? 1 : $somTotal);
+            $company->setTotalCapital($somTotal);
+
+            // Part en pourcentage
+            // $partAssocie1 = ($apportAssocie1 * 100) / $somTotal;
+            // $partAssocie2 = ($apportAssocie2 * 100) / $somTotal;
+            // $partAssocie3 = ($apportAssocie3 * 100) / $somTotal;
+            // $partAssocie4 = ($apportAssocie4 * 100) / $somTotal;
+            // $partAssocie5 = ($apportAssocie5 * 100) / $somTotal;
+            // $partAssocieCompany1 = ($apportAssocieCompany1 * 100) / $somTotal;
+            // $partAssocieCompany2 = ($apportAssocieCompany2 * 100) / $somTotal;
+            // $partAssocieCompany3 = ($apportAssocieCompany3 * 100) / $somTotal;
+
+            $associateCompany1->setCompanyPart($apportAssocieCompany1);
+            $associateCompany2->setCompanyPart($apportAssocieCompany2);
+            $associateCompany3->setCompanyPart($apportAssocieCompany3);
+            
+            $associe1->setAssociatePart($apportAssocie1);
+            $associe2->setAssociatePart($apportAssocie2);
+            $associe3->setAssociatePart($apportAssocie3);
+            $associe4->setAssociatePart($apportAssocie4);
+            $associe5->setAssociatePart($apportAssocie5);
+            
              // pour un associer de type Societer
-             if($associateCompany->getName() !== null){
-                 $associateCompany->setPerson($person);
-                 $em->persist($associateCompany);
+             if($associateCompany1->getName() !== null){
+                 $associateCompany1->setPerson($person);
+                 $em->persist($associateCompany1);
              }
              if($associateCompany2->getName() !== null){
                  $associateCompany2->setPerson($person);
@@ -187,13 +222,8 @@ class CreateEntrepriseController extends AbstractController
             
             // persistance separer des associes
             if($associe1->getFirstName() !== null || $associe1->getLastName() !== null){
-                // $em->persist($associe1);
                 $person->addMyAssociate($associe1);
-                // $associate1CompanyInfo->setPerson($associe1);
                 $em->persist($associe1);
-                // $em->persist($associate1CompanyInfo);
-                // $em->flush();
-                // dd($associate1CompanyInfo, $associe1);
             }
             if($associe2->getFirstName() !== null || $associe2->getLastName() !== null){
                 $person->addMyAssociate($associe2);
@@ -208,27 +238,56 @@ class CreateEntrepriseController extends AbstractController
                 $em->persist($associe4);
             }
             if($associe5->getFirstName() !== null || $associe5->getLastName() !== null){
-                // $associate5CompanyInfo->setPerson($associe5);
-                // $em->persist($associate5CompanyInfo);
-                // dd($associate5CompanyInfo, $associe5);
                 $person->addMyAssociate($associe5);
                 $em->persist($associe5);
             }
-                // dd( $person, $user, $company, $request, $associateCompany, $associateCompany2);
-            //   $person->setPhoneNumber($formCompany->get('phoneNumber')->getData());
+            
 
-            $em->persist($user);
             $em->persist($person);
             $em->persist($company);
             $em->flush();
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_sarl_prestation'
-            // ,
-            // ['id' => $company->getId()]
-            );
+            
+            
+           
+            if( $isConnected === false)
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    // 'csrf_token' => $request->request->get('_csrf_token'),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
+                );
+                
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
+            }
+            
+            return $this->redirectToRoute('create_sarl_prestation' );
 
-            // $entityManager->flush();
         }   
 
         return $this->render('create_entreprise/sarl/SARL_form.html.twig', [
@@ -243,72 +302,131 @@ class CreateEntrepriseController extends AbstractController
             'formAssociateCompany' => $formAssociateCompany->createView(),
             'formAssociateCompany2' => $formAssociateCompany2->createView(),
             'formAssociateCompany3' => $formAssociateCompany3->createView(),
-            
+            'emailUsed' => $emailUsed,
+            'isConnected' => $isConnected,
+            'user' => $user,
             'typeStatut' => "SARL",
-            // 'EURL' => "EURL"
             
         ]);
+        
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
+          
     }
+    
+    
+    
+    /**
+     * @Route("/success", name="url_stripe_success")
+     */
+    public function sucessPayment()
+    {
+        // return $this->render('paiement/success.html.twig');
+        return $this->redirectToRoute('save_status');
+    }
+    
+    /**
+     * @Route("/create/success", name="generate_status_success")
+     */
+    public function sucessGenerateStatus(EventDispatcherInterface $eventDispatcher, PersonRepository $recupPerson)
+    {
+        $person = new Person();
+        try
+        {
+           $person = $recupPerson->findOneByUser($this->getUser()->getId());
+
+          if($person)
+          {
+            $UserPaymentEvent = new UserPaymentEvent($person);
+                    $eventDispatcher->dispatch(
+                    UserPaymentEvent::NAME,
+                    $UserPaymentEvent
+            ); 
+          }
+        }catch (\Throwable $th) { }
+              
+        return $this->render('paiement/success.html.twig');
+        // return $this->redirectToRoute('save_status');
+    }
+    
+      /**
+     * @Route("/cancel", name="url_stripe_canceled")
+     */
+    public function cancelPayment()
+    {
+        return $this->render('paiement/cancel.html.twig');
+    }
+    
     
     /**
      * @Route("/create/entreprise/sarl/prestation", name="create_sarl_prestation") 
      */
      public function createSarlPrestation (Request $request, EntityManagerInterface $em)
      {
-         
+        //  dd($this->getUser()->getEmail());
          return $this->render('create_entreprise/sarl/SARL_form_prestation.html.twig', [
-            
-        ]);
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+             'url_stripe_success' => $this->getParameter('url_stripe_success'),
+             'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_sarl_sas_sasu_sci_eurl'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_sarl_sas_sasu_sci_eurl'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_sarl_sas_sasu_sci_eurl'),
+         ]);
          
      }
      
      /**
-     * @Route("/create/entreprise/sarl/payment", name="create_sarl_payement") 
+     * @Route("/create/entreprise/sarl/prestation/me", name="create_sarl_prestation_me") 
      */
-     public function createSarlPayment (Request $request, EntityManagerInterface $em)
+     public function createSarlPrestationMe (Request $request, EntityManagerInterface $em)
      {
-         
-         return $this->render('create_entreprise/sarl/SARL_form_payement.html.twig', [
-            
-        ]);
+         return $this->render('create_entreprise/me_ei/ME_prestation.html.twig', [
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+             'url_stripe_success' => $this->getParameter('url_stripe_success'),
+             'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_me_ei'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_me_ei'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_me_ei'),
+         ]);
          
      }
      
-     /**
-     * @Route("/create/entreprise/sarl/status", name="create_sarl_status") 
+      /**
+     * @Route("/create/entreprise/sarl/prestation/ei", name="create_sarl_prestation_ei") 
      */
-     public function createSarlStatus (Request $request, EntityManagerInterface $em, Security $security)
+     public function createSarlPrestationEi (Request $request, EntityManagerInterface $em)
      {
-        // include_once('../src/Services/testNumToLet.php');
-        // dd(NumberToLetterInFrench(3400000));
-        // dd($security);
-        $numberToWords = new NumberToWords();
-         $numberTransformer = $numberToWords->getNumberTransformer('fr');
-                //  $ex = $numberTransformer->toWords(10200400);
-                 // build a new currency transformer using the RFC 3066 language identifier
-                // $currencyTransformer = $numberToWords->getCurrencyTransformer('fr');
-                // $ex = $currencyTransformer->toWords(5099.3, 'EUR');
-                // dd($ex);
-        
-         return $this->render('create_entreprise/sarl/SARL_status.html.twig', [
-            'dateCreation' => date('d/m/Y'),
-            // 'capitalSocial' => NumberToLetterInFrench(3500),
-            'capitalSocial' => $numberTransformer->toWords(3500),
-            'capitalNum' => 3500,
-        ]);
+         return $this->render('create_entreprise/me_ei/EI_prestation.html.twig', [
+             'stripe_public_key' => $this->getParameter('stripe_public_key'),
+             'url_stripe_success' => $this->getParameter('url_stripe_success'),
+             'url_stripe_canceled' => $this->getParameter('url_stripe_canceled'),
+             'offre_izy_basic' => $this->getParameter('offre_izy_basic_me_ei'),
+             'offre_izy_plus' => $this->getParameter('offre_izy_plus_me_ei'),
+             'offre_izy_premium' => $this->getParameter('offre_izy_premium_me_ei'),
+         ]);
          
      }
-    
-    
-    
     
     /**
-     * @Route("/create/entreprise/eurl", name="create_eurl") 
+     * @Route("/create/entreprise/eurl", name="create_eurl", methods={"GET","POST"}) 
      */
-     public function createEurl(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
+     public function createEurl(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                                EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                                CompaniesTypesRepository $companyTypeRecup, Request $request,
+                                ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                EventDispatcherInterface $eventDispatcher)
      {
+      try
+       {
+         $isConnected = false;
          
-        
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -322,40 +440,99 @@ class CreateEntrepriseController extends AbstractController
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
-            
-        // dump($company, $person, $user);
         
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        $emailUsed = false;
+        if( $isConnected === false)
+          {
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
+          }
+            
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+            
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("EURL"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
+                 $em->persist($user);
              $person->setUser($user);
-            
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+             
+             $person->setEmailPerson($user->getEmail());
+             $person->setHasCompany(true); 
+             $company->setClient($user);
+             
+           
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             
-        // dd($formCompany, $company, $user, $person);
-            // dd($this->getUser(), $user->getEmail() );
+           
             $em->flush();
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
+            
+            if( $isConnected === false )
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
+                );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
+            }
+            
+            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees. Un mail contenant vos informations de connexion vous est envoye');
             return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
                 ]);
-
+            
 
         }        
     
@@ -363,47 +540,36 @@ class CreateEntrepriseController extends AbstractController
              'formEurl' => $formCompany->createView(),
              'formEurlPerson' => $formPerson->createView(),
              'formEurlUser' => $formUser->createView(),
+             'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
+             'user' => $user,
              'typeStatut' => "EURL",
         ]);
+        
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
     }
-    
+
     /**
-     * @Route("/create/entreprise/sasu", name="create_sasu") 
+     * @Route("/create/entreprise/micro-entreprise", name="create_me", methods={"GET","POST"}) 
      */
-     public function createSasu()
+     public function createMicroEntreprise(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                                            EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                                            CompaniesTypesRepository $companyTypeRecup, Request $request,
+                                             ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                                             EventDispatcherInterface $eventDispatcher)
      {
-        return $this->render('create_entreprise/SASU_form.html.twig', [
-            
-        ]);
-    }
-    
-    
-    
-    /**
-     * @Route("/create/entreprise/sas", name="create_sas") 
-     */
-     public function createSAS()
-     {
-        return $this->render('create_entreprise/SASU_form.html.twig', [
-            
-        ]);
-    }
-    
-    /**
-     * @Route("/create/entreprise/sci", name="create_sci") 
-     */
-     public function createSCI()
-     {
-        return $this->render('create_entreprise/SASU_form.html.twig', [
-            
-        ]);
-    }
-    
-    /**
-     * @Route("/create/entreprise/micro-entreprise", name="create_me") 
-     */
-     public function createMicroEntreprise(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
-     {
+       try
+       {
+         $isConnected = false;
+         
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
          $company = new Company();
          $person = new Person();
          $user = new User();
@@ -418,61 +584,138 @@ class CreateEntrepriseController extends AbstractController
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
             
-        // dump($company, $person, $user);
-        
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
-        {
+        $emailUsed = false;
+        if( $isConnected === false)
+          {    
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
+          }
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+        if ($emailUsed == false && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        {
+            $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
+            
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
+
              $company->setIsCreated(false);
              $company->setCompanyType($companyTypeRecup->findOneByName("MICRO-ENTREPRISE"));
              
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
+                 $em->persist($user);
              $person->setUser($user);
+                 
+                 }elseif($isConnected === true){
+                     $user = $this->getUser();
+             }
+              
+                 $person->setEmailPerson($user->getEmail());
+              $person->setHasCompany(true);
+             $company->setClient($user);
             
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
-            
-            
-            return $this->redirectToRoute('create_me_ei_informations', [
-                
-                ]);
-        dd($formCompany, $company, $user, $person);
-            // dd($this->getUser(), $user->getEmail() );
             $em->flush();
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
+            
+
+            if($isConnected === false)
+            {
+                 $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    // 'csrf_token' => $request->request->get('_csrf_token'),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
+                );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoye');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
+            }
+            
+            return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+                'company' => $company,
+                'person' => $person,
+                'user' => $user,
+                'typeStatut' => 'ME',
                 ]);
 
-
         }        
-        
+        if( $request->getMethod() == "POST" )
+        {
+            $this->addFlash('danger', 'Cette adresse mail '.$user->getEmail().' existe déjà veuillez vous connecter!');
+        }
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formMe' => $formCompany->createView(),
              'formMePerson' => $formPerson->createView(),
              'formMeUser' => $formUser->createView(),
+             'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
+             'user' => $user,
            'typeStatut' => 'ME' 
         ]);
+      
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
     }
     
     /**
-     * @Route("/create/entreprise/ei", name="create_ei") 
+     * @Route("/create/entreprise/ei", name="create_ei", methods={"GET","POST"}) 
      */
-     public function createEI(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, CompaniesTypesRepository $companyTypeRecup)
+     public function createEI(GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, 
+                              EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, 
+                              CompaniesTypesRepository $companyTypeRecup, Request $request,
+                              ActivitySectorRepository $activitySectorRecup, UserRepository $recupEmail,
+                              EventDispatcherInterface $eventDispatcher)
      {
+      try
+       {
+         $isConnected = false;
          
-                  $company = new Company();
+          if($this->getUser()){
+             $isConnected = true;
+         }
+         
+         $company = new Company();
          $person = new Person();
          $user = new User();
          
@@ -485,53 +728,118 @@ class CreateEntrepriseController extends AbstractController
          $formCompany->handleRequest($request);
          $formPerson->handleRequest($request);
          $formUser->handleRequest($request);
+
+        $emailUsed = false;
+        if( $isConnected === false)
+          {
+            $emailVerification = $recupEmail->findOneByEmail($user->getEmail());
+            if($emailVerification){
+                $emailUsed = true;
+            }
+          }
             
-        // dump($company, $person, $user);
-        
-        if ($formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
+        if ($emailUsed !== true && $formCompany->isSubmitted() && $formPerson->isSubmitted() && $formUser->isSubmitted()) 
         {
+           $recupNameActivitySector = $activitySectorRecup->findOneByIdActivitySector($request->request->all()['company']['activitySector']);
+            $nameActivitySector = $recupNameActivitySector->getName();
             
-           if ($request->request->all()['company']['activitySector'] === "14")
+           if ($nameActivitySector == 'Autres')
             {
                 $company->setActivitySector( $activitySector->setNameOther($request->request->all()['company_activitySector_autre']) );
-                
                 $em->persist($activitySector);
             }
-             $company->setIsCreated(false);
-             $company->setCompanyType($companyTypeRecup->findOneByName("IE"));
-             
-             $user->setIsVerified(false);
-             $user->setRoles(['ROLE_CLIENT']);
-             $user->setPassword ( $passwordEncoder->encodePassword( $user,"izycontratpassword" ));
-              
-             $person->setUser($user);
             
+             $company->setIsCreated(false);
+             $company->setCompanyType($companyTypeRecup->findOneByName("EI"));
+             
+             if($isConnected === false){
+                 $user->setIsVerified(false);
+                 $user->setRoles(['ROLE_CLIENT']);
+                 $user->setPassword ( $passwordEncoder->encodePassword( $user,"Qt7Xd4Lr" ));
+                 $user->setEnabled(true);
+                 $em->persist($user);
+             $person->setUser($user);
+             
+             }elseif($isConnected === true){
+                 $user = $this->getUser();
+             }
+              
+            $person->setEmailPerson($user->getEmail());
+             $person->setHasCompany(true);
+             $company->setClient($user);
+
             $em->persist($company);
-            $em->persist($user);
             $em->persist($person);
             
-            // $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_me_ei_informations', [
-                
-                ]);
-        dd($formCompany, $company, $user, $person);
-            // dd($this->getUser(), $user->getEmail() );
             // $em->flush();
+            // $UserInfoEvent = new UserInfoEvent($person);
+            //     $eventDispatcher->dispatch(
+            //     UserInfoEvent::NAME,
+            //     $UserInfoEvent
+            // ); 
             
-            $this->addFlash('success', 'Vos informations ont ete bien enregistrees');
-            return $this->redirectToRoute('create_sarl_prestation', [
-                'user' => $user->getEmail(),
-                ]);
+            
+            if($isConnected === false)
+            {
+                $credentials = [
+                    'password' => $user->getPassword(),
+                    'email' => $user->getEmail(),
+                    ];
+                    $request->getSession()->set(
+                        Security::LAST_USERNAME,
+                        $credentials['email']
+                    );
+    
+                 $guardHandler->authenticateUserAndHandleSuccess(
+                    $user,
+                    $request,
+                    $authenticator,
+                    'main'
+                );
+            }
+            
+            if( $isConnected === false)
+            {
+                
+                $UserInfoEvent = new UserInfoEvent($person);
+                $eventDispatcher->dispatch(
+                UserInfoEvent::NAME,
+                $UserInfoEvent
+               ); 
+               
+              $this->addFlash('success', 'Vos informations ont été bien enregistrées. Un mail contenant vos informations de connexion vous est envoyé');
+            }
+            else{
+                $this->addFlash('success', 'Vos informations ont été bien enregistrées');
+            }
 
+             return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
+                'company' => $company,
+                'person' => $person,
+                'user' => $user,
+                'typeStatut' => 'Ei',
+                ]);
 
         }        
-        
+        if( $request->getMethod() == "POST" )
+        {
+            $this->addFlash('danger', 'Cette adresse mail '.$user->getEmail().' existe déjà, veuillez vous connecter!');
+        }
         return $this->render('create_entreprise/me_ei/M-E_form.html.twig', [
             'formEi' => $formCompany->createView(),
              'formEiPerson' => $formPerson->createView(),
              'formEiUser' => $formUser->createView(),
+             'emailUsed' => $emailUsed,
+             'isConnected' => $isConnected,
+             'user' => $user,
          'typeStatut' => 'EI',
         ]);
+        
+       }catch (\Throwable $th) 
+          {
+              return $this->redirectToRoute('app_home');
+              
+          }
     }
     
     /**
@@ -539,8 +847,6 @@ class CreateEntrepriseController extends AbstractController
      */
      public function MeEiInformations(Request $request, EntityManagerInterface $em)
      {
-        return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [
-         
-        ]);
+        return $this->render('create_entreprise/me_ei/me_ei_informations.html.twig', [ ]);
      }
 }

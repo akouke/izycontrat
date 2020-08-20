@@ -1,0 +1,339 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Izy pratique Entreprise individuelle{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    {{ encore_entry_link_tags('technical_sheet') }}
+{% endblock %}
+
+{% block body %}
+    <section class="homeTop d-flex justify-content-center">
+        <img class="homePicture img-fiche" src="/images/entreprise_individuelle.jpg" alt="image principale">
+        <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
+            <p>CRÉER UNE ENTREPRISE INDIVIDUELLE</p>
+            <p>L’entreprise individuelle (EI) présente plusieurs avantages. Simple à créer, elle permet de développer
+                une activité professionnelle sans se dissocier de son exploitant.</p>
+            <a href="{{ path('create_ei') }}" class="btn btn-secondary btnHome">Je crée mon ENTREPRISE INDIVIDUELLE
+                !</a>
+        </div>
+    </section>
+    <div class="container text-justify p-4">
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Qu’est-ce qu’une entreprise individuelle ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>L’entreprise individuelle est une forme juridique qui consiste à ce qu’une personne physique, donc un
+                entrepreneur individuel, exerce une activité exclusivement seul et en son nom propre. Elle a la qualité
+                d’être simple et d’avoir un faible coût de fonctionnement, car elle nécessite qu’une seule personne.
+            </p>
+            <p>L’entreprise individuelle n’a pas de personnalité morale.
+            </p>
+            <p>L’exercice de l’entreprise individuelle dépourvue de personnalité morale peut se faire sous deux options
+                :
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">Le régime de micro-entreprise (le micro-entrepreneur était auparavant identifié sous
+                    l’appellation d’auto-entrepreneur) à condition de respecter les seuils de chiffre d'affaires.
+                </li>
+                <li class="mt-2">Le régime de l’EIRL (Entreprise Individuelle à Responsabilité Limitée) : il s’agit pour
+                    l’entrepreneur de limiter sa responsabilité au patrimoine professionnel et donc exclure le
+                    patrimoine personnel.
+                </li>
+            </ul>
+        </div>
+        <div class="row justify-content-center">
+            <h2 class="text-center"> Qui peut créer une entreprise individuelle ?</h2>
+        </div>
+        <div>
+            <p>Exclusivement une personne physique, pas de personne morale.</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quels sont les pouvoirs de l’entrepreneur individuel ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>L’entrepreneur individuel est donc l’unique chef, il dispose d’une totale autonomie ou liberté de son
+                entreprise. Par exemple, concernant la rémunération, l’entrepreneur individuel est libre de fixer le
+                montant de sa rémunération.
+            </p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Comment créer une entreprise individuelle ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une entreprise individuelle nécessite la déclaration de son activité et le choix d’un
+                Centre de
+                Formalités des Entreprises (CFE), celui-ci diffère en fonction de l’activité exercée et de la
+                domiciliation de l’entreprise. Il est également nécessaire de s’immatriculer au Registre du commerce et
+                des sociétés (RCS) si vous êtes commerçant, ou au Répertoire des métiers (RM) si vous êtes artisans.
+            </p>
+            <p>Il faut également choisir un régime social, en tant que travailleur non-salarié il vous faut choisir
+                entre le régime des indépendants de la Sécurité sociale ou la CIPAV (Caisse interprofessionnelle de
+                prévoyance et d’assurance vieillesse), ce choix dépend de la nature de votre activité.
+            </p>
+            <p>L’équipe <span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> est là
+                pour vous aider dans vos démarches et vous mettre en relation avec des avocats spécialisés si vous avez
+                besoin de conseils personalisés.
+            </p>
+
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">La rédaction des statuts est-elle indispensable à la création d’une entreprise
+                individuelle ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une entreprise individuelle n’exige pas la rédaction de statuts, car elle n’a pas de
+                personnalité
+                morale. Sa création a donc l’avantage d’être simple.</p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quel est le capital social d’une entreprise individuelle ?</h2>
+        </div>
+        <div class="row mt-4">
+            <p>La création d’une entreprise individuelle n’exige pas non plus l’existence d’un capital social. Le
+                fonctionnement de l’entreprise individuelle a
+                donc l’avantage d’être à faible coût, car aucun apport n’est obligatoire afin de la constituer.
+            </p>
+            <p>Rappelons que le patrimoine de l’entrepreneur individuel est également le patrimoine de l’entreprise
+                individuelle.
+            </p>
+        </div>
+        <div class="row mt-4 justify-content-center">
+            <h2 class="text-center">Quelles activités une entreprise individuelle peut-elle exercer ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Il peut s’agir d’activités commerciales, artisanales, industrielles, agricoles ou libérales. La
+                détermination des activités doit être conforme à la loi.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel siège social pour une entreprise individuelle ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Concernant l’entreprise individuelle on parle plutôt de domiciliation commerciale. Il est important de
+                connaître cette information, car c’est elle qui détermine la nationalité de l’entreprise, le pays
+                d’imposition, le tribunal compétent, ainsi que le lieu d’immatriculation.
+            </p>
+            <p> Une entreprise individuelle peut être domiciliée au lieu d’habitation de l'entrepreneur individuel, sans
+                conditions
+                (loi Dutreil), ou être située dans un local professionnel.
+
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quelle dénomination pour une entreprise individuelle ?
+            </h2>
+        </div>
+        <div class="row mt-4"><p>Le choix de la dénomination sociale doit être licite (donc conforme à l’ordre
+                public et aux bonnes mœurs), elle peut comporter certains caractères spéciaux (/, &, *) et/ou des
+                chiffres.
+
+            </p>
+            <p>La dénomination de l’entreprise individuelle doit obligatoirement comporter le nom de l’entrepreneur
+                individuel. On peut également faire référence, en guise de nom commercial, au secteur d’activité et
+                prévoir une enseigne.
+            </p>
+            <p>Ensuite, il convient de vérifier sur le site de Infogreffe et de l’INPI la disponibilité du nom,
+                celui-ci ne doit pas faire l’objet d’une protection sur la propriété intellectuelle.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Doit-on déclarer l’entreprise individuelle au Registre de Commerce et des
+                Sociétés (RCS) ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Même si l’entreprise individuelle n’a pas de personnalité morale, l’entrepreneur individuel à
+                l’obligation d’immatriculer l’entreprise individuelle au Répertoire des Métiers ou au Registre de
+                Commerce et des
+                Sociétés sous peine de sanction, car toute personne physique ou morale qui exerce une activité
+                commerciale doit obligatoirement s’inscrire au RCS. Cette démarche s’effectue en ligne ou par
+                courrier auprès du Centre de Formalités des Entreprises (CFE) dans un délai maximum de 15 jours
+                après le commencement de l’activité commerciale.
+
+            </p>
+            <p><span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> est là pour
+                réaliser cette démarche à votre place, vous n’avez plus qu’à vous concentrer sur votre activité.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quelle responsabilité pour l’entrepreneur individuel face aux créanciers ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>En principe, l’entrepreneur individuel a une responsabilité illimitée envers les créanciers. En cas
+                de dettes, les créanciers peuvent exiger d’être payés en considération du patrimoine de
+                l’entrepreneur individuel (il y a donc une confusion entre le patrimoine personnel et le patrimoine
+                professionnel : c’est le principe d’unicité du patrimoine).
+            </p>
+            <p>Par exception, la responsabilité de l’entrepreneur individuel peut être limitée au patrimoine
+                professionnel en cas de déclaration d’insaisissabilité du patrimoine personnel auprès d’un notaire.
+                De plus, la résidence principale d’un entrepreneur individuel ne peut être saisie.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Peut-on cumuler la profession d’entrepreneur individuel avec une autre ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Il est impossible d’être l’entrepreneur individuel de deux entreprises individuelles à la fois.
+            </p>
+            <p>En revanche, il est possible de cumuler le statut d’entrepreneur individuel avec le statut de salarié
+                d’une autre société
+                (mais des clauses de contrat peuvent prohiber ce cumul), d’étudiant, ou de fonctionnaire (sous
+                réserve d’accord hiérarchique).
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quel est le régime fiscal d’une entreprise individuelle ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Le régime fiscal d’une entreprise individuelle est celui de l’impôt sur le revenu (IR), elle ne peut
+                pas être soumise à l’impôt sur les sociétés (IS).
+            </p>
+            <p>Il y a différentes catégories de revenus selon l’activité exercée :
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">Pour l’exercice d’une activité agricole : BA (Bénéfices Agricoles)
+                </li>
+                <li class="mt-2">Pour le commerce ou l’artisanat : BIC (Bénéfices Industriels et Commerciaux)
+                </li>
+                <li class="mt-2">Pour les activités libérales : BNC (Bénéfices Non Commerciaux).
+                </li>
+            </ul>
+        </div>
+        <div class="row mt-4">
+            <p> Concernant les régimes fiscaux d’une entreprise individuelle, on parle de régime simplifié (il
+                y a allégement de certaines obligations de déclarations par rapport au régime normal). En principe,
+                le régime réel de l’impôt sur le revenu permet de déduire les dépenses effectuées pour le
+                fonctionnement de l’activité dans le chiffre d’affaires.
+
+            </p>
+            <p> L’observation du chiffre d’affaires est importante concernant le choix de régime.
+            </p>
+            <p>Le régime simplifié s’applique :
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2"> Lorsqu’il s’agit d’un chiffre d’affaires ne dépassant pas 238 000 € HT pour
+                    une prestation de service.
+                </li>
+                <li class="mt-2"> Lorsqu’il s’agit d’un chiffre d’affaires ne dépassant pas 789 000 € HT pour
+                    un achat-revente.
+                </li>
+            </ul>
+        </div>
+        <div class="row mt-4">
+            <p>Le régime normal s’applique lorsque le chiffre d’affaires annuel hors taxe dépasse le seuil du régime
+                simplifié.
+            </p>
+            <p>L’entrepreneur doit préciser, la nature du revenu, le régime d’imposition et fournir le numéro SIRET.
+                L’entrepreneur individuel peut également se décider concernant le changement de régime si ces seuils
+                sont atteints.
+            </p>
+            <p><span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> est là pour
+                vous aider à comprendre et choisir le régime fiscal de votre entreprise
+                individuelle.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quels sont les avantages d’une entreprise individuelle ?</h2>
+        </div>
+        <div class="row mt-4 mb-4">
+            <p> L’entreprise individuelle procure trois avantages majeurs :
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4 mb-4">
+            <ul class="col-9">
+                <li class="mt-2"><span class="font-weight-bold"> Un avantage administratif et financier</span> :
+                    Comme dit précédemment, la création d’une
+                    entreprise individuelle est simple car elle ne nécessite pas la rédaction de statuts et présente
+                    un faible coût de fonctionnement, car il n’existe qu’une personne physique en charge :
+                    l’entrepreneur. Il n’est également pas obligatoire de constituer un capital social, le
+                    patrimoine de l’entrepreneur individuel est confondu au patrimoine de l’entreprise individuelle.
+                </li>
+                <li class="mt-2"><span class="font-weight-bold"> Un avantage fiscal </span>: Vous pouvez bénéficier
+                    d’une aide consistant à l’exonération temporaire, sous certaines conditions, d’impôt sur les
+                    bénéfices ou sur la cotisation foncière concernant une nouvelle entreprise dans une zone
+                    prioritaire.
+                </li>
+                <li class="mt-2"><span class="font-weight-bold"> Un avantage social </span>: Vous pouvez bénéficier
+                    d’une aide,
+                    consistant à l’exonération sous certaines conditions des charges sociales, appelée ACRE (Aide
+                    aux Créateurs et Repreneurs d’Entreprise). L’entrepreneur individuel est soumis à un régime de
+                    protection sociale obligatoire sous peine de sanction en cas de refus de s’affilier.
+                    L’entrepreneur individuel ne bénéficie pas d’une protection sociale assimilée totalement au
+                    salarié, car le risque d’accident de travail et la maladie professionnelle ne sont pas
+                    obligatoirement assurés.
+                </li>
+            </ul>
+        </div>
+        <div class="row mt-4"><p>L’URSSAF collecte les cotisations et opère une répartition des fonds pour financer
+                la
+                sécurité sociale des indépendants : Travailleur Non Salarié (TNS). Il s’agit d’une couverture
+                concernant
+                les allocations familiales, les décès, maladies, maternité et la formation professionnelle.</p>
+        </div>
+        <p><span class="font-weight-bold"><span class="text-secondary">IZY </span>CONTRAT </span> peut vous aider
+            dans vos démarches et vous mettre en relation avec un avocat spécialisé, si vous souhaitez bénéficier de
+            conseils juridiques.
+
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quels sont les inconvénients d’une entreprise individuelle ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>L’inconvénient majeur de l’entreprise individuelle est la non-distinction du patrimoine de l’entrepreneur
+                individuel avec celui de l’entreprise individuelle.
+            </p>
+            <p>Si les dettes de l’entreprise sont impayées, le créancier peut non seulement engager la responsabilité de
+                l’entrepreneur individuel, mais aussi celle de son conjoint en cas de régime de la communauté
+                universelle, ou de régime de la communauté des biens réduits aux acquêts en ce qui concerne les biens
+                communs (tout ceci est possible s’il n’y a pas eu de déclaration d’insaisissabilité du patrimoine
+                personnel).
+            </p>
+            <p>Pour le versement des dividendes, cette forme juridique n’est pas avantageuse.
+            </p>
+            <p>La cession de l’entreprise individuelle ne se fait pas simplement.</p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Quelle est la différence entre une entreprise individuelle et une société ?
+            </h2>
+        </div>
+        <div class="row justify-content-center">
+            <p>L’entreprise individuelle est juridiquement différente d’une société car elle n’a pas de personnalité
+                juridique ni de patrimoine distinct à celui de
+                l’entrepreneur individuel.
+            </p>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <h2 class="text-center">Peut-on transformer une entreprise individuelle en société ?
+            </h2>
+        </div>
+        <div class="row mt-4">
+            <p>Étant donné que l’entreprise individuelle n’a pas de personnalité morale, sa « transformation » en une
+                société n’est en soi pas possible.
+            </p>
+            <p> En revanche, il est possible d’opter pour une autre procédure qui consiste à créer une nouvelle société
+                dans le but de
+                poursuivre la même activité, faire un transfert de fond de l’entreprise individuelle vers cette nouvelle
+                société, et ensuite
+                radier l’entreprise individuelle.
+            </p>
+            <p>Vous avez trouvé les réponses à toutes vos interrogations ? Alors c’est parti, donnez vie à votre projet
+                en quelques clics !</p>
+            <p>Vous avez encore des questions ? L’Équipe d’<span class="font-weight-bold"><span
+                            class="text-secondary">IZY </span>CONTRAT </span>
+                est là pour vous aider.
+            </p>
+        </div>
+    </div>
+{% endblock %}

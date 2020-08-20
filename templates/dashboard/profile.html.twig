@@ -11,13 +11,18 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        <h2>Modifier mon profil</h2>
+        <h1>Modifier mon profil</h1>
         <div class="">
             {{ form_start(form) }}
+
             {{ form_widget(form) }}
 
             <button class="btn btn-primary offset-11">{{ button_label|default('Valider') }}</button>
             {{ form_end(form) }}
         </div>
     </section>
+        <a class="btn btn-danger offset-5" href="{{path('dashboard_profile_edit_user')}}">modifier mot de passe</a>
+{% endblock %}
+{% block footer %}
+   
 {% endblock %}

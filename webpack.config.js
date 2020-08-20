@@ -21,8 +21,11 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('js_dashboard', './assets/js/dashboard.js')
     .addEntry('home', './assets/js/home.js')
-    .addEntry('login', './assets/js/login.js')
     .addEntry('fields', './assets/js/fields.js')
+    .addEntry('howitwork', './assets/js/howitwork.js')
+    .addEntry('createcompany', './assets/js/createcompany.js')
+    .addEntry('fichesci', './assets/js/fichesci.js')
+    .addEntry('success_cancel_payment', './assets/js/success_cancel_payment.js')
 
 
     .addStyleEntry('style_dashboard', './assets/scss/dashboard.scss')
@@ -34,6 +37,14 @@ Encore
     .addStyleEntry('register_user', './assets/scss/registerUser.scss')
     .addStyleEntry('editor', './assets/scss/editor.scss')
     .addStyleEntry('document', './assets/scss/document.scss')
+    .addStyleEntry('technical_sheet', './assets/scss/technical_sheet.scss')
+    .addStyleEntry('about', './assets/scss/about.scss')
+    .addStyleEntry('tab1', './assets/scss/tab1.scss')
+    .addStyleEntry('create_entreprise', './assets/scss/create_entreprise.scss')
+    .addStyleEntry('login', './assets/scss/login.scss')
+    .addStyleEntry('footer_style', './assets/scss/footer.scss')
+
+
 
 
     .copyFiles([

@@ -1,8 +1,8 @@
 @import "vars";
-@import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display+SC&display=swap');
 @import "Molecules/navbar";
 @import "Molecules/footer";
+@import "~bootstrap/scss/bootstrap";
 
 body {
     margin: 0;
@@ -24,14 +24,12 @@ body {
 
 .btn {
     font-size: $font-size;
-    border-radius: 50px;
-    text-transform: uppercase;
 }
 
 .btn-primary {
-    border-radius: 50px;
-    text-transform: uppercase;
+    background: $secondary-color;
 }
+
 
 h1, h2, h3, h4 {
     font-family: $font-title;
@@ -78,4 +76,8 @@ section.page-content{
     flex-direction: column;
     justify-content: center;
     padding-top: 100px;
+}
+
+.flash {
+    margin-top: 100px;
 }

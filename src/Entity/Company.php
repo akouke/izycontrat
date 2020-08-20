@@ -147,6 +147,11 @@ class Company
      */
     private $socialObject;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="companies")
+     */
+    private $client;
+
     // /**
     //  * @ORM\ManyToOne(targetEntity=Person::class)
     //  */
@@ -501,6 +506,18 @@ class Company
     public function setSocialObject(?string $socialObject): self
     {
         $this->socialObject = $socialObject;
+
+        return $this;
+    }
+
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    public function setClient(?User $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }

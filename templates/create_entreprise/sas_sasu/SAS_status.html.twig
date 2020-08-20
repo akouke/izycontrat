@@ -1,0 +1,1453 @@
+{% extends '_layout.html.twig' %}
+{% block title %}SAS STATUT {% endblock %}
+{% block navbar %}{% endblock %}
+{% block dashboard %}{% endblock %}
+{% block body %}
+    <style>
+        body {
+
+            background-size: cover;
+            background: white;
+            margin-top: 2px;
+            text-align: center;
+            width: 100%;
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
+
+    <div class="container-fluid">
+
+
+        <h2><br>
+            {% if company.name is defined %}
+                {{ company.name }}
+            {% else %}
+                'NOM DE LA SOCIETE'
+            {% endif %}
+
+        </h2>
+        <p>Société Par actions simplifiée<br>
+            au capital de
+            <b>
+                {% if capitalNum is defined %}
+                {{ capitalNum }} euros
+                {% else %}
+                'NOMBRE NUMERAIRE' euros
+                {% endif %}
+            </b>
+        </p>
+
+        <p><u>Siège social</u> :
+            <b>
+                {% if company is defined %}
+                {{ company.address }} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}
+                {% else %}
+                'ADRESSE'
+                {% endif %}
+            </b>
+        </p>
+
+        <br>
+
+        <div class="col-11" style="margin-left: 4%; text-align: left">
+            <hr>
+            <h2 style="color: black; text-align: center;">STATUTS</h2>
+            <hr>
+            <b>LES SOUSSIGNES :</b>
+
+              {% if associe1 is defined and associe1 is not null %}
+                <p>
+                     <br><b>{{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}}</b>, <br>
+
+                    Né le <b>{{ associe1.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant  à <b>{{ associe1.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
+                </p>
+
+                <p style="text-align: center;"><br> <b>DE PREMIERE PART</b> </p>
+                {% endif %}
+
+                {% if associe2 is defined and associe2 is not null %}
+                <p>
+                   <br><b>{{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}}</b>, <br>
+
+                    Né le <b>{{ associe2.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant  à <b>{{ associe2.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
+                </p>
+
+                <p style="text-align: center;"><br> <b>DE SECONDE PART</b> </p>
+                {% endif %}
+
+
+                {% if associe3 is defined and associe3 is not null %}
+                <p>
+                   <br><b>{{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}}</b>, <br>
+
+                    Né le <b>{{ associe3.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant  à <b>{{ associe3.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
+                </p>
+
+                <p style="text-align: center;"><br> <b>DE TROISIEME PART</b> </p>
+                {% endif %}
+
+
+                {% if associe4 is defined and associe4 is not null %}
+                <p>
+                   <br><b>{{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}}</b>, <br>
+
+                    Né le <b>{{ associe4.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant  à <b>{{ associe4.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
+                </p>
+
+                <p style="text-align: center;"><br> <b>DE QUATRIEME PART</b> </p>
+                {% endif %}
+
+
+                {% if associe5 is defined and associe5 is not null %}
+                <p>
+                   <br><b>{{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}}</b>, <br>
+
+                    Né le <b>{{ associe5.dateBirth ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant  à <b>{{ associe5.address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
+                </p>
+
+                <p style="text-align: center;"><br> <b>DE CINQUIEME PART</b> </p>
+                {% endif %}
+
+                   {% if associeCompany1.id is defined %}
+                <p>
+                    Société <b> {{ associeCompany1.name ?? '' }}</b> représentée par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>
+                </p>
+                <p style="text-align: center;"><br> <b> {%if numberPerson == 1%}DE SECONDE PART{% elseif numberPerson == 2%}DE TROISIEME PART{% elseif numberPerson == 3%}DE QUATRIEME PART{% elseif numberPerson == 4%}DE CINQUIEME PART{%endif%} </b> </p>
+                    {% endif %}
+
+                    {% if associeCompany2.id is defined %}
+                <p>
+                    Société <b> {{ associeCompany2.name ?? '' }}</b> représentée par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>
+                 </p>
+                 <p style="text-align: center;"><br> <b>D' AUTRE PART</b> </p>
+                    {% endif %}
+
+                    {% if associeCompany3.id is defined %}
+                <p>
+                    - Par la société <b> {{ associeCompany3.name ?? '' }}</b> représentée par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+                </p>
+                <p style="text-align: center;"><br> <b>DE Z PART</b> </p>
+
+            {% endif %}
+
+
+            <p style="text-align: center;"><b>Ont établi, ainsi qu'il suit, les statuts de la société par actions
+                    simplifiée
+                    qu'ils ont décidé de constituer.</b></p>
+
+            <p><b>ARTICLE 1 - FORME</b><br>
+
+                Il est constitué par les présentes, sous la forme d’une société par actions simplifiée, une société qui
+                sera
+                régie par les lois et règlements en vigueur, et par les présents statuts (les « Statuts »).</p>
+
+            <p>La Société fonctionne sous la même forme avec un ou plusieurs associés.</p>
+
+            <p>En cas de réunion de toutes les actions en une seule main, l'associé unique exerce seul les pouvoirs
+                dévolus
+                à
+                la collectivité des associés par les Statuts.</p>
+
+            <p>Elle ne peut procéder à une offre au public de ses titres mais peut néanmoins procéder à des offres
+                réservées
+                à
+                des investisseurs qualifiés ou à un cercle restreint d'investisseurs.</p>
+
+
+            <p><b>ARTICLE 2 - OBJET</b><<br>
+
+                La Société a pour objet, en France et à l'étranger :</p>
+
+            <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE' }}  {{company.activitySector.nameOther ?? ''}}</b><br>
+
+            <p>Toutes opérations industrielles et commerciales se rapportant à :<br>
+                - la création, l'acquisition, la location, la prise en location-gérance de tous fonds de commerce, la
+                prise
+                à
+                bail, l'installation, l'exploitation de tous établissements, fonds de commerce, usines, ateliers, se
+                rapportant
+                à l'une ou l'autre des activités spécifiées ci-dessus ;<br>
+                - la prise, l'acquisition, l'exploitation ou la cession de tous procédés, brevets et droits de propriété
+                intellectuelle concernant ces activités ;<br>
+                - la participation, directe ou indirecte, de la Société dans toutes opérations financières, mobilières
+                ou
+                immobilières ou entreprises commerciales ou industrielles pouvant se rattacher à l'objet social ou à
+                tout
+                objet
+                similaire ou connexe ;<br>
+                - toutes opérations quelconques contribuant à la réalisation de cet objet.</p>
+
+
+            <p><b>ARTICLE 3 - DENOMINATION</b><br>
+
+                La dénomination sociale est : <b> {{ company.name ?? ' NOM DE LA SOCIETE' }}  </b>. </p>
+
+            <p>Dans tous les actes et documents émanant de la Société et destinés aux tiers, la dénomination sera
+                précédée
+                ou
+                suivie immédiatement des mots écrits lisiblement "Société par actions simplifiée" ou des initiales "SAS"
+                et
+                de
+                l'énonciation du montant du capital social.</p>
+
+            <p>En outre, la Société doit indiquer en tête de ses factures, notes de commandes, tarifs et documents
+                publicitaires, ainsi que sur toutes correspondances et récépissés concernant son activité et signés par
+                elle
+                ou
+                en son nom, le siège du tribunal au greffe duquel elle est immatriculée au Registre du commerce et des
+                sociétés,
+                et le numéro d'immatriculation qu'elle a reçu.</p>
+
+
+            <p><b>ARTICLE 4 - SIEGE SOCIAL</b><br>
+
+                Le siège social est fixé à <b> {{ company.address ?? ' VILLE (CODE POSTAL) – ADRESSE' }} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}</b> <br>
+
+            <p>Il pourra être transféré dans le même département ou dans un département limitrophe par simple par une
+                simple
+                décision du président, habilité à modifier les statuts à cet effet, sous réserve néanmoins d’une
+                ratification
+                par la prochaine assemblée générale, et en tout autre lieu en vertu d'une décision collective
+                extraordinaire
+                des
+                associés.</p>
+
+
+            <p><b>ARTICLE 5 - DUREE</b><br>
+
+                La durée de la Société est fixée à quatre-vingt-dix-neuf années à compter de la date de son
+                immatriculation
+                au
+                Registre du commerce et des sociétés, sauf les cas de dissolution anticipée ou de prorogation.
+            </p>
+
+
+            <p>
+               <b> ARTICLE 6 -  APPORTS </b> <br>
+
+                Il est fait les apports numéraires suivants : <br>
+                {#Associes Persons#}
+                 {% if associe1 is defined and associe1 is not null %}
+                - Par <b> {{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe1.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+
+                {% if associe2 is defined and associe2 is not null %}
+                - Par <b> {{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe2.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+
+                {% if associe3 is defined and associe3 is not null %}
+                - Par <b> {{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe3.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+
+                {% if associe4 is defined and associe4 is not null %}
+                - Par <b> {{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie4 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe4.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+
+                {% if associe5 is defined and associe5 is not null %}
+                - Par <b> {{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocie5 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associe5.capitalAmountAdding ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+
+                {#Associes Companies#}
+                 {% if associeCompany1.id is defined %}
+                - Par la société <b> {{ associeCompany1.name ?? '' }}</b> représentée par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany1 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany1.capitalBring ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+                {% if associeCompany2.id is defined %}
+                - Par la société <b> {{ associeCompany2.name ?? '' }}</b> représentée par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany2 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany2.capitalBring ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+                {% if associeCompany3.id is defined %}
+                - Par la société <b> {{ associeCompany3.name ?? '' }}</b> représentée par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+                {% endif %}
+
+                Soit au total, la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} €</b>, ci	<b> {{ totalToNum ?? ' 0.00' }} €</b>
+                <p style="text-align: right">==========================</p>
+
+                La totalité de cet apport en numéraire, soit la somme de <b>{{ totalToWord ?? ' NOMBRE EN LETTRES' }} euros ( {{ totalToNum ?? ' 0.00' }} €)</b>,
+                a été dès avant ce jour, déposée au crédit d'un compte ouvert au nom de la Société en formation,
+                à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateDepot ?? ' JOUR/ MOIS/ ANNEE' }}</b> par
+                la <b>{{ company.bankName ?? ' NOM BANQUE' }} – {{ addressBank ?? ' ADRESSE'}} – {{ villeBank ?? '(CODE POSTAL) VILLE '}}</b>, dépositaire des fonds, auquel est demeurée annexée
+                la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
+                <br>
+            </p>
+
+
+            <p><b>ARTICLE 7 - CAPITAL SOCIAL</b><br>
+
+                1.Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? ' nombre en numéraire'}} €)</b>, divisé en
+                  <b>{{ totalPartWord ?? 'NOMBRE EN LETTRES'}} ( {{ totalPartNum ?? 'nombre en numéraire'}})</b> parts sociales de <b>{{ partChacuneWord ?? 'NOMBRE EN LETTRES'}} ({{ partChacuneNum ?? 'nombre en numéraire'}} )</b> chacune,
+                   et entièrement libérées et attribuées aux associés en rémunération de leur apport.
+
+                </p>
+
+            <p>
+                2.Les actions sont attribuées et réparties comme suit :<br>
+
+              {% if associe1 is defined and associe1 is not null %}
+                  - A <b>{{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}}</b>, à concurrence de <b> {{ toWordApportAssocie1 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, numérotées de 1 à <b> {{ associe1.capitalAmountAdding ?? ' 0.0'}}</b>, <br> ci	<b> {{ associe1.capitalAmountAdding ?? ' 0.0'}} parts</b> <br>
+                {% endif%}
+                {% if associe2 is defined and associe2 is not null %}
+                  - A <b>{{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}}</b>, à concurrence de <b> {{ toWordApportAssocie2 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, numérotées de {% if associe1.capitalAmountAdding is defined %} {{ associe1.capitalAmountAdding + 1}} {% else %} 0.0 {% endif%} à <b> {{ maxIntervalleAssocie2 ?? '0.0'}}</b>, <br> ci	<b> {{ associe2.capitalAmountAdding ?? ' 0.0'}} parts</b> <br>
+                {% endif%}
+                {% if associe3 is defined and associe3 is not null %}
+                  - A <b>{{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}}</b>, à concurrence de <b> {{ toWordApportAssocie3 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, numérotées de {{ maxIntervalleAssocie2 ?? ' 0.0'}} à <b> {{ maxIntervalleAssocie3 ?? '0.0'}}</b>, <br> ci	<b> {{ associe3.capitalAmountAdding ?? ' 0.0'}} parts</b> <br>
+                {% endif%}
+                {% if associe4 is defined and associe4 is not null %}
+                  - A <b>{{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}}</b>, à concurrence de <b> {{ toWordApportAssocie4 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, numérotées de {{ maxIntervalleAssocie3 ?? ' 0.0'}} à <b> {{ maxIntervalleAssocie4 ?? '0.0'}}</b>, <br> ci	<b> {{ associe4.capitalAmountAdding ?? ' 0.0'}} parts</b> <br>
+                {% endif%}
+                {% if associe5 is defined and associe5 is not null %}
+                  - A <b>{{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}}</b>, à concurrence de <b> {{ toWordApportAssocie5 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, numérotées de {{ maxIntervalleAssocie4 ?? ' 0.0'}} à <b> {{ maxIntervalleAssocie5 ?? '0.0'}}</b>, <br> ci	<b> {{ associe5.capitalAmountAdding ?? ' 0.0'}} parts</b> <br>
+                {% endif%}
+
+                {#{% for i in  0..numberPerson %}#}
+                {#    {% if i == numberPerson %}#}
+
+                       {% if associeCompany1.id is defined %}
+                         - A la société <b> {{ associeCompany1.name ?? '' }} </b>, à concurrence de <b> {{ toWordApportAssocieCompany1 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, ci	<b>{{ associeCompany1.capitalBring ?? ' 0.0'}} parts</b><br>
+                        {% endif %}
+
+                        {% if associeCompany2.id is defined %}
+                         - A la société <b> {{ associeCompany2.name ?? '' }} </b>, à concurrence de <b> {{ toWordApportAssocieCompany2 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, ci	<b>{{ associeCompany2.capitalBring ?? ' 0.0'}} parts</b><br>
+                        {% endif %}
+
+                        {% if associeCompany3.id is defined %}
+                         - A la société <b> {{ associeCompany3.name ?? '' }} </b>, à concurrence de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}} </b> parts sociales, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} parts</b><br>
+                        {% endif %}
+
+                {#    {% endif %}#}
+                {#{% endfor %}#}
+
+
+
+                Total égal au nombre de parts composant le capital social : <b>{{ companyTotalCapitalWord ?? 'NOMBRE EN LETTRES' }}</b> parts sociales, ci <b>{{ companyTotalCapital ?? '0' }} parts</b>
+
+                <br>Les soussignés déclarent que toutes les parts sociales représentant le capital social leur appartiennent, sont réparties entre eux dans les proportions indiquées ci-dessus correspondant à leurs apports respectifs et qu'elles sont toutes souscrites et libérées comme indiqué ci-dessus.
+                <br>
+            </p>
+
+            <p><b>ARTICLE 8 - MODIFICATIONS DU CAPITAL SOCIAL</b><br>
+
+                I - Le capital social peut être augmenté par tous moyens et selon toutes modalités prévues par la loi.
+            </p>
+
+            <p>Le capital social est augmenté soit par émission d'actions ordinaires ou d'actions de préférence, soit
+                par
+                majoration du montant nominal des titres de capital existants. Il peut également être augmenté par
+                l'exercice de droits attachés à des valeurs mobilières donnant accès au capital, dans les conditions
+                prévues
+                par la loi.</p>
+
+            <p>La collectivité des associés est seule compétente pour décider, sur le rapport du président, une
+                augmentation de capital immédiate ou à terme. Elle peut déléguer cette compétence au président dans les
+                conditions fixées à l'article L. 225-129-2 du Code de commerce.</p>
+
+            <p>Lorsque la collectivité des associés décide l'augmentation de capital, elle peut déléguer au président le
+                pouvoir de fixer les modalités de l'émission des titres.</p>
+
+            <p>En cas d'augmentation par émission d'actions de numéraire ou émission de valeurs mobilières donnant accès
+                au capital ou donnant droit à l'attribution de titres de créances, un droit préférentiel à la
+                souscription de ces actions est réservé, dans les conditions légales, aux propriétaires d'actions
+                existantes autres que des actions de préférence sans droit de vote auxquelles est attaché un droit
+                limité aux dividendes, aux réserves ou au partage de l'actif de liquidation, même si elles récupèrent un
+                droit de vote au cours de leur existence.</p>
+
+            <p>Les associés peuvent renoncer à titre individuel à leur droit préférentiel et la collectivité des
+                associés qui décide l'augmentation de capital peut décider, dans les conditions prévues par la loi, de
+                supprimer ce droit préférentiel de souscription.</p>
+
+            <p>Si la collectivité des associés ou, en cas de délégation le président, le décide expressément, les titres
+                de capital non souscrits à titre irréductible sont attribués aux associés qui auront souscrit un nombre
+                de
+                titres supérieur à celui auquel ils pouvaient souscrire à titre préférentiel, proportionnellement aux
+                droits de souscription dont ils disposent et, en tout état de cause, dans la limite de leurs
+                demandes.</p>
+            <p>Si l'augmentation du capital est réalisée par incorporation de réserves, bénéfices ou primes d'émission,
+                la collectivité des associés délibère aux conditions de quorum et de majorité prévues pour les décisions
+                ordinaires.</p>
+
+            <p>Le droit à l'attribution d'actions nouvelles, à la suite de l'incorporation au capital de réserves,
+                bénéfices ou primes d'émission appartient au nu-propriétaire, sous réserve des droits de
+                l'usufruitier.</p>
+
+            <p>II - La réduction du capital est autorisée ou décidée par la collectivité des associés délibérant dans
+                les conditions prévues pour les décisions extraordinaires et ne peut en aucun cas porter atteinte à
+                l'égalité des associés. Les associés peuvent déléguer au président tous pouvoirs pour la réaliser.</p>
+
+            <p>III - La collectivité des associés délibérant dans les conditions prévues pour les décisions
+                extraordinaires peut également décider d'amortir tout ou partie du capital social et substituer aux
+                actions de capital des actions de jouissance partiellement ou totalement amorties, le tout en
+                application des articles L. 225-198 et suivants du Code de commerce.</p>
+
+
+            <p><b>ARTICLE 9 - LIBERATION DES ACTIONS</b><br>
+
+                Lors de la constitution de la Société, les actions de numéraire sont libérées, lors de la souscription,
+                de la moitié au moins de leur valeur nominale.</p>
+
+            <p>Lors d'une augmentation de capital, les actions de numéraire sont libérées, lors de la souscription, d'un
+                quart au moins de leur valeur nominale et, le cas échéant, de la totalité de la prime d'émission.</p>
+
+            <p>La libération du surplus doit intervenir en une ou plusieurs fois sur appel du président, dans le délai
+                de cinq ans à compter de l'immatriculation au Registre du commerce et des sociétés en ce qui concerne le
+                capital initial, et dans le délai de cinq ans à compter du jour où l'opération est devenue définitive en
+                cas d'augmentation de capital.</p>
+
+            <p>Les appels de fonds sont portés à la connaissance du ou des souscripteurs quinze jours au moins avant la
+                date fixée pour chaque versement, par lettre recommandée avec demande d'avis de réception, adressée à
+                chaque associé.</p>
+
+            <p>Tout retard dans le versement des sommes dues sur le montant non libéré des actions entraîne de plein
+                droit intérêt au taux légal à partir de la date d'exigibilité, sans préjudice de l'action personnelle
+                que la Société peut exercer contre l'associé défaillant et des mesures d'exécution forcée prévues par la
+                loi.</p>
+
+            <p>Conformément aux dispositions de l'article 1843-3 du Code civil, lorsqu'il n'a pas été procédé dans un
+                délai légal aux appels de fonds pour réaliser la libération intégrale du capital, tout intéressé peut
+                demander au Président du tribunal statuant en référé soit d'enjoindre sous astreinte aux dirigeants de
+                procéder à ces appels de fonds, soit de désigner un mandataire chargé de procéder à cette formalité.</p>
+
+
+            <p><b>ARTICLE 10 - FORME DES ACTIONS</b><br>
+
+                Les actions sont obligatoirement nominatives. Elles donnent lieu à une inscription en compte individuel
+                dans les conditions et selon les modalités prévues par la loi et les règlements en vigueur.</p>
+
+            <p>Tout associé peut demander à la Société la délivrance d'une attestation d'inscription en compte.</p>
+
+
+            <p><b>ARTICLE 11 - TRANSMISSION DES ACTIONS</b><br>
+
+                Les actions ne sont négociables qu'après l'immatriculation de la Société au Registre du commerce et des
+                sociétés. En cas d'augmentation du capital, les actions sont négociables à compter de la réalisation de
+                celle-ci.
+            </p>
+
+            <p>Les actions demeurent négociables après la dissolution de la Société et jusqu'à la clôture de la
+                liquidation.</p>
+
+            <p>La propriété des actions résulte de leur inscription en compte individuel au nom du ou des titulaires sur
+                les registres tenus à cet effet au siège social.</p>
+
+            <p>En cas de transmission des actions, le transfert de propriété résulte de l'inscription des titres au
+                compte
+                de l'acheteur à la date fixée par l'accord des parties et notifiée à la Société.</p>
+
+            <p>Les actions résultant d'apports en industrie sont attribuées à titre personnel. Elles sont inaliénables
+                et intransmissibles. Elles seront annulées en cas de décès de leur titulaire comme en cas de cessation
+                par ledit titulaire de ses prestations à l'issue d'un délai de 15 jours suivant mise en demeure, par
+                lettre
+                recommandée avec demande d'avis de réception, de poursuivre lesdites prestations dans les conditions
+                prévues à la convention d'apport.</p>
+
+
+            <p><b>ARTICLE 12 - PREEMPTION</b><br>
+
+                Dans le cadre des présents statuts, les soussignés sont convenus des définitions ci-après :</p>
+
+            <p><b>- Cession</b> : signifie toute opération à titre onéreux ou gratuit entraînant le transfert de la
+                pleine propriété, de la nue-propriété ou de l'usufruit des valeurs mobilières émises par la Société, à
+                savoir : cession, transmission, échange, apport en Société, fusion et opération assimilée, cession
+                judiciaire, constitution de trusts, nantissement, liquidation, transmission universelle de patrimoine.
+            </p>
+
+            <p><b>- Action ou Valeur mobilière </b>: signifie les valeurs mobilières émises par la Société donnant accès
+                de façonimmédiate ou différée et de quelque manière que ce soit, à l'attribution d'un droit au capital
+                et/ou d'un droit de vote de la Société, ainsi que les bons et droits de souscription et d'attribution
+                attachés à ces valeurs mobilières.</p>
+
+            <p>La cession des actions de la Société à un tiers ou au profit d'associés est soumise au respect du droit
+                de préemption des associés défini ci-après :</p>
+
+            <p>L'associé cédant doit notifier son projet au président par lettre recommandée avec demande d'avis de
+                réception en indiquant les informations sur le cessionnaire (nom, adresse et nationalité ou, s'il s'agit
+                d'une personne morale, dénomination, siège social, capital, numéro RCS, identité des associés et des
+                dirigeants), le nombre d'actions dont la cession est envisagée, le prix et les conditions de la cession
+                projetée.</p>
+
+            <p>Dans un délai de 15 jours de ladite notification, le président notifiera ce projet aux autres associés,
+                individuellement, par lettre recommandée avec demande d'avis de réception, qui disposeront d'un délai de
+                2
+                mois pour se porter acquéreurs des actions à céder, dans la proportion de leur participation au
+                capital.</p>
+
+            <p>Chaque associé exerce son droit de préemption en notifiant au président le nombre d'actions qu'il
+                souhaite acquérir, par lettre recommandée avec demande d'avis de réception.<br>
+                A l'expiration du délai de 2 mois, le président devra faire connaître par lettre recommandée avec
+                demande d'avis de réception les résultats de la préemption à l'associé cédant.</p>
+
+            <p>Si les droits de préemption sont supérieurs au nombre d'actions proposées à la vente, les actions
+                concernées sont réparties par le président entre les associés qui ont notifié leur intention d'acquérir
+                au prorata
+                de
+                leur participation au capital et dans la limite de leurs demandes.</p>
+
+            <p>Si les offres d'achat sont inférieures au nombre d'actions proposées à la vente, les droits de préemption
+                seront réputés n'avoir jamais été exercés. Dans ce cas, et sous réserve de l'agrément ci-après prévu,
+                l'associé cédant pourra librement céder ses actions au cessionnaire mentionné dans la notification.</p>
+
+            <p>Toutefois, l'associé cédant peut demander le bénéfice de l'exercice du droit de préemption à concurrence
+                du nombre de titres pour lequel il aura été notifié par les autres associés et procéder à la cession du
+                solde des actions qu'il envisageait de céder, conformément aux dispositions des statuts.</p>
+
+            <p>Lorsque tout ou partie des actions dont la cession est projetée n'aura pas été préemptée dans les
+                conditions ci-dessus prévues, le cédant devra se soumettre à la procédure d'agrément suivante:</p>
+
+
+            <p><b>ARTICLE 13 - AGREMENT</b><br>
+
+                La cession de titres de capital et de valeurs mobilières donnant accès au capital à un tiers ou au
+                profit d'un associé est soumise à l'agrément préalable de la collectivité des associés.</p>
+
+            <p>Le cédant doit notifier par lettre recommandée avec demande d'avis de réception une demande d'agrément au
+                président de la Société en indiquant les nom, prénoms et adresse du cessionnaire, le nombre des titres
+                de capital ou valeurs mobilières donnant accès au capital dont la cession est envisagée et le prix
+                offert. Cette demande d'agrément est transmise par le président aux associés.</p>
+
+            <p>L'agrément résulte d'une décision collective des associés statuant à la majorité des voix des associés
+                disposant du droit de vote.</p>
+
+            <p>La décision d'agrément ou de refus d'agrément n'a pas à être motivée. Elle est notifiée au cédant par
+                lettre recommandée. A défaut de notification dans les 2 mois qui suivent la demande d'agrément,
+                l'agrément est réputé acquis.</p>
+
+            <p>En cas d'agrément, l'associé cédant peut réaliser librement la cession aux conditions prévues dans la
+                demande d'agrément.</p>
+
+            <p>En cas de refus d'agrément, la Société est tenue, dans un délai de 3 mois à compter de la notification du
+                refus, de faire acquérir les titres de capital ou valeurs mobilières donnant accès au capital, soit par
+                un associé ou par un tiers, soit, avec le consentement du cédant, par la Société, en vue d'une réduction
+                du capital.</p>
+
+            <p>A défaut d'accord entre les parties, le prix des titres de capital ou valeurs mobilières donnant accès au
+                capital est déterminé par voie d'expertise, dans les conditions prévues à l'article 1843-4 du Code
+                civil.</p>
+
+            <p>Le cédant peut à tout moment aviser le président, par lettre recommandée avec demande d'avis de
+                réception, qu'il renonce à la cession de ses titres de capital ou valeurs mobilières donnant accès au
+                capital.</p>
+
+            <p>Si, à l'expiration du délai de 3 mois, l'achat n'est pas réalisé, l'agrément est considéré comme donné.
+                Toutefois, ce délai peut être prolongé par ordonnance du Président du Tribunal de commerce statuant en
+                la forme des référés, sans recours possible, l'associé cédant et le cessionnaire dûment appelés.<br>
+                Les dispositions qui précèdent sont applicables à toutes les cessions, que lesdites cessions
+                interviennent en cas de dévolution successorale ou de liquidation d'une communauté de biens entre époux,
+                par voie d'apport, de fusion, de partage consécutif à la liquidation d'une société associée, de
+                transmission
+                universelle de patrimoine d'une société ou par voie d'adjudication publique en vertu d'une décision de
+                justice ou autrement.</p>
+
+            <p>Elles peuvent aussi s'appliquer à la cession des droits d'attribution en cas d'augmentation de capital
+                par incorporation de réserves, primes d'émission ou bénéfices, ainsi qu'en cas de cession de droits de
+                souscription à une augmentation de capital par voie d'apports en numéraire ou de renonciation
+                individuelle au droit de souscription en faveur de personnes dénommées.</p>
+
+            <p>La présente clause d'agrément ne peut être supprimée ou modifiée qu'à l'unanimité des associés.
+            </p>
+            <p>Toute cession réalisée en violation de cette clause d'agrément est nulle.</p>
+
+
+            <p><b>ARTICLE 14 - LOCATION DES ACTIONS</b><br>
+
+                La location des actions est interdite.</p>
+
+
+            <p><b> ARTICLE 15 - EXCLUSION D'UN ASSOCIE</b><br>
+
+                L'exclusion d'un associé peut être prononcée dans les cas suivants:</p>
+            <p>- défaut d'affectio societatis ;<br>
+                - mésentente durable entre associés ;<br>
+                - désaccord persistant sur la gestion, les objectifs et la stratégie de la Société ;<br>
+                - manquements d'un associé à ses obligations ;<br>
+                - dissolution, redressement ou liquidation judiciaires ;<br>
+                - changement de contrôle au sens de l'article L. 233-3 du Code de commerce ;<br>
+                - exercice d'une activité concurrente à celle de la Société, soit directement, soit par l'intermédiaire
+                d'une société filiale ou apparentée ;<br>
+                - violation d'une disposition statutaire ;<br>
+                - opposition continue aux décisions proposées par le président pendant deux exercices consécutifs,<br>
+                - condamnation pénale prononcée à l'encontre d'un associé personne physique ou morale (ou à l'encontre
+                de
+                l'un de ses dirigeants) ;<br>
+                - plus généralement, la condamnation judiciaire prononcée à l'encontre d'un associé personne physique ou
+                d'un dirigeant de l'associé personne morale, susceptible de mettre en cause l'image ou la réputation de
+                la
+                Société.<br>
+
+            <p> Les associés sont appelés à se prononcer à l'initiative du président de la Société.</p>
+
+            <p>La décision d'exclusion ne peut intervenir sans que les griefs invoqués à l'encontre de l'associé
+                susceptible d'être exclu et la date de réunion des associés devant statuer sur l'exclusion lui aient été
+                préalablement communiqués au moyen d'une lettre recommandée avec demande d'avis de réception adressée 20
+                jours avant la date de la réunion de la collectivité des associés, et ce afin qu'il puisse présenter au
+                cours d'une réunion préalable des associés ses observations, et faire valoir ses arguments en défense,
+                lesquels doivent, en tout état de cause, être mentionnés dans la décision des associés.</p>
+
+            <p>La décision d'exclusion prend effet à compter de son prononcé ; elle est notifiée à l'associé exclu par
+                lettre recommandée avec demande d'avis de réception à l'initiative du président.<br>
+                En outre, cette décision doit également statuer sur le rachat des actions de l'associé exclu et désigner
+                le
+                ou les acquéreurs des actions ; il est expressément convenu que la cession sera valable sans qu'il y ait
+                lieu
+                d'appliquer les procédures statutaires prévues en cas de cession (agrément, préemption ...).</p>
+
+            <p>La totalité des actions de l'associé exclu doit être cédée dans les 15 jours de la décision
+                d'exclusion.</p>
+
+            <p>Le prix de cession des actions de l'exclu sera déterminé d'un commun accord ou, à défaut, à dire d'expert
+                dans les conditions de l'article 1843-4 du Code civil.</p>
+
+            <p>Si la cession des actions de l'associé exclu ou le paiement du prix ne sont pas réalisés dans le délai
+                prévu, la décision d'exclusion sera nulle et de nul effet.</p>
+
+            <p>A compter de la décision d'exclusion, les droits non pécuniaires de l'associé exclu seront suspendus.</p>
+
+            <p>Les dispositions du présent article s'appliquent dans les mêmes conditions à l'associé qui a acquis cette
+                qualité à la suite d'une opération de fusion, de scission ou de dissolution.</p>
+
+            <p>La présente clause ne peut être annulée ou modifiée qu'à l'unanimité des associés.</p>
+
+
+            <p><b>ARTICLE 16 - DROITS ET OBLIGATIONS ATTACHES AUX ACTIONS</b><br>
+
+                Toute action donne droit, dans les bénéfices et l'actif social, à une part nette proportionnelle à la
+                quotité de capital qu'elle représente.</p>
+
+            <p>Sauf dispositions contraires de l'acte d'apport, les droits attachés aux actions résultant d'apports en
+                industrie sont égaux à ceux de l'associé ayant le moins apporté.</p>
+
+            <p>Chaque action donne en outre le droit au vote et à la représentation dans les consultations collectives
+                ou
+                assemblées générales, ainsi que le droit d'être informé sur la marche de la Société et d'obtenir
+                communication de certains documents sociaux aux époques et dans les conditions prévues par la loi et les
+                statuts.</p>
+
+            <p>Les associés ne supportent les pertes qu'à concurrence de leurs apports.</p>
+
+            <p>Sous réserve des dispositions légales et statutaires, aucune majorité ne peut leur imposer une
+                augmentation de leurs engagements. Les droits et obligations attachés à l'action suivent l'action quel
+                qu'en soit le titulaire.</p>
+
+            <p>La propriété d'une action comporte de plein droit adhésion aux statuts de la Société et aux décisions de
+                la collectivité des associés.</p>
+
+            <p>Les créanciers, ayants droit ou autres représentants d'un associé ne peuvent, sous quelque prétexte que
+                ce soit, requérir l'apposition de scellés sur les biens et valeurs sociales, ni en demander le partage
+                ou la licitation ;
+                ils doivent s'en rapporter aux inventaires sociaux et aux décisions de la collectivité des associés.</p>
+
+            <p>Chaque fois qu'il sera nécessaire de posséder plusieurs actions pour exercer un droit quelconque, en cas
+                d'échange, de regroupement ou d'attribution de titres ou en conséquence d'augmentation ou de réduction
+                de capital, de fusion ou autre opération sociale, les associés propriétaires de titres isolés, ou en
+                nombre inférieur à celui requis, ne peuvent exercer ces droits qu'à la condition de faire leur affaire
+                personnelle du groupement, et éventuellement de l'achat ou de la vente du nombre d'actions ou droits
+                nécessaires.</p>
+
+            <p><b>ARTICLE 17 - INDIVISIBILITE DES ACTIONS</b><br>
+
+                Les actions sont indivisibles à l'égard de la Société.</p>
+
+            <p>Les associés propriétaires indivis d'actions sont tenus de se faire représenter auprès de la Société par
+                un seul d'entre eux, considéré comme seul propriétaire ou par un mandataire unique ; en cas de
+                désaccord, le
+                mandataire unique peut être désigné à la demande de l'indivisaire le plus diligent.</p>
+
+            <p>La désignation du représentant de l'indivision doit être notifiée à la Société dans le mois de la
+                survenance
+                de l'indivision. Toute modification dans la personne du représentant de l'indivision n'aura d'effet,
+                vis-à-vis
+                de la Société, qu'à l'expiration d'un délai d'un mois à compter de sa notification à la Société,
+                justifiant
+                de
+                la régularité de la modification intervenue.</p>
+
+            <p>Le droit de vote attaché aux actions démembrées appartient au nu-propriétaire pour toutes les décisions
+                collectives, sauf pour celles concernant l'affectation des bénéfices où il appartient à
+                l'usufruitier.</p>
+
+            <p>Cependant, les associés concernés peuvent convenir de toute autre répartition du droit de vote aux
+                consultations collectives. La convention est notifiée par lettre recommandée à la Société, qui sera
+                tenue
+                d'appliquer cette convention pour toute consultation collective qui aurait lieu après l'expiration d'un
+                délai
+                d'un mois suivant l'envoi de cette lettre.</p>
+
+            <p>Toutefois, dans tous les cas, le nu-propriétaire a le droit de participer aux consultations
+                collectives.</p>
+
+
+            <p><b>ARTICLE 18 - PRESIDENT DE LA SOCIETE</b><br>
+
+                La société est représentée, dirigée et administrée par un Président, personne physique ou morale,
+                associée
+                ou non de la Société.</p>
+
+            <p><b>Désignation</b></p>
+
+            <p>Le premier Président de la Société sera désigné aux termes des présents statuts. Le Président est ensuite
+                désigné par décision collective des associés prise à la majorité des voix des associés.</p>
+
+            <p>La personne morale Président est représentée par son représentant légal sauf si, lors de sa nomination ou
+                à
+                tout moment en cours de mandat, elle désigne une personne spécialement habilitée à la représenter en
+                qualité
+                de
+                représentant.</p>
+
+            <p>Lorsqu'une personne morale est nommée Président, ses dirigeants sont soumis aux mêmes conditions et
+                obligations
+                et encourent les mêmes responsabilités civile et pénale que s'ils étaient Président en leur propre nom,
+                sans
+                préjudice de la responsabilité solidaire de la personne morale qu'ils dirigent.</p>
+
+            <p>Le mandat du Président est renouvelable sans limitation.</p>
+
+            <p>Le Président, personne physique, ou le représentant de la personne morale Président, peut être également
+                lié
+                à la Société par un contrat de travail à condition que ce contrat corresponde à un emploi effectif.</p>
+
+            <p><b>Durée des fonctions</b></p>
+
+            <p>Le Président est désigné pour une durée déterminée ou non, par l'associé unique ou la collectivité des
+                associés.</p>
+
+            <p>Les fonctions de Président prennent fin soit par le décès, la démission, la révocation, l'expiration de
+                son
+                mandat, soit par l'ouverture à l'encontre de celui-ci d'une procédure de redressement ou de liquidation
+                judiciaires.</p>
+
+            <p>Le Président peut démissionner de son mandat sous réserve de respecter un préavis de 1 mois lequel pourra
+                être réduit lors de la consultation de la collectivité des associés qui aura à statuer sur le
+                remplacement
+                du
+                Président démissionnaire.</p>
+
+            <p>La démission du Président n'est recevable que si elle est adressée à chacun des associés par lettre
+                recommandée.</p>
+
+            <p><b>Révocation</b></p>
+
+            <p>Le Président peut être révoqué pour un motif grave, par décision de la collectivité des associés prise à
+                l'initiative d'un ou plusieurs associés réunissant au moins 40 % du capital et des droits de vote de la
+                Société et statuant à la majorité des voix. Toute révocation intervenant sans qu'un motif grave soit
+                établi
+                ouvrira
+                droit à une indemnisation du Président.</p>
+
+            <p>En outre, le Président est révoqué de plein droit, sans indemnisation, dans les cas suivants :<br>
+                - interdiction de diriger, gérer, administrer ou contrôler une entreprise ou personne morale, incapacité
+                ou
+                faillite personnelle du Président personne physique,<br>
+                - mise en redressement ou liquidation judiciaire, interdiction de gestion ou dissolution du Président
+                personne morale,<br>
+                - exclusion du Président associé.</p>
+
+            <p><b>Rémunération</b></p>
+
+            <p>Le Président peut recevoir une rémunération dont les modalités sont fixées par la décision de nomination.
+                Elle peut être fixe ou proportionnelle ou à la fois fixe et proportionnelle au bénéfice ou au chiffre
+                d'affaires.</p>
+
+            <p>En outre, le Président est remboursé de ses frais de représentation et de déplacement sur justificatifs.
+                Pouvoirs du Président</p>
+
+            <p>Le Président dirige la Société et la représente à l'égard des tiers. A ce titre, il est investi des
+                pouvoirs
+                les plus étendus pour agir en toute circonstance au nom de la Société dans les limites de l'objet social
+                et
+                des
+                pouvoirs expressément dévolus par la loi et les statuts à la collectivité des associés.</p>
+
+            <p>Les dispositions des présents statuts limitant les pouvoirs du Président sont inopposables aux tiers.</p>
+
+            <p>La Société est engagée même par les actes du Président qui ne relèvent pas de l'objet social, à moins
+                qu'elle ne prouve que le tiers savait que l'acte dépassait cet objet ou qu'il ne pouvait l'ignorer
+                compte
+                tenu des
+                circonstances, la seule publication des statuts ne suffisant pas à constituer cette preuve.</p>
+
+            <p>Le Président peut déléguer à toute personne de son choix certains de ses pouvoirs pour l'exercice de
+                fonctions spécifiques ou l'accomplissement de certains actes.</p>
+
+
+            <p><b>ARTICLE 19 - DIRECTEUR GENERAL</b></p>
+
+            <p><b>Désignation</b></p>
+
+            <p>Sur la proposition du Président, la collectivité des associés peut nommer à la majorité des voix un
+                Directeur Général, personne physique ou morale.</p>
+
+            <p>La personne morale Directeur Général est représentée par son représentant légal sauf si, lors de sa
+                nomination ou à tout moment en cours de mandat, elle désigne une personne spécialement habilitée à la
+                représenter en qualité de représentant.</p>
+
+            <p>Lorsqu'une personne morale est nommée Directeur Général, ses dirigeants sont soumis aux mêmes conditions
+                et
+                obligations et encourent les mêmes responsabilités civile et pénale que s'ils étaient Directeur Général
+                en
+                leur propre nom, sans préjudice de la responsabilité solidaire de la personne morale qu'ils
+                dirigent.</p>
+
+            <p>Le Directeur Général personne physique peut être lié à la Société par un contrat de travail.</p>
+
+            <p><b>Durée des fonctions</b></p>
+
+            <p>La durée des fonctions du Directeur Général est fixée dans la décision de nomination et ne peut excéder
+                celle du mandat du Président.</p>
+
+            <p>Toutefois, en cas de cessation des fonctions du Président, le Directeur Général conserve ses fonctions
+                jusqu'à la nomination du nouveau Président, sauf décision contraire des associés.</p>
+
+            <p>Les fonctions de Directeur Général prennent fin soit par le décès, la démission, la révocation,
+                l'expiration
+                de son mandat, soit par l'ouverture à l'encontre de celui-ci d'une procédure de redressement ou de
+                liquidation judiciaires.</p>
+
+            <p>Le Directeur Général peut démissionner de son mandat par lettre recommandée adressée au Président, sous
+                réserve de respecter un préavis de 15 jours, lequel pourra être réduit lors de consultation de la
+                collectivité des associés qui aura à statuer sur le remplacement du Directeur Général
+                démissionnaire.</p>
+
+            <p><b>Révocation</b></p>
+
+            <p>Le Directeur Général peut être révoqué à tout moment, sans qu'il soit besoin d'un juste motif, par
+                décision
+                de la collectivité des associés sur proposition du Président, prise à la majorité des voix. Cette
+                révocation
+                n'ouvre droit à aucune indemnisation.</p>
+
+            <p>En outre, le Directeur Général est révoqué de plein droit, sans indemnisation, dans les cas suivants
+                :<br>
+                - interdiction de diriger, gérer, administrer ou contrôler une entreprise ou personne morale, incapacité
+                ou
+                faillite personnelle du Directeur Général personne physique,<br>
+                - mise en redressement ou liquidation judiciaire, interdiction de gestion ou dissolution du Directeur
+                Général personne morale,<br>
+                - exclusion du Directeur Général associé.</p>
+
+            <p><b>Rémunération</b></p>
+
+            <p>Le Directeur Général peut recevoir une rémunération dont les modalités sont fixées dans la décision de
+                nomination. Elle peut être fixe ou proportionnelle ou à la fois fixe et proportionnelle au bénéfice ou
+                au
+                chiffre d'affaires.</p>
+
+            <p>En outre, le Directeur Général est remboursé de ses frais de représentation et de déplacement sur
+                justificatifs.</p>
+
+            <p><b>Pouvoirs du Directeur Général</b></p>
+
+            <p>Le Directeur Général dispose des mêmes pouvoirs que le Président, sous réserve des limitations
+                éventuellement fixées par la décision de nomination ou par une décision ultérieure.</p>
+
+            <p>Le Directeur Général dispose du pouvoir de représenter la Société à l'égard des tiers.</p>
+
+            <p><b>ARTICLE 20 - CONVENTIONS ENTRE LA SOCIETE ET SES DIRIGEANTS OU ASSOCIES</b><br>
+
+                En application des dispositions de l'article L. 227-10 du Code de commerce, le Président ou, s'il en
+                existe
+                un, le Commissaire aux Comptes présente aux associés un rapport sur les conventions, intervenues
+                directement
+                ou
+                par personne interposée entre la Société et son Président, l'un de ses dirigeants, l'un de ses associés
+                disposant d'une fraction des droits de vote supérieure à dix pour cent ou, s'il s'agit d'une société
+                associée, la
+                Société la contrôlant au sens de l'article L. 233-3 dudit code.</p>
+
+            <p>Les associés statuent sur ce rapport lors de la décision collective statuant sur les comptes de
+                l'exercice
+                écoulé.</p>
+
+            <p>Le Président ou, s'il en existe un, le Commissaire aux Comptes établit un rapport sur les conventions
+                conclues au cours de l'exercice écoulé ; la collectivité des associés statue chaque année sur ce rapport
+                lors de sa consultation annuelle sur les comptes sociaux dudit exercice écoulé.</p>
+
+            <p>Les dispositions qui précèdent ne sont pas applicables aux conventions portant sur les opérations
+                courantes
+                de la Société et conclues à des conditions normales.</p>
+
+            <p>Les conventions non approuvées produisent néanmoins leurs effets, à charge pour la personne intéressée
+                et,
+                éventuellement, pour le Président et les autres dirigeants d'en supporter les conséquences dommageables
+                pour
+                la Société.</p>
+
+            <p>Les interdictions prévues à l'article L. 225-43 du Code de commerce s'appliquent dans les conditions
+                déterminées par cet article, au Président et aux autres dirigeants de la Société.</p>
+
+
+            <p><b>ARTICLE 21 - COMMISSAIRES AUX COMPTES</b><br>
+
+                La nomination d'un ou plusieurs Commissaires aux Comptes titulaires est obligatoire dans les cas prévus
+                par
+                la loi et les règlements. Elle est facultative dans les autres cas.</p>
+
+            <p>Un ou plusieurs Commissaires aux Comptes suppléants appelés à remplacer le ou les titulaires en cas de
+                refus, d'empêchement, de démission ou de décès, sont nommés en même temps que le ou les titulaires pour
+                la
+                même
+                durée.</p>
+
+            <p>Lorsque la désignation d'un Commissaire aux Comptes titulaire et d'un Commissaire aux Comptes suppléant
+                est
+                facultative, la collectivité des associés peut, à la majorité des deux tiers procéder à ces désignations
+                si
+                elle le juge opportun.</p>
+
+            <p>En outre, la nomination d'un Commissaire aux Comptes pourra être demandée en justice par un ou plusieurs
+                associés représentant au moins le dixième du capital.</p>
+
+            <p>Les Commissaires aux Comptes sont nommés pour six exercices sociaux ; leurs fonctions expirent à l'issue
+                de
+                la consultation annuelle de la collectivité des associés appelée à statuer sur les comptes du sixième
+                exercice
+                social.</p>
+
+            <p>Les Commissaires aux Comptes exercent leur mission de contrôle conformément à la loi. Ils ont notamment
+                pour
+                mission permanente de vérifier les valeurs et les documents comptables de la Société, de contrôler la
+                régularité et la sincérité des comptes sociaux et d'en rendre compte à la Société. Ils ne doivent en
+                aucun
+                cas
+                s'immiscer dans la gestion de la Société.</p>
+
+            <p>Les Commissaires aux Comptes sont invités à participer à toute consultation de la collectivité des
+                associés.</p>
+
+            <p><b>ARTICLE 22 - REPRESENTATION SOCIALE</b><br>
+
+                Les délégués du comité d'entreprise, s'il en existe un, exercent les droits prévus par l'article L.
+                2323-62
+                du Code du travail auprès du président. A cette fin, celui-ci les réunira une fois par trimestre au
+                moins,
+                et
+                notamment lors de l'arrêté des comptes annuels.</p>
+
+            <p>Le comité d'entreprise doit être informé des décisions collectives dans les mêmes conditions que les
+                associés.</p>
+
+            <p>Les demandes d'inscription des projets de résolutions présentées par le comité d'entreprise doivent être
+                adressées par tous moyens écrits par un représentant du comité au président et accompagnées du texte des
+                projets de résolutions.</p>
+
+            <p>Elles doivent être reçues au siège social 30 jours au moins avant la date fixée pour la décision des
+                associés. Le président accuse réception de ces demandes dans les 15 jours de leur réception.</p>
+
+
+            <p><b>ARTICLE 23 - DECISIONS COLLECTIVES</b><br>
+
+                La collectivité des associés est seule compétente pour prendre les décisions suivantes :</p>
+            <p>- approbation des comptes annuels et affectation des résultats,<br>
+                - approbation des conventions réglementées,<br>
+                - nomination des Commissaires aux Comptes,<br>
+                - augmentation, amortissement et réduction du capital social,<br>
+                - transformation de la Société,<br>
+                - fusion, scission ou apport partiel d'actif,<br>
+                - dissolution et liquidation de la Société,<br>
+                - agrément des cessions d'actions,<br>
+                - inaliénabilité des actions,<br>
+                - suspension des droits de vote et exclusion d'un associé ou cession forcée de ses actions,<br>
+                - augmentation des engagements des associés,<br>
+                - nomination, révocation et rémunération des dirigeants,<br>
+                - modification des statuts, sauf transfert du siège social,</p>
+
+            <p>Toutes autres décisions relèvent de la compétence du président.</p>
+
+            <p>Les décisions collectives sont prises, au choix du président en assemblée générale ou résultent du
+                consentement des associés exprimé dans un acte sous seing privé. Elles peuvent également faire l'objet
+                d'une
+                consultation écrite et être prises par tous moyens de télécommunication électronique.</p>
+
+            <p>Toutefois, devront être prises en assemblée générale les décisions relatives à l'approbation des comptes
+                annuels et à l'affectation des résultats, aux modifications du capital social, à des opérations de
+                fusion,
+                scission ou apport partiel d'actif, à l'exclusion d'un associé.</p>
+
+
+            <p><b>ARTICLE 25 - CONSULTATION ECRITE</b><br>
+
+                En cas de consultation écrite, le président adresse à chaque associé, par lettre recommandée, le texte
+                des
+                résolutions proposées ainsi que les documents nécessaires à l'information des associés.</p>
+
+            <p>Les associés disposent d'un délai de 8 jours à compter de la réception du projet de résolutions pour
+                transmettre leur vote à l'auteur de la consultation par lettre recommandée.</p>
+
+            <p>Tout associé n'ayant pas répondu dans le délai ci-dessus est considéré comme s'étant abstenu.</p>
+
+            <p><b>ARTICLE 26 - ASSEMBLEE GENERALE</b><br>
+
+                Les Assemblées Générales sont convoquées, soit par le président, soit par un mandataire désigné par le
+                Président du Tribunal de commerce statuant en référé à la demande d'un ou plusieurs associés réunissant
+                cinq
+                pour cent au moins du capital ou à la demande du comité d'entreprise en cas d'urgence, soit par le
+                Commissaire aux Comptes, s'il en existe un.</p>
+
+            <p>Pendant la période de liquidation, l'Assemblée est convoquée par le liquidateur.</p>
+
+            <p>La convocation est effectuée par tous procédés de communication écrite 15 jours avant la date de la
+                réunion
+                et mentionne le jour, l'heure, le lieu et l'ordre du jour de la réunion. Toutefois, l'Assemblée Générale
+                se
+                réunit valablement sur convocation verbale et sans délai si tous les associés y consentent.</p>
+
+            <p>L'ordre du jour est arrêté par l'auteur de la convocation.</p>
+
+            <p>Un ou plusieurs associés représentant au moins 30 % du capital ont la faculté de requérir l'inscription à
+                l'ordre du jour de l'Assemblée de projets de résolutions par tous moyens de communication écrite. Ces
+                demandes doivent être reçues au siège social 10 jours au moins avant la date de la réunion. Le président
+                accuse
+                réception de ces demandes dans les 2 jours de leur réception.</p>
+
+            <p>L'Assemblée ne peut délibérer sur une question qui n'est pas à l'ordre du jour. Elle peut cependant, en
+                toutes circonstances, révoquer le Président, un ou plusieurs dirigeants, et procéder à leur
+                remplacement.</p>
+
+            <p>Les associés peuvent se faire représenter aux délibérations de l'Assemblée par un autre associé ou par un
+                tiers justifiant d'un mandat. Chaque mandataire peut disposer d'un nombre illimité de mandats.</p>
+
+            <p>Les mandats peuvent être donnés par tous procédés de communication écrite, et notamment par
+                télécopie.</p>
+
+            <p>En cas de vote à distance au moyen d'un formulaire de vote électronique ou d'un vote par procuration
+                donné
+                par signature électronique, celui-ci s'exerce dans les conditions prévues par la réglementation en
+                vigueur, soit
+                sous la forme d'une signature électronique sécurisée au sens du décret 2001-272 du 30 mars 2001, soit
+                sous
+                la forme d'un procédé fiable d'identification garantissant son lien avec l'acte auquel elle
+                s'attache.</p>
+
+            <p>Une feuille de présence est émargée par les associés présents et les mandataires et à laquelle sont
+                annexés
+                les pouvoirs donnés à chaque mandataire. Elle est certifiée exacte par le bureau de l'Assemblée.</p>
+
+            <p>Les réunions des assemblées générales ont lieu au siège social ou en tout autre endroit indiqué dans la
+                convocation.</p>
+
+            <p>L'Assemblée est présidée par le Président ou, en son absence par un associé désigné par l'Assemblée.</p>
+
+            <p>L'Assemblée désigne un secrétaire qui peut être pris en dehors de ses membres.</p>
+
+
+            <p><b>ARTICLE 27 - REGLES DE MAJORITE</b><br>
+
+                Le droit de vote attaché aux actions est proportionnel à la quotité de capital qu'elles représentent.
+            </p>
+
+            <p>Chaque action donne droit à une voix.</p>
+
+            <p>Conformément à l'article L. 228-11, alinéa 5 du Code de commerce, les actions de préférence sans droit de
+                vote auxquelles est attaché un droit limité de participation aux dividendes, aux réserves ou au partage
+                du
+                patrimoine en cas de liquidation sont privées de droit préférentiel de souscription pour toute
+                augmentation
+                de capital en numéraire, même si elles récupèrent un droit de vote au cours de leur existence.</p>
+
+            <p>Les décisions collectives entraînant modification des statuts, à l'exception de celles pour lesquelles
+                l'unanimité est exigée par la loi, seront prises à la majorité deux tiers. Les autres décisions seront
+                prises à la majorité des voix.</p>
+
+
+            <p><b>ARTICLE 28 - PROCES-VERBAUX DES DECISIONS COLLECTIVES</b><br>
+
+                Les décisions collectives prises en assemblée sont constatées par des procès-verbaux signés par le
+                Président
+                et le secrétaire et établis sur un registre spécial, ou sur des feuillets mobiles numérotés.</p>
+
+            <p>Les procès-verbaux doivent indiquer le lieu et la date de la consultation, l'identité des associés
+                présents
+                et représentés et celle de toute autre personne ayant assisté à tout ou partie des délibérations, les
+                documents
+                et informations communiqués préalablement aux associés, un exposé des débats ainsi que le texte des
+                résolutions
+                et pour chaque résolution le résultat du vote.</p>
+
+            <p>En cas de décision collective résultant du consentement unanime des associés exprimé dans un acte, cet
+                acte
+                doit mentionner les documents et informations communiqués préalablement aux associés. Il est signé par
+                tous
+                les
+                associés et retranscrit sur le registre spécial ou les feuillets numérotés.</p>
+
+            <p>Les copies ou extraits des procès-verbaux des décisions collectives sont valablement certifiés par le
+                Président, ou un fondé de pouvoir habilité à cet effet.</p>
+
+
+            <p><b>ARTICLE 29 - DROIT D'INFORMATION DES ASSOCIES</b><br>
+
+                Quel que soit le mode de consultation, toute décision des associés doit faire l'objet d'une information
+                préalable comprenant l'ordre du jour, le texte des résolutions et tous documents et informations leur
+                permettant de se prononcer en connaissance de cause sur la ou les résolutions soumises à leur
+                approbation.
+            </p>
+
+            <p>Les rapports établis par le président doivent être communiqués aux frais de la Société aux associés 15
+                jours
+                avant la date de la consultation, ainsi que les comptes annuels et, le cas échéant, les comptes
+                consolidés
+                du dernier exercice lors de la décision collective statuant sur ces comptes.</p>
+
+            <p>Les associés peuvent, à toute époque, consulter au siège social, et, le cas échéant prendre copie, des
+                statuts à jour de la Société ainsi que, pour les trois derniers exercices, des registres sociaux, des
+                comptes annuels, du tableau des résultats des cinq derniers exercices, des comptes consolidés, des
+                rapports
+                et documents soumis aux associés à l'occasion des décisions collectives.</p>
+
+
+            <p><b>ARTICLE 30 - EXERCICE SOCIAL</b><br>
+
+                Chaque exercice social a une durée d'une année, qui commence le premier janvier et finit le trente et un
+                décembre de chaque année.</p>
+
+            <p>Par exception, le premier exercice commencera le jour de l'immatriculation de la Société au Registre du
+                commerce et des sociétés et se terminera le 31 décembre 2021.</p>
+
+            <p><b>ARTICLE 31 - INVENTAIRE - COMPTES ANNUELS</b><br>
+
+                Il est tenu une comptabilité régulière des opérations sociales, conformément à la loi et aux usages du
+                commerce.</p>
+
+            <p>A la clôture de chaque exercice, le président dresse l'inventaire des divers éléments de l'actif et du
+                passif
+                existant à cette date et établit les comptes annuels comprenant le bilan, le compte de résultat et
+                l'annexe,
+                conformément aux lois et règlements en vigueur.</p>
+
+            <p>Il dresse également le bilan décrivant les éléments actifs et passifs et faisant apparaître de façon
+                distincte
+                les capitaux propres, le compte de résultat récapitulant les produits et les charges de l'exercice,
+                ainsi
+                que
+                l'annexe complétant et commentant l'information donnée par le bilan et le compte de résultat.</p>
+
+            <p>Il est procédé, même en cas d'absence ou d'insuffisance du bénéfice, aux amortissements et provisions
+                nécessaires. Le montant des engagements cautionnés, avalisés ou garantis est mentionné à la suite du
+                bilan.</p>
+
+            <p>Le président établit un rapport de gestion contenant les indications fixées par la loi.</p>
+
+            <p>En application des dispositions de l'article L. 225-184 du Code de commerce, il établit un rapport
+                spécial
+                qui informe chaque année la collectivité des associés des opérations réalisées dans le cadre des options
+                de
+                souscription ou d'achat d'actions consenties par la Société à chacun des mandataires sociaux.</p>
+
+            <p>Tous ces documents sont mis à la disposition du ou des Commissaires aux Comptes de la Société, s'il en
+                existe, dans les conditions légales et réglementaires.</p>
+
+            <p>Dans les six mois de la clôture de l'exercice ou, en cas de prolongation, dans le délai fixé par décision
+                de
+                justice, les associés doivent statuer par décision collective sur les comptes annuels, au vu du rapport
+                de
+                gestion et, le cas échéant, du rapport du ou des Commissaires aux Comptes. Lorsque la Société établit
+                des
+                comptes consolidés, ceux-ci sont présentés, lors de cette décision collective, avec le rapport de
+                gestion du
+                groupe et le rapport des Commissaires aux Comptes.</p>
+
+
+            <p><b>ARTICLE 32 - AFFECTATION ET REPARTITION DU RESULTAT</b><br>
+
+                Le compte de résultat qui récapitule les produits et charges de l'exercice fait apparaître par
+                différence,
+                après déduction des amortissements et des provisions, le bénéfice ou la perte de l'exercice clos.</p>
+
+            <p>Sur le bénéfice de l'exercice diminué, le cas échéant, des pertes antérieures, il est prélevé cinq pour
+                cent au moins pour constituer le fonds de réserve légale. Ce prélèvement cesse d'être obligatoire
+                lorsque le fonds de réserve atteint le dixième du capital social ; il reprend son cours lorsque, pour
+                une cause quelconque, la réserve légale est descendue au-dessous de ce dixième.</p>
+
+            <p>Le bénéfice distribuable est constitué par le bénéfice de l'exercice diminué des pertes antérieures et
+                des
+                sommes à porter en réserve, en application de la loi et des statuts, et augmenté du report
+                bénéficiaire.</p>
+
+            <p>Sur ce bénéfice, la collectivité des associés peut prélever toutes sommes qu'elle juge à propos
+                d'affecter à
+                la dotation de tous fonds de réserves facultatives, ordinaires ou extraordinaires, ou de reporter à
+                nouveau.</p>
+
+            <p>Le solde, s'il en existe, est réparti entre tous les associés proportionnellement à leurs droits dans le
+                capital.</p>
+
+            <p>En outre, la collectivité des associés peut décider la mise en distribution de sommes prélevées sur les
+                réserves disponibles, en indiquant expressément les postes de réserves sur lesquels les prélèvements
+                sont effectués.
+                Toutefois, les dividendes sont prélevés par priorité sur les bénéfices de l'exercice.</p>
+
+            <p>Hors le cas de réduction du capital, aucune distribution ne peut être faite aux associés lorsque les
+                capitaux propres sont ou deviendraient à la suite de celle-ci, inférieurs au montant du capital augmenté
+                des réserves que la loi ou les statuts ne permettent pas de distribuer. L'écart de réévaluation n'est
+                pas distribuable. Il peut être incorporé en tout ou partie au capital.</p>
+
+            <p>Les pertes, s'il en existe, sont après l'approbation des comptes par la collectivité des associés,
+                reportées à nouveau, pour être imputées sur les bénéfices des exercices ultérieurs jusqu'à
+                extinction.</p>
+
+
+            <p><b>ARTICLE 33 - PAIEMENT DES DIVIDENDES - ACOMPTES</b><br>
+
+                Les modalités de mise en paiement des dividendes en numéraire sont fixées par décision collective des
+                associés ou, à défaut, par le président.</p>
+
+            <p>Toutefois, la mise en paiement des dividendes en numéraire doit avoir lieu dans un délai maximal de neuf
+                mois après la clôture de l'exercice, sauf prolongation de ce délai par autorisation de justice.</p>
+
+            <p>Lorsqu'un bilan établi au cours ou à la fin de l'exercice et certifié par un Commissaire aux Comptes
+                fait apparaître que la Société, depuis la clôture de l'exercice précédent, après constitution des
+                amortissements et provisions nécessaires et déduction faite s'il y a lieu des pertes antérieures ainsi
+                que des sommes à porter en réserve, en application de la loi ou des statuts, a réalisé un bénéfice, il
+                peut être distribué sur décision du président des acomptes sur dividende avant l'approbation des comptes
+                de
+                l'exercice. Le montant de ces acomptes ne peut excéder le montant du bénéfice ainsi défini.</p>
+
+            <p>Aucune répétition de dividende ne peut être exigée des associés sauf lorsque la distribution a été
+                effectuée en violation des dispositions légales et que la Société établit que les bénéficiaires avaient
+                connaissance du caractère irrégulier de cette distribution au moment de celle-ci ou ne pouvaient
+                l'ignorer compte tenu des circonstances. Le cas échéant, l'action en répétition est prescrite trois ans
+                après la mise en paiement de ces dividendes.</p>
+
+            <p>Les dividendes non réclamés dans les cinq ans de leur mise en paiement sont prescrits.</p>
+
+
+            <p><b>ARTICLE 34 - CAPITAUX PROPRES INFERIEURS A LA MOITIE DU CAPITAL SOCIAL</b><br>
+
+                Si, du fait des pertes constatées dans les documents comptables, les capitaux propres de la Société
+                deviennent inférieurs à la moitié du capital social, le président doit, dans les quatre mois qui suivent
+                l'approbation des comptes ayant fait apparaître ces pertes, consulter la collectivité des associés, à
+                l'effet de décider s'il y a lieu à dissolution anticipée de la Société.</p>
+
+            <p>Si la dissolution n'est pas prononcée, le capital doit être, dans le délai fixé par la loi, réduit d'un
+                montant égal à celui des pertes qui n'ont pu être imputées sur les réserves si, dans ce délai, les
+                capitaux
+                propres ne sont pas redevenus au moins égaux à la moitié du capital social.</p>
+
+            <p>Dans tous les cas, la décision collective des associés doit être publiée dans les conditions légales et
+                réglementaires.</p>
+
+            <p>En cas d'inobservation de ces prescriptions, tout intéressé peut demander en justice la dissolution de
+                la Société. Il en est de même si la collectivité des associés n'a pu délibérer valablement. Toutefois,
+                le
+                tribunal ne peut prononcer la dissolution si, au jour où il statue sur le fond, la régularisation a eu
+                lieu.</p>
+
+            <p><b>ARTICLE 35 - TRANSFORMATION DE LA SOCIETE</b><br>
+
+                La Société peut se transformer en société d'une autre forme sur décision collective des associés aux
+                conditions fixées par la loi.</p>
+
+            <p>La transformation en société en nom collectif nécessite l'accord de tous les associés. En ce cas, les
+                conditions prévues ci-dessus ne sont pas exigibles.</p>
+
+            <p>La transformation en société en commandite simple ou par actions est décidée dans les conditions prévues
+                pour la modification des statuts et avec l'accord de chacun des associés qui acceptent de devenir
+                commandités en
+                raison de la responsabilité solidaire et indéfinie des dettes sociales.</p>
+
+            <p>La transformation en société à responsabilité limitée est décidée dans les conditions prévues pour la
+                modification des statuts des sociétés de cette forme.</p>
+
+            <p>La transformation qui entraînerait, soit l'augmentation des engagements des associés, soit la
+                modification des clauses des présents statuts exigeant l'unanimité des associés devra faire l'objet
+                d'une décision unanime de ceux-ci.</p>
+
+
+            <p><b>ARTICLE 36 - DISSOLUTION - LIQUIDATION</b><br>
+
+                La Société est dissoute dans les cas prévus par la loi et, sauf prorogation, à l'expiration du terme
+                fixé par les statuts, ou à la suite d'une décision collective des associés prise dans les conditions
+                fixées par les présents statuts.</p>
+
+            <p>Un ou plusieurs liquidateurs sont alors nommés par cette décision collective.</p>
+
+            <p>Le liquidateur représente la Société. Il est investi des pouvoirs les plus étendus pour réaliser
+                l'actif, même à l'amiable. Il est habilité à payer les créanciers et à répartir le solde disponible
+                entre les associés.</p>
+
+            <p>La collectivité des associés peut l'autoriser à continuer les affaires en cours ou à en engager de
+                nouvelles pour les besoins de la liquidation.</p>
+
+            <p>Le produit net de la liquidation, après remboursement à chacun des associés du montant nominal et non
+                amorti de leurs actions, est réparti entre les associés en proportion de leur participation dans le
+                capital
+                social.</p>
+
+            <p>Les pertes, s'il en existe, sont supportées par les associés jusqu'à concurrence du montant de leurs
+                apports.</p>
+
+            <p>En cas de réunion de toutes les actions en une seule main, la dissolution de la Société entraîne,
+                lorsque l'associé unique est une personne morale, la transmission universelle du patrimoine de la
+                Société à
+                l'associé unique, conformément aux dispositions de l'article 1844-5 du Code civil.</p>
+
+
+            <p><b>ARTICLE 37 - CONTESTATIONS</b><br>
+
+                Toutes les contestations qui pourraient s'élever pendant la durée de la Société ou lors de sa
+                liquidation, soit
+                entre la Société et les associés titulaires de ses actions, soit entre les associés titulaires d'actions
+                eux-mêmes, concernant les affaires sociales, l'interprétation ou l'exécution des présents statuts,
+                seront jugées conformément à la loi et soumises à la juridiction des tribunaux compétents.</p>
+
+
+            <p><b>ARTICLE 38 - REPRISE DES ENGAGEMENTS ANTERIEURS A LA SIGNATURE DES STATUTS ET A L'IMMATRICULATION DE
+                    LA
+                    SOCIETE AU REGISTRE DU COMMERCE ET DES SOCIETES</b><br>
+
+                Les soussignés donnent mandat au président à l'effet de conclure, pour le compte de la Société, en
+                attendant son immatriculation au registre du Commerce et des Sociétés, les actes entrant dans l'objet
+                social.</p>
+
+            <p>La signature des présents statuts emportera reprise par la société des engagements qui seront réputés
+                avoir été souscrits par elle dès l’origine, et ce, dès qu’elle aura été immatriculée au registre du
+                commerce
+                et des sociétés.</p>
+
+
+            <p><b>ARTICLE 39 - FORMALITES DE PUBLICITE - POUVOIRS - FRAIS</b><br>
+
+                Tous pouvoirs sont donnés au porteur d'un original ou d'une copie certifiée conforme des présentes pour
+                effectuer l'ensemble des formalités légales relatives à la constitution de la Société et notamment :</p>
+
+            <p> - procéder à l'enregistrement des statuts auprès du Service des impôts compétent ;<br>
+                - signer et faire publier l'avis de constitution dans un journal d'annonces légales dans le département
+                du siège social ;<br>
+                - procéder à toutes déclarations auprès du Centre de Formalités des Entreprises compétent ;<br>
+                - effectuer toutes formalités en vue de l'immatriculation de la Société au Registre du commerce et des
+                sociétés ;<br>
+                - à cet effet, signer tous actes et pièces, acquitter tous droits et frais, et plus généralement faire
+                tout ce qui sera nécessaire afin de donner à la Société présentement constituée son existence légale en
+                accomplissant toutes autres formalités prescrites par la loi.<br>
+                Tous pouvoirs sont conférés au porteur d'un original ou d'une copie certifiée conforme des présentes à
+                l'effet
+                d'accomplir l'ensemble des formalités de publicité, de dépôt et autres pour parvenir à l'immatriculation
+                de
+                la
+                Société au Registre du commerce et des sociétés.</p>
+
+
+            <p><b>ARTICLE 40 - NOMINATION DES DIRIGEANTS</b>
+            <p>
+
+            <p><u><b>Nomination du(de la) Président(e)</b></u></p>
+
+            <p>
+                {% if isManager == true %}
+                     <b> {{ civilite ?? ' CIVILITE'}} {{ lastName ?? ' Prénom'}} {{ firstName ?? ' NOM'}}</b>, désigné en tête des
+                    présentes, est nommé(e) premier(e) président(e) de la société, aux termes des présents statuts pour une durée
+                    illimitée.
+                {% else %}
+                    <b> 'CIVILITE' 'Prénom' 'NOM', désigné en tête des
+                    présentes, est nommé(e) premier(e) président(e) de la société, aux termes des présents statuts pour une durée
+                    illimitée.
+                {% endif %}
+                </p>
+
+            <p>{{ civilite ?? ' CIVILITE' }} {{ lastName ?? ' Prénom' }} {{ firstName ?? ' NOM' }} accepte les fonctions
+                de Président et déclare, en ce qui le concerne, n'être atteint
+                d'aucune incompatibilité ni d'aucune interdiction susceptibles d'empêcher sa nomination et l'exercice de
+                ses fonctions.</p>
+
+
+            <p><u><b>Nomination du Directeur Général</b></u></p>
+
+            <p>{{ DGcivilite ?? ' CIVILITE' }} {{ DGlastName ?? ' Prénom' }} {{ DGfirstName ?? ' NOM' }} ou DENOMINATION
+                SOCIALE (si entreprise), désignée en tête des présentes, est nommé(e)
+                premier(e)
+                directeur général de la société, aux termes des présents statuts pour une durée illimitée, ce qui est
+                accepté
+                par {{ DGcivilite ?? ' CIVILITE' }} {{ DGlastName ?? ' Prénom' }} {{ DGfirstName ?? ' NOM' }} ou DENOMINATION
+                SOCIALE (si entreprise), es qualite, qui déclare en ce qui le
+                concerne,
+                tant pour lui-même que pour sa société, n'être atteint d'aucune incompatibilité ni d'aucune interdiction
+                susceptibles d'empêcher sa nomination et l'exercice de ses fonctions.</p>
+
+
+            <p style="text-align: right">
+                <br>Fait à <b>{{ address ?? 'VILLE' }}</b>
+                <br>Le <b>{{ dateCreation ?? 'DATE' }}</b>
+                <br>En QUATRE exemplaires originaux
+                <br>
+            </p>
+
+
+           {% if associe1 is defined and associe1 is not null %}
+            <p>
+                <b>{{ associe1.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe1.firstName ?? ' NOM'}} {{ associe1.lastName ?? ' Prénom'}}
+            </p>
+            {% endif %}
+
+            {% if associe2 is defined and associe2 is not null %}
+            <p>
+                <b>{{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM'}} {{ associe2.lastName ?? ' Prénom'}}
+            </p>
+            {% endif %}
+
+            {% if associe3 is defined and associe3 is not null %}
+            <p>
+                <b>{{ associe3.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe3.firstName ?? ' NOM'}} {{ associe3.lastName ?? ' Prénom'}}
+            </p>
+            {% endif %}
+
+            {% if associe4 is defined and associe4 is not null %}
+            <p>
+                <b>{{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM'}} {{ associe4.lastName ?? ' Prénom'}}
+            </p>
+            {% endif %}
+
+            {% if associe5 is defined and associe5 is not null %}
+            <p>
+                <b>{{ associe5.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe5.firstName ?? ' NOM'}} {{ associe5.lastName ?? ' Prénom'}}
+            </p>
+            {% endif %}
+
+
+               {% if associeCompany1.id is defined %}
+            <p>
+                Société <b> {{ associeCompany1.name ?? '' }}</b> représentée par <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete'}} </b>
+            </p>
+                {% endif %}
+
+                {% if associeCompany2.id is defined %}
+            <p>
+                Société <b> {{ associeCompany2.name ?? '' }}</b> représentée par <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete'}} </b>
+             </p>
+                {% endif %}
+
+                {% if associeCompany3.id is defined %}
+            <p>
+                - Par la société <b> {{ associeCompany3.name ?? '' }}</b> représentée par <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete'}} </b>, d'une somme en numéraire de <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES'}}  €</b>, ci	<b>{{ associeCompany3.capitalBring ?? ' 0.0'}} €</b> <br>
+            </p>
+
+           {% endif %}
+
+
+
+
+            <p style="text-align: center; margin-top: 50px;"><b>ANNEXE 1</b></p>
+
+
+            <p style="text-align: center;"><b><u>ETAT DES ACTES ACCOMPLIS POUR LE COMPTE<br>
+                        DE LA SOCIETE EN FORMATION<br>
+                        AVANT LA SIGNATURE DES STATUTS</u></b></p>
+
+
+            <p>Conformément aux dispositions de l'article R.210-5 du Code de commerce, cet état sera annexé aux
+                statuts, dont la signature emportera reprise des engagements par la Société dès que celle-ci aura été
+                immatriculée au Registre du commerce et des sociétés.</p>
+        </div>
+    </div>
+    {% block footer %} {% endblock %}
+{% endblock %}

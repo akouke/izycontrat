@@ -3,27 +3,15 @@
 {% block dashboard %}{% endblock %}
 {% block title %}Vos informations {% endblock %}
 
- {% block body %} 
-  
-  <style>
-      * {
-  margin: 0;
-  padding: 0;
-  font-family: 'AsapRegular';
-  font-size: 17px;
-}
+ {% block body %}
 
-header {
-  text-align: center;
-  background-color: #244C9A;
-  border-bottom: 4px solid black;
-  \
-}
+  <style>
 
 body {
   /*background: linear-gradient(#FFF, #FFC79B);*/
   margin: auto;
   text-align: center;
+  background: white;
 }
 
 p {
@@ -32,8 +20,8 @@ p {
 }
 
 fieldset {
-  width: 50%;
-  background-color: #DDD;
+  /*width: 50%;*/
+  background-color: #BEA058;
   margin: auto;
   box-shadow: 2px 2px 2px black;
   margin-bottom: 20px;
@@ -46,7 +34,7 @@ legend {
   border-radius: 30px 10px;
   box-shadow: 4px 2px 2px black;
   padding: 12px;
-  background-color: #244C9A;
+  background-color: #222753;
   text-shadow: 1px 1px 2px black;
   margin-bottom: 20px;
 }
@@ -66,7 +54,7 @@ label {
   float: left;
   clear: left;
   width: 20%;
-  background-color: #244C9A;
+  background-color: #222753;
   margin: 5px;
   padding: 5px;
   border-radius: 20px;
@@ -226,63 +214,73 @@ input[type="checkbox"] {
   margin-bottom: 5px;
 }
   </style>
-  
- {#<div class="modal fade bd-example-modal-lg w-100" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">#}
- 
+
   <h1>Details de vos Informations!</h1>
-      <p>Voici la liste de toutes les informations renseignees pour la creation de votre entreprise!</p>
+      <p>Voici la liste de toutes les informations renseignées pour la création de votre entreprise!</p>
 
       <form id="envoi1" name="envoi1" method="post" action="">
-        <fieldset id="customerInfo">
-          <legend>Vos Informations Personnelles</legend>
-        {#<div class=row>#}
-        {# <div class="col-8">#}
-          <label for="fName">Votre Nom</label>
-         {#</div>#}
-         {#<div class="col">#}
-          <input id="fName" name="fName" type="text" placeholder="" value="Seck" required>
-         {#</div>#}
-        </div>
-          <label for="lName">Votre Prenom</label>
-          <input id="lName" name="lName" type="text" placeholder="" value="Abdoulaye" required>
-          <label for="nationality">Votre Nationalite</label>
-          <input id="nationality" name="nationality" placeholder="" value="francaise" >
-          <label for="situation">Votre Situation</label>
-          <input id="situation" name="situation" placeholder="" value="celibataire" >
-          <label for="mail">Votre Email</label>
-          <input id="mail" name="mail" placeholder="" value="testmail@gmail.com" required>
-          {#<label for="zip">Zipcode*</label>#}
-          {#<input id="zip" name="zip" type="text" placeholder="Zipcode" required>#}
-          <label for="phone">Votre Numero</label>
-          <input id="phone" name="phone" type="tel" placeholder="" value="(33) 93 434 343" required>
+       <div class="container">
+        <div class="row">
+           <div class="col">
+            <fieldset id="customerInfo">
+              <legend>Vos Informations Personnelles</legend>
 
-        </fieldset>
-        <fieldset id="specifications">
-          <legend>Informations Entreprise</legend>
-          
-         <label for="nameCompany">Nom Entreprise</label>
-          <input id="nameCompany" name="nameCompany" placeholder="nom societe" value="IzyContrat" required>
-          
-          <label for="secteurActivity">Secteur d'activite</label>
-          <input id="secteurActivity" name="secteurActivity" placeholder="secteur d'activite" value="Aide et service à la personne" required>
+             <label for="fName">Civilite</label>
+              <input id="fName" name="fName" type="text" placeholder="" value="{{ person.gender == 1 ? 'Madame' : 'Monsieur'}}" disabled>
 
-          <label for="dc">delai de creation</label>
-          <select id="dc" name="dc">
-            <option value="vite">le plus vite possible</option>
-            <option value="1mois">Dans 1 mois </option>
-            <option value="6mois">Dans 6 mois </option>
-            <option value="NA">Je ne sais pas</option>
-          </select>
-          <label for="es">Evolution entreprise</label>
-          <select id="es" name="es">
-            <option value="oui">oui</option>
-            <option value="non">non</option>
-            <option value="NA">je ne sais pas</option>
-          </select>
-          <label for="so">objet social</label>
-          <input id="so" name="so" type="textarea">
-        </fieldset>
-        <input class="btn btn-success" id="sendOrder" type="submit" value="Valider">
+              <label for="fName">Votre Nom</label>
+              <input id="fName" name="fName" type="text" placeholder="" value="{{person.firstName}}" disabled>
+
+              <label for="lName">Votre Prenom</label>
+              <input id="lName" name="lName" type="text" placeholder="" value="{{person.lastName}}" disabled>
+
+              <label for="nationality">Votre Nationalite</label>
+              <input id="nationality" name="nationality" placeholder="votre nationalite" value="{{person.nationality}}" disabled>
+
+              <label for="situation">Votre Situation</label>
+              <input id="situation" name="situation" placeholder="" value="{{ person.married == true ? 'Marie(e)' : 'Celibataire'}}" disabled>
+
+              <label for="mail">Votre Email</label>
+              <input id="mail" name="mail" placeholder="" value="{{user.email}}" disabled>
+
+              <label for="phone">Votre Numero</label>
+              <input id="phone" name="phone" type="tel" placeholder="" value="{{person.phoneNumber}}"  disabled>
+
+            </fieldset>
+           </div>
+           <div class="col">
+            <fieldset id="specifications">
+              <legend>Informations Entreprise</legend>
+
+             <label for="nameCompany">Nom</label>
+              <input id="nameCompany" name="nameCompany" placeholder="nom societe" value="{{company.name}}" disabled>
+
+              <label for="forme">forme</label>
+              <input id="forme" name="forme" placeholder="forme juridique" value="{{company.companyType.name == 'EI' ? 'Entreprise Individuel' : company.companyType.name}}" disabled>
+
+              <label for="address">Adresse</label>
+              <input id="address" name="address" placeholder="adresse" value="{{company.address}}" disabled>
+
+              <label for="secteurActivity">Secteur d'activité</label>
+              <input id="secteurActivity" name="secteurActivity" placeholder="secteur d'activite" value="{{company.activitySector.name == null ? company.activitySector.nameOther : company.activitySector.name}}" disabled>
+
+              <label for="dc">delai de création</label>
+               <input  id="dc" name="dc" value="{{company.priority.name}}"  disabled>
+
+              <label for="es">Evolution ME</label>
+              <input   id="es" name="es" value="{{company.regimeMicroEntreprise == true ? 'OUI' : 'NON'}}"  disabled>
+
+              <label for="so">objet social</label>
+              <input id="so" name="so" type="text" value="{{company.SocialObject}}" disabled>
+            </fieldset>
+           </div>
+          </div>
+          </div>
+          {% if company.companyType.name == 'EI'%}
+            <a class="btn btn-warning" href="{{ path('create_sarl_prestation_ei')}}"> Suivant </a>
+          {% else %}
+            <a class="btn btn-warning" href="{{ path('create_sarl_prestation_me')}}"> Suivant </a>
+          {% endif %}
         {#<input id="sendOrder" type="reset" value="Cancel Order">#}
         {#<input id="sendOrder" type="button" value="Contact Me">#}
       </form>

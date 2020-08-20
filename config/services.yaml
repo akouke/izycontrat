@@ -6,12 +6,15 @@
 parameters:
     document_directory: '%kernel.project_dir%/public/uploads/documents'
     locale: 'fr'
+    email_from: '%env(MAILER_FROM)%'
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:               # ici tu définis les arguments scalaires(string, int, bool) que tu passeras à tes services(dans ton cas le cas le controlleur)
+            $dossierClient: '%kernel.project_dir%/public/uploads/status'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -27,3 +30,17 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    'App\Event\UserRegisterEvent': ~
+    'App\Event\UserPaymentEvent': ~
+
+    App\Mailer\Mailer:
+       arguments:
+           $emailFrom: '%email_from%'
+           
+           
+           
+    
+
+   
+

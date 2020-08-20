@@ -7,12 +7,18 @@ use App\Entity\User;
 use App\Form\RegistrationLawyerType;
 use App\Form\RegistrationUserType;
 use App\Security\UserAuthenticator;
+use App\Security\TokenGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Event\UserRegisterEvent;
+use App\Event\UserPaymentEvent;
+use App\Event\UserPasswordEvent;
+//use App\Event\UserInfoEvent;
 
 class RegistrationController extends AbstractController
 {
@@ -22,17 +28,21 @@ class RegistrationController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param UserAuthenticator $authenticator
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param TokenGenerator $tokenGenerator
      * @return Response
      */
     public function registerUser(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
-        UserAuthenticator $authenticator
+        UserAuthenticator $authenticator,
+        EventDispatcherInterface $eventDispatcher,
+        TokenGenerator $tokenGenerator
     ): ?Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_home');
+//         }
         $person = new Person();
         $user = new User();
         $person->setUser($user);
@@ -52,6 +62,8 @@ class RegistrationController extends AbstractController
                     $request->request->all()['registration_user']['user']['password']
                 )
             );
+            $user->setRoles(['ROLE_CLIENT']);
+            $user->setConfirmationToken($tokenGenerator->getRandomSecureToken(30));
             $user->setIsVerified(false);
             $entityManager = $this->getDoctrine()->getManager();
 
@@ -60,12 +72,30 @@ class RegistrationController extends AbstractController
 
             $entityManager->flush();
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
+            //$UserRegisterEvent = new UserRegisterEvent($person);
+            //EMail de validation EMail déclenché lors de l'inscription d'un internaute sur le site.
+
+           /** $UserPaymentEvent= new UserPaymentEvent($person);
+                $eventDispatcher->dispatch(
+                UserPaymentEvent::NAME,
+                $UserPaymentEvent);**/
+
+            $UserRegisterEvent = new UserRegisterEvent($person);
+            $eventDispatcher->dispatch(
+                UserRegisterEvent::NAME,
+                $UserRegisterEvent
+            );
+        //   dd($UserRegisterEvent);
+           $this->addFlash('success', 'vos informations ont été bien enregistées. Vous recevrez un mail de validation pour pouvoir accéder à votre espace personnel');
+            return $this->redirectToRoute('app_home');
+
+           /** return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main'
             );
+            **/
         }
 
         return $this->render('registration/user.html.twig', [
@@ -87,9 +117,9 @@ class RegistrationController extends AbstractController
         GuardAuthenticatorHandler $guardHandler,
         UserAuthenticator $authenticator
     ): ?Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
-        }
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('app_home');
+//         }
         $person = new Person();
         $user = new User();
         $person->setUser($user);

@@ -19,6 +19,18 @@ class ActivitySectorRepository extends ServiceEntityRepository
         parent::__construct($registry, ActivitySector::class);
     }
 
+    
+    public function findOneByIdActivitySector($id): ?ActivitySector
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    
+    
     // /**
     //  * @return ActivitySector[] Returns an array of ActivitySector objects
     //  */
@@ -36,15 +48,4 @@ class ActivitySectorRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?ActivitySector
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

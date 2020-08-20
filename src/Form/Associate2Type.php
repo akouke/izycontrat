@@ -16,7 +16,7 @@ class Associate2Type extends AbstractType
     {
         $builder
             ->add('capitalAmountAdding', MoneyType::class, [
-                'label' => 'Apport Associé 2',
+                'label' => 'Apport',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -25,25 +25,25 @@ class Associate2Type extends AbstractType
                 'required'    => false,
             ])
              ->add('firstName', TextType::class, [
-                'label' => 'Prénom Associé 2',
+                'label' => 'Prénom',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Abdoulaye',
+                    'placeholder' => 'Jone',
                 ),
                 'required'    => false,
             ])
             ->add('lastName',  TextType::class, [
-                'label' => 'Nom Associé 2',
+                'label' => 'Nom A2',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'SECK',
+                    'placeholder' => 'DOE',
                 ),
                 'required'    => false,
             ])
             ->add('gender', ChoiceType::class, [
-                'label' => 'Civilite',
+                'label' => 'M/Mm',
                 // 'expanded' => true,
                 'choices' => [
                                 'Monsieur' => 2,

@@ -40,7 +40,6 @@ class EmailVerifier
         $context['expiresAt'] = $signatureComponents->getExpiresAt();
 
         $email->context($context);
-
         $this->mailer->send($email);
     }
 

@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('style_dashboard') }}
-    
+
 {% endblock %}
 {% block dashboard %}
 {% if app.user %}
@@ -90,7 +90,7 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="">Jean Dupond</a>
+                                            <a href="">Client</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -99,12 +99,12 @@
                                 <a href="#">
                                     <i class="fas fa-folder-open"> </i>
                                     <span>Dossiers en cours</span>
-                                    <span class="badge badge-pill badge-danger">1</span>
+                                    <span class="badge badge-pill badge-danger"></span>
                                 </a>
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="">Création SAS - Jean Dupond (04/06/2020)</a>
+                                            <a href="">Création societe en cours</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -121,7 +121,7 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="">Document 1</a>
+                                            <a href="{{ path('upload_index') }}">Mes documents</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -135,7 +135,7 @@
                                 <div class="sidebar-submenu">
                                     <ul>
                                         <li>
-                                            <a href="">Création SAS (04/06/2020)</a>
+                                            <a href="">Création dossier en cours</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -145,21 +145,21 @@
                                 <span>Un projet à créer ?</span>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{ path('create_entreprise') }}">
                                     <i class="fas fa-project-diagram"> </i>
                                     <span>Je crée une entreprise!</span>
                                 </a>
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <li>
+                                <a href="{{ path('newsletter_new') }}">
+                                    <i class="far fa-paper-plane"></i>
+                                    <span>Envoyer une Newsletter</span>
+                                </a>
+                            </li>
                             <li class="header-menu">
                                 <span>Gestion des Champs</span>
-                            </li>
-                            <li>
-                                <a href="{{ path('field') }}">
-                                    <i class="far fa-plus-square"> </i>
-                                    <span>Ajouter un champ</span>
-                                </a>
                             </li>
                         {% endif %}
                     </ul>
@@ -174,11 +174,9 @@
     {% endif %}
     {% endblock %}
     {% block body %}
-
     {% block footer %}
-        {% include '_footer.html.twig' %}
+        {{ render(controller('App\\Controller\\FooterInputController::input')) }}
     {% endblock %}
-</div>
 {% endblock %}
     {% block javascripts %}
         {{ parent() }}

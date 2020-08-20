@@ -1,0 +1,21 @@
+@import "app";
+
+.buttonfull{
+  position:absolute;
+   margin-top:45px;
+  display: block;
+  width: 100%;
+  bottom:50px;
+  min-height: 28px;        // Make inputs at least the height of their button counterpart
+}
+.box{
+  box-sizing: border-box;
+  padding-top: 30px;// Makes inputs behave like true block-level elements
+
+}
+.successmessage{
+  margin-top:100px;
+  text-align:center;
+  align:center;
+    
+}

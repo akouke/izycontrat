@@ -22,7 +22,7 @@ class Person
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true , onDelete="CASCADE")
      */
     private $user;
 
@@ -71,12 +71,6 @@ class Person
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Type("string", message="Mauvais format de données")
-     * @Assert\NotBlank(message="L'adresse ne doit pas être vide")
-     * @Assert\Length(
-     *      max = 255,
-     *      maxMessage = "L'adresse doit contenir au maximum {{ limit }} characters",
-     *      allowEmptyString = false
-     * )
      */
     private $address;
 
@@ -152,6 +146,21 @@ class Person
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nationality;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $associatePart;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateBirth;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $emailPerson;
 
     public function __construct()
     {
@@ -514,6 +523,42 @@ class Person
     public function setNationality(?string $nationality): self
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    public function getAssociatePart(): ?float
+    {
+        return $this->associatePart;
+    }
+
+    public function setAssociatePart(?float $associatePart): self
+    {
+        $this->associatePart = $associatePart;
+
+        return $this;
+    }
+
+    public function getDateBirth(): ?\DateTimeInterface
+    {
+        return $this->dateBirth;
+    }
+
+    public function setDateBirth(?\DateTimeInterface $dateBirth): self
+    {
+        $this->dateBirth = $dateBirth;
+
+        return $this;
+    }
+
+    public function getEmailPerson(): ?string
+    {
+        return $this->emailPerson;
+    }
+
+    public function setEmailPerson(?string $emailPerson): self
+    {
+        $this->emailPerson = $emailPerson;
 
         return $this;
     }

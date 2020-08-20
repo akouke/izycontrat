@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EmailNewsletter index{% endblock %}
+
+{% block body %}
+    <h1>EmailNewsletter index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for email_newsletter in email_newsletters %}
+            <tr>
+                <td>{{ email_newsletter.id }}</td>
+                <td>{{ email_newsletter.email|raw }}</td>
+                <td>{{ email_newsletter.date ? email_newsletter.date|date('Y-m-d') : '' }}</td>
+                <td>
+{#                    <a href="{{ path('email_newsletter_show', {'id': email_newsletter.id}) }}">show</a>#}
+{#                    <a href="{{ path('email_newsletter_edit', {'id': email_newsletter.id}) }}">edit</a>#}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('email_newsletter_new') }}"> Créer une Newsletter</a>
+{% endblock %}

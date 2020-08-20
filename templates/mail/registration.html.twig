@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Confirmation Email</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        img {
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<img src="https://www.izy-contrat.fr/images/Logo_Izy_Contrat_H.png" alt="logo Izy Contrat">
+<h4>Bonjour, {{ user.getFirstName() }}</h4>
+<br>
+<div class="content__body py-8 border-b">
+        <p>
+        Merci d'avoir bien voulu vous enregistrer sur notre plateforme.<br>
+          Merci de cliquer sur ce <a href="{{ url ('security_confirmation',{'token': user.getUser().getConfirmationToken()}) }}" method="get" target="_blank"> lien</a> pour activer votre compte pour commencer à créer votre entreprise.
+        </p>
+      
+        <p class="text-sm">
+          Nos salutations'!<br> L'équipe Izycontrat
+        </p>
+      </div>
+
+<p>L'équipe d'Izy Contrat</p>
+
+
+</body>
+</html>
+
+
+
+
+
+
+

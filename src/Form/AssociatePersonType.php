@@ -66,7 +66,7 @@ class AssociatePersonType extends AbstractType
                 'required'    => false,
             ])
              ->add('gender', ChoiceType::class, [
-                'label' => 'Civilite',
+                'label' => 'M/Mm',
                 // 'expanded' => true,
                 'choices' => [
                                 'Monsieur' => 2,

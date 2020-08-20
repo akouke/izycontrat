@@ -1,16 +1,16 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Izy Contrat Dashboard{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('dashboardPage') }}
 {% endblock %}
 {% block body %}
     <section class="page-content container-fluid col-10">
-        <h2 class="col-10">Dashboard</h2>
-        <h3 class="col-10">Profil</h3>
+        <h1 class="col-10">Dashboard</h1>
+        <h2 class="col-10">Profil</h2>
         <div class="profile">
-            <div>
+            <div class="pr-2">
                 <div>{{ person.firstname }} {{ person.lastname }}</div>
                 <div>{{ user.email }}</div>
             </div>
@@ -20,4 +20,8 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block footer %}
+   
 {% endblock %}

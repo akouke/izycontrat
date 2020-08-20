@@ -1,0 +1,33 @@
+parameters:
+  stripe_public_key: pk_live_51H2XzXJ1VSvMwQdgBq6WSmnaJB6HjPPMuUPXjol4iJvOi08T08ZsZxte2nHopGYlIsB6Xxtcug3xZXlDF6OzzaAM00Dd7hhIAP
+
+  url_stripe_success: https://izy-contrat.fr/success
+  url_stripe_canceled: https://izy-contrat.fr/cancel
+
+  offre_izy_basic_me_ei: price_1HGkvHJ1VSvMwQdgGbzDJpNE
+  offre_izy_plus_me_ei: price_1HGkv7J1VSvMwQdg77cXr1Py
+  offre_izy_premium_me_ei: price_1HGkv0J1VSvMwQdg2j6ayaGJ
+  offre_izy_basic_sarl_sas_sasu_sci_eurl: price_1HGkvOJ1VSvMwQdgJGkqOY1m
+  offre_izy_plus_sarl_sas_sasu_sci_eurl: price_1HGkvVJ1VSvMwQdg72KdA7XD
+  offre_izy_premium_sarl_sas_sasu_sci_eurl: price_1HGkviJ1VSvMwQdgcWjmtSTI
+  payment:
+    currency: EUR
+    decimal: true
+    premium_amount: 1
+    
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'memory' }
+    transport:        gmail
+    username:         cheikhousy@gmail.com
+    password:         Medinasy87
+    host:             smtp.gmail.com
+    port:             465
+    encryption:       ssl
+    auth-mode:        login
+    stream_options:
+        ssl:
+            allow_self_signed: true
+            verify_peer: false
+            verify_peer_name: false
+    
