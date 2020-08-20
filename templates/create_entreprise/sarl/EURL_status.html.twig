@@ -3,17 +3,43 @@
 {% block navbar %}{% endblock %}
 {% block dashboard %}{% endblock %}
 {% block body %}
-<style>
-     body{
+     
+     <style>
+ 
+            @page {
+                margin: 0cm 0cm;
+            }
 
-        background-size: cover;
-        background: white;
-        margin-top: 2px;
-        text-align: center;
-        width: 100%;
-        font-family: 'Roboto', sans-serif !important;
-    }
-</style>
+            body {
+                margin-top: 2cm;
+                margin-left: 0.5cm;
+                margin-right: 0.5cm;
+                margin-bottom: 1.5cm;
+                text-align: center;
+            }
+
+            footer {
+                position: fixed; 
+                bottom: 0cm; 
+                left: 0cm; 
+                right: 0cm;
+                height: 1cm;
+
+                /** Extra personal styles **/
+                background-color: #bea058;
+                color: white;
+                text-align: center;
+                line-height: 0.8cm;
+            }
+        </style>
+
+  <body>
+
+        <footer>
+            IZY CONTRAT Copyright &copy; 2020
+        </footer>
+
+     <main>
         
 <div class="container-fluid">
     
@@ -56,21 +82,21 @@ au capital de
     <hr>
     <h2 style="color: black; text-align: center;">STATUTS</h2>
     <hr>
-    <b>LE / LA SOUSSIGNE(E) : </b>
+  <br><br>  <b>LE / LA SOUSSIGNE(E) : </b>
 <p>
      <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
         
     Né(e) le <b>{{ dateNaissance ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
     De nationalité Française, <br>
     Demeurant  à <b>{{ address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
-    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
+    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br> <br> <br> <br> <br> <br>
 </p>
 
-<p style="text-align: center;"><b>A établi, ainsi qu'il suit, les statuts de la société par actions simplifiée unipersonnelle qu'il / elle a décidé d'instituer.</b></p>
+<p style="text-align: center;"><b> <br> <br> <br> A établi, ainsi qu'il suit, les statuts de la société par actions simplifiée unipersonnelle qu'il / elle a décidé d'instituer.</b> <br><br><br></p>
 
-<h4 style="text-align: center;"><b>TITRE I — FORME - OBJET - DENOMINATION - SIEGE - DUREE - EXERCICE - GERANCE</b></h4>
+<br><br><br><br><br><h4 style="text-align: center;"><b>TITRE I — FORME - OBJET - DENOMINATION - SIEGE - DUREE - EXERCICE - GERANCE</b></h4><br>
 <p>
-   <b> ARTICLE 1 -  Forme </b><br>
+  <br><br> <b> ARTICLE 1 -  Forme </b><br>
 
     La Société est un entreprise unipersonnelle à responsabilité limitée. Elle est régie par les dispositions du livre deuxième du Code de commerce, par toutes autres dispositions légales et réglementaires en vigueur et par les présents statuts.
     <br>
@@ -79,7 +105,7 @@ au capital de
 </p>
 
 <p>
-  <b>  ARTICLE 2 -   </b><br>
+  <b>  ARTICLE 2 - Objet  </b><br>
 
     La Société a pour objet : <br>
     <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE'}}</b>
@@ -147,7 +173,7 @@ au capital de
     , Gérant associé unique, intervenant aux présents statuts, déclare accepter les fonctions qui lui sont conférées.
     <br>
     Le Gérant exercera ses fonctions dans les conditions prévues au titre III des présents statuts
-    <br>
+    <br><br>
 </p>
 
 <h4 style="text-align: center;"><b>TITRE II — APPORTS - CAPITAL - PARTS SOCIALES</b></h4>
@@ -161,13 +187,13 @@ au capital de
      <br>
      apporte à la Société la somme de {{ capitalWord ?? ' NOMBRE EN LETTRES' }} EUROS,
      <br>
-       Ci…………{{ capitalNum ?? '0.00'}} Euros………………………………
+       Ci…………{{ capitalNum ?? '0.00'}} € ………………………………
      <br>
-       <b>Total des apports en numéraire : ……………{{ capitalNum ?? '0.00'}} Euros………………</b> <br>
+       <b>Total des apports en numéraire : ……………{{ capitalNum ?? '0.00'}} € ………………</b> <br>
        
-       Ladite somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} euros ({{ capitalNum ?? 'nombre en numéraire'}} €)</b>, 
-       correspondant à 100%(nombre en numéraire) parts sociales au nominal de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} 
-       ({{ capitalNum ?? 'nombre en numéraire'}}) Euros </b> chacune, souscrites et libérées en totalité, 
+       Ladite somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? 'nombre en numéraire'}}) EUROS</b>, 
+       correspondant à {{ capitalNum ?? 'nombre en numéraire' }} parts sociales au nominal de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} 
+       ({{ capitalNum ?? 'nombre en numéraire'}}) EUROS </b> chacune, souscrites et libérées en totalité, 
        est déposée au crédit d'un compte ouvert au nom de la Société en formation, 
        à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateCreation ?? 'JOUR/ MOIS/ ANNEE'}} </b>par la 
        <b>{{ companyBankName ?? 'NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE'}}</b> , dépositaire des fonds, auquel est demeurée annexée 
@@ -182,19 +208,19 @@ au capital de
 <p>
     <b>ARTICLE 9 -  Capital social</b> 
     <br>
-    Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? 'nombre en numéraire'}} €)</b>
+    Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? 'nombre en numéraire'}}) EUROS</b>
     <br>
-    Il est divisé en {{ totalPartNum ?? 'NOMBRE' }} parts de {{ capitalNum ?? 'NOMBRE'}} € chacune, numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }}, 
+    Il est divisé en {{ totalPartNum ?? 'NOMBRE' }} parts de {{ totalPartNum ?? 'NOMBRE' }} € chacune, numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }}, 
     attribuées en totalité à {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, 
     associé unique, entièrement libérées et souscrites en totalité :
     <br>
     {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
     <br>
-    A concurrence de {{ totalPartNum ?? 'NOMBRE' }} parts numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }} inclus, 
+    A concurrence de {{ capitalNum ?? 'nombre en numéraire'}} parts numérotées de 1 à {{ capitalNum ?? 'nombre en numéraire'}}  inclus, 
     <br>
-    ci……………{{ totalPartNum ?? '0' }} parts………………………… 
+    ci…………… {{ capitalNum ?? 'nombre en numéraire'}} parts………………………… 
     <br>
-       <b>Total égal au nombre de parts composant le capital social : ………{{ totalPartNum ?? '0' }} parts………</b>
+       <b>Total égal au nombre de parts composant le capital social : ………  {{ capitalNum ?? 'nombre en numéraire'}}  parts………</b>
        <br>
        L’associé unique déclare expressément que ces parts sont toutes intégralement libérées et souscrites en totalité.
     
@@ -588,7 +614,7 @@ au capital de
 </div>
 </div>
 
-
-
+  </main>
 {% block footer %} {% endblock %}
+</body>
 {% endblock %}

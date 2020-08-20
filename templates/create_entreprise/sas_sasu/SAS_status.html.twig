@@ -3,19 +3,69 @@
 {% block navbar %}{% endblock %}
 {% block dashboard %}{% endblock %}
 {% block body %}
-    <style>
-        body {
 
-            background-size: cover;
-            background: white;
-            margin-top: 2px;
-            text-align: center;
-            width: 100%;
-            font-family: 'Roboto', sans-serif !important;
-        }
-    </style>
+        <style>
+            /** 
+                Set the margins of the page to 0, so the footer and the header
+                can be of the full height and width !
+             **/
+            @page {
+                margin: 0cm 0cm;
+            }
 
-    <div class="container-fluid">
+            /** Define now the real margins of every page in the PDF **/
+            body {
+                margin-top: 3cm;
+                margin-left: 2cm;
+                margin-right: 2cm;
+                margin-bottom: 2cm;
+            }
+
+            /** Define the header rules **/
+            header {
+                position: fixed;
+                top: 0cm;
+                left: 0cm;
+                right: 0cm;
+                height: 3cm;
+            }
+            
+            
+        /*body {*/
+
+        /*    background-size: cover;*/
+        /*    background: white;*/
+        /*    margin-top: 2px;*/
+        /*    text-align: center;*/
+        /*    width: 100%;*/
+        /*    font-family: 'Roboto', sans-serif !important;*/
+        /*}*/
+
+
+            /** Define the footer rules **/
+            footer {
+                position: fixed; 
+                bottom: 0cm; 
+                left: 0cm; 
+                right: 0cm;
+                height: 2cm;
+            }
+        </style>
+
+  <body>
+        <!-- Define header and footer blocks before your content -->
+        <header>
+            <img src="/images/Logo_Izy_Contrat_H.png" width="100%" height="100%"/>
+        </header>
+
+        <footer>
+            <img src="/images/Logo_Izy_Contrat_H.png" width="100%" height="100%"/>
+        </footer>
+
+        <!-- Wrap the content of your PDF inside a main tag -->
+        <main>
+
+      <div class="container-fluid">
 
 
         <h2><br>
@@ -1449,5 +1499,7 @@
                 immatriculée au Registre du commerce et des sociétés.</p>
         </div>
     </div>
+  </main>
     {% block footer %} {% endblock %}
+</body>
 {% endblock %}
