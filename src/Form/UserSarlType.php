@@ -17,11 +17,11 @@ class UserSarlType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Mail',
+                'label' => 'Email',
                 'mapped' => true,
                 // 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'votre addresse mail',
+                    'placeholder' => 'votre addresse e-mail',
                 ),
                 'required'    => true,
             ])

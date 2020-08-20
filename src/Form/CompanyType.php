@@ -26,14 +26,14 @@ class CompanyType extends AbstractType
 {
     private $companiesTypesRecup;
     private $priorityRecup;
-    
+
     public function __construct(CompaniesTypesRepository $companiesRecup, PriorityRepository $priorityRecup)
     {
         $this->companiesTypesRecup = $companiesRecup;
         $this->priorityRecup = $priorityRecup;
-        
+
     }
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -50,7 +50,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('name', TextType::class, [
                 'attr' => [
-                    'placeholder' => "nom entreprise"
+                    'placeholder' => "nom de l'entreprise"
                     ],
                  'required' => false,
                  'mapped' => true,
@@ -152,7 +152,7 @@ class CompanyType extends AbstractType
                 //     'OUI' => 'Oui',
                 //     'NON' => 'Non',
                 //     'JE NE SAIS PAS' => 'Je ne sais pas'
-                //     ], 
+                //     ],
                 //     'choice_label' => function ($choice, $key, $value) {
                 //       if ("Oui" === $choice) {
                 //             return 'Tu sera le DG';
@@ -164,7 +164,7 @@ class CompanyType extends AbstractType
                 //         else{
                 //             return "Tu ne sais pas";
                 //         }
-            
+
                 //     return strtoupper($key);
                 // },
                  // 'required' => false,
@@ -188,9 +188,9 @@ class CompanyType extends AbstractType
                 'required' => false,
                 'mapped' => true,
                 // 'choices' => $this->companiesTypesRecup->findAll(),
-                // 'multiple' => true 
+                // 'multiple' => true
                 ]);
-              
+
     }
 
 

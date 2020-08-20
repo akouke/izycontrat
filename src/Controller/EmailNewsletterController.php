@@ -53,7 +53,7 @@ class EmailNewsletterController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $this->addFlash('danger', 'Veuillez entrer une adresse mail valide');
+        $this->addFlash('danger', 'Veuillez entrer une adresse email valide');
         return $this->redirectToRoute('app_home',  [
             'email_newsletter' => $emailNewsletter,
             'form' => $form->createView(),

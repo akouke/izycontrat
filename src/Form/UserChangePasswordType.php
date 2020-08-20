@@ -24,7 +24,7 @@ class UserChangePasswordType extends AbstractType
                  ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'Vos mot de passe ne correspond pas',
+                'invalid_message' => 'Vos mots de passe ne correspondent pas',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'mapped' => false,

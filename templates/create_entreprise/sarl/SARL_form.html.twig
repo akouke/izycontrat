@@ -8,7 +8,7 @@
 {{ encore_entry_link_tags('tab1') }}
 {% endblock %}
 
-{% block title %}Je cree mon {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} {% endblock %}
+{% block title %}Je crée mon {{ typeStatut == 'SARL' ? 'SARL' : 'EURL' }} {% endblock %}
 
 {% block body %}
 <style>
@@ -124,7 +124,7 @@
 
   {% if emailUsed == true %}
       <div class="alert alert-danger">
-            Cet adresse Email: <strong>{{ user.email }}</strong> existe déja veuillez vous connecter!
+            Cet adresse Email: <strong>{{ user.email }}</strong> existe déja veuillez vous connecter.
       </div>
     {% endif%}
 
@@ -287,7 +287,7 @@
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
-            
+
             <fieldset>
 
             <h2 class="fs-title ">Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur ? </h2>
@@ -314,7 +314,7 @@
                     <h2 class="fs-title ">Où sera le siège social de votre société ?</h2>
 
                      {% if typeStatut == 'SARL' %}
-                     
+
                      <div id="accordion">
                             <div class="card-header bg-light" id="headingOne">
                               <h5 class="mb-0">
@@ -323,7 +323,7 @@
                                 </button>
                               </h5>
                             </div>
-                        
+
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                               <div class="card-body">
                                 <div class="mx-auto" style="max-width: 400px;">
@@ -331,7 +331,7 @@
                                 </div>
                               </div>
                             </div>
-                            
+
                             <div class="card-header bg-light" id="headingTwo">
                               <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -358,7 +358,7 @@
                               <div class="card-body">
                                   <div class="mx-auto" style="max-width: 400px;">
                                         {{ form_widget(formSarl.address)}}
-                                  </div>                              
+                                  </div>
                               </div>
                             </div>
 
@@ -398,7 +398,7 @@
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
-            
+
             <fieldset>
                     <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2>
                      <div class="mx-auto mb-2" style="max-width: 400px;">
@@ -657,7 +657,7 @@
 
                     {% if emailUsed == true %}
                       <div class="badge badge-danger text-wrap">
-                        Erreur: Cet adresse Email: <b>{{ user.email }}</b> existe déja!
+                        Erreur: Cet adresse Email: <b>{{ user.email }}</b> existe déja.
                       </div>
                     {% endif%}
                  </div>
