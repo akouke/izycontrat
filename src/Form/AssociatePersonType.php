@@ -39,7 +39,7 @@ class AssociatePersonType extends AbstractType
             //     'required'    => false,
             // ])
             ->add('capitalAmountAdding', MoneyType::class, [
-                'label' => 'Apport Associe',
+                'label' => 'Apport Associé',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -48,7 +48,7 @@ class AssociatePersonType extends AbstractType
                 'required'    => false,
             ])
              ->add('firstName', TextType::class, [
-                'label' => 'Prénom Associe',
+                'label' => 'Prénom Associé',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -57,7 +57,7 @@ class AssociatePersonType extends AbstractType
                 'required'    => false,
             ])
             ->add('lastName',  TextType::class, [
-                'label' => 'Nom Associe',
+                'label' => 'Nom Associé',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -109,7 +109,7 @@ class AssociatePersonType extends AbstractType
             //         ]),
             //     ],
             // ])
-        
+
         ;
     }
 

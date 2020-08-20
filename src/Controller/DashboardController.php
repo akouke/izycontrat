@@ -54,7 +54,7 @@ class DashboardController extends AbstractController
         //     return $this->redirectToRoute('dashboard_home');
         // }
         $person = $this->getDoctrine()->getRepository(Person::class)->findOneBy(['user' => $user]);
-        
+
     // dd($person);
         if ($this->isGranted(['ROLE_LAWYER'])) {
             $form = $this->createForm(LawyerType::class, $person);
@@ -62,7 +62,7 @@ class DashboardController extends AbstractController
             $form = $this->createForm(ClientType::class, $person);
         }
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
                 // $user->setPassword ( $passwordEncoder->encodePassword( $user, $formUser->getPassword() ));
                 $this->getDoctrine()->getManager()->flush();
@@ -73,11 +73,11 @@ class DashboardController extends AbstractController
             [
                 'form' => $form->createView(),
                 // 'formUser' => $formUser->createView(),
-            
+
             ]
         );
     }
-    
+
      /**
      * @Route("/profile/edit", name="profile_edit_user")
      * @param Request $request
@@ -97,25 +97,25 @@ class DashboardController extends AbstractController
             // ->add('save', SubmitType::class, ['label' => "Modifier Password"]);
         }
         $formUser->handleRequest($request);
-            
+
         if ( $request->getMethod() == "POST" )
         {
             $newPassword = $formUser->get('password')->getData();
             $lenNewPassword = strlen($newPassword);
             if($lenNewPassword < 8){
-                $this->addFlash('danger', 'Votre mot de passe de '.$lenNewPassword.' caracteres est trop court! 8 caracteres au minimun');
+                $this->addFlash('danger', 'Votre mot de passe de '.$lenNewPassword.' caractères est trop court. Veuillez entrer 8 caractères au minimun');
                 return $this->redirectToRoute('dashboard_profile_edit_user');
             }
             // dd($lenNewPassword);
             $oldPassword = $formUser->get('oldPassword')->getData();
             $user->setOldPassword($oldPassword);
             $checkPass = $passwordEncoder->isPasswordValid($user, $oldPassword);
-            if(  $checkPass === true ) 
+            if(  $checkPass === true )
             {
                 $user->setPassword($passwordEncoder->encodePassword( $user, $newPassword ));
                 $this->getDoctrine()->getManager()->flush();
                 $this->addFlash('success', 'Votre mot de passe a bien été modifié');
-                
+
                 return $this->redirectToRoute('dashboard_home');
             }
         }
@@ -123,7 +123,7 @@ class DashboardController extends AbstractController
             'dashboard/userChangePassword.html.twig',
             [
                 'formUser' => $formUser->createView(),
-            
+
             ]
         );
     }
@@ -154,9 +154,9 @@ class DashboardController extends AbstractController
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
-        
+
         if($client->getUser() === null ){
-            
+
             $user = $userRecup->findOneByEmail($client->getEmailPerson()) ;
         }
         else{
@@ -169,15 +169,15 @@ class DashboardController extends AbstractController
 
     //   $d = $dossierClient."/";
 
-    
+
     //     $mot = trim($uploads['0']->getStatus());
 
     //     $path = $d.$mot;
         // $d->close();
-        
+
         // }
         // dd($uploads);
-        
+
         return $this->render('dashboard/Admin/show.html.twig', [
             'client' => $client,
             'uploads' => $uploads,
@@ -213,7 +213,7 @@ class DashboardController extends AbstractController
         }
         return $this->render('dashboard/Admin/show.html.twig', ['lawyer' => $lawyer]);
     }
-    
+
      /**
      * @Route("/admin/client/delete/{id}", name="clients_delete")
      */
@@ -227,12 +227,12 @@ class DashboardController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($client);
             $entityManager->flush();
-            $this->addFlash('success', 'le client a bien ete supprime');
-            
-        }catch (\Throwable $th) 
+            $this->addFlash('success', 'le client a bien été supprimé');
+
+        }catch (\Throwable $th)
           {
-            $this->addFlash('danger', 'la suppression n\'a pas reussit contacter l\'administrateur au besion');  
-              
+            $this->addFlash('danger', 'la suppression n\'a pas réussi, veuillez contacter l\'administrateur au besoin');
+
           }
         return $this->redirectToRoute('dashboard_admin_clients');
     }
