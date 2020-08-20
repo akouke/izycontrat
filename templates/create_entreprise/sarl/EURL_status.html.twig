@@ -3,592 +3,796 @@
 {% block navbar %}{% endblock %}
 {% block dashboard %}{% endblock %}
 {% block body %}
-<style>
-     body{
-
-        background-size: cover;
-        background: white;
-        margin-top: 2px;
-        text-align: center;
-        width: 100%;
-        font-family: 'Roboto', sans-serif !important;
-    }
-</style>
-        
-<div class="container-fluid">
-    
-    
-<h2><br>
-
-<h2><br>
-
-    {% if company.name is defined %}
-        {{ company.name }}
-    {% else %}
-        'NOM DE LA SOCIETE'
-    {% endif %}
-    
-</h2>
-<p>Société à responsabilité limitée<br>
-au capital de 
-<b>
-    {% if capitalNum is defined %}
-    {{ capitalNum }} euros 
-    {% else %}
-    'NOMBRE NUMERAIRE' euros
-    {% endif %}
-</b>
-</p>
-
-<p><u>Siège social</u> : 
-    <b>
-        {% if company is defined %}
-        {{ company.address }} {{ company.country ?? ''}} {{ company.addressManager ?? ''}}
-        {% else %}
-        'ADRESSE'
-        {% endif %}
-    </b>
-</p>
-
-    <br>
-    
-<div class="col-11" style="margin-left: 4%; text-align: left">
-    <hr>
-    <h2 style="color: black; text-align: center;">STATUTS</h2>
-    <hr>
-    <b>LE / LA SOUSSIGNE(E) : </b>
-<p>
-     <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
-        
-    Né(e) le <b>{{ dateNaissance ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
-    De nationalité Française, <br>
-    Demeurant  à <b>{{ address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
-    <b>{{ situation ?? 'Célibataire / Marié'}}</b> <br>
-</p>
-
-<p style="text-align: center;"><b>A établi, ainsi qu'il suit, les statuts de la société par actions simplifiée unipersonnelle qu'il / elle a décidé d'instituer.</b></p>
-
-<h4 style="text-align: center;"><b>TITRE I — FORME - OBJET - DENOMINATION - SIEGE - DUREE - EXERCICE - GERANCE</b></h4>
-<p>
-   <b> ARTICLE 1 -  Forme </b><br>
-
-    La Société est un entreprise unipersonnelle à responsabilité limitée. Elle est régie par les dispositions du livre deuxième du Code de commerce, par toutes autres dispositions légales et réglementaires en vigueur et par les présents statuts.
-    <br>
-    Elle fonctionne indifféremment sous la même forme avec un ou plusieurs associés.
-    <br>
-</p>
-
-<p>
-  <b>  ARTICLE 2 -   </b><br>
-
-    La Société a pour objet : <br>
-    <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE'}}</b>
-    <br>
-    La participation de la Société, par tous moyens, directement ou indirectement, dans toutes opérations pouvant se rattacher à son objet par voie de création de sociétés nouvelles, d'apport, de souscription ou d'achat de titres ou droits sociaux, de fusion ou autrement, de création, d'acquisition, de location, de prise en location-gérance de tous fonds de commerce ou établissements ; la prise, l'acquisition, l'exploitation ou la cession de tous procédés et brevets concernant ces activités.
-    <br>
-    Et plus généralement toutes opérations financières, commerciales, civiles, mobilières et immobilières pouvant se rattacher directement ou indirectement à l’un des objets spécifiés ou à tout autre objet similaire ou connexe.
-    <br>
-</p>
-
-<p>
-  <b> ARTICLE 3 - Dénomination sociale </b> 
-    <br>
-
-    La dénomination de la Société est : <b> {{ company.name ?? ' NOM DE LA SOCIETE'}}  </b>. 
-    <br>
-      Tous les actes et documents émanant de la Société et destinés aux tiers et notamment les lettres, 
-      factures, annonces et publications diverses, doivent indiquer la dénomination sociale précédée ou 
-      suivie immédiatement des mots «Société à responsabilité limitée» ou de l’abréviation «SARL», 
-      de l’énonciation du capital social ainsi que du numéro d’immatriculation de la Société au 
-      Registre du Commerce et des Sociétés.
-    <br>
-</p>
-
-
-<p>
-   <b> ARTICLE 4 - Siège social </b> <br>
-
-    Le siège social est fixé : <b> {{ company.address ?? ' VILLE (CODE POSTAL) – ADRESSE'}}</b> <br>
-    
-    Il pourra être transféré dans le même département ou dans un département limitrophe par simple décision de la gérance, sous réserve de ratification par la prochaine décision de l'associé unique ou par la prochaine décision collective extraordinaire des associés, et en tout lieu par décision de l'associé unique ou par décision collective extraordinaire des associés.
-    <br>
-</p>
-
-
-<p>
-   <b> ARTICLE 5 -  Durée </b> <br>
-
-    La durée de la Société est fixée à <b>quatre-vingt-dix-neuf (99) années </b> à compter de la date de son immatriculation au Registre du commerce et des sociétés, sauf dissolution anticipée ou prorogation.
-    <br>
-</p>
-
-<p>
-   <b> ARTICLE 6 -  Exercice social </b> <br>
-
-    L’exercice social a une durée de douze mois. Il commence le 1er janvier et se termine le 
-    31 décembre de chaque année.
-    
-    Le premier exercice social sera clos exceptionnellement le <b>31 décembre de cette année</b>.
-    <br>
-</p>
-
-<p>
-    <b>ARTICLE 7 - Gérance</b> 
-    <br>
-        {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
-    <br>
-    Né(e) le <b>{{ dateNaissance ?? 'DATE'}} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
-    De nationalité Française, <br>
-    Demeurant  à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b> 
-    <br>
-    exerce la fonction de Gérant de la Société sans limitation de durée.
-    <br>
-    {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
-    , Gérant associé unique, intervenant aux présents statuts, déclare accepter les fonctions qui lui sont conférées.
-    <br>
-    Le Gérant exercera ses fonctions dans les conditions prévues au titre III des présents statuts
-    <br>
-</p>
-
-<h4 style="text-align: center;"><b>TITRE II — APPORTS - CAPITAL - PARTS SOCIALES</b></h4>
-
-<p>
-    <b>ARTICLE 8 -  Apports</b> 
-    <br>
-     <u>Apports en numéraire</u> 
-     <br>
-     {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b> , 
-     <br>
-     apporte à la Société la somme de {{ capitalWord ?? ' NOMBRE EN LETTRES' }} EUROS,
-     <br>
-       Ci…………{{ capitalNum ?? '0.00'}} Euros………………………………
-     <br>
-       <b>Total des apports en numéraire : ……………{{ capitalNum ?? '0.00'}} Euros………………</b> <br>
-       
-       Ladite somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} euros ({{ capitalNum ?? 'nombre en numéraire'}} €)</b>, 
-       correspondant à 100%(nombre en numéraire) parts sociales au nominal de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} 
-       ({{ capitalNum ?? 'nombre en numéraire'}}) Euros </b> chacune, souscrites et libérées en totalité, 
-       est déposée au crédit d'un compte ouvert au nom de la Société en formation, 
-       à la banque ainsi qu'en atteste un certificat établi en date du <b>{{ dateCreation ?? 'JOUR/ MOIS/ ANNEE'}} </b>par la 
-       <b>{{ companyBankName ?? 'NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE'}}</b> , dépositaire des fonds, auquel est demeurée annexée 
-       la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
-       <br>
-       Cette somme sera retirée par le Gérant de la société ou son mandataire sur présentation du certificat délivré par le Greffier du tribunal de commerce du lieu du siège social attestant l'immatriculation de la société au registre du commerce.
-    
-    <br>
-</p>
-
-
-<p>
-    <b>ARTICLE 9 -  Capital social</b> 
-    <br>
-    Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} ({{ capitalNum ?? 'nombre en numéraire'}} €)</b>
-    <br>
-    Il est divisé en {{ totalPartNum ?? 'NOMBRE' }} parts de {{ capitalNum ?? 'NOMBRE'}} € chacune, numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }}, 
-    attribuées en totalité à {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, 
-    associé unique, entièrement libérées et souscrites en totalité :
-    <br>
-    {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
-    <br>
-    A concurrence de {{ totalPartNum ?? 'NOMBRE' }} parts numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }} inclus, 
-    <br>
-    ci……………{{ totalPartNum ?? '0' }} parts………………………… 
-    <br>
-       <b>Total égal au nombre de parts composant le capital social : ………{{ totalPartNum ?? '0' }} parts………</b>
-       <br>
-       L’associé unique déclare expressément que ces parts sont toutes intégralement libérées et souscrites en totalité.
-    
-    <br>
-</p>
-
-
-<p>
-    <b>ARTICLE 10 -  MODIFICATIONS DU CAPITAL SOCIAL</b> 
-    <br>
-
-    <u>I - Augmentation du capital</u>
-    <br>
-    
-    Modalités de l’augmentation du capital :
-    <br>
-    
-    Le capital social peut, en vertu d’une décision de l’associé unique ou décision collective extraordinaire des associés être augmenté, en une ou plusieurs fois, en représentation d’apports en nature ou en numéraire, ou par incorporation de tout ou partie des bénéfices ou réserves disponibles, au moyen de la création de parts sociales nouvelles ou de l’élévation de la valeur nominale des parts existantes.
-    <br>
-    
-    <u>II - Réduction du capital social</u>
-    <br>
-    <ol>
-        <li>Le capital social peut être réduit, pour quelque cause et de quelque manière que ce soit, par décision de l’associé unique ou par décision collective extraordinaire des associés.</li>
-        <li>Si, du fait de pertes constatées dans les documents comptables, le montant des capitaux propres de la Société devient inférieur à la moitié du capital social, l’associé unique ou, en cas de pluralité d’associés, l’assemblée générale extraordinaire des associés, décident dans les quatre mois qui suivent l’approbation des comptes ayant fait apparaître ces pertes, s’il y a lieu de prononcer la dissolution anticipée de la Société.</li>
-    </ol>
-    <br>
-    
-    Si la dissolution n’est pas prononcée, la Société est tenue, au plus tard à la clôture du deuxième exercice suivant celui au cours duquel la constatation des pertes est intervenue, et sous réserve des dispositions relatives au montant minimum du capital, de réduire son capital d’un montant au moins égal à celui des pertes qui n’ont pu être imputées sur les réserves si, dans ce délai, les capitaux propres n’ont pu être reconstitués à concurrence d’une valeur au moins égale à la moitié du capital.
-    <br>
-    
-    En cas d’inobservation des prescriptions ci-dessus, tout intéressé peut demander en justice la dissolution de la Société. Il en est de même si les associés n’ont pu valablement délibérer.
-    <br>
-    
-    Toutefois, le tribunal ne peut prononcer la dissolution de la Société, si au jour où il statue la régularisation a été effectuée.
-    
-    <br>
-
-</p>
-
-
-<p>
-    
-    <b>ARTICLE 11 -  Représentation des parts sociales - Obligations nominatives</b> 
-    <br>
-    
-    <u>I -Représentation des parts sociales</u>
-    <br>
-    
-    Les parts sociales ne peuvent être représentées par des titres négociables. Les droits de l’associé dans la Société résultent seulement des présents statuts, des actes modificatifs ultérieurs et des cessions de parts régulièrement notifiés et publiés
-    <br>
-    
-    La Société peut émettre des parts sociales en rémunération des apports en industrie qui lui sont effectués. Ces parts sont émises sans valeur nominale et ne sont pas prises en compte pour la formation du capital social.
-    <br>
-    
-    Les parts sociales d’industrie sont attribuées à titre personnel. Elles ne peuvent être cédées et sont annulées en cas de décès de leur titulaire comme en cas de cessation des prestations dues par ledit titulaire.
-    <br>
-    
-    <u>II - Obligations nominatives</u>
-    <br>
-    
-    Si la Société est légalement tenue d’avoir un Commissaire aux comptes et que les comptes des trois derniers exercices de 12 mois ont été régulièrement approuvés, elle pourra émettre des obligations nominatives, dans les conditions et sous les réserves édictées par la réglementation en vigueur, sans pour autant pouvoir faire appel public à l’épargne.
-    <br>
-    
-    L’émission des obligations nominatives est décidée par l’assemblée générale des associés, dans les conditions de majorité requises pour les décisions ordinaires. Si le capital de la Société est entièrement libéré, l’assemblée générale peut déléguer au Gérant le pouvoir de procéder à l’émission des obligations nominatives.
-    <br>
-    
-    Une notice relative aux conditions de l’émission et un document d’information sont mis à la disposition des souscripteurs lors de chaque émission.
-    <br>
-    
-    Pour la défense de leurs intérêts, les obligataires sont regroupés en une masse dotée de la personnalité morale et représentée par une ou plusieurs personnes physiques ou morales, sans que les représentants puissent être plus de trois, et sont appelés à se réunir en assemblée générale, dans les conditions et selon les modalités fixées par la réglementation en vigueur.
-    <br>
-    
-</p>
-
-<p>
-    
-    <b>ARTICLE 12 - Cession — Transmission</b>
-    <br>
-    <u>I - Cession</u>
-    <br>
-    
-    1 - Les cessions de parts doivent être constatées par écrit.
-    <br>
-    La cession n’est opposable à la Société que dans les formes prévues par l’article 1690 du Code civil ou par le dépôt d’un original de l’acte de cession au siège social contre remise par le Gérant d’une attestation de ce dépôt.
-    <br>
-    Elle n’est opposable aux tiers qu’après accomplissement de cette formalité et, en outre, après publicité au Greffe du tribunal de commerce.
-    <br>
-    
-    2 - Les cessions ou transmissions sous quelque forme que ce soit des parts sociales appartenant à l’associé unique sont libres.
-    <br>
-    
-    3 - En cas de pluralité d’associés, toutes les cessions de parts au profit de tiers étrangers à la Société, sont soumises à agrément dans les conditions prévues par les dispositions de la loi et du décret sur les Sociétés commerciales
-    <br>
-    
-    <u>II - Transmission</u>
-    <br>
-    
-    4 - En cas de décès de l’associé unique, la Société continue de plein droit entre ses ayants droit ou héritiers, et, le cas échéant, son conjoint survivant.
-    <br>
-    
-    <u>III - Dissolution de la communauté</u>
-    <br>
-    
-    5 - En cas de dissolution de la communauté de biens existant entre l’associé unique et son conjoint, la Société continue soit avec un associé unique, si les parts sociales sont attribuées en totalité à l’un des époux, soit avec deux associés si lesdites parts sont partagées entre les époux.
-    
-   <br>
-</p>
-
-
-<p>
-    
-    <b>ARTICLE 13 -  Indivisibilité des parts sociales</b>
-    <br>
-       En cas de pluralité d’associés, les copropriétaires de parts sociales indivises sont tenus de désigner l’un d’entre eux pour les représenter auprès de la Société ; à défaut d’entente, il appartient à l’indivisaire le plus diligent de faire désigner par justice un mandataire chargé de les représenter.
-   <br>
-   Lorsque des parts sociales sont grevées d’usufruit, le droit de vote appartient au nu-propriétaire pour toutes les décisions collectives autres que celles relatives à l’affectation des résultats sociaux.
-
-   <br>
-</p>
-
-
-<p>
-    
-    <b>ARTICLE 14 -  Décès ou incapacité d’un associé</b> 
-    <br>
-    La Société n’est pas dissoute par le décès ou l’incapacité frappant l’associé unique ou l’un des associés.
-    
-    <br>
-</p>
-
-    <h4 style="text-align: center;"><b>TITRE III — GÉRANCE</b></h4>
-    
-<p>
-    
-    <b>ARTICLE 15 - Pouvoirs de la gérance</b> 
-    <br>
-    La Société est gérée et administrée par un ou plusieurs Gérants, personnes physiques, associés ou non, nommés avec ou sans limitation de durée.
-
-    <br>Le ou les Gérants sont nommés par l’associé unique ou, en cas de pluralité d’associés, par les associés représentant plus de la moitié des parts sociales.
-
-    <br>En cas de pluralité de Gérants, chacun d’eux peut faire tous actes de gestion dans l’intérêt de la Société et dispose des mêmes pouvoirs que s’il était Gérant unique : l’opposition formée par l’un d’eux aux actes de son ou de ses collègues est sans effet à l’égard des tiers, à moins qu’il ne soit établi que ces derniers ont eu connaissance de celle-ci.
-
-    <br>Le Gérant, ou chacun des Gérants s’ils sont plusieurs, a la signature sociale, donnée par les mots «Pour la Société - Le Gérant», suivis de la signature du Gérant.
-
-   <br>Dans ses rapports avec les tiers, le Gérant est investi des pouvoirs les plus étendus pour représenter la Société et agir en son nom en toute circonstance, sans avoir à justifier de pouvoirs spéciaux.
-
-   <br>Le Gérant est tenu de consacrer tout le temps et les soins nécessaires aux affaires sociales ; il peut, sous sa responsabilité personnelle, déléguer temporairement ses pouvoirs à toute personne de son choix pour un ou plusieurs objets spéciaux et limités.
-
-   <br>Le Gérant est expressément habilité à mettre les statuts de la Société en harmonie avec les dispositions impératives de la loi et des règlements, sous réserve de ratification de ces modifications par l’associé unique ou par décision collective des associés représentant plus des trois-quarts des parts sociales.
-
-
-    <br>
-</p>
-
-<p>
-    
-   <b> ARTICLE 16 - Cessation des fonctions des Gérants </b>
-    
-    <br>Le ou les Gérants sont révocables par décision de l’associé unique ou par une décision collective des associés représentant plus de la moitié des parts sociales. Si la révocation est décidée sans juste motif, elle peut donner lieu à des dommages-intérêts. 
-
-    <br>Enfin, en cas de pluralité d’associés, un Gérant peut être révoqué par le Président du Tribunal de Commerce, pour cause légitime, à la demande de tout associé.
-
-    <br>Les fonctions du ou des Gérants cessent par décès, interdiction, déconfiture, faillite personnelle, incompatibilité de fonctions ou révocation. Le Gérant peut également résilier ses fonctions mais seulement en prévenant l’associé unique ou, en cas de pluralité d’associés, chacun des associés trois mois à l’avance.
-
-    <br>La cessation des fonctions du ou des Gérants n’entraîne pas la dissolution de la Société.
-
-    <br>
-</p>
-
-<p>
-    
-    <b>ARTICLE 17 - Rémunération de la gérance</b>
-    
-   <br> Chacun des Gérants a droit, en rémunération de ses fonctions, à un traitement fixe ou proportionnel, ou à la fois fixe et proportionnel à passer par frais généraux.
-
-   <br>Les modalités d’attribution de cette rémunération, ainsi que son montant, sont fixés par décision de l’associé unique ou décision ordinaire des associés. La gérance a droit, en outre, au remboursement de ses frais de représentation et de déplacements.
-
-  <br>
-</p>
-
-<p>
-    
-    <b>ARTICLE 18 - Responsabilité des gérants</b>
-
-    <br>Les gérants sont responsables individuellement ou solidairement selon les cas, envers la société ou envers les tiers, soit des infractions aux dispositions législatives ou réglementaires applicables aux sociétés à responsabilité limitée, soit des violations des statuts, soit des fautes commises dans leur gestion.
-
-    <br>Outre l'action en réparation du préjudice subi personnellement, les associés peuvent intenter l'action sociale en responsabilité contre les gérants, soit individuellement, soit en se regroupant, à condition qu'ils représentent au moins le dixième du capital social, et en chargeant à leurs frais un ou plusieurs d'entre eux de les représenter pour soutenir cette action à poursuivre la réparation de l'entier préjudice subi par la société à laquelle, le cas échéant, des dommages et intérêts sont alloués.
-
-    <br>Aucune décision de l'assemblée ne peut avoir pour effet d'éteindre une action en responsabilité contre les gérants pour fautes commises dans l'accomplissement de leur mandat.
-
-    <br>Les actions en responsabilité contre les gérants se prescrivent par trois ans à compter du fait dommageable ou, s'il a été dissimulé, de sa révélation.
-
-    <br>Toutefois, lorsque le fait est qualifié crime, l'action se prescrit par dix ans.
-
-    <br>En cas de règlement judiciaire ou de liquidation des biens de la société, les personnes visées par la législation sur le règlement judiciaire, la liquidation des biens, la faillite personnelle et les banqueroutes peuvent être rendues responsables  du passif social et sont soumises aux interdictions et déchéances, dans les conditions prévues par ladite législation.
-
-   <br> 
-</p>
-
-    <h4 style="text-align: center;"><b>TITRE IV - CONVENTIONS ENTRE LA SOCIÉTÉ ET LA GÉRANCE OU UN ASSOCIÉ</b></h4>
-<p>
-    <ol>
-        <li>Les conventions, autres que celles portant sur des opérations courantes conclues à des conditions normales (article L 223-20 du Code de commerce), qui interviennent directement ou par personne interposée entre la Société et l’un de ses Gérants ou associés, sont soumises à la procédure d’approbation prévue par la loi.
-            <br>Ces dispositions s’appliquent aux conventions passées avec une Société dont un associé indéfiniment responsable, un Gérant, un administrateur, un Directeur Général, un membre du Directoire ou un membre du Conseil de surveillance, est également associé ou Gérant de la SARL
-        </li>
-        <li>Lorsque la Société n’est pas pourvue de Commissaire aux comptes, les conventions conclues par le Gérant non associé sont soumises à l’approbation préalable de l’associé unique ou de la collectivité des associés.</li>
-        <li>La procédure d’approbation et de contrôle prévue par la loi ne s’applique pas aux conventions conclues par l’associé unique, Gérant ou non. Toutefois, le Gérant non associé ou le Commissaire aux comptes, s’il en existe un, doivent établir un rapport spécial.</li>
-        <li>Les conventions conclues par l’associé unique ou par le Gérant non associé doivent être répertoriées dans le registre des décisions de l’associé unique</li>
-        <li>A peine de nullité du contrat, il est interdit aux Gérants ou aux associés autres que les personnes morales de contracter, sous quelque forme que ce soit, des emprunts auprès de la Société, de se faire consentir par elle des découverts en compte courant ou autrement, ainsi que de faire cautionner ou avaliser par elle leurs engagements envers des tiers.
-            <br>Cette interdiction s’applique également aux représentants légaux des personnes morales associés, aux conjoints, ascendants et descendants des Gérants ou associés personnes physiques, ainsi qu’à toute personne interposée
-        </li>
-        
-    </ol>
-    <br>
-</p>
-
-<h4 style="text-align: center;"><b>TITRE V — DECISIONS DE L’ASSOCIEE UNIQUE OU DES ASSOCIES</b></h4>
-    
-<p>
-    
-    <b>ARTICLE 19 - Décisions de l’associé unique ou des associés</b>
-    <ol>
-        <li>L’associé unique exerce les pouvoirs qui sont dévolus par la loi aux associés réunis en assemblée générale. Il ne peut déléguer ses pouvoirs.</li>
-        <li>Les décisions de l’associé unique sont constatées dans un registre côté et paraphé dans les mêmes conditions que le registre des procès-verbaux des assemblées.</li>
-        <li>En cas de pluralité d’associés, tout associé a le droit de participer aux décisions collectives et dispose d’un nombre de voix égal à celui des parts sociales qu’il possède. Dans l’exercice de son droit de participer aux décisions collectives, chaque associé a le droit de se faire représenter par un autre associé, sauf si les associés sont au nombre de deux, ou par son conjoint à moins que la Société ne comprenne que les deux époux, ou par toute autre personne de son choix.</li>
-        <li>Les décisions collectives des associés sont prises en assemblées. Ces assemblées sont convoquées et délibèrent conformément aux dispositions légales et réglementaires en vigueur</li>
-    </ol>
- <br>
-</p>
-
-
-<p>
-    
-    <b>ARTICLE 20 - Information de l’associé unique ou des associés</b>
-    <ol>
-        <li>L’associé unique non Gérant, indépendamment de son droit d’information préalable à l’approbation annuelle des comptes, peut à toute époque, prendre connaissance au siège social des documents prévus par la loi et relatifs aux trois derniers exercices sociaux.</li>
-        <li>Lorsque la Société comporte plusieurs associés, l’étendue et les modalités de leurs droits d’information et de communication sont déterminées par les dispositions légales et réglementaires en vigueur.</li>
-    </ol>
-    
- <br>
-</p>
-
-  <h4 style="text-align: center;"><b>TITRE VI — CONTROLE DE LA SOCIETE</b></h4>
-  
-<p>
-    <b>ARTICLE 21 -  Commissaires aux comptes</b>
-    <br>La nomination d’un Commissaire aux comptes titulaire et d’un Commissaire aux comptes suppléant est obligatoire dans les cas prévus par la loi et les règlements. Elle est facultative dans les autres cas.
-    <br>En cas de pluralité d’associés, la nomination d’un Commissaire aux comptes peut également être décidée par décision ordinaire des associés. Elle peut aussi être demandée en justice par un ou plusieurs associés représentant au moins le dixième du capital.
-
-    <br>Le Commissaire aux comptes exerce ses fonctions dans les conditions prévues par la loi.
-</p>
-
-    <h4 style="text-align: center;"><b>TITRE VII —COMPTES SOCIAUX - BENEFICES - DIVIDENDES</b></h4>
-    
-<p>
-    
-    <b>ARTICLE 22 -  Comptes sociaux</b>
-    <br>Il est tenu une comptabilité régulière des opérations sociales, conformément à la loi et aux usages du commerce.<br>
-        A la clôture de chaque exercice, la gérance dresse l’inventaire des divers éléments de l’actif et du passif existant à cette date. Elle dresse également le bilan, le compte de résultat et l’annexe, en se conformant aux dispositions légales et réglementaires.<br>
-        Elle établit également un rapport de gestion exposant la situation de la Société durant l’exercice écoulé, l’évolution prévisible de cette situation, les événements importants intervenus entre la date de clôture de l’exercice et la date d’établissement du rapport et enfin les activités en matière de recherche et de développement.<br>
-
-<br>
-</p>
-
-<p>
-    <b>ARTICLE 23 -  Affectation et répartition des résultats</b>
-    
-   <br>Les produits nets de l’exercice, déduction faite des frais généraux et autres charges de la Société, ainsi que tous amortissements provisions, constituent le bénéfice.
-
-    <br>Il est fait, sur ce bénéfice, diminué le cas échéant des pertes antérieures, un prélèvement d’un vingtième au moins, affecté à la formation d’un compte de réserve dite «réserve légale». Ce prélèvement cesse d’être obligatoire lorsque ladite réserve atteint le dixième du capital social.
-    <br>Le bénéfice distribuable est constitué par le bénéfice de l’exercice, diminué des pertes antérieures et des sommes portées en réserve en application de la loi ou des statuts, et augmenté des reports bénéficiaires.
-
-    <br>Le bénéfice distribuable est attribué à l’associé unique. Lorsque la Société comprend plusieurs associés, la part attribuée aux associés sur ce bénéfice est déterminée par l’assemblée générale.<br>
-        Les modalités de mise en paiement des dividendes sont fixées par l’associé unique ou décidées par l’assemblée générale.
-    <br>La mise en paiement des dividendes doit avoir lieu dans les neuf mois de la clôture de l’exercice, sauf prolongation de ce délai par décision de justice.
-    <br>L’associé unique ou l’assemblée générale peut également décider la distribution de sommes prélevées sur les réserves disponibles en indiquant expressément les postes de réserves sur lesquels ces prélèvements sont effectués. Toutefois, les dividendes sont prélevés par priorité sur le bénéfice distribuable de l’exercice.
-
-    <br>De même, l’associé unique ou l’assemblée générale peut décider d’affecter en totalité ou en partie les sommes distribuables aux réserves ou au report à nouveau.<br>
-         Aucune distribution ne peut être effectuée lorsque les capitaux propres sont ou deviendraient à la suite d’une telle distribution, inférieurs au montant du capital augmenté des réserves que la loi ou les statuts ne permettent pas de distribuer.
-
-    <br>Les pertes de l’exercice, s’il en existe, sont inscrites au report à nouveau pour être imputées sur les bénéfices des exercices ultérieurs jusqu’à apurement complet.
-
-
-<br>
-</p>
-
-   <h4 style="text-align: center;"><b>TITRE VIII — PROROGATION - DISSOLUTION - LIQUIDATION - CONTESTATIONS</b></h4>
-
-<p>
-    
-    <b>ARTICLE 24 -  Prorogation</b>
-    
-   <br> Un an au moins avant la date d’expiration de la Société, l’associé unique ou les associés doivent décider si la Société doit être prorogée ou non
-
-<br>
-</p>
-
-
-<p>
-    
-    <b>ARTICLE 25 -  Dissolution - Liquidation</b>
-
-    <ol>
-        <li>La Société est dissoute à l’arrivée du terme statuaire, sauf prorogation régulière, et en cas de survenance d’une cause légale de dissolution.</li>
-        <li>Lorsque la Société ne comporte qu’un seul associé personne morale, la dissolution pour quelque cause que ce soit, entraîne dans les conditions prévues par l’article 1844-5 du Code civil, la transmission universelle du patrimoine social à l’associé unique, sans qu’il y ait lieu à liquidation.</li>
-        <li>Lorsque la Société comporte un associé personne physique ou plusieurs associés, la dissolution entraîne sa liquidation.</li>
-    </ol>
-    <br>
-    Sa dénomination doit alors être suivie des mots «Société en liquidation». Le ou les Liquidateurs sont nommés par la décision qui prononce la dissolution.<br>
-    La collectivité des associés garde les mêmes attributions qu’au cours de la vie sociale, mais les pouvoirs du ou des Gérants, comme ceux des Commissaires aux comptes s’il en existe, prennent fin à compter de la dissolution.
-    <br>
-    Le ou les Liquidateurs sont investis des pouvoirs les plus étendus, sous réserve des dispositions légales, pour réaliser l’actif, payer le passif et répartir le solde disponible entre les associés.<br>
-      Les associés sont convoqués en fin de liquidation pour statuer sur les comptes définitifs, sur le quitus du ou des Liquidateurs et la décharge de leur mandat et pour constater la clôture de la liquidation.
- 
- <br>
-</p>
-
-
-
-<p>
-    
-    <b>ARTICLE 26 -  Contestations</b>
-
-    <br>Toutes les contestations relatives aux affaires sociales susceptibles de surgir pendant la durée de la Société ou de sa liquidation, seront jugées conformément à la loi et soumises à la juridiction des tribunaux compétents.
-    <br>
-</p>
-
-  <h4 style="text-align: center;"><b>TITRE IX — FORMALITES</b></h4>
-
-<p>
-    
-    <b>ARTICLE 27 - Personnalité morale - Immatriculation au Registre du Commerce et des Sociétés</b>
-
-   <br> Conformément à la loi, la Société ne jouira de la personnalité morale qu’à dater de son immatriculation au Registre du Commerce et des Sociétés.
-
-   <br>En outre, pour faire publier la constitution de la présente Société conformément à la loi, tous pouvoirs sont donnés au porteur d’une copie des présents statuts comme de toutes autres pièces qui pourraient être exigées.
-
-
-</p>
-
-
-<p>
-    
-    <b>ARTICLE 28 - Actes souscrits au nom de la Société en formation</b>
-
-    <br>L’immatriculation de la Société au Registre du Commerce et des Sociétés entraînera de plein droit reprise par la Société desdits actes et engagements.
-    <br>En outre, <b> {{ civilite ?? 'CIVILITE' }} {{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, Gérant associé unique, agira au nom et pour le compte de la Société en formation, jusqu’à son immatriculation au Registre du Commerce et des Sociétés. Il passera les actes et prendra les engagements pour le compte de la Société.
-    <br>L’immatriculation de la Société au Registre du Commerce et des Sociétés comportera reprise de ces actes et engagements
-    
-    <br>
-</p>
-
-<p>
-    
-    <b>ARTICLE 29 - Frais</b>
-    
-     <br>Les frais, droits et honoraires des présentes et de leurs suites seront supportés par la Société, portés au compte des «Frais d’établissement» et amortis sur les premiers exercices avant toute distribution de dividendes.
-    <br>
-</p>
-
-
-<p style="text-align: right">
-    <br>Fait à <b>{{ address ?? 'VILLE'}}</b>
-    <br>Le <b>{{ dateCreation ?? 'DATE'}}</b>
-    <br>En QUATRE exemplaires originaux
-    <br>
-</p>
-
-<p style="text-align: center">
-        <b>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b><br>
-    Gérant Associé Unique <br>
-    Bon pour acceptation des fonctions de Gérant<br>
-
-<br><br><br>
-   ANNEXE 1
- <br><br><br>
- 
-     <u><b>ETAT DES ACTES ACCOMPLIS POUR LE COMPTE<br>
-        DE LA SOCIETE EN FORMATION<br>
-        AVANT LA SIGNATURE DES STATUTS   <br>
-     </b></u>
-</p>
-
-<p>
-    Conformément aux dispositions de l'article R.210-5 du Code de commerce, cet état sera annexé aux statuts, dont la signature emportera reprise des engagements par la Société dès que celle-ci aura été immatriculée au Registre du commerce et des sociétés.
-</p>
-
-
-
-</div>
-</div>
-
-
-
-{% block footer %} {% endblock %}
+    <style>
+        body {
+
+            background-size: cover;
+            background: white;
+            margin-top: 2px;
+            text-align: center;
+            width: 100%;
+            font-family: 'Roboto', sans-serif !important;
+        }
+    </style>
+
+    <div class="container-fluid">
+
+
+        <h2><br>
+
+            <h2><br>
+
+                {% if company.name is defined %}
+                    {{ company.name }}
+                {% else %}
+                    'NOM DE LA SOCIETE'
+                {% endif %}
+
+            </h2>
+            <p>Société à responsabilité limitée<br>
+                au capital de
+                <b>
+                    {% if capitalNum is defined %}
+                        {{ capitalNum }} euros
+                    {% else %}
+                        'NOMBRE NUMERAIRE' euros
+                    {% endif %}
+                </b>
+            </p>
+
+            <p><u>Siège social</u> :
+                <b>
+                    {% if company is defined %}
+                        {{ company.address }} {{ company.country ?? '' }} {{ company.addressManager ?? '' }}
+                    {% else %}
+                        'ADRESSE'
+                    {% endif %}
+                </b>
+            </p>
+
+            <br>
+
+            <div class="col-11" style="margin-left: 4%; text-align: left">
+                <hr>
+                <h2 style="color: black; text-align: center;">STATUTS</h2>
+                <hr>
+                <b>LE / LA SOUSSIGNE(E) : </b>
+                <p>
+                    <br>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, <br>
+
+                    Né(e) le <b>{{ dateNaissance ?? 'DATE' }} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant à <b>{{ address ?? 'VILLE (code postal) – ADRESSE' }}</b> <br>
+                    <b>{{ situation ?? 'Célibataire / Marié' }}</b> <br>
+                </p>
+
+                <p style="text-align: center;"><b>A établi, ainsi qu'il suit, les statuts de la société par actions
+                        simplifiée unipersonnelle qu'il / elle a décidé d'instituer.</b></p>
+
+                <h4 style="text-align: center;"><b>TITRE I — FORME - OBJET - DENOMINATION - SIEGE - DUREE - EXERCICE -
+                        GERANCE</b></h4>
+                <p>
+                    <b> ARTICLE 1 - Forme </b><br>
+
+                    La Société est un entreprise unipersonnelle à responsabilité limitée. Elle est régie par les
+                    dispositions du livre deuxième du Code de commerce, par toutes autres dispositions légales et
+                    réglementaires en vigueur et par les présents statuts.
+                    <br>
+                    Elle fonctionne indifféremment sous la même forme avec un ou plusieurs associés.
+                    <br>
+                </p>
+
+                <p>
+                    <b> ARTICLE 2 - </b><br>
+
+                    La Société a pour objet : <br>
+                    <b>{{ activitySector ?? ' SECTEUR D’ACTIVITE – ACTIVITE PRECISE' }}</b>
+                    <br>
+                    La participation de la Société, par tous moyens, directement ou indirectement, dans toutes
+                    opérations pouvant se rattacher à son objet par voie de création de sociétés nouvelles, d'apport, de
+                    souscription ou d'achat de titres ou droits sociaux, de fusion ou autrement, de création,
+                    d'acquisition, de location, de prise en location-gérance de tous fonds de commerce ou établissements
+                    ; la prise, l'acquisition, l'exploitation ou la cession de tous procédés et brevets concernant ces
+                    activités.
+                    <br>
+                    Et plus généralement toutes opérations financières, commerciales, civiles, mobilières et
+                    immobilières pouvant se rattacher directement ou indirectement à l’un des objets spécifiés ou à tout
+                    autre objet similaire ou connexe.
+                    <br>
+                </p>
+
+                <p>
+                    <b> ARTICLE 3 - Dénomination sociale </b>
+                    <br>
+
+                    La dénomination de la Société est : <b> {{ company.name ?? ' NOM DE LA SOCIETE' }}  </b>.
+                    <br>
+                    Tous les actes et documents émanant de la Société et destinés aux tiers et notamment les lettres,
+                    factures, annonces et publications diverses, doivent indiquer la dénomination sociale précédée ou
+                    suivie immédiatement des mots «Société à responsabilité limitée» ou de l’abréviation «SARL»,
+                    de l’énonciation du capital social ainsi que du numéro d’immatriculation de la Société au
+                    Registre du Commerce et des Sociétés.
+                    <br>
+                </p>
+
+
+                <p>
+                    <b> ARTICLE 4 - Siège social </b> <br>
+
+                    Le siège social est fixé : <b> {{ company.address ?? ' VILLE (CODE POSTAL) – ADRESSE' }}</b> <br>
+
+                    Il pourra être transféré dans le même département ou dans un département limitrophe par simple
+                    décision de la gérance, sous réserve de ratification par la prochaine décision de l'associé unique
+                    ou par la prochaine décision collective extraordinaire des associés, et en tout lieu par décision de
+                    l'associé unique ou par décision collective extraordinaire des associés.
+                    <br>
+                </p>
+
+
+                <p>
+                    <b> ARTICLE 5 - Durée </b> <br>
+
+                    La durée de la Société est fixée à <b>quatre-vingt-dix-neuf (99) années </b> à compter de la date de
+                    son immatriculation au Registre du commerce et des sociétés, sauf dissolution anticipée ou
+                    prorogation.
+                    <br>
+                </p>
+
+                <p>
+                    <b> ARTICLE 6 - Exercice social </b> <br>
+
+                    L’exercice social a une durée de douze mois. Il commence le 1er janvier et se termine le
+                    31 décembre de chaque année.
+
+                    Le premier exercice social sera clos exceptionnellement le <b>31 décembre de cette année</b>.
+                    <br>
+                </p>
+
+                <p>
+                    <b>ARTICLE 7 - Gérance</b>
+                    <br>
+                    {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
+                    <br>
+                    Né(e) le <b>{{ dateNaissance ?? 'DATE' }} à {{ lieuNaissance ?? 'VILLE' }} </b> (code postal) <br>
+                    De nationalité Française, <br>
+                    Demeurant à <b>{{ adress ?? 'VILLE (code postal) – ADRESSE' }}</b>
+                    <br>
+                    exerce la fonction de Gérant de la Société sans limitation de durée.
+                    <br>
+                    {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
+                    , Gérant associé unique, intervenant aux présents statuts, déclare accepter les fonctions qui lui
+                    sont conférées.
+                    <br>
+                    Le Gérant exercera ses fonctions dans les conditions prévues au titre III des présents statuts
+                    <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE II — APPORTS - CAPITAL - PARTS SOCIALES</b></h4>
+
+                <p>
+                    <b>ARTICLE 8 - Apports</b>
+                    <br>
+                    <u>Apports en numéraire</u>
+                    <br>
+                    {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b> ,
+                    <br>
+                    apporte à la Société la somme de {{ capitalWord ?? ' NOMBRE EN LETTRES' }} EUROS,
+                    <br>
+                    Ci…………{{ capitalNum ?? '0.00' }} Euros………………………………
+                    <br>
+                    <b>Total des apports en numéraire : ……………{{ capitalNum ?? '0.00' }} Euros………………</b> <br>
+
+                    Ladite somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }} euros
+                        ({{ capitalNum ?? 'nombre en numéraire' }} €)</b>,
+                    correspondant à 100%(nombre en numéraire) parts sociales au nominal de
+                    <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }}
+                        ({{ capitalNum ?? 'nombre en numéraire' }}) Euros </b> chacune, souscrites et libérées en
+                    totalité,
+                    est déposée au crédit d'un compte ouvert au nom de la Société en formation,
+                    à la banque ainsi qu'en atteste un certificat établi en date du
+                    <b>{{ dateCreation ?? 'JOUR/ MOIS/ ANNEE' }} </b>par la
+                    <b>{{ companyBankName ?? 'NOM BANQUE – ADRESSE – (CODE POSTAL) VILLE' }}</b> , dépositaire des
+                    fonds, auquel est demeurée annexée
+                    la liste des associés ayant souscrit avec l'indication, pour chacun d'eux, des sommes versées.
+                    <br>
+                    Cette somme sera retirée par le Gérant de la société ou son mandataire sur présentation du
+                    certificat délivré par le Greffier du tribunal de commerce du lieu du siège social attestant
+                    l'immatriculation de la société au registre du commerce.
+
+                    <br>
+                </p>
+
+
+                <p>
+                    <b>ARTICLE 9 - Capital social</b>
+                    <br>
+                    Le capital social est fixé à la somme de <b>{{ capitalWord ?? ' NOMBRE EN LETTRES' }}
+                        ({{ capitalNum ?? 'nombre en numéraire' }} €)</b>
+                    <br>
+                    Il est divisé en {{ totalPartNum ?? 'NOMBRE' }} parts de {{ capitalNum ?? 'NOMBRE' }} € chacune,
+                    numérotées de 1 à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }},
+                    attribuées en totalité à {{ civilite ?? 'CIVILITE' }}
+                    <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>,
+                    associé unique, entièrement libérées et souscrites en totalité :
+                    <br>
+                    {{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>
+                    <br>
+                    A concurrence de {{ totalPartNum ?? 'NOMBRE' }} parts numérotées de 1
+                    à {{ totalPartNum ?? 'NOMBRE DE PARTS SOCIALES' }} inclus,
+                    <br>
+                    ci……………{{ totalPartNum ?? '0' }} parts…………………………
+                    <br>
+                    <b>Total égal au nombre de parts composant le capital social : ………{{ totalPartNum ?? '0' }}
+                        parts………</b>
+                    <br>
+                    L’associé unique déclare expressément que ces parts sont toutes intégralement libérées et souscrites
+                    en totalité.
+
+                    <br>
+                </p>
+
+
+                <p>
+                    <b>ARTICLE 10 - MODIFICATIONS DU CAPITAL SOCIAL</b>
+                    <br>
+
+                    <u>I - Augmentation du capital</u>
+                    <br>
+
+                    Modalités de l’augmentation du capital :
+                    <br>
+
+                    Le capital social peut, en vertu d’une décision de l’associé unique ou décision collective
+                    extraordinaire des associés être augmenté, en une ou plusieurs fois, en représentation d’apports en
+                    nature ou en numéraire, ou par incorporation de tout ou partie des bénéfices ou réserves
+                    disponibles, au moyen de la création de parts sociales nouvelles ou de l’élévation de la valeur
+                    nominale des parts existantes.
+                    <br>
+
+                    <u>II - Réduction du capital social</u>
+                    <br>
+                <ol>
+                    <li>Le capital social peut être réduit, pour quelque cause et de quelque manière que ce soit, par
+                        décision de l’associé unique ou par décision collective extraordinaire des associés.
+                    </li>
+                    <li>Si, du fait de pertes constatées dans les documents comptables, le montant des capitaux propres
+                        de la Société devient inférieur à la moitié du capital social, l’associé unique ou, en cas de
+                        pluralité d’associés, l’assemblée générale extraordinaire des associés, décident dans les quatre
+                        mois qui suivent l’approbation des comptes ayant fait apparaître ces pertes, s’il y a lieu de
+                        prononcer la dissolution anticipée de la Société.
+                    </li>
+                </ol>
+                <br>
+
+                Si la dissolution n’est pas prononcée, la Société est tenue, au plus tard à la clôture du deuxième
+                exercice suivant celui au cours duquel la constatation des pertes est intervenue, et sous réserve des
+                dispositions relatives au montant minimum du capital, de réduire son capital d’un montant au moins égal
+                à celui des pertes qui n’ont pu être imputées sur les réserves si, dans ce délai, les capitaux propres
+                n’ont pu être reconstitués à concurrence d’une valeur au moins égale à la moitié du capital.
+                <br>
+
+                En cas d’inobservation des prescriptions ci-dessus, tout intéressé peut demander en justice la
+                dissolution de la Société. Il en est de même si les associés n’ont pu valablement délibérer.
+                <br>
+
+                Toutefois, le tribunal ne peut prononcer la dissolution de la Société, si au jour où il statue la
+                régularisation a été effectuée.
+
+                <br>
+
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 11 - Représentation des parts sociales - Obligations nominatives</b>
+                    <br>
+
+                    <u>I -Représentation des parts sociales</u>
+                    <br>
+
+                    Les parts sociales ne peuvent être représentées par des titres négociables. Les droits de l’associé
+                    dans la Société résultent seulement des présents statuts, des actes modificatifs ultérieurs et des
+                    cessions de parts régulièrement notifiés et publiés
+                    <br>
+
+                    La Société peut émettre des parts sociales en rémunération des apports en industrie qui lui sont
+                    effectués. Ces parts sont émises sans valeur nominale et ne sont pas prises en compte pour la
+                    formation du capital social.
+                    <br>
+
+                    Les parts sociales d’industrie sont attribuées à titre personnel. Elles ne peuvent être cédées et
+                    sont annulées en cas de décès de leur titulaire comme en cas de cessation des prestations dues par
+                    ledit titulaire.
+                    <br>
+
+                    <u>II - Obligations nominatives</u>
+                    <br>
+
+                    Si la Société est légalement tenue d’avoir un Commissaire aux comptes et que les comptes des trois
+                    derniers exercices de 12 mois ont été régulièrement approuvés, elle pourra émettre des obligations
+                    nominatives, dans les conditions et sous les réserves édictées par la réglementation en vigueur,
+                    sans pour autant pouvoir faire appel public à l’épargne.
+                    <br>
+
+                    L’émission des obligations nominatives est décidée par l’assemblée générale des associés, dans les
+                    conditions de majorité requises pour les décisions ordinaires. Si le capital de la Société est
+                    entièrement libéré, l’assemblée générale peut déléguer au Gérant le pouvoir de procéder à l’émission
+                    des obligations nominatives.
+                    <br>
+
+                    Une notice relative aux conditions de l’émission et un document d’information sont mis à la
+                    disposition des souscripteurs lors de chaque émission.
+                    <br>
+
+                    Pour la défense de leurs intérêts, les obligataires sont regroupés en une masse dotée de la
+                    personnalité morale et représentée par une ou plusieurs personnes physiques ou morales, sans que les
+                    représentants puissent être plus de trois, et sont appelés à se réunir en assemblée générale, dans
+                    les conditions et selon les modalités fixées par la réglementation en vigueur.
+                    <br>
+
+                </p>
+
+                <p>
+
+                    <b>ARTICLE 12 - Cession — Transmission</b>
+                    <br>
+                    <u>I - Cession</u>
+                    <br>
+
+                    1 - Les cessions de parts doivent être constatées par écrit.
+                    <br>
+                    La cession n’est opposable à la Société que dans les formes prévues par l’article 1690 du Code civil
+                    ou par le dépôt d’un original de l’acte de cession au siège social contre remise par le Gérant d’une
+                    attestation de ce dépôt.
+                    <br>
+                    Elle n’est opposable aux tiers qu’après accomplissement de cette formalité et, en outre, après
+                    publicité au Greffe du tribunal de commerce.
+                    <br>
+
+                    2 - Les cessions ou transmissions sous quelque forme que ce soit des parts sociales appartenant à
+                    l’associé unique sont libres.
+                    <br>
+
+                    3 - En cas de pluralité d’associés, toutes les cessions de parts au profit de tiers étrangers à la
+                    Société, sont soumises à agrément dans les conditions prévues par les dispositions de la loi et du
+                    décret sur les Sociétés commerciales
+                    <br>
+
+                    <u>II - Transmission</u>
+                    <br>
+
+                    4 - En cas de décès de l’associé unique, la Société continue de plein droit entre ses ayants droit
+                    ou héritiers, et, le cas échéant, son conjoint survivant.
+                    <br>
+
+                    <u>III - Dissolution de la communauté</u>
+                    <br>
+
+                    5 - En cas de dissolution de la communauté de biens existant entre l’associé unique et son conjoint,
+                    la Société continue soit avec un associé unique, si les parts sociales sont attribuées en totalité à
+                    l’un des époux, soit avec deux associés si lesdites parts sont partagées entre les époux.
+
+                    <br>
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 13 - Indivisibilité des parts sociales</b>
+                    <br>
+                    En cas de pluralité d’associés, les copropriétaires de parts sociales indivises sont tenus de
+                    désigner l’un d’entre eux pour les représenter auprès de la Société ; à défaut d’entente, il
+                    appartient à l’indivisaire le plus diligent de faire désigner par justice un mandataire chargé de
+                    les représenter.
+                    <br>
+                    Lorsque des parts sociales sont grevées d’usufruit, le droit de vote appartient au nu-propriétaire
+                    pour toutes les décisions collectives autres que celles relatives à l’affectation des résultats
+                    sociaux.
+
+                    <br>
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 14 - Décès ou incapacité d’un associé</b>
+                    <br>
+                    La Société n’est pas dissoute par le décès ou l’incapacité frappant l’associé unique ou l’un des
+                    associés.
+
+                    <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE III — GÉRANCE</b></h4>
+
+                <p>
+
+                    <b>ARTICLE 15 - Pouvoirs de la gérance</b>
+                    <br>
+                    La Société est gérée et administrée par un ou plusieurs Gérants, personnes physiques, associés ou
+                    non, nommés avec ou sans limitation de durée.
+
+                    <br>Le ou les Gérants sont nommés par l’associé unique ou, en cas de pluralité d’associés, par les
+                    associés représentant plus de la moitié des parts sociales.
+
+                    <br>En cas de pluralité de Gérants, chacun d’eux peut faire tous actes de gestion dans l’intérêt de
+                    la Société et dispose des mêmes pouvoirs que s’il était Gérant unique : l’opposition formée par l’un
+                    d’eux aux actes de son ou de ses collègues est sans effet à l’égard des tiers, à moins qu’il ne soit
+                    établi que ces derniers ont eu connaissance de celle-ci.
+
+                    <br>Le Gérant, ou chacun des Gérants s’ils sont plusieurs, a la signature sociale, donnée par les
+                    mots «Pour la Société - Le Gérant», suivis de la signature du Gérant.
+
+                    <br>Dans ses rapports avec les tiers, le Gérant est investi des pouvoirs les plus étendus pour
+                    représenter la Société et agir en son nom en toute circonstance, sans avoir à justifier de pouvoirs
+                    spéciaux.
+
+                    <br>Le Gérant est tenu de consacrer tout le temps et les soins nécessaires aux affaires sociales ;
+                    il peut, sous sa responsabilité personnelle, déléguer temporairement ses pouvoirs à toute personne
+                    de son choix pour un ou plusieurs objets spéciaux et limités.
+
+                    <br>Le Gérant est expressément habilité à mettre les statuts de la Société en harmonie avec les
+                    dispositions impératives de la loi et des règlements, sous réserve de ratification de ces
+                    modifications par l’associé unique ou par décision collective des associés représentant plus des
+                    trois-quarts des parts sociales.
+
+
+                    <br>
+                </p>
+
+                <p>
+
+                    <b> ARTICLE 16 - Cessation des fonctions des Gérants </b>
+
+                    <br>Le ou les Gérants sont révocables par décision de l’associé unique ou par une décision
+                    collective des associés représentant plus de la moitié des parts sociales. Si la révocation est
+                    décidée sans juste motif, elle peut donner lieu à des dommages-intérêts.
+
+                    <br>Enfin, en cas de pluralité d’associés, un Gérant peut être révoqué par le Président du Tribunal
+                    de Commerce, pour cause légitime, à la demande de tout associé.
+
+                    <br>Les fonctions du ou des Gérants cessent par décès, interdiction, déconfiture, faillite
+                    personnelle, incompatibilité de fonctions ou révocation. Le Gérant peut également résilier ses
+                    fonctions mais seulement en prévenant l’associé unique ou, en cas de pluralité d’associés, chacun
+                    des associés trois mois à l’avance.
+
+                    <br>La cessation des fonctions du ou des Gérants n’entraîne pas la dissolution de la Société.
+
+                    <br>
+                </p>
+
+                <p>
+
+                    <b>ARTICLE 17 - Rémunération de la gérance</b>
+
+                    <br> Chacun des Gérants a droit, en rémunération de ses fonctions, à un traitement fixe ou
+                    proportionnel, ou à la fois fixe et proportionnel à passer par frais généraux.
+
+                    <br>Les modalités d’attribution de cette rémunération, ainsi que son montant, sont fixés par
+                    décision de l’associé unique ou décision ordinaire des associés. La gérance a droit, en outre, au
+                    remboursement de ses frais de représentation et de déplacements.
+
+                    <br>
+                </p>
+
+                <p>
+
+                    <b>ARTICLE 18 - Responsabilité des gérants</b>
+
+                    <br>Les gérants sont responsables individuellement ou solidairement selon les cas, envers la société
+                    ou envers les tiers, soit des infractions aux dispositions législatives ou réglementaires
+                    applicables aux sociétés à responsabilité limitée, soit des violations des statuts, soit des fautes
+                    commises dans leur gestion.
+
+                    <br>Outre l'action en réparation du préjudice subi personnellement, les associés peuvent intenter
+                    l'action sociale en responsabilité contre les gérants, soit individuellement, soit en se regroupant,
+                    à condition qu'ils représentent au moins le dixième du capital social, et en chargeant à leurs frais
+                    un ou plusieurs d'entre eux de les représenter pour soutenir cette action à poursuivre la réparation
+                    de l'entier préjudice subi par la société à laquelle, le cas échéant, des dommages et intérêts sont
+                    alloués.
+
+                    <br>Aucune décision de l'assemblée ne peut avoir pour effet d'éteindre une action en responsabilité
+                    contre les gérants pour fautes commises dans l'accomplissement de leur mandat.
+
+                    <br>Les actions en responsabilité contre les gérants se prescrivent par trois ans à compter du fait
+                    dommageable ou, s'il a été dissimulé, de sa révélation.
+
+                    <br>Toutefois, lorsque le fait est qualifié crime, l'action se prescrit par dix ans.
+
+                    <br>En cas de règlement judiciaire ou de liquidation des biens de la société, les personnes visées
+                    par la législation sur le règlement judiciaire, la liquidation des biens, la faillite personnelle et
+                    les banqueroutes peuvent être rendues responsables du passif social et sont soumises aux
+                    interdictions et déchéances, dans les conditions prévues par ladite législation.
+
+                    <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE IV - CONVENTIONS ENTRE LA SOCIÉTÉ ET LA GÉRANCE OU UN
+                        ASSOCIÉ</b></h4>
+                <p>
+                <ol>
+                    <li>Les conventions, autres que celles portant sur des opérations courantes conclues à des
+                        conditions normales (article L 223-20 du Code de commerce), qui interviennent directement ou par
+                        personne interposée entre la Société et l’un de ses Gérants ou associés, sont soumises à la
+                        procédure d’approbation prévue par la loi.
+                        <br>Ces dispositions s’appliquent aux conventions passées avec une Société dont un associé
+                        indéfiniment responsable, un Gérant, un administrateur, un Directeur Général, un membre du
+                        Directoire ou un membre du Conseil de surveillance, est également associé ou Gérant de la SARL
+                    </li>
+                    <li>Lorsque la Société n’est pas pourvue de Commissaire aux comptes, les conventions conclues par le
+                        Gérant non associé sont soumises à l’approbation préalable de l’associé unique ou de la
+                        collectivité des associés.
+                    </li>
+                    <li>La procédure d’approbation et de contrôle prévue par la loi ne s’applique pas aux conventions
+                        conclues par l’associé unique, Gérant ou non. Toutefois, le Gérant non associé ou le Commissaire
+                        aux comptes, s’il en existe un, doivent établir un rapport spécial.
+                    </li>
+                    <li>Les conventions conclues par l’associé unique ou par le Gérant non associé doivent être
+                        répertoriées dans le registre des décisions de l’associé unique
+                    </li>
+                    <li>A peine de nullité du contrat, il est interdit aux Gérants ou aux associés autres que les
+                        personnes morales de contracter, sous quelque forme que ce soit, des emprunts auprès de la
+                        Société, de se faire consentir par elle des découverts en compte courant ou autrement, ainsi que
+                        de faire cautionner ou avaliser par elle leurs engagements envers des tiers.
+                        <br>Cette interdiction s’applique également aux représentants légaux des personnes morales
+                        associés, aux conjoints, ascendants et descendants des Gérants ou associés personnes physiques,
+                        ainsi qu’à toute personne interposée
+                    </li>
+
+                </ol>
+                <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE V — DECISIONS DE L’ASSOCIEE UNIQUE OU DES ASSOCIES</b></h4>
+
+                <p>
+
+                    <b>ARTICLE 19 - Décisions de l’associé unique ou des associés</b>
+                <ol>
+                    <li>L’associé unique exerce les pouvoirs qui sont dévolus par la loi aux associés réunis en
+                        assemblée générale. Il ne peut déléguer ses pouvoirs.
+                    </li>
+                    <li>Les décisions de l’associé unique sont constatées dans un registre côté et paraphé dans les
+                        mêmes conditions que le registre des procès-verbaux des assemblées.
+                    </li>
+                    <li>En cas de pluralité d’associés, tout associé a le droit de participer aux décisions collectives
+                        et dispose d’un nombre de voix égal à celui des parts sociales qu’il possède. Dans l’exercice de
+                        son droit de participer aux décisions collectives, chaque associé a le droit de se faire
+                        représenter par un autre associé, sauf si les associés sont au nombre de deux, ou par son
+                        conjoint à moins que la Société ne comprenne que les deux époux, ou par toute autre personne de
+                        son choix.
+                    </li>
+                    <li>Les décisions collectives des associés sont prises en assemblées. Ces assemblées sont convoquées
+                        et délibèrent conformément aux dispositions légales et réglementaires en vigueur
+                    </li>
+                </ol>
+                <br>
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 20 - Information de l’associé unique ou des associés</b>
+                <ol>
+                    <li>L’associé unique non Gérant, indépendamment de son droit d’information préalable à l’approbation
+                        annuelle des comptes, peut à toute époque, prendre connaissance au siège social des documents
+                        prévus par la loi et relatifs aux trois derniers exercices sociaux.
+                    </li>
+                    <li>Lorsque la Société comporte plusieurs associés, l’étendue et les modalités de leurs droits
+                        d’information et de communication sont déterminées par les dispositions légales et
+                        réglementaires en vigueur.
+                    </li>
+                </ol>
+
+                <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE VI — CONTROLE DE LA SOCIETE</b></h4>
+
+                <p>
+                    <b>ARTICLE 21 - Commissaires aux comptes</b>
+                    <br>La nomination d’un Commissaire aux comptes titulaire et d’un Commissaire aux comptes suppléant
+                    est obligatoire dans les cas prévus par la loi et les règlements. Elle est facultative dans les
+                    autres cas.
+                    <br>En cas de pluralité d’associés, la nomination d’un Commissaire aux comptes peut également être
+                    décidée par décision ordinaire des associés. Elle peut aussi être demandée en justice par un ou
+                    plusieurs associés représentant au moins le dixième du capital.
+
+                    <br>Le Commissaire aux comptes exerce ses fonctions dans les conditions prévues par la loi.
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE VII —COMPTES SOCIAUX - BENEFICES - DIVIDENDES</b></h4>
+
+                <p>
+
+                    <b>ARTICLE 22 - Comptes sociaux</b>
+                    <br>Il est tenu une comptabilité régulière des opérations sociales, conformément à la loi et aux
+                    usages du commerce.<br>
+                    A la clôture de chaque exercice, la gérance dresse l’inventaire des divers éléments de l’actif et du
+                    passif existant à cette date. Elle dresse également le bilan, le compte de résultat et l’annexe, en
+                    se conformant aux dispositions légales et réglementaires.<br>
+                    Elle établit également un rapport de gestion exposant la situation de la Société durant l’exercice
+                    écoulé, l’évolution prévisible de cette situation, les événements importants intervenus entre la
+                    date de clôture de l’exercice et la date d’établissement du rapport et enfin les activités en
+                    matière de recherche et de développement.<br>
+
+                    <br>
+                </p>
+
+                <p>
+                    <b>ARTICLE 23 - Affectation et répartition des résultats</b>
+
+                    <br>Les produits nets de l’exercice, déduction faite des frais généraux et autres charges de la
+                    Société, ainsi que tous amortissements provisions, constituent le bénéfice.
+
+                    <br>Il est fait, sur ce bénéfice, diminué le cas échéant des pertes antérieures, un prélèvement d’un
+                    vingtième au moins, affecté à la formation d’un compte de réserve dite «réserve légale». Ce
+                    prélèvement cesse d’être obligatoire lorsque ladite réserve atteint le dixième du capital social.
+                    <br>Le bénéfice distribuable est constitué par le bénéfice de l’exercice, diminué des pertes
+                    antérieures et des sommes portées en réserve en application de la loi ou des statuts, et augmenté
+                    des reports bénéficiaires.
+
+                    <br>Le bénéfice distribuable est attribué à l’associé unique. Lorsque la Société comprend plusieurs
+                    associés, la part attribuée aux associés sur ce bénéfice est déterminée par l’assemblée
+                    générale.<br>
+                    Les modalités de mise en paiement des dividendes sont fixées par l’associé unique ou décidées par
+                    l’assemblée générale.
+                    <br>La mise en paiement des dividendes doit avoir lieu dans les neuf mois de la clôture de
+                    l’exercice, sauf prolongation de ce délai par décision de justice.
+                    <br>L’associé unique ou l’assemblée générale peut également décider la distribution de sommes
+                    prélevées sur les réserves disponibles en indiquant expressément les postes de réserves sur lesquels
+                    ces prélèvements sont effectués. Toutefois, les dividendes sont prélevés par priorité sur le
+                    bénéfice distribuable de l’exercice.
+
+                    <br>De même, l’associé unique ou l’assemblée générale peut décider d’affecter en totalité ou en
+                    partie les sommes distribuables aux réserves ou au report à nouveau.<br>
+                    Aucune distribution ne peut être effectuée lorsque les capitaux propres sont ou deviendraient à la
+                    suite d’une telle distribution, inférieurs au montant du capital augmenté des réserves que la loi ou
+                    les statuts ne permettent pas de distribuer.
+
+                    <br>Les pertes de l’exercice, s’il en existe, sont inscrites au report à nouveau pour être imputées
+                    sur les bénéfices des exercices ultérieurs jusqu’à apurement complet.
+
+
+                    <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE VIII — PROROGATION - DISSOLUTION - LIQUIDATION -
+                        CONTESTATIONS</b></h4>
+
+                <p>
+
+                    <b>ARTICLE 24 - Prorogation</b>
+
+                    <br> Un an au moins avant la date d’expiration de la Société, l’associé unique ou les associés
+                    doivent décider si la Société doit être prorogée ou non
+
+                    <br>
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 25 - Dissolution - Liquidation</b>
+
+                <ol>
+                    <li>La Société est dissoute à l’arrivée du terme statuaire, sauf prorogation régulière, et en cas de
+                        survenance d’une cause légale de dissolution.
+                    </li>
+                    <li>Lorsque la Société ne comporte qu’un seul associé personne morale, la dissolution pour quelque
+                        cause que ce soit, entraîne dans les conditions prévues par l’article 1844-5 du Code civil, la
+                        transmission universelle du patrimoine social à l’associé unique, sans qu’il y ait lieu à
+                        liquidation.
+                    </li>
+                    <li>Lorsque la Société comporte un associé personne physique ou plusieurs associés, la dissolution
+                        entraîne sa liquidation.
+                    </li>
+                </ol>
+                <br>
+                Sa dénomination doit alors être suivie des mots «Société en liquidation». Le ou les Liquidateurs sont
+                nommés par la décision qui prononce la dissolution.<br>
+                La collectivité des associés garde les mêmes attributions qu’au cours de la vie sociale, mais les
+                pouvoirs du ou des Gérants, comme ceux des Commissaires aux comptes s’il en existe, prennent fin à
+                compter de la dissolution.
+                <br>
+                Le ou les Liquidateurs sont investis des pouvoirs les plus étendus, sous réserve des dispositions
+                légales, pour réaliser l’actif, payer le passif et répartir le solde disponible entre les associés.<br>
+                Les associés sont convoqués en fin de liquidation pour statuer sur les comptes définitifs, sur le quitus
+                du ou des Liquidateurs et la décharge de leur mandat et pour constater la clôture de la liquidation.
+
+                <br>
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 26 - Contestations</b>
+
+                    <br>Toutes les contestations relatives aux affaires sociales susceptibles de surgir pendant la durée
+                    de la Société ou de sa liquidation, seront jugées conformément à la loi et soumises à la juridiction
+                    des tribunaux compétents.
+                    <br>
+                </p>
+
+                <h4 style="text-align: center;"><b>TITRE IX — FORMALITES</b></h4>
+
+                <p>
+
+                    <b>ARTICLE 27 - Personnalité morale - Immatriculation au Registre du Commerce et des Sociétés</b>
+
+                    <br> Conformément à la loi, la Société ne jouira de la personnalité morale qu’à dater de son
+                    immatriculation au Registre du Commerce et des Sociétés.
+
+                    <br>En outre, pour faire publier la constitution de la présente Société conformément à la loi, tous
+                    pouvoirs sont donnés au porteur d’une copie des présents statuts comme de toutes autres pièces qui
+                    pourraient être exigées.
+
+
+                </p>
+
+
+                <p>
+
+                    <b>ARTICLE 28 - Actes souscrits au nom de la Société en formation</b>
+
+                    <br>L’immatriculation de la Société au Registre du Commerce et des Sociétés entraînera de plein
+                    droit reprise par la Société desdits actes et engagements.
+                    <br>En outre,
+                    <b> {{ civilite ?? 'CIVILITE' }} {{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b>, Gérant
+                    associé unique, agira au nom et pour le compte de la Société en formation, jusqu’à son
+                    immatriculation au Registre du Commerce et des Sociétés. Il passera les actes et prendra les
+                    engagements pour le compte de la Société.
+                    <br>L’immatriculation de la Société au Registre du Commerce et des Sociétés comportera reprise de
+                    ces actes et engagements
+
+                    <br>
+                </p>
+
+                <p>
+
+                    <b>ARTICLE 29 - Frais</b>
+
+                    <br>Les frais, droits et honoraires des présentes et de leurs suites seront supportés par la
+                    Société, portés au compte des «Frais d’établissement» et amortis sur les premiers exercices avant
+                    toute distribution de dividendes.
+                    <br>
+                </p>
+
+
+                <p style="text-align: right">
+                    <br>Fait à <b>{{ address ?? 'VILLE' }}</b>
+                    <br>Le <b>{{ dateCreation ?? 'DATE' }}</b>
+                    <br>En QUATRE exemplaires originaux
+                    <br>
+                </p>
+
+                <p style="text-align: center">
+                    <b>{{ civilite ?? 'CIVILITE' }} <b>{{ lastName ?? 'Prenom' }} {{ firstName ?? 'Nom' }}</b><br>
+                        Gérant Associé Unique <br>
+                        Bon pour acceptation des fonctions de Gérant<br>
+
+                        <br><br><br>
+                        ANNEXE 1
+                        <br><br><br>
+
+                        <u><b>ETAT DES ACTES ACCOMPLIS POUR LE COMPTE<br>
+                                DE LA SOCIETE EN FORMATION<br>
+                                AVANT LA SIGNATURE DES STATUTS <br>
+                            </b></u>
+                </p>
+
+                <p>
+                    Conformément aux dispositions de l'article R.210-5 du Code de commerce, cet état sera annexé aux
+                    statuts, dont la signature emportera reprise des engagements par la Société dès que celle-ci aura
+                    été immatriculée au Registre du commerce et des sociétés.
+                </p>
+
+
+            </div>
+    </div>
+
+
+
+    {% block footer %} {% endblock %}
 {% endblock %}
