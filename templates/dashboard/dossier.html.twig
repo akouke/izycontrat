@@ -1,0 +1,26 @@
+{% extends '_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('dashboardPage') }}
+{% endblock %}
+{% block body %}
+    <section class="page-content container-fluid col-10">
+        <h1 class="col-10">Dashboard</h1>
+        <h2 class="col-10">Profil</h2>
+        <div class="profile">
+            {% if user %} 
+            <div class="pr-2">
+                <div>{{ company.name}}</div>
+               
+            {% endif %}
+               
+            </div>
+           
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+   
+{% endblock %}

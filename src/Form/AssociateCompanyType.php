@@ -17,7 +17,7 @@ class AssociateCompanyType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom S1',
+                'label' => 'Nom société 1',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -27,13 +27,13 @@ class AssociateCompanyType extends AbstractType
             ])
             // ->add('person')
             ->add('companyType', EntityType::class, [
-                'label' => 'forme',
+                'label' => 'forme juridique',
                 'class' => CompaniesTypes::class,
                 'choice_label' => 'name',
                 'mapped' => true,
             ])
             ->add('capitalBring', MoneyType::class, [
-                'label' => 'Apport S1',
+                'label' => 'Apport société 1',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
@@ -42,11 +42,11 @@ class AssociateCompanyType extends AbstractType
                 'required'    => false,
             ])
             ->add('legalRepresentative', TextType::class, [
-                'label' => 'Représentant',
+                'label' => 'Représentant(e)',
                 'mapped' => true,
                 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'Jone Doe',
+                    'placeholder' => 'Adrien Durand',
                 ),
                 'required'    => false,
             ])

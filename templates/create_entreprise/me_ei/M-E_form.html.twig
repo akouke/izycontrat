@@ -12,13 +12,6 @@
 {% block body %}
     <style>
 
-        /*body{*/
-        /*    background-size: cover;*/
-        /*    background: white;*/
-        /*    margin: 1%;*/
-        /*    text-align: center;*/
-        /*    width: 100%;*/
-        /*}*/
         b{
             margin: 0 0px 0 20px;
         }
@@ -29,14 +22,6 @@
         .breadcrumb{
             background: none;
         }
-        /*.tailInput{*/
-        /*    margin-left:33%;*/
-        /*    margin-bottom: 1%;*/
-        /*    width: 34%;*/
-        /*    text-align: center;*/
-        /*    min-width: 25%;*/
-
-        /*}*/
 
         #progressbar li {
             list-style-type: none;
@@ -51,12 +36,12 @@
     </style>
 
 
-    <div class="container-fluid breadcrumb progression haut" style="min-width: 450px;">
+    <div class="row breadcrumb progression haut" style="min-width: 360px;">
         <ul class="nav nav-tabs">
-            <a data-toggle="tab" class="active"><b>1-Projet</b></a>
-            <a data-toggle="tab" > <b>2-Prestation</b></a>
-            <a data-toggle="tab"> <b>3-Paiement</b></a>
-            <a data-toggle="tab" ><b>4-créée!</b></a>
+            <a data-toggle="tab" class="active"><b> 1 - Détails</b></a>
+            <a data-toggle="tab" > <b> 2 - Préstation</b></a>
+            <a data-toggle="tab"> <b> 3 - Paiement</b></a>
+            <a data-toggle="tab" ><b> 4 - créée!</b></a>
         </ul>
     </div>
 
@@ -65,15 +50,15 @@
 
             <div id="msform" class="">
                 <!-- progressbar -->
-                <div style="min-width: 530px;">
+                <div style="min-width: 350px;">
                     <ul id="progressbar">
-                        <li class="active">délai</li>
-                        <li>Nom</li>
-                        <li>Secteur</li>
-                        <li>Objet</li>
-                        <li>siège</li>
-                        <li>situation</li>
-                        <li>contact</li>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                     </ul>
                 </div>
 
@@ -101,7 +86,7 @@
                 <!-- fieldsets -->
                 <fieldset>
                     <h2 class="fs-title ">Dans quel délai souhaitez-vous créer votre {{ typeStatut == 'ME' ? 'ME' : 'EI' }} ?</h2>
-                    <div class="mx-auto" style="max-width: 400px;">
+                    <div class="mx-auto mb-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.priority)}}
                         {% else %}
@@ -153,7 +138,7 @@
                 <fieldset>
 
                     <h2 class="fs-title ">Quel nom choisissez vous pour votre entreprise?</h2>
-                    <div class="mx-auto" style="max-width: 400px;">
+                    <div class="mx-auto mb-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.name)}}
                         {% else %}
@@ -200,7 +185,7 @@
                 <fieldset>
 
                     <h2 class="fs-title ">Quel est l’objet social de votre entreprise ?  </h2>
-                    <div class="mx-auto" style="max-width: 400px;">
+                    <div class="mx-auto mb-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMe.socialObject)}}
                         {% else %}
@@ -232,7 +217,7 @@
 
                     {% if typeStatut == 'ME' %}
                         <h2 class="fs-title "> Quelle est votre nationalité ?  </h2>
-                        <div class="mx-auto" style="max-width: 400px;">
+                        <div class="mx-auto mb-2" style="max-width: 400px;">
                             {{ form_widget(formMePerson.nationality)}}
                         </div>
                         <div  class="alert alert-info" role="alert">
@@ -249,7 +234,7 @@
                 <fieldset>
 
                     <h2 class="fs-title "> Êtes-vous marié(e) ? </h2>
-                    <div class="mx-auto" style="max-width: 400px;">
+                    <div class="mx-auto mb-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.married)}}
                         {% else %}
@@ -296,8 +281,8 @@
                         {% endif %}
                     </div>
 
-                    <small style="margin-top: -10px;" class="badge badge-info text-wrap" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
-                    <div class="mx-auto" style="max-width: 400px;">
+                    <small  class="badge badge-info text-wrap mt-1" id="emailHelp">Votre numéro pourra être utilisé par nos experts afin de vous contacter</small>
+                    <div class="mx-auto mb-2" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMePerson.phoneNumber) }}
                         {% else %}
@@ -305,7 +290,7 @@
                         {% endif %}
                     </div>
 
-                    <small style="margin-top: -10px;" class="badge badge-info text-wrap" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
+                    <small class="badge badge-info text-wrap mt-1" id="emailHelp"  >Votre adresse email vous permettra d'accéder à votre espace client où seront stockés vos documents</small>
                     <div class="mx-auto" style="max-width: 400px;">
                         {% if typeStatut == 'ME' %}
                             {{ form_widget(formMeUser.email) }}

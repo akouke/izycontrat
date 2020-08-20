@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Entity\Company;
 /**
  * @Route("/dashboard", name="dashboard_")
  */
@@ -127,6 +128,8 @@ class DashboardController extends AbstractController
             ]
         );
     }
+    
+
 
     /**
      * @Route("/admin/clients", name="admin_clients")

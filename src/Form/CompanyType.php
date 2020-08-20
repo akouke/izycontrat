@@ -50,7 +50,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('name', TextType::class, [
                 'attr' => [
-                    'placeholder' => "nom de l'entreprise"
+                    'placeholder' => "Nom"
                     ],
                  'required' => false,
                  'mapped' => true,
