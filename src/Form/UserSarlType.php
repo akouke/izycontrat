@@ -21,7 +21,7 @@ class UserSarlType extends AbstractType
                 'mapped' => true,
                 // 'empty_data'  => null,
                 'attr' => array(
-                    'placeholder' => 'votre addresse e-mail',
+                    'placeholder' => 'votre adresse mail',
                 ),
                 'required'    => true,
             ])
