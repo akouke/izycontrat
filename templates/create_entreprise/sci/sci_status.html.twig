@@ -3,19 +3,46 @@
 {% block navbar %}{% endblock %}
 {% block dashboard %}{% endblock %}
 {% block body %}
-    <style>
-        body {
 
-            background-size: cover;
-            background: white;
-            margin-top: 2px;
-            text-align: center;
-            width: 100%;
-            font-family: 'Roboto', sans-serif !important;
-        }
-    </style>
+      <style>
+ 
+            @page {
+                margin: 0cm 0cm;
+            }
 
-    <p class="container-fluid">
+            body {
+                margin-top: 2cm;
+                margin-left: 0.5cm;
+                margin-right: 0.5cm;
+                margin-bottom: 1.5cm;
+                text-align: center;
+            }
+
+            footer {
+                position: fixed; 
+                bottom: 0cm; 
+                left: 0cm; 
+                right: 0cm;
+                height: 1cm;
+
+                /** Extra personal styles **/
+                background-color: #bea058;
+                color: white;
+                text-align: center;
+                line-height: 0.8cm;
+            }
+        </style>
+
+  <body>
+
+        <footer>
+            IZY CONTRAT Copyright &copy; 2020
+        </footer>
+
+     <main>
+
+
+    <div class="container-fluid">
 
 
     <h2><br>
@@ -48,7 +75,9 @@
     </p>
 
     <br>
-
+    
+  <div class="col-11" style="margin-left: 4%; text-align: left">
+      
     <hr>
     <h2 style="color: black; text-align: center;">STATUTS</h2>
     <hr>
@@ -1119,7 +1148,7 @@
     {% endif %}
 
     {% if associe2 is defined and associe2 is not null %}
-        <p>
+        <p  style="text-align: right">
             <b>{{ associe2.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe2.firstName ?? ' NOM' }} {{ associe2.lastName ?? ' Prénom' }}
         </p>
     {% endif %}
@@ -1131,7 +1160,7 @@
     {% endif %}
 
     {% if associe4 is defined and associe4 is not null %}
-        <p>
+        <p  style="text-align: right">
             <b>{{ associe4.gender == 2 ? 'Monsieur' : 'Madame' }} {{ associe4.firstName ?? ' NOM' }} {{ associe4.lastName ?? ' Prénom' }}
         </p>
     {% endif %}
@@ -1144,21 +1173,21 @@
 
 
     {% if associeCompany1.id is defined %}
-        <p>
+        <p  style="text-align: right">
             Société <b> {{ associeCompany1.name ?? '' }}</b> representer par
             <b>{{ associeCompany1.legalRepresentative ?? ' Nom complete' }} </b>
         </p>
     {% endif %}
 
     {% if associeCompany2.id is defined %}
-        <p>
+        <p >
             Société <b> {{ associeCompany2.name ?? '' }}</b> representer par
             <b>{{ associeCompany2.legalRepresentative ?? ' Nom complete' }} </b>
         </p>
     {% endif %}
 
     {% if associeCompany3.id is defined %}
-        <p>
+        <p  style="text-align: right">
             - Par la société <b> {{ associeCompany3.name ?? '' }}</b> representer par
             <b>{{ associeCompany3.legalRepresentative ?? ' Nom complete' }} </b>, d'une somme en numéraire de
             <b> {{ toWordApportAssocieCompany3 ?? 'NOMBRE EN LETTRES' }} €</b>, ci
@@ -1181,5 +1210,10 @@
         Registre du commerce et des sociétés.</p>
     {# <a class="btn btn-outline-warning" href="javascript:window.print()">Imprimer votre statut</a> #}
     {# <a class="btn btn-outline-success" href="{{ path('save_status')}}">Sauvegarder Statut </a> #}
+    </div>
+   </div>
+  </main>
 
+{% block footer %} {% endblock %}
+</body>
 {% endblock %}

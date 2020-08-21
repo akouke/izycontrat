@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use App\Entity\Company;
+
 /**
  * @Route("/dashboard", name="dashboard_")
  */
@@ -129,7 +129,27 @@ class DashboardController extends AbstractController
         );
     }
     
-
+    
+    
+    /**
+     * @Route("/dossier", name="dossier_en_cours")
+     */
+    public function dossier()
+    {
+        $user = $this->getUser();
+        // if(!$user){
+        //     return $this->redirectToRoute('dashboard_home');
+        // }
+        // dd($user);
+        $person = $this->getDoctrine()->getRepository(Company::class)->findOneBy(['user' => $user]);
+        return $this->render(
+            'dashboard/dossier.html.twig',
+            [
+                'user' => $user,
+                'company' => $company
+            ]
+        );
+    }
 
     /**
      * @Route("/admin/clients", name="admin_clients")
