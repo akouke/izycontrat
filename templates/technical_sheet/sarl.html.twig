@@ -12,10 +12,10 @@
     <section class="homeTop d-flex justify-content-center">
         <img class="homePicture img-fiche" src="/images/sarl.jpg" alt="image principale">
         <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
-            <p>CRÉER UNE SARL</p>
+            <h1 class="h4 titre">CRÉER UNE SARL</h1>
             <p>La SARL est une structure sécurisante qui vous protège et limite votre responsabilité au montant de vos
                 apports. Créer votre SARL et recevez vos statuts en quelques minutes, c’est super IZY ! </p>
-            <a href="{{ path('create_sarl') }}" class="btn btn-secondary btnHome">Je crée ma SARL !</a>
+            <a href="{{ path('create_sarl') }}" class="btn btn-secondary">Je crée ma SARL !</a>
         </div>
     </section>
     <div class="container text-justify p-4">
@@ -119,32 +119,33 @@
             <p class="mt-2">Le statut du gérant de SARL peut être de différentes natures, il dépend du nombre de parts
                 sociales détenues, et de si le gérant est associé ou non de la SARL.</p>
             <p>Si le gérant est associé de la SARL il existe deux cas de figure :</p>
-            <div class="row justify-content-center">
-                <ul class="col-9">
-                    <li class="mt-2">Il est associé majoritaire, c’est-à-dire qu’il possède plus de la moitié des parts
-                        sociales de la SARL. Dans ce cas, il relève de la catégorie des travailleurs non salariés (TNS)
-                        et
-                        est affilié à la Sécurité sociale des indépendants (SSI).
-                    </li>
-                    <li class="mt-2"> Il est associé égalitaire ou minoritaire, c’est-à-dire qu’il possède la moitié ou
-                        moins des parts sociales de la SARL. Dans ce cas, il est dirigeant assimilé salarié et relève du
-                        régime général de la Sécurité sociale.
-                    </li>
-                </ul>
-                <p>Si le gérant n’est pas associé de la SARL, son statut dépend de l’existence ou non d’une rémunération
-                    :
-                </p>
-                <ul class="col-9">
-                    <li class="mt-2">S’il perçoit une rémunération le gérant a le statut d’assimilé salarié, et est
-                        soumis
-                        au régime général de la Sécurité sociale.
-                    </li>
-                    <li class="mt-2"> S’il ne perçoit aucune rémunération le gérant il n’a aucun statut social, et n’est
-                        donc affilié à aucun régime de protection sociale.
-                    </li>
-                </ul>
-            </div>
         </div>
+        <div class="row justify-content-center">
+            <ul class="col-9">
+                <li class="mt-2">Il est associé majoritaire, c’est-à-dire qu’il possède plus de la moitié des parts
+                    sociales de la SARL. Dans ce cas, il relève de la catégorie des travailleurs non salariés (TNS)
+                    et
+                    est affilié à la Sécurité sociale des indépendants (SSI).
+                </li>
+                <li class="mt-2"> Il est associé égalitaire ou minoritaire, c’est-à-dire qu’il possède la moitié ou
+                    moins des parts sociales de la SARL. Dans ce cas, il est dirigeant assimilé salarié et relève du
+                    régime général de la Sécurité sociale.
+                </li>
+            </ul>
+            <p>Si le gérant n’est pas associé de la SARL, son statut dépend de l’existence ou non d’une rémunération
+                :
+            </p>
+            <ul class="col-9">
+                <li class="mt-2">S’il perçoit une rémunération le gérant a le statut d’assimilé salarié, et est
+                    soumis
+                    au régime général de la Sécurité sociale.
+                </li>
+                <li class="mt-2"> S’il ne perçoit aucune rémunération le gérant il n’a aucun statut social, et n’est
+                    donc affilié à aucun régime de protection sociale.
+                </li>
+            </ul>
+        </div>
+
         <div class="row mt-4 justify-content-center">
             <h2 class="text-center">Quel est le régime fiscal d’une SARL ?</h2>
         </div>
