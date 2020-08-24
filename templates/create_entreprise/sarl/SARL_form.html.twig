@@ -132,7 +132,7 @@
 
   {% if emailUsed == true %}
       <div class="alert alert-danger">
-            Cet adresse Email: <strong>{{ user.email }}</strong> existe déja veuillez vous connecter.
+            Adresse Email:<strong> {{ user.email }} </strong> existe déja veuillez vous connecter.
       </div>
     {% endif%}
 
@@ -291,7 +291,7 @@
                 </div>
                 <div  class="alert alert-info" role="alert">
                     (Le Gérant est la personne en charge de diriger la société et est le plus fréquemment un
-                    associé de la société. Cependant, il ne peut y avoir qu'un seul Gérant.)
+                    associé de la société. Cependant, il peut y avoir plusieurs Gérants.)
                 </div>
                 <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
@@ -666,7 +666,7 @@
 
                     {% if emailUsed == true %}
                       <div class="badge badge-danger text-wrap">
-                        Erreur: Cet adresse Email: <b>{{ user.email }}</b> existe déja.
+                        Erreur: adresse Email: <b>{{ user.email }}</b> existe déja.
                       </div>
                     {% endif%}
                  </div>

@@ -102,7 +102,7 @@
             <div class="container-fluid mx-auto">
                 {% if emailUsed == true %}
                     <div class="alert alert-danger">
-                        Erreur: Cet adresse Email: <strong>{{ user.email }}</strong> existe déjà!
+                        Adresse Email:<strong> {{ user.email }} </strong>existe déjà!
                     </div>
                 {% endif %}
                 <!-- fieldsets -->
@@ -537,7 +537,7 @@
 
                         {% if emailUsed == true %}
                             <div class="badge badge-danger text-wrap">
-                                Erreur: Cet adresse Email: {{ user.email }} existe déjà!
+                                Erreur: adresse Email: {{ user.email }} existe déjà!
                             </div>
                         {% endif %}
                     </div>

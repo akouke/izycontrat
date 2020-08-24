@@ -76,7 +76,7 @@
 
                 {% if emailUsed == true %}
                     <div class="alert alert-danger">
-                        Cet adresse Email: <strong>{{ user.email }}</strong> existe déjà veuillez vous connecter.
+                        Adresse Email:<strong> {{ user.email }} </strong>existe déjà veuillez vous connecter.
                     </div>
                 {% endif%}
 
@@ -299,7 +299,7 @@
                         {% endif %}
                         {% if emailUsed == true %}
                             <div class="badge badge-danger text-wrap">
-                                Erreur: Cet adresse Email: {{ user.email }} existe déjà.
+                                Erreur: adresse Email: {{ user.email }} existe déjà.
                             </div>
                         {% endif%}
                     </div>

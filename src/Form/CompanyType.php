@@ -43,7 +43,7 @@ class CompanyType extends AbstractType
                 ])
             ->add('addressManager', TextType::class, [
                 'attr' => [
-                    'placeholder' => "Quel est l’adresse ?"
+                    'placeholder' => "Quelle est l’adresse ?"
                     ],
                 'required' => false,
                 'mapped' => true,
