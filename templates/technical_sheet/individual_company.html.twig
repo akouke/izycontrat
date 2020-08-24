@@ -5,16 +5,17 @@
 {% block stylesheets %}
     {{ parent () }}
     {{ encore_entry_link_tags('technical_sheet') }}
+    {{ encore_entry_link_tags('home') }}
 {% endblock %}
 
 {% block body %}
     <section class="homeTop d-flex justify-content-center">
         <img class="homePicture img-fiche" src="/images/entreprise_individuelle.jpg" alt="image principale">
         <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
-            <p>CRÉER UNE ENTREPRISE INDIVIDUELLE</p>
+            <h1 class="h4 titre">CRÉER UNE ENTREPRISE INDIVIDUELLE</h1>
             <p>L’entreprise individuelle (EI) présente plusieurs avantages. Simple à créer, elle permet de développer
                 une activité professionnelle sans se dissocier de son exploitant.</p>
-            <a href="{{ path('create_ei') }}" class="btn btn-secondary btnHome">Je crée mon ENTREPRISE INDIVIDUELLE
+            <a href="{{ path('create_ei') }}" class="btn btn-secondary">Je crée mon ENTREPRISE INDIVIDUELLE
                 !</a>
         </div>
     </section>

@@ -6,8 +6,6 @@
 {% block stylesheets %}
     {{ parent () }}
     {{ encore_entry_link_tags('home') }}
-
-    {# {{ encore_entry_link_tags('fichesci') }} #}
     {{ encore_entry_link_tags('technical_sheet') }}
 {% endblock %}
 
@@ -16,10 +14,10 @@
     <img class="homePicture" src="/images/sci.jpg" alt="image principale">
 
     <div class="homeTxt d-flex flex-column justify-content-around align-items-center align-self-center">
-        <p>CRÉER UNE SCI</p>
+        <h1 class="h4 titre">CRÉER UNE SCI</h1>
         <p>La SCI ou Société Civile Immobilière est une structure qui vous permet de faciliter la transmission d’un
             bien immobilier. Créer votre SCI et recevez vos statuts en quelques minutes, c’est super IZY !</p>
-        <a href="{{ path('create_sci') }}" class="btn btn-secondary btnHome">Je crée ma SCI !</a>
+        <a href="{{ path('create_sci') }}" class="btn btn-secondary">Je crée ma SCI !</a>
     </div>
 </section>
 <div class="container page-content text-justify  p-4">
