@@ -1,28 +1,50 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Izy Contrat - Équipe{% endblock %}
+{% block title %}Izy Contrat - Qui sommes-nous ?{% endblock %}
 
 {% block body %}
     <section class="team page-content container-fluid">
-        <h1 class="text-center">L'équipe Izy Contrat</h1>
-        <p class="hook container text-center">L'équipe d'Izy Contrat est au service de ses clients pour les accompagner
-        dans leurs démarches, pour que la création d'entreprise soit à la portée de tous.</p>
-        <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-around flex-wrap">
-        {% for member in members %}
-            <div class="member d-flex flex-column align-items-center">
-                {% if member.sociallink is not empty %}
-                    <a href="{{ member.sociallink }}">
-                        <img class="member-pic hvr-grow" src="{{ member.picture }}" alt="Photo {{ member.name }}" />
-                    </a>
-                {% else %}
-                    <img class="member-pic hvr-grow" src="{{ member.picture }}" alt="Photo {{ member.name }}" />
-                {% endif %}
-                <h3 class="text-center">{{ member.name }}</h3>
-                <p class="member-role text-center">{{ member.role }}</p>
-                <p class="member-description text-center d-none d-md-inline">{{ member.description }}</p>
-            </div>
-        {% endfor %}
-        </div>
+        <h1 class="text-center mb-3">Qui sommes-nous ?</h1>
+        <p class="container text-center">IZY CONTRAT est une société fondée par Saliha AZOUGAGH, juriste de profession
+            et
+            passionnée par le monde de l’entreprenariat.</p>
+        <p class="text-center">Ayant exercée dans plusieurs cabinets d’expertise-comptable, cabinets d’avocats et
+            services
+            juridiques de grands groupes, Saliha s’est aperçue au fil des années que bénéficier d’un
+            service juridique de qualité n’était malheureusement pas à la portée de tous du fait d’un
+            manque de recommandation d’avocat spécialisé en la matière et principalement du fait des
+            coûts trop élevés pratiqués par beaucoup de professionnels du droit. Le résultat étant qu’un
+            grand nombre de dirigeants mettent en péril la sécurité de leur entreprise en n’étant pas
+            accompagnés sur le plan juridique.</p>
+        <p class="text-center">C’est pourquoi, Saliha Azougagh a créé IZY CONTRAT, la plateforme en ligne qui permet aux
+            TPE et PME de bénéficier de documents juridiques de qualité et d’un accompagnement
+            juridique sur-mesure et ce, à moindre coup ! Nous démocratisons ainsi l’accès au droit à un
+            plus grand nombre de professionnels qui ne pouvaient jusqu’ici, s’offrir le luxe de protéger
+            leur entreprise comme il se doit. Tous nos documents sont rédigés par des juristes et des
+            avocats spécialisés et à jour des dernières lois.</p>
+        <h2 class="text-center">Notre Objectif</h2>
+        <p class="text-center">Faciliter la création de votre entreprise par un accompagnement juridique grâce à nos
+            services 100% en ligne et où l’humain est au centre de notre relation !</p>
+        <h3 class="text-center mb-3">Comment nous contacter ?</h3>
+        <p class="text-center">Numéro de téléphone : 07 83 95 48 39</p>
+        <p class="text-center">Adresse e-mail : contact@izy-contrat.com</p>
+        <p class="mb-4 text-center">Réseaux sociaux (LinkedIn, Twitter, Facebook, Instagram) : IZY CONTRAT</p>
+        {# <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-around flex-wrap"> #}
+        {# {% for member in members %} #}
+        {# <div class="member d-flex flex-column align-items-center"> #}
+        {# {% if member.sociallink is not empty %} #}
+        {# <a href="{{ member.sociallink }}"> #}
+        {# <img class="member-pic hvr-grow" src="{{ member.picture }}" alt="Photo {{ member.name }}"/> #}
+        {# </a> #}
+        {# {% else %} #}
+        {# <img class="member-pic hvr-grow" src="{{ member.picture }}" alt="Photo {{ member.name }}"/> #}
+        {# {% endif %} #}
+        {# <h3 class="text-center">{{ member.name }}</h3> #}
+        {# <p class="member-role text-center">{{ member.role }}</p> #}
+        {# <p class="member-description text-center d-none d-md-inline">{{ member.description }}</p> #}
+        {# </div> #}
+        {# {% endfor %} #}
+        {# </div> #}
     </section>
 {% endblock %}
 
