@@ -45,3 +45,9 @@
 .btn-secondary {
     width: 500px;
   }
+
+@media (max-width: 520px) {
+  .btn-secondary{
+    width: 75%;
+  }
+}
