@@ -4,7 +4,7 @@
 
 {% block body %}
     <section class="page-content container-fluid col-10 col-lg-10 pb-4">
-        <h2>Inscription d'un avocat</h2>
+        <h1>Inscription d'un avocat</h1>
         <div class="registerUser row row-cols-1 row-cols-md-2 row-cols-xl-3">
             {% for flashError in app.flashes('verify_email_error') %}
                 <div class="alert alert-danger" role="alert">{{ flashError }}</div>
