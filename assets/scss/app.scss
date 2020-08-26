@@ -85,3 +85,8 @@ section.page-content{
 .title-section{
     font-size: $font-size-h1;
 }
+
+.ancre:target {
+    padding-top: 3em;
+    margin-top: -3em;
+}
