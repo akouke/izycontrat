@@ -2,9 +2,9 @@
 {% extends "_layout.html.twig" %}
 {# {% form_theme form 'bootstrap_4_layout.html.twig' %} #}
 
-{% block stylesheets %} 
+{% block stylesheets %}
 {{ parent() }}
-{{ encore_entry_link_tags('tab1') }}  
+{{ encore_entry_link_tags('tab1') }}
 {% endblock %}
 
 {% block title %}EI Prestation {% endblock %}
@@ -199,7 +199,7 @@ table {
  border-radius: 8px 8px 0 0;
  background: #C02031;
 }
-</style> 
+</style>
 
 {#<h1 class="haut">Choix de la Prestation</h1>#}
         <div class="breadcrumb progression haut">
@@ -215,7 +215,7 @@ table {
 
 {#<body>#}
 <section>
-      <h2 class="titre">OFFRES ENTREPRISE INDIVIDUELLE</h2>
+      <h1 class="titre">OFFRES ENTREPRISE INDIVIDUELLE</h1>
   <div class="container-fluid">
     <div class="container">
       <div class="row">
@@ -237,7 +237,7 @@ table {
               <li> <i class="fa fa-check" aria-hidden="true"></i> Je gère seul </li>
               <li> <i class="fa fa-check" aria-hidden="true"></i> + frais administratifs </li>
               </ul>
-              
+
             </div>
             <a id="checkout-button-{{ offre_izy_basic }}"
                role="link"><b>Choisir ce forfait</b> </a>
@@ -289,7 +289,7 @@ table {
       </div>
       {#debut table details#}
     <table class="table table-hover table-bordered" style="text-align:center;padding-left:200px; padding-right:200px;">
- 
+
     <tbody>
 
       <tr>
@@ -357,7 +357,7 @@ table {
         <td><b>-</b></td>
         <td><i style="color:#BEA058" class="fa fa-check fa-lg"></i></td>
       </tr>
-      
+
     </tbody>
   </table>
       {#fin table details#}

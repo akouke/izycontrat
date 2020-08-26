@@ -1,17 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('article') }}
+{% endblock %}
 
 {% block title %}Edition Article{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<section class="container-fluid page-content">
     <div class="row">
-        <h2 class="article col-8 offset-2">Editer votre article</h2>
+        <h1 class="col-10 offset-2">Éditer votre article</h1>
     </div>
     <div class="row">
-        <div class="col-8 offset-2"> {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}</div>
+        <div class="col-8 offset-2"> {{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}</div>
     </div>
     <div class="col-12 mb-2 text-center">
         <a href="{{ path('article_index') }}"><i class=" my-5 fas fa-arrow-alt-circle-left fa-5x"></i></a>
     </div>
-</div>
+</section>
 {% endblock %}
+

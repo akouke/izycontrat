@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
 
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
-
     <div class="container">
         <div class="row">
             <div class="col-1">
@@ -18,11 +16,11 @@
                             </div>
                         {% endfor %}
                     {% endfor %}
-                    <h2 class="mb-5">Articles</h2>
+                    <h2 class="mb-5 text-center">Article</h2>
                     <div class="card mb-3">
                         <div class="container">
                             <div class="row">
-                                <div class="col-12"><h3 class="card-title mt-2 text-center">{{ article.title }}</h3></div>
+                                <div class="col-12"><h1 class="card-title mt-2 text-center">{{ article.title }}</h1></div>
                                 <div class="col-12">
                                 {% if article.image is not null %}
                                 <div><img class="fullArticleImage" src="{{ vich_uploader_asset(article, 'imageFile') }}"
