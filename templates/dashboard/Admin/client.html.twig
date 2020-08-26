@@ -4,13 +4,13 @@
 
 {% block body %}
     <div class="page-content container-fluid col-10 col-lg-10">
-        <h2>Clients</h2>
+        <h1>Clients</h1>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
         {% for client in clients %}
             <div class="col pb-4">
                 <div class="card overflow-auto">
                     <div class="card-body">
-                        <h5 class="card-title">{{ client.firstName ~ ' ' ~ client.lastName  }}</h5>
+                        <h2 class="card-title">{{ client.firstName ~ ' ' ~ client.lastName  }}</h2>
                         <p>Téléphone :</p>
                         <a class="card-text" href="tel:{{ client.phoneNumber|phone }}">{{ client.phoneNumber|phone }}</a>
                         <p>Mail :</p>

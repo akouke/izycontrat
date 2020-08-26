@@ -4,13 +4,14 @@
 
 {% block body %}
     <div class="row page-content container-fluid col-12 col-lg-12">
+        <h1>Fiche client</h1>
         <div class ="row">
             <div class="col">
              <a href="{{ path('dashboard_admin_clients')}}" class="btn btn-primary">Retour</a>
             </div>
-        </div> 
-        <div class=" row">
-                
+        </div>
+        <div class="row">
+
             <div class="clientInformation  col  bg-light d-flex flex-column">
                 {#<img class="profilePicture" src="{{ client.user.profilePicture ?? '' }}" alt="{{ 'photo de profile de' ~ client.lastName ~ ' ' ~ client.firstName }}">#}
                 <h2>{{ client.gender == 2 ? 'Monsieur' : 'Madame'}}
@@ -38,32 +39,32 @@
                         <h3> Statut </h3>
                             {{ company.companyType.name ?? ''}}
 
-                        <h3>Capital Social</h3>  
+                        <h3>Capital Social</h3>
                             {{ company.capitalSocial ?? ''}}
-  
+
                           <h3>Addresse</h3>
                           adresse: ({{ company.address ?? '' }}); adresse manager:({{ company.addressManager ?? '' }}); departement:({{ company.country ?? '' }})
-                        
+
                         <h3>Protecion</h3>
                         {{ company.hasProtection ?? ''}}
-                        
+
                         <h3> Priorite</h3>
                             {{ company.priority.name ?? ''}}
-                       
+
                         <h3> Banque</h3>
                             {{ company.bankName ?? ''}}
-                        
+
                         <h3> Secteur D'activiter</h3>
                             {{ company.activitySector.name ?? ''}}
-                        
+
                         <h3> Objet Sociale</h3>
                             {{ company.socialObject ?? ''}}
-                        
+
                     {#</div>#}
                       {% endfor %}
                     </div>
                 </div>
-              
+
                <div class="col">
                 <div class="clientInformation col bg-light d-flex flex-column">
                      <h2>Dossiers Clients</h2>
@@ -98,7 +99,7 @@
         </div>
             </div>
           </div>
-        
+
 {% endblock %}
 {% block stylesheets %}
     {{ parent() }}
