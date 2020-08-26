@@ -70,16 +70,16 @@
 
     {# debut information company3 associer #}
     {{ form_start(formAssociateCompany3) }}
-    
+
     <div class="container-fluid">
         <!-- MultiStep Form -->
 
         <div class="row breadcrumb progression haut" style="min-width: 360px;">
             <ul class="nav nav-tabs">
-                <a data-toggle="tab" class="active"> <b> 1 - Détails</b></a>
-                <a data-toggle="tab" > <b> 2 - préstation</b> </a>
+                <a data-toggle="tab" class="active"> <b> 1 - Détails de votre projet</b></a>
+                <a data-toggle="tab" > <b> 2 - Choix de la prestation</b> </a>
                 <a data-toggle="tab"> <b> 3 - Paiement</b> </a>
-                <a data-toggle="tab" > <b> 4 - créée !</b> </a>
+                <a data-toggle="tab" > <b> 4 - Société créée !</b> </a>
             </ul>
       </div>
 
@@ -87,13 +87,13 @@
 
             <div class="mx-auto" style="min-width: 350px;">
                 <ul id="progressbar">
-                     <li class="active"></li> 
+                     <li class="active"></li>
                     <li></li>
-                     <li></li> 
+                     <li></li>
                     <li></li>
                     <li></li>
                     <li></li>
-                     <li></li> 
+                     <li></li>
                     <li></li>
                     <li></li>
                 </ul>
@@ -118,11 +118,11 @@
                             {# {{ form_widget(formSci.country)}} #}
                         </div>
                     </div>
-                    
+
                     <a href="{{ path('create_entreprise') }}" class="action-button-previous btn"> Annuler </a>
                     <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
                 </fieldset>
-                
+
 
                <fieldset>
                    <h2 class="fs-title ">Quel nom choisissez vous pour votre entreprise?</h2>
@@ -139,12 +139,12 @@
                             qui est différent du nom commercial)
                         </small>
                     </div>
-                   
+
                     <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                     <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
                 </fieldset>
-                
-                
+
+
                 <fieldset>
                     <h2 class="fs-title ">Quel est le nom commercial ? (s’il y en a un)</h2>
                         <div class="mx-auto mt-2 mb-2" style="max-width: 400px;">
@@ -154,12 +154,12 @@
                             (Le nom commercial est une expression désignant le nom sous lequel l'activité d'une entreprise
                             est connue du public, cela peut être un patronyme, un nom, un pseudonyme, un prénom ...)
                         </div>
-                   
+
                     <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                     <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
                 </fieldset>
-               
-               
+
+
                 <fieldset>
                     {# <div class="card-body"> #}
                     <h2 class="fs-title ">Quel est votre secteur d’activité ? </h2>
@@ -270,26 +270,26 @@
                     <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
                     <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
                 </fieldset>
-                
 
-                 <fieldset> 
-                     <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2> 
-                     <div class="mx-auto m-2" style="max-width: 400px;"> 
-    
-                         {{ form_widget(formSci.bankName)}} 
-    
-                     </div> 
-                     <div class="alert alert-info" role="alert"> 
-                         <small> 
-                             (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création 
-                             de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ». 
-                             Ce document est indispensable pour immatriculer votre société. Si vous n'avez pas encore choisi votre banque, 
-                             passez la question, vous pourrez la préciser au moment d'effectuer vos formalités de création.) 
-                         </small> 
-                     </div> 
-                     <input type="button" name="previous" class="previous action-button-previous" value="Retour"/> 
-                     <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/> 
-                 </fieldset> 
+
+                 <fieldset>
+                     <h2 class="fs-title ">Dans quelle banque souhaitez-vous déposer le capital social ? </h2>
+                     <div class="mx-auto m-2" style="max-width: 400px;">
+
+                         {{ form_widget(formSci.bankName)}}
+
+                     </div>
+                     <div class="alert alert-info" role="alert">
+                         <small>
+                             (Le dépôt du capital se fait sur un compte bancaire, où les fonds seront bloqués jusqu’à la création
+                             de votre société. A l’issue du dépôt, le banque vous remet un document appelé « Attestation de dépôt de fonds ».
+                             Ce document est indispensable pour immatriculer votre société. Si vous n'avez pas encore choisi votre banque,
+                             passez la question, vous pourrez la préciser au moment d'effectuer vos formalités de création.)
+                         </small>
+                     </div>
+                     <input type="button" name="previous" class="previous action-button-previous" value="Retour"/>
+                     <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
+                 </fieldset>
 
                 <fieldset>
                     <h2 class="fs-title ">Qui sont les associés de votre société </h2>
