@@ -58,16 +58,16 @@
             letter-spacing: 1px;
         }
         {% endif %}
-        
+
     </style>
     {# <div class="container-fluid"> #}
     <!-- MultiStep Form -->
     <div class="row breadcrumb progression haut" style="min-width: 360px;">
         <ul class="nav nav-tabs">
-            <a data-toggle="tab" class="active"> <b> 1 - Détails</b></a>
-            <a data-toggle="tab"> <b> 2 - préstation</b> </a>
+            <a data-toggle="tab" class="active"> <b> 1 - Détails de votre projet</b></a>
+            <a data-toggle="tab"> <b> 2 - Choix de la prestation</b> </a>
             <a data-toggle="tab"> <b> 3 - Paiement</b> </a>
-            <a data-toggle="tab"> <b> 4 - créée !</b> </a>
+            <a data-toggle="tab"> <b> 4 - Société créée !</b> </a>
         </ul>
     </div>
     {# <div class="row"> #}
@@ -75,25 +75,25 @@
 
         <div id="msform" class="">
             <!-- progressbar -->
-           <ul id="progressbar"> 
-             <li class="active"></li> 
+           <ul id="progressbar">
+             <li class="active"></li>
              <li></li>
-             <li></li> 
-             <li></li> 
-             <li></li> 
-             <li></li> 
+             <li></li>
+             <li></li>
+             <li></li>
+             <li></li>
              {%if typeStatut == 'SASU'%}
              <li></li>
              {% endif%}
-             <li></li> 
-             <li></li> 
              <li></li>
-             {% if typeStatut == 'SAS' %} 
-                <li></li> 
-                <li></li> 
-             {% endif%} 
-             <li></li> 
-             </ul> 
+             <li></li>
+             <li></li>
+             {% if typeStatut == 'SAS' %}
+                <li></li>
+                <li></li>
+             {% endif%}
+             <li></li>
+             </ul>
 
             {% if typeStatut == 'SAS' %}
 
@@ -317,7 +317,7 @@
                 <input type="button" name="next" class="next action-button left-right-hover" value="Suivant"/>
             </fieldset>
 
-        
+
          {% if typeStatut == 'SASU' %}
             <fieldset>
                 <h2 class="fs-title ">Prévoyez-vous de faire entrer d'autres associés dans votre société dans le futur

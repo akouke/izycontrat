@@ -1,8 +1,8 @@
 {% extends "_layout.html.twig" %}
 
-{% block stylesheets %} 
+{% block stylesheets %}
 {{ parent() }}
-{{ encore_entry_link_tags('tab1') }}  
+{{ encore_entry_link_tags('tab1') }}
 {% endblock %}
 
 {% block title %}SARL Paiement {% endblock %}
@@ -16,7 +16,7 @@
 .breadcrumb{
         background: none;
     }
-    
+
 body {
     margin: 0;
     padding: 0;
@@ -382,12 +382,12 @@ input {
         text-align: center;
     }
 
-</style> 
+</style>
 
 {#<h1 class="haut">Choix de Payement</h1>#}
         <div class="breadcrumb progression">
             <ul class="nav nav-tabs">
-                <a class="active" href="{{path('create_sarl')}}"><b>1 - Détail de votre projet</b></a>
+                <a class="active" href="{{path('create_sarl')}}"><b>1 - Détails de votre projet</b></a>
                 <a class="active" href="{{path('create_sarl_prestation')}}"><b> 2 - Choix de la prestation</b></a>
                 <a data-toggle="tab" class="active"><b> 3 - Paiement</b></a>
                 <a data-toggle="tab" ><b>4 - Société créée !</b></a>
@@ -499,7 +499,7 @@ input {
     <div class="form-container">
     </div>
     <script type="text/javascript">
-        
+
         window.onload = function () {
 
 const name = document.getElementById('name');
