@@ -16,7 +16,7 @@ class EmailNewsletterType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'email',
                 'attr' => [
-                    'placeholder' => 'Saisissez votre adresse e-mail'
+                    'placeholder' => 'Saisissez votre e-mail'
                 ]]);
     }
 
