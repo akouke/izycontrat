@@ -211,15 +211,14 @@ class DashboardController extends AbstractController
     /**
      * @Route("/admin/avocats", name="admin_lawyers")
      */
-    public function adminLawyerList()
+    public function adminLawyerList(UserRepository $userRepository)
     {
         $user = $this->getUser();
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
-        $lawyers = $this->getDoctrine()
-            ->getRepository(Person::class)
-            ->findBy(['hasCompany' => true]);
+        $lawyers = $userRepository->getAllLawyers();
+
         return $this->render('dashboard/Admin/lawyer.html.twig', ['lawyers' => $lawyers]);
     }
 
