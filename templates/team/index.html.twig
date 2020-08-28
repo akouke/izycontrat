@@ -3,9 +3,12 @@
 {% block title %}Izy Contrat - Qui sommes-nous ?{% endblock %}
 
 {% block body %}
-    <section class="team page-content container-fluid">
+    <section class="team page-content container-fluid col-10 col-lg-10">
         <h1 class="text-center mb-3">Qui sommes-nous ?</h1>
-        <p class="container text-center">IZY CONTRAT est une société fondée par Saliha AZOUGAGH, juriste de profession
+        <div class="illustration text-center">
+            <img src="/images/qui_sommes_nous.png" alt="qui sommes nous">
+        </div>
+        <p class="container text-center"><span class="text-secondary">IZY</span> CONTRAT est une société fondée par Saliha AZOUGAGH, juriste de profession
             et
             passionnée par le monde de l’entreprenariat.</p>
         <p class="text-center">Ayant exercée dans plusieurs cabinets d’expertise-comptable, cabinets d’avocats et
@@ -16,19 +19,42 @@
             coûts trop élevés pratiqués par beaucoup de professionnels du droit. Le résultat étant qu’un
             grand nombre de dirigeants mettent en péril la sécurité de leur entreprise en n’étant pas
             accompagnés sur le plan juridique.</p>
-        <p class="text-center">C’est pourquoi, Saliha Azougagh a créé IZY CONTRAT, la plateforme en ligne qui permet aux
+        <p class="text-center">C’est pourquoi, Saliha a créé <span class="text-secondary">IZY</span> CONTRAT, la plateforme en ligne qui permet aux
             TPE et PME de bénéficier de documents juridiques de qualité et d’un accompagnement
             juridique sur-mesure et ce, à moindre coup ! Nous démocratisons ainsi l’accès au droit à un
             plus grand nombre de professionnels qui ne pouvaient jusqu’ici, s’offrir le luxe de protéger
             leur entreprise comme il se doit. Tous nos documents sont rédigés par des juristes et des
             avocats spécialisés et à jour des dernières lois.</p>
+        <div class="illustration text-center">
+            <img src="/images/objectifs.png" alt="objectif">
+        </div>
         <h2 class="text-center">Notre Objectif</h2>
         <p class="text-center">Faciliter la création de votre entreprise par un accompagnement juridique grâce à nos
             services 100% en ligne et où l’humain est au centre de notre relation !</p>
+        <div class="illustration text-center">
+            <img src="/images/contact.png" alt="contact">
+        </div>
         <h3 class="text-center mb-3">Comment nous contacter ?</h3>
         <p class="text-center">Numéro de téléphone : 07 83 95 48 39</p>
         <p class="text-center">Adresse e-mail : contact@izy-contrat.com</p>
-        <p class="mb-4 text-center">Réseaux sociaux (LinkedIn, Twitter, Facebook, Instagram) : IZY CONTRAT</p>
+        <p class="mb-4 text-center font-weight-bold">Réseaux sociaux</p>
+        <ul class="d-flex justify-content-around">
+            <li>
+                <a href="https://www.linkedin.com/company/izy-contrat/" target="_blank">
+                    <i class="fab fa-linkedin icone-linkedin"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/IZYCONTRAT/" target="_blank">
+                    <i class="fab fa-facebook-square icone-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/IzyContrat" target="_blank">
+                    <i class="fab fa-twitter-square icone-twitter"></i>
+                </a>
+            </li>
+        </ul>
         {# <div class="d-flex flex-column align-items-center flex-md-row justify-content-md-around flex-wrap"> #}
         {# {% for member in members %} #}
         {# <div class="member d-flex flex-column align-items-center"> #}
@@ -48,7 +74,7 @@
     </section>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent () }}
-    {{ encore_entry_link_tags('team') }}
-{% endblock %}
+    {% block stylesheets %}
+        {{ parent () }}
+        {{ encore_entry_link_tags('team') }}
+    {% endblock %}
