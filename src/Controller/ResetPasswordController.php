@@ -196,7 +196,7 @@ class ResetPasswordController extends AbstractController
         $email = (new \Swift_Message())
             ->setFrom('contact@izy-contrat.fr')
             ->setTo($toEmail)
-            ->setSubject('Your password reset request')
+            ->setSubject('Demande de réinitialisation de mot de passe')
             ->setBody($body,'text/html');
 
         $mailer->send($email);
