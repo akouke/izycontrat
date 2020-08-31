@@ -20,7 +20,6 @@
                         <h4 class="card-title">Maitre {{ lawyer.lastname }} {{ lawyer.firstname }}</h4>
                         <p><i class="fas fa-map-marker-alt"></i> {{ lawyer.address }}</p>
                         <div class="d-flex justify-content-around align-items-center w-100">
-                            <p class="score">{{ lawyer.score }} <i class="far fa-thumbs-up"></i></p>
                             <a href="{{ path('dashboard_admin_lawyers_show', {'id': lawyer.id}) }}" class="btn btn-primary mt-3 d-inline-block">voir la fiche avocat</a>
                         </div>
                     </div>
