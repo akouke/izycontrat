@@ -128,9 +128,9 @@ class DashboardController extends AbstractController
             ]
         );
     }
-    
-    
-    
+
+
+
     /**
      * @Route("/dossier", name="dossier_en_cours")
      */
@@ -211,15 +211,14 @@ class DashboardController extends AbstractController
     /**
      * @Route("/admin/avocats", name="admin_lawyers")
      */
-    public function adminLawyerList()
+    public function adminLawyerList(UserRepository $userRepository)
     {
         $user = $this->getUser();
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
-        $lawyers = $this->getDoctrine()
-            ->getRepository(Person::class)
-            ->findBy(['hasCompany' => true]);
+        $lawyers = $userRepository->getAllLawyers();
+
         return $this->render('dashboard/Admin/lawyer.html.twig', ['lawyers' => $lawyers]);
     }
 
@@ -234,8 +233,9 @@ class DashboardController extends AbstractController
         if(!$user){
             return $this->redirectToRoute('dashboard_home');
         }
-        return $this->render('dashboard/Admin/show.html.twig', ['lawyer' => $lawyer]);
+        return $this->render('dashboard/Admin/showlawyer.html.twig', ['lawyer' => $lawyer]);
     }
+
 
      /**
      * @Route("/admin/client/delete/{id}", name="clients_delete")
@@ -258,5 +258,28 @@ class DashboardController extends AbstractController
 
           }
         return $this->redirectToRoute('dashboard_admin_clients');
+    }
+
+    /**
+     * @Route("/admin/lawyer/delete/{id}", name="lawyers_delete")
+     */
+    public function deleteLawyer(Person $lawyer): Response
+    {
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('dashboard_home');
+        }
+        try{
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($lawyer);
+            $entityManager->flush();
+            $this->addFlash('success', 'l\'avocat a bien été supprimé');
+
+        }catch (\Throwable $th)
+        {
+            $this->addFlash('danger', 'la suppression n\'a pas réussi, veuillez contacter l\'administrateur au besoin');
+
+        }
+        return $this->redirectToRoute('dashboard_admin_lawyers');
     }
 }

@@ -1,0 +1,39 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Fiche avocat - {{ lawyer.lastName }} {{ lawyer.firstName }}{% endblock %}
+
+{% block body %}
+    <div class="row page-content container-fluid col-12 col-lg-12">
+        <h1>Fiche Avocat</h1>
+
+        <div class="row justify-content-center">
+
+            <div class="clientInformation  col-md-6  bg-light d-flex flex-column">
+                <img class="card-img-top w-25" src="{{ lawyer.user.profilePicture }}" alt="{{ lawyer.lastname }} {{ lawyer.firstname }}">
+                <h2 class="card-title">Maitre {{ lawyer.lastname }} {{ lawyer.firstname }}</h2>
+                <h3>Mail</h3>
+                <a class="card-text" href="mailto:{{ lawyer.user.email ?? '' }}">{{ lawyer.user.email ?? '' }}</a>
+
+                <h3>Adresse</h3>
+                {{ lawyer.address }}
+                <h3>Téléphone</h3>
+                <a class="card-text" href="tel:{{ lawyer.phoneNumber|phone }}">{{ lawyer.phoneNumber|phone }}</a>
+
+            </div>
+
+            <div class ="row">
+                <div class="col offset-md-3">
+                    <a href="{{ path('dashboard_admin_lawyers')}}" class="btn btn-primary mt-5">Retour</a>
+                </div>
+                <div class="col">
+                    <a href="{{ path('dashboard_lawyers_delete', {'id': lawyer.id}) }}" class="btn btn-danger mt-5" onClick="return confirm('Êtes-vous sûr de vouloir supprimer {{ lawyer.lastName }} {{ lawyer.firstName }}?');">Supprimer l'avocat </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('clientsList') }}
+{% endblock %}
